@@ -1,0 +1,91 @@
+﻿body {
+    background: rgb(204,204,204);
+}
+
+page {
+    background: white;
+    /*border: 1px solid black;*/
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 0.5cm;
+    box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+}
+
+    page[size="A4"] {
+        width: 21cm;
+        height: 29.7cm;
+    }
+
+        page[size="A4"][layout="landscape"] {
+            width: 29.7cm;
+            height: 21cm;
+        }
+
+    page[size="A3"] {
+        width: 29.7cm;
+        height: 42cm;
+    }
+
+        page[size="A3"][layout="landscape"] {
+            width: 42cm;
+            height: 29.7cm;
+        }
+
+    page[size="A5"] {
+        width: 14.8cm;
+        height: 21cm;
+    }
+
+        page[size="A5"][layout="landscape"] {
+            width: 21cm;
+            height: 14.8cm;
+        }
+
+
+.b-1 {
+    border: 1px solid black;
+}
+
+.b-t-2 {
+    border-top: 2px solid black;
+}
+
+.b-b-2 {
+    border-bottom: 2px solid black;
+}
+
+.b-l-2 {
+    border-left: 2px solid black;
+}
+
+.b-r-2 {
+    border-right: 2px solid black;
+}
+
+.m-t-10 {
+    margin-top: 10px;
+}
+
+.m-b-10 {
+    margin-bottom: 10px;
+}
+
+.p-r-100{
+    padding-right:100px;
+}
+
+.row1 {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.container {
+    width: @container-desktop !important;
+}
+
+@media print {
+    body, page {
+        margin: 0;
+        box-shadow: 0;
+    }
+}

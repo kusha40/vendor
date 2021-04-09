@@ -1,0 +1,136 @@
+﻿@using Vendor_Indusuno.Extensions
+@model Vendor_Indusuno.ViewModels.TopLeftNavBarViewModel
+
+<!-- Top Menu Bar -->
+<header class="main-header">
+	<!-- Logo -->
+	<a href='@Url.Action("Index", "Dashboard")' class="logo">
+		<!-- mini logo for sidebar mini 50x50 pixels -->
+		<span class="logo-mini">
+			<b>
+				<img src="~/Content/dist/img/logo-mini.png" />
+			</b>
+		</span>
+		<!-- logo for regular state and mobile devices -->
+		<span class="logo-lg"><b></b></span>
+	</a>
+	<!-- Header Navbar: style can be found in header.less -->
+	<nav class="navbar navbar-static-top">
+		<!-- Sidebar toggle button-->
+		<a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+			<span class="sr-only">Toggle navigation</span>
+		</a>
+		<div class="navbar-custom-menu">
+			<ul class="nav navbar-nav">
+				<!-- User Account: style can be found in dropdown.less -->
+				<li class="dropdown user user-menu">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						<img src="~/Content/upload/vendor/logo/@Model.UserProfileModels.ProfileImage" class="user-image">
+						<span class="hidden-xs">@Model.UserProfileModels.Name</span>
+					</a>
+					<ul class="dropdown-menu">
+						<!-- User image -->
+						<li class="user-header">
+							<img src="~/Content/upload/vendor/logo/@Model.UserProfileModels.ProfileImage" class="img-circle">
+							<p>
+								@Model.UserProfileModels.Name - @Model.UserProfileModels.Designation
+							</p>
+						</li>
+						<!-- Menu Body -->
+						<li class="user-body">
+							@*<div class="row">
+									<div class="col-xs-4 text-center">
+										<a href="#">Followers</a>
+									</div>
+									<div class="col-xs-4 text-center">
+										<a href="#">Sales</a>
+									</div>
+									<div class="col-xs-4 text-center">
+										<a href="#">Friends</a>
+									</div>
+								</div>*@
+							<!-- /.row -->
+						</li>
+						<!-- Menu Footer-->
+						<li class="user-footer">
+							<div class="pull-left">
+								@if (!String.IsNullOrWhiteSpace(Model.UserProfileModels.SVCode) && Model.UserProfileModels.SVCode != "Admin")
+								{
+									@Html.EncodedActionLink("Profile", "Profile", "Dashboard", new { ecode = Model.UserProfileModels.SVCode }, new { @class = "btn btn-default btn-flat", title = "Profile" })
+								}
+							</div>
+							<div class="pull-right">
+								@*<a href="#" class="btn btn-default btn-flat">Sign out</a>*@
+								<a href="#" class="btn btn-default btn-flat mb-control" data-box="#mb-signout"><span class="fa fa-sign-out"></span> Sign out</a>
+							</div>
+						</li>
+					</ul>
+				</li>
+				<!-- Control Sidebar Toggle Button -->
+				@*<li>
+						<a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+					</li>*@
+			</ul>
+		</div>
+	</nav>
+</header>
+<!-- Top Menu Bar -->
+<!-- Left side column. contains the logo and sidebar -->
+<aside class="main-sidebar">
+	<!-- sidebar: style can be found in sidebar.less -->
+	<section class="sidebar">
+		<!-- Sidebar user panel -->
+		@*<!-- search form -->
+			<form action="#" method="get" class="sidebar-form">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control" placeholder="Search...">
+					<span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn btn-flat">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<!-- /.search form -->*@
+		<!-- sidebar menu: : style can be found in sidebar.less -->
+		<ul class="sidebar-menu" data-widget="tree">
+			<li class="header">VENDOR DASHBOARD</li>
+			<li class='@TempData["Index"]'>
+				<a href='@Url.Action("Index", "Dashboard")'><i class="fa fa-tachometer"></i>  Dashboard</a>
+			</li>
+			<li class='@TempData["Products"]'>
+				<a href='@Url.Action("Products", "Dashboard")'><i class="fa fa-file-text"></i>  Products</a>
+			</li>
+			<li class='@TempData["Payments"]'>
+				<a href='@Url.Action("Payments", "Dashboard")'><i class="fa fa-file-text"></i> Payments</a>
+			</li>
+			<li class='@TempData["PurchaseOrders"]'>
+				<a href='@Url.Action("PurchaseOrders", "Dashboard")'><i class="fa fa-file-text"></i> Purchase Orders</a>
+			</li>
+			<li class='@TempData["Invoices"]'>
+				<a href='@Url.Action("Invoices", "Dashboard")'><i class="fa fa-file-text"></i> Invoices</a>
+			</li>
+
+			<li class="header">VENDOR PROFILE</li>
+			<li class='@TempData["VendorInfo"]'>
+				<a href='@Url.Action("VendorInfo", "Dashboard")'><i class="fa fa-file-text"></i> Vendor Information</a>
+			</li>
+			<li class='@TempData["ContactInfo"]'>
+				<a href='@Url.Action("ContactInfo", "Dashboard")'><i class="fa fa-file-text"></i> Contact Information</a>
+			</li>
+			<li class='@TempData["BankInfo"]'>
+				<a href='@Url.Action("BankInfo", "Dashboard")'><i class="fa fa-file-text"></i> Bank Information</a>
+			</li>
+			<li class='@TempData["TaxInfo"]'>
+				<a href='@Url.Action("TaxInfo", "Dashboard")'><i class="fa fa-file-text"></i> Tax Information</a>
+			</li>
+			<li class='@TempData["CreditInfo"]'>
+				<a href='@Url.Action("CreditInfo", "Dashboard")'><i class="fa fa-file-text"></i> Credit Information</a>
+			</li>
+			<li class='@TempData["AdditionalInfo"]'>
+				<a href='@Url.Action("AdditionalInfo", "Dashboard")'><i class="fa fa-file-text"></i> Additional Information</a>
+			</li>
+		</ul>
+	</section>
+</aside>
+<!-- Left side column. contains the logo and sidebar -->

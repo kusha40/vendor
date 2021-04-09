@@ -1,0 +1,231 @@
+﻿@using Vendor_Indusuno.Extensions
+@model Vendor_Indusuno.ViewModels.ProductBrandViewModel
+@{
+	ViewBag.Title = "ProductBrand";
+	TempData["Master"] = "active";
+	TempData["ProductBrand"] = "active";
+	Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	@{
+		string actType = "Add";
+		string actBtn = "Submit";
+		string pageTitle = Html.Raw(Html.PageTitle()) + "";
+		if (!String.IsNullOrEmpty(Model.ProductBrandModels.Id))
+		{
+			actType = "Edit";
+			actBtn = "Update";
+		}
+	}
+	<h1>
+		@pageTitle
+		@*Unit of Measure*@
+		<small></small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="@Url.Action("Index")"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+		@Html.Raw(Html.BuildBreadcrumbNavigation())
+	</ol>
+</section>
+<!-- Main content -->
+<section class="content">
+	@using (Html.BeginForm("ProductBrand", "Admin", FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off", enctype = "multipart/form-data" }))
+	{
+		@Html.AntiForgeryToken()
+		<!-- Main row -->
+		<div class="row">
+			<div class="col-lg-12">
+				<!-- Default box -->
+				<div class="box">
+					<div class="box-header with-border">
+						<h3 class="box-title">@actType @pageTitle</h3>
+						<div class="box-tools pull-right">
+						</div>
+					</div>
+					<div class="box-body">
+						<div class="col-md-12">
+							<div class="msgs">
+								@if (ViewData?.ModelState[""]?.Errors?.Any() == true)
+								{
+									<div class="alert alert-danger alert-dismissible">
+										<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+										<h4><i class="icon fa fa-ban"></i> Error!</h4>
+										@Html.ValidationSummary(true, "", new { @class = "" })
+									</div>
+								}
+								@if (!String.IsNullOrEmpty(ViewBag.SucMsg))
+								{
+									<div class="alert alert-success alert-dismissible">
+										<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+										<h4><i class="icon fa fa-check"></i> Success!</h4>
+										<strong>Well done!</strong> @ViewBag.SucMsg
+									</div>
+								}
+								@if (!String.IsNullOrEmpty(ViewBag.ErrMsg))
+								{
+									<div class="alert alert-danger alert-dismissible">
+										<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+										<h4><i class="icon fa fa-ban"></i> Error!</h4>
+										<strong>Oh snap!</strong> @ViewBag.ErrMsg
+									</div>
+								}
+								@if (!String.IsNullOrEmpty(TempData["ErrMsg"] + ""))
+								{
+									<div class="alert alert-danger alert-dismissible">
+										<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+										<h4><i class="icon fa fa-ban"></i> Error!</h4>
+										<strong>Oh snap!</strong> @TempData["ErrMsg"]
+									</div>
+								}
+								@if (!String.IsNullOrEmpty(TempData["SucMsg"] + ""))
+								{
+									<div class="alert alert-success alert-dismissible">
+										<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+										<h4><i class="icon fa fa-check"></i> Success!</h4>
+										<strong>Well done!</strong> @TempData["SucMsg"]
+									</div>
+								}
+							</div>
+							@Html.HiddenFor(model => model.ProductBrandModels.Id)
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+									<div class="form-group">
+										@Html.LabelFor(m => m.ProductBrandModels.Name, new { @class = "form-control-label" }) <sup>*</sup>
+										@Html.TextBoxFor(m => m.ProductBrandModels.Name,
+								new
+								{
+									@class = "form-control text-uppercase",
+									placeholder = "Enter " + @Html.DisplayNameFor(m => m.ProductBrandModels.Name)
+								})
+										@Html.ValidationMessageFor(m => m.ProductBrandModels.Name, "",
+								new { @class = "text-danger" })
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /.box-body -->
+					<div class="box-footer">
+						<div class="col-md-12">
+							<div class="box-tools pull-left">
+								<button type="submit" name="@actBtn.ToLower()" class="btn bg-aqua" title="@actBtn"
+										value="@actBtn">
+									@actBtn.ToUpper()
+								</button>
+							</div>
+							<div class="box-tools pull-right">
+								<button type="submit" name="reset" class="btn btn-clear cancel" title="Reset"
+										value="reset" formnovalidate="formnovalidate">
+									RESET
+								</button>
+							</div>
+						</div>
+					</div>
+					<!-- /.box-footer-->
+				</div>
+				<!-- /.box -->
+			</div>
+			<div class="col-lg-12">
+				<!-- Default box -->
+				<div class="box">
+					@if (Model.ProductBrandModelList.Count > 0)
+					{
+						<div class="box-header with-border">
+							<h3 class="box-title">@pageTitle List</h3>
+							<div class="box-tools pull-right">
+								<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+										title="Collapse">
+									<i class="fa fa-minus"></i>
+								</button>
+								@*<button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+						<i class="fa fa-times"></i>
+					</button>*@
+							</div>
+						</div>
+						<div class="box-body">
+							<table id="tblProductBrand" class="table table-bordered display nowrap">
+								<thead>
+									<tr>
+										<th>SNo.</th>
+										<th>Action</th>
+										<th>@Html.DisplayNameFor(model => model.ProductBrandModelList.FirstOrDefault().Name)</th>
+										<th>@Html.DisplayNameFor(model => model.ProductBrandModelList.FirstOrDefault().Status)</th>
+									</tr>
+								</thead>
+								<tbody>
+									@foreach (var u in Model.ProductBrandModelList)
+									{
+									<tr>
+										<td></td>
+										<td>
+											@Html.EncodedActionLink("<i class='fa fa-pencil-square-o'></i>", "EditProductBrand", "Admin", new { id = u.Id }, new { @class = "btn btn-edt bg-aqua", title = "Edit" })
+											@Html.EncodedActionLink("<i class='fa fa-times'></i>", "DeleteProductBrand", "Admin", new { id = u.Id }, new { data_box = "#mb-act-cnfrm", @class = "btn btn-del m-l-5 mb-act-confirm bg-m-red", title = "Delete" })
+										</td>
+										<td>@Html.DisplayFor(model => u.Name) </td>
+										<td>@Html.DisplayFor(model => u.Status) </td>
+									</tr>
+									}
+								</tbody>
+							</table>
+						</div>
+						<!-- /.box-body -->
+					}
+					else
+					{
+						<div class="box-body">
+							<div class="no-record">No record found.</div>
+						</div>
+					}
+				</div>
+				<!-- /.box -->
+			</div>
+		</div>
+		<!-- danger with sound -->
+		<div class="message-box animated fadeIn" data-sound="alert" id="mb-act-cnfrm">
+			<div class="mb-container">
+				<div class="mb-middle">
+					<div class="mb-title"><span class="fa fa-warning"></span> Confirm <strong>Box</strong> ?</div>
+					<div class="mb-content">
+						<p>Are you sure you want to delete?</p>
+						<p>Press No if you want to Cancel. Press Yes to Delete the record.</p>
+					</div>
+					<div class="mb-footer">
+						<div class="pull-right">
+							<a id="confirmhref" href="#" class="btn btn-confirm-yes btn-lg">Yes</a>
+							<button class="btn btn-confirm-no btn-lg mb-control-close">No</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- end danger with sound -->
+		<!-- /.row (main row) -->
+		<!-- Modal -->
+		@*<div class="modal fade" id="modalAddBranch" style="display: none;">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">×</span>
+							</button>
+							<h4 class="modal-title">Default Modal</h4>
+						</div>
+						<div class="modal-body">
+							<p>One fine body…</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary">Save changes</button>
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>*@
+	}
+</section>
+<!-- /.content -->

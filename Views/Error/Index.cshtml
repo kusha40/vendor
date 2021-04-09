@@ -1,0 +1,67 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/_LayoutError.cshtml";
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="error-title">Error!</div>
+            <div class="col-md-2 pull-right m-t-6">
+                @Html.ActionLink("Back to dashboard", "Index", @Model.ControllerName, null, new { @class= "btn btn-info btn-block btn-lg" })
+            </div>
+            <div class="col-md-2 pull-right m-t-6">
+                @Html.ActionLink("Back to page", @Model.ActionName, @Model.ControllerName, null, new { @class = "btn btn-primary btn-block btn-lg" })
+            </div>
+        </div>
+        <div class="error-subtitle">An error occurred while processing your request.</div>
+        <div class="col-md-12">
+            <div class="error-subtext">Please contact your system administrator for more information</div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="error-subtitle">Error information</div>
+            <div class="col-md-1 error-lbl">
+                Error Message
+            </div>
+            <div class="col-md-11 error-msg">
+                @Model.Exception.Message
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1 error-lbl">
+                Application
+            </div>
+            <div class="col-md-11 error-msg">
+                @Model.ControllerName
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1 error-lbl">
+                Source
+            </div>
+            <div class="col-md-11 error-msg">
+                @Model.ActionName
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1 error-lbl">
+                Function
+            </div>
+            <div class="col-md-11 error-msg">
+                @Model.ActionName
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1 error-lbl">
+                Stack Trace
+            </div>
+            <div class="col-md-11 error-msg">
+                @Model.Exception.StackTrace
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,600 @@
+﻿@using Vendor_Indusuno.Extensions
+@model Vendor_Indusuno.ViewModels.VendorProfileViewModel
+@{
+    ViewBag.Title = "Vendor Profile";
+    TempData["VendorProfile"] = "active";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    @{
+        string pageTitle = Html.Raw(Html.PageTitle()) + "";
+    }
+    <h1>
+        @pageTitle
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index")"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        @Html.Raw(Html.BuildBreadcrumbNavigation())
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    @using (Html.BeginForm("VendorProfile", "Admin", FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="col-md-3">
+                <!-- Profile Image -->
+                <div class="box box-primary">
+                    <div class="box-body box-profile">
+                        @if (!string.IsNullOrEmpty(Model.VendorInfoModels.CompanyLogo))
+                        {
+                            <img class="profile-user-img img-responsive img-circle" src="~/Content/upload/vendor/logo/@Model.VendorInfoModels.CompanyLogo" alt="Company Logo">
+                        }
+                        else
+                        {
+                            <img class="profile-user-img img-responsive img-circle" src="~/Content/upload/vendor/logo/dlogo.png" alt="Company Logo">
+                        }
+                        <h3 class="profile-username text-center">@Model.VendorInfoModels.CompanyName</h3>
+
+                        <p class="text-muted text-center">@Model.VendorInfoModels.ContactPerson</p>
+
+                        <ul class="list-group list-group-unbordered">
+                            <li class="list-group-item">
+                                <b>Contact 1</b> <a class="pull-right">@Model.VendorInfoModels.Contact1</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Contact 2</b> <a class="pull-right">@Model.VendorInfoModels.Contact2</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Fax</b> <a class="pull-right">@Model.VendorInfoModels.Fax</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>City</b> <a class="pull-right">@Model.VendorInfoModels.City</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>State</b> <a class="pull-right">@Model.VendorInfoModels.State</a>
+                            </li>
+                        </ul>
+                        <p class="text-muted text-center"><b>Email</b></p>
+                        <p class="text-center">@Model.VendorInfoModels.Email</p>
+                        <p class="text-muted text-center"><b>Website</b></p>
+                        <p class="text-center">@Model.VendorInfoModels.WebsiteURL</p>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-9">
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#basicinfo" data-toggle="tab" aria-expanded="false">Basic Info</a></li>
+                        <li class=""><a href="#contactinfo" data-toggle="tab" aria-expanded="true">Contact Info</a></li>
+                        <li class=""><a href="#bankinfo" data-toggle="tab" aria-expanded="true">Bank Info</a></li>
+                        <li class=""><a href="#taxinfo" data-toggle="tab" aria-expanded="false">Tax Info</a></li>
+                        <li class=""><a href="#creditinfo" data-toggle="tab" aria-expanded="false">Credit Info</a></li>
+                        <li class=""><a href="#adtinfo" data-toggle="tab" aria-expanded="false">Additional Info</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active m-b-10" id="basicinfo">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Category</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorInfoModels.Category</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Brand</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorInfoModels.Brand</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Warehouse Code</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorInfoModels.WarehouseCode</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Operations Model</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorInfoModels.OperationsModel</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Trade Type</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorInfoModels.TradeType</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Legal Status</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorInfoModels.LegalStatus</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Accept Returns</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorInfoModels.AcceptReturns</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Payment Terms</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorInfoModels.PaymentTerms</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Packaging Terms</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorInfoModels.PackagingTerms</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Seller Panel Usage</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorInfoModels.SellerPanelUsage</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Vendor Source</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorInfoModels.VendorSource</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Delivery Mode</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorInfoModels.DeliveryMode</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Invoicing Term</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorInfoModels.InvoicingTerms</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.tab-pane -->
+                        <div class="tab-pane" id="contactinfo">
+                            <div class="row">
+                                <h3 class="p-l-30">Pick Details</h3>
+                                <div class="col-md-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Pick Address Line 1</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorContactModels.PickAddrLin1</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Pick Address Line 2</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorContactModels.PickAddrLin2</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Pick Contact 1</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorContactModels.PickContact1</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Pick Contact 2</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorContactModels.PickContact2</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Pick Email</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorContactModels.PickEmail</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Pick Landmark</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorContactModels.PickLandmark</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Pick City</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorContactModels.PickCity</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Pick State</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorContactModels.PickState</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Pick Country</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorContactModels.PickCountry</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Pincode</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorContactModels.PickPincode</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h3 class="p-l-30">Bill Details</h3>
+                                <div class="col-md-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Bill Address Line 1</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorContactModels.BilAddrLin1</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Bill Address Line 2</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorContactModels.BilAddrLin2</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Bill Contact 1</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorContactModels.BilContact1</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Bill Contact 2</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorContactModels.BilContact2</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Bill Email</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorContactModels.BilEmail</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Bill Landmark</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorContactModels.BilLandmark</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Bill City</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorContactModels.BilCity</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Bill State</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorContactModels.BilState</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Bill Country</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorContactModels.BilCountry</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Pincode</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorContactModels.BilPincode</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h3 class="p-l-30">Return Details</h3>
+                                <div class="col-md-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Return Address Line 1</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorContactModels.RetAddrLin1</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Return Address Line 2</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorContactModels.RetAddrLin2</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Return Contact 1</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorContactModels.RetContact1</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Return Contact 2</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorContactModels.RetContact2</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Return Email</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorContactModels.RetEmail</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Return Landmark</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorContactModels.RetLandmark</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Return City</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorContactModels.RetCity</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Return State</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorContactModels.RetState</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Return Country</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorContactModels.RetCountry</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Return Pincode</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorContactModels.RetPincode</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.tab-pane -->
+
+                        <div class="tab-pane" id="bankinfo">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Bank</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorBankModels.BankId</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Account No</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorBankModels.AccountNo</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">IFSC Code</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorBankModels.IFSCCode</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Beneficiary Name</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorBankModels.BeneficiaryName</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Cancel Checque Image</label>
+                                            <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorBankModels.CanChqImage" height="150" width="300" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="taxinfo">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">PAN No</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorTaxModels.PANNo</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">GST No</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorTaxModels.GSTIN</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">PAN Image</label>
+                                            <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorTaxModels.PANImage" height="150" width="300" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">GST Image</label>
+                                            <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorTaxModels.GSTINImage" height="150" width="300" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Signature Image</label>
+                                            <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorTaxModels.SignatureImage" height="150" width="300" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="creditinfo">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Security Account</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorCreditModels.SecurityAccount</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Credit Days</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorCreditModels.CreditDays</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Amount</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorCreditModels.Amount</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Credit Type</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorCreditModels.CreditType</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Pay Initial Forms</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorCreditModels.PayInitForm</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Credit Note Terms</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorCreditModels.CreditNoteTerms</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Special Terms</label>
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">@Model.VendorCreditModels.SpecialTerms</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="adtinfo">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Shop & Establishment Certificate</label>
+                                            <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorAdtlInfoModels.ShpEstbCert" height="150" width="300" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Authorised Dealer Proof</label>
+                                            <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorAdtlInfoModels.AuthDlrPrf" height="150" width="300" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Copy of Partnership Deed COI</label>
+                                            <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorAdtlInfoModels.CpyPrtnDeedCOI" height="150" width="300" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">MSME Registration Certificate</label>
+                                            <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorAdtlInfoModels.MSMERegsCert" height="150" width="300" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.tab-pane -->
+                    </div>
+                    <!-- /.tab-content -->
+                </div>
+                <!-- /.nav-tabs-custom -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+        <!-- danger with sound -->
+        <div class="message-box animated fadeIn" data-sound="alert" id="mb-act-cnfrm">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-warning"></span> Confirm <strong>Box</strong> ?</div>
+                    <div class="mb-content">
+                        <p>Are you sure you want to delete?</p>
+                        <p>Press No if you want to Cancel. Press Yes to Delete the record.</p>
+                    </div>
+                    <div class="mb-footer">
+                        <div class="pull-right">
+                            <a id="confirmhref" href="#" class="btn btn-confirm-yes btn-lg">Yes</a>
+                            <button class="btn btn-confirm-no btn-lg mb-control-close">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end danger with sound -->
+    }
+</section>
+<!-- /.content -->

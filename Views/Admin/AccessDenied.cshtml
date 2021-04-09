@@ -1,0 +1,68 @@
+﻿@using Vendor_Indusuno.Extensions
+@{
+	ViewBag.Title = "Access Denied";
+	TempData["AccessDenied"] = "active";
+	Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	@{
+		string actType = "Add";
+		string actBtn = "Submit";
+		string pageTitle = Html.Raw(Html.PageTitle()) + "";
+	}
+	<h1>
+		@pageTitle
+		<small></small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="@Url.Action("Index")"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+		@Html.Raw(Html.BuildBreadcrumbNavigation())
+		@*<li class="active">Dashboard</li>*@
+	</ol>
+</section>
+<!-- Main content -->
+<section class="content">
+	@using (Html.BeginForm("AccessDenied", "Admin", FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off", enctype = "multipart/form-data" }))
+	{
+		@Html.AntiForgeryToken()
+		<!-- Main row -->
+		<div class="row">
+			<div class="col-lg-12">
+				<!-- Default box -->
+				<div class="box">
+					
+				</div>
+				<!-- /.box -->
+			</div>
+			<div class="col-lg-12">
+				<!-- Default box -->
+				<div class="box">
+					
+				</div>
+				<!-- /.box -->
+			</div>
+		</div>
+		<!-- danger with sound -->
+		<div class="message-box animated fadeIn" data-sound="alert" id="mb-act-cnfrm">
+			<div class="mb-container">
+				<div class="mb-middle">
+					<div class="mb-title"><span class="fa fa-warning"></span> Confirm <strong>Box</strong> ?</div>
+					<div class="mb-content">
+						<p>Are you sure you want to delete?</p>
+						<p>Press No if you want to Cancel. Press Yes to Delete the record.</p>
+					</div>
+					<div class="mb-footer">
+						<div class="pull-right">
+							<a id="confirmhref" href="#" class="btn btn-confirm-yes btn-lg">Yes</a>
+							<button class="btn btn-confirm-no btn-lg mb-control-close">No</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- end danger with sound -->
+	}
+</section>
+<!-- /.content -->

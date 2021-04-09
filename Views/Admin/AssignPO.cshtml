@@ -1,0 +1,145 @@
+﻿@using Vendor_Indusuno.Extensions
+@model Vendor_Indusuno.ViewModels.AssignPOViewModel
+@{
+    ViewBag.Title = "Assign Purchase Orders";
+    TempData["Purchase"] = "active";
+    TempData["AssignPO"] = "active";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    @{
+        string pageTitle = Html.Raw(Html.PageTitle()) + "";
+    }
+    <h1>
+        @pageTitle
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index")"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        @Html.Raw(Html.BuildBreadcrumbNavigation())
+        @*<li class="active">Dashboard</li>*@
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    @using (Html.BeginForm("AssignPO", "Admin", FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <!-- Main row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Default box -->
+                <div class="box">
+                    <div class="box-header with-border">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.PurOrdModels.POAssignTo, new { @class = "form-control-label" }) <sup>*</sup>
+                                @Html.DropDownListFor(m => m.PurOrdModels.POAssignTo, new SelectList(Model.UserModelList, "Key", "Value"),
+                                "--Select User--", new { @class = "form-control select2 poasnto" })
+                                @Html.ValidationMessageFor(m => m.PurOrdModels.POAssignTo, "",
+                        new { @class = "text-danger errcstid" })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <button name="submit" id="poassign" class="btn bg-aqua m-t-20" title="submit"
+                                    value="assign">
+                                Assign
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-body">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Search, new { @class = "form-control-label" }) <sup>*</sup>
+                                @Html.TextBoxFor(m => m.Search,
+                                new
+                                {
+                                    @class = "form-control text-capitalize",
+                                    placeholder = @Html.DisplayNameFor(m => m.Search)
+                                })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.OrderDate, new { @class = "form-control-label" }) <sup>*</sup>
+                                @Html.TextBoxFor(m => m.OrderDate,
+                                new
+                                {
+                                    @class = "form-control datepicker",
+                                    placeholder = @Html.DisplayNameFor(m => m.OrderDate)
+                                })
+                            </div>
+                        </div>
+                        <table id="tblassignpo" class="table table-bordered display nowrap">
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" id="seallasnpo" /></th>
+                                    <th>SNo</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().OrderDate)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().CustomerName)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POId)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().PONumber)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POPId)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Product)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Quantity)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Unit)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Price)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Status)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POCreatedBy)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POAssignTo)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.PurchaseOrdersModelList)
+                                {
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.POId)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.PONumber)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.POPId)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Product)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Unit)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.POCreatedBy)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.POAssignTo)</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box -->
+                </div>
+            </div>
+        </div>
+        <!-- danger with sound -->
+        <div class="message-box animated fadeIn" data-sound="alert" id="mb-sub-confirm">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-warning"></span> Confirm <strong>Box</strong> ?</div>
+                    <div class="mb-content">
+                        <p>Are you sure you want to submit?</p>
+                        <p>Press No if you want to Cancel. Press Yes to Submit the record.</p>
+                    </div>
+                    <div class="mb-footer">
+                        <div class="pull-right">
+                            <button name="posubmit" class="btn btn-confirm-yes btn-lg" title="Yes">
+                                Yes
+                            </button>
+                            <button class="btn btn-confirm-no btn-lg mb-control-close">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end danger with sound -->
+    }
+</section>
+<!-- /.content -->
