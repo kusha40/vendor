@@ -98,7 +98,7 @@
                                 @Html.HiddenFor(m => m.POGenerateModels.IsShippingAddressSame)
                                 <br><br><input type="checkbox" id="chksameadd" name="chksameadd" class="chksameadd" value="" />
                                 <label for="chksameadd">Is Shipping Address Same</label>
-                            </div>     
+                            </div>
                             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     @Html.LabelFor(m => m.POGenerateModels.BuyerShippingName, new { @class = "form-control-label" })
@@ -516,7 +516,11 @@
                                         <td>@Html.DisplayFor(modelItem => item.POId)</td>
                                         <td>@Html.DisplayFor(modelItem => item.PONumber)</td>
                                         <td>@Html.DisplayFor(modelItem => item.POPId)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Product)</td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Product)<br>
+                                            Brand : @item.Brand<br>
+                                            Model : @item.ModelNo
+                                        </td>
                                         <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Unit)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Price)</td>

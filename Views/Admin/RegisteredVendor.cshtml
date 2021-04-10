@@ -89,13 +89,13 @@
                                     @actBtn.ToUpper()
                                 </button>
                             </div>
-                            <table id="tblVendorInfo" class="table table-bordered display nowrap">
+                            <table id="tblVendorInfo" class="table table-bordered display">
                                 <thead>
                                     <tr>
                                         <th>SNo.</th>
                                         <th>Action</th>
                                         <th>@Html.DisplayNameFor(model => model.VendorInfoModelList.FirstOrDefault().VendorCode)</th>
-                                        <th width="20">@Html.DisplayNameFor(model => model.VendorInfoModelList.FirstOrDefault().CompanyName)</th>
+                                        <th>@Html.DisplayNameFor(model => model.VendorInfoModelList.FirstOrDefault().CompanyName)</th>
                                         <th>@Html.DisplayNameFor(model => model.VendorInfoModelList.FirstOrDefault().ContactPerson)</th>
                                         <th>@Html.DisplayNameFor(model => model.VendorInfoModelList.FirstOrDefault().Contact1)</th>
                                         <th>@Html.DisplayNameFor(model => model.VendorInfoModelList.FirstOrDefault().Contact2)</th>

@@ -72,7 +72,7 @@
                                 })
                             </div>
                         </div>
-                        <table id="tblpurchaseorder" class="table table-bordered display nowrap">
+                        <table id="tblpurchaseorder" class="table table-bordered display">
                             <thead>
                                 <tr>
                                     <th>SNo</th>
@@ -107,7 +107,11 @@
                                             <a href='~/Content/upload/poupload/@item.POFile' target="_blank">@item.POId</a>
                                         </td>
                                         <td>@Html.DisplayFor(modelItem => item.POPId)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Product)</td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Product)<br>
+                                            Brand : @item.Brand<br>
+                                            Model : @item.ModelNo
+                                        </td>
                                         <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Price)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Discount)</td>

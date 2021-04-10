@@ -227,26 +227,62 @@ $(document).ready(function () {
     //Approved Vendor Index Info Table
 
     //Vendor Info Table
-    var tblVendorInfo = $('#tblVendorInfo').DataTable({
+    var tblApVendor = $('#tblApVendor').DataTable({
         "columnDefs": [
-            { 'targets': 0, 'width': '50', 'searchable': false, 'orderable': false },   //SNo.
-            { 'targets': 1, 'width': '50', 'searchable': false, 'orderable': false },  //Action
-            { 'targets': 2, 'width': '80' },   //Code
-            { 'targets': 3, 'width': '100' },   //CompanyName
-            { 'targets': 4, 'width': '100' },   //ContactPerson
-            { 'targets': 5, 'width': '100' },   //Contact1
-            { 'targets': 6, 'width': '150' },   //Contact2
-            { 'targets': 7, 'width': '100' },   //Email
-            { 'targets': 8, 'width': '100' },   //WebsiteURL
-            { 'targets': 9, 'width': '150' },   //Category
-            { 'targets': 10, 'width': '100' },  //Brand
-            { 'targets': 11, 'width': '100' },  //City
-            { 'targets': 12, 'width': '150' },  //State
-            { 'targets': 13, 'width': '100' }   //Country
+            { 'targets': 0, 'searchable': false, 'orderable': false },   //SNo.
+            { 'targets': 1, 'width': '210', 'searchable': false, 'orderable': false },  //Action
+            { 'targets': 2, 'width': '20', 'orderable': false },   //Code
+            { 'targets': 3, 'width': '200', 'orderable': false },   //CompanyName
+            { 'targets': 4, 'width': '100', 'orderable': false },   //ContactPerson
+            { 'targets': 5, 'width': '30', 'orderable': false },   //Contact1
+            { 'targets': 6, 'width': '30', 'orderable': false },   //Contact2
+            { 'targets': 7, 'width': '50', 'orderable': false },   //Email
+            { 'targets': 8, 'width': '50', 'orderable': false },   //WebsiteURL
+            { 'targets': 9, 'width': '40', 'orderable': false },   //Category
+            { 'targets': 10, 'width': '50', 'orderable': false },  //Brand
+            { 'targets': 11, 'width': '50', 'orderable': false },  //City
+            { 'targets': 12, 'width': '50', 'orderable': false },  //State
+            { 'targets': 13, 'width': '50', 'orderable': false }   //Country
         ],
         "scrollX": true,
         "order": [2, 'asc'],
-        "paging": true,
+        "paging": false,
+        "searching": false,
+        "info": false,
+        "pageLength": 100
+    });
+
+    tblApVendor.on('order.dt search.dt', function () {
+        tblApVendor.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblApVendor.cell(cell).invalidate('dom');
+        });
+    }).draw();
+    //Vendor Info Table
+
+    //Vendor Info Table
+    var tblVendorInfo = $('#tblVendorInfo').DataTable({
+        "columnDefs": [
+            { 'targets': 0, 'searchable': false, 'orderable': false },   //SNo.
+            { 'targets': 1, 'width': '210', 'searchable': false, 'orderable': false },  //Action
+            { 'targets': 2, 'width': '20', 'orderable': false },   //Code
+            { 'targets': 3, 'width': '200', 'orderable': false },   //CompanyName
+            { 'targets': 4, 'width': '100', 'orderable': false },   //ContactPerson
+            { 'targets': 5, 'width': '30', 'orderable': false },   //Contact1
+            { 'targets': 6, 'width': '30', 'orderable': false },   //Contact2
+            { 'targets': 7, 'width': '50', 'orderable': false },   //Email
+            { 'targets': 8, 'width': '50', 'orderable': false },   //WebsiteURL
+            { 'targets': 9, 'width': '40', 'orderable': false },   //Category
+            { 'targets': 10, 'width': '50', 'orderable': false },  //Brand
+            { 'targets': 11, 'width': '50', 'orderable': false },  //City
+            { 'targets': 12, 'width': '50', 'orderable': false },  //State
+            { 'targets': 13, 'width': '50', 'orderable': false }   //Country
+        ],
+        "scrollX": true,
+        "order": [2, 'asc'],
+        "paging": false,
+        "searching": false,
+        "info": false,
         "pageLength": 100
     });
 
@@ -869,21 +905,20 @@ $(document).ready(function () {
         "columnDefs": [
             { 'targets': 0, 'width': '20', 'searchable': false, 'orderable': false },   //SNo.
             { 'targets': 1, 'width': '30', 'searchable': false, 'orderable': false },  //Edit
-            { 'targets': 2, 'width': '80', 'searchable': false, 'orderable': false },   //ContactPerson
-            { 'targets': 3, 'width': '60', 'searchable': false, 'orderable': false },    //Contact
-            { 'targets': 4, 'width': '60', 'searchable': false, 'orderable': false },    //Contact
-            { 'targets': 5, 'width': '60', 'searchable': false, 'orderable': false },    //Contact
-            { 'targets': 6, 'width': '60', 'searchable': false, 'orderable': false },    //Contact
-            { 'targets': 7, 'width': '60', 'searchable': false, 'orderable': false },    //Contact
-            { 'targets': 8, 'width': '60', 'searchable': false, 'orderable': false },    //Contact
-            { 'targets': 9, 'width': '60', 'searchable': false, 'orderable': false },    //Contact
-            { 'targets': 10, 'width': '60', 'searchable': false, 'orderable': false },    //Contact
-            { 'targets': 11, 'width': '60', 'searchable': false, 'orderable': false },   //Contact
-            { 'targets': 12, 'width': '60', 'searchable': false, 'orderable': false }    //Contact
+            { 'targets': 2, 'width': '120', 'orderable': false },   //ContactPerson
+            { 'targets': 3, 'width': '60', 'orderable': false },    //Contact
+            { 'targets': 4, 'width': '60', 'orderable': false },    //Contact
+            { 'targets': 5, 'width': '60', 'orderable': false },    //Contact
+            { 'targets': 6, 'width': '300', 'orderable': false },    //Contact
+            { 'targets': 7, 'width': '60', 'orderable': false },    //Contact
+            { 'targets': 8, 'width': '60', 'orderable': false },    //Contact
+            { 'targets': 9, 'width': '60', 'orderable': false },    //Contact
+            { 'targets': 10, 'width': '60', 'orderable': false },    //Contact
+            { 'targets': 11, 'width': '60', 'orderable': false },   //Contact
+            { 'targets': 12, 'width': '60', 'orderable': false }    //Contact
         ],
         "scrollX": true,
         "paging": false,
-        "searching": false,
         "info": false
     });
 
@@ -949,19 +984,23 @@ $(document).ready(function () {
                 {
                     'selectRow': true
                 }
-            },                      //SNo
-            { 'targets': 1 },       //Select
-            { 'targets': 2 },       //OrderDate
-            { 'targets': 3 },       //CustomerName
-            { 'targets': 4 },       //POId
-            { 'targets': 5 },       //POPId
-            { 'targets': 6 },       //Product
-            { 'targets': 7 },       //Quantity
-            { 'targets': 8 },       //Unit
-            { 'targets': 9 },       //Price
-            { 'targets': 10 },      //Status
-            { 'targets': 11 },      //POCreatedBy
-            { 'targets': 11 }       //POAssignTo
+            },                      //Select
+            { 'targets': 1, 'width': '20', 'orderable': false },       //SNo
+            { 'targets': 2, 'width': '30', 'orderable': false },       //OrderDate
+            { 'targets': 3, 'width': '80', 'orderable': false },       //CustomerName
+            { 'targets': 4, 'width': '30', 'orderable': false },       //PONumber
+            { 'targets': 5, 'width': '30', 'orderable': false },       //POId
+            { 'targets': 6, 'width': '30', 'orderable': false },       //POPId
+            { 'targets': 7, 'width': '200', 'orderable': false },       //Product
+            { 'targets': 8, 'width': '20', 'orderable': false },       //Quantity
+            { 'targets': 9, 'width': '20', 'orderable': false },       //Unit
+            { 'targets': 10, 'width': '20', 'orderable': false },      //Price
+            { 'targets': 11, 'width': '20', 'orderable': false },      //Discount
+            { 'targets': 12, 'width': '30', 'orderable': false },       //TotalPrice
+            { 'targets': 13, 'width': '20', 'orderable': false },       //GST
+            { 'targets': 14, 'width': '20', 'orderable': false },      //Status
+            { 'targets': 15, 'width': '40', 'orderable': false },      //POCreatedBy
+            { 'targets': 16, 'width': '40', 'orderable': false }       //POAssingTo
         ],
         select: {
             style: 'multi',
@@ -985,19 +1024,23 @@ $(document).ready(function () {
                 {
                     'selectRow': true
                 }
-            },                      //SNo
-            { 'targets': 1 },       //Select
-            { 'targets': 2 },       //OrderDate
-            { 'targets': 3 },       //CustomerName
-            { 'targets': 4 },       //POId
-            { 'targets': 5 },       //POPId
-            { 'targets': 6 },       //Product
-            { 'targets': 7 },       //Quantity
-            { 'targets': 8 },       //Unit
-            { 'targets': 9 },       //Price
-            { 'targets': 10 },      //Status
-            { 'targets': 11 },      //POCreatedBy
-            { 'targets': 11 }       //POAssignTo
+            },                      //Select
+            { 'targets': 1, 'width': '20', 'orderable': false },       //SNo
+            { 'targets': 2, 'width': '30', 'orderable': false },       //OrderDate
+            { 'targets': 3, 'width': '80', 'orderable': false },       //CustomerName
+            { 'targets': 4, 'width': '30', 'orderable': false },       //PONumber
+            { 'targets': 5, 'width': '30', 'orderable': false },       //POId
+            { 'targets': 6, 'width': '30', 'orderable': false },       //POPId
+            { 'targets': 7, 'width': '200', 'orderable': false },       //Product
+            { 'targets': 8, 'width': '20', 'orderable': false },       //Quantity
+            { 'targets': 9, 'width': '20', 'orderable': false },       //Unit
+            { 'targets': 10, 'width': '20', 'orderable': false },      //Price
+            { 'targets': 11, 'width': '20', 'orderable': false },      //Discount
+            { 'targets': 12, 'width': '30', 'orderable': false },       //TotalPrice
+            { 'targets': 13, 'width': '20', 'orderable': false },       //GST
+            { 'targets': 14, 'width': '20', 'orderable': false },      //Status
+            { 'targets': 15, 'width': '40', 'orderable': false },      //POCreatedBy
+            { 'targets': 16, 'width': '40', 'orderable': false }       //POAssingTo
         ],
         select: {
             style: 'multi',
@@ -1076,7 +1119,7 @@ $(document).ready(function () {
         select: {
             style: 'multi',
         },
-        "scrollX" : true,
+        "scrollX": true,
         "paging": false,
         "searching": false,
         "info": false
@@ -1121,7 +1164,7 @@ $(document).ready(function () {
             { 'targets': 3, 'orderable': false },       //POId
             { 'targets': 4, 'orderable': false },       //PONumber
             { 'targets': 5, 'orderable': false },       //Vendor
-            { 'targets': 6, 'orderable': false},       //VendorPrice
+            { 'targets': 6, 'orderable': false },       //VendorPrice
             { 'targets': 7, 'orderable': false },       //Price
             { 'targets': 8, 'orderable': false },       //Margin
             { 'targets': 9, 'orderable': false },       //Download
@@ -1130,7 +1173,8 @@ $(document).ready(function () {
         ],
         "paging": false,
         "searching": false,
-        "info": false
+        "info": false,
+	"scrollX":true
     });
     tblpodetails.on('order.dt search.dt', function () {
         tblpodetails.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
@@ -1138,6 +1182,110 @@ $(document).ready(function () {
             tblpodetails.cell(cell).invalidate('dom');
         });
     }).draw();
+
+    var tblPaymentProcessing = $('#tblPaymentProcessing').DataTable({
+        "columnDefs": [
+            { 'targets': 0 },       //SNo
+            { 'targets': 1 },       //OrderDate
+            { 'targets': 2 },       //CustomerName
+            { 'targets': 3 },       //POId
+            { 'targets': 4 },       //PONumber
+            { 'targets': 5 },       //Vendor
+            { 'targets': 6 },       //VendorPrice
+            { 'targets': 7 },       //Price
+            { 'targets': 8 },       //Margin
+            { 'targets': 9 },       //Download
+            { 'targets': 10 },       //Status
+            { 'targets': 11 },       //Payment
+            { 'targets': 12 },       //Payment
+        ],
+        "scrollX": true,
+        "paging": false,
+        "info": false
+    });
+    tblPaymentProcessing.on('order.dt search.dt', function () {
+        tblPaymentProcessing.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblPaymentProcessing.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
+    $(document).on('blur', '.cstmtrcd', function () {
+        var matcode = $(".cstmtrcd").val();
+        //e.preventDefault();
+        if (matcode !== "") {
+            $.ajax({
+                url: '/Admin/GetProductDetWMatCode',
+                data: "{'matcode':'" + matcode + "'}",
+                type: "POST",
+                dataType: "JSON",
+                contentType: "application/json; charset=utf-8",
+                success: function (res) {
+                    var lst = res;
+                    if (lst === undefined || lst === "") {
+                        $(".skuno").val("");
+                        $(".prdid").val("");
+                        $(".modelno").val("");
+                        $(".prdctgid").val("");
+                        $(".brndid").val("");
+                        $(".hsncode").val("");
+                        $(".untid").val("");
+                        $(".spcrmk").val("");
+                        $(".qty").val("");
+                        $(".price").val("");
+                        $(".gst").val("");
+                        $(".discount").val("");
+                    }
+                    else {
+                        $(".skuno").val(res[0].SKUNo).trigger('change.select2');
+                        $(".prdid").val(res[0].ProductId);
+                        $(".modelno").val(res[0].ModelNo);
+                        $(".prdctgid").val(res[0].PrdCtgryId).trigger('change.select2');
+                        $(".brndid").val(res[0].BrandId).trigger('change.select2');
+                        $(".hsncode").val(res[0].HSNCode);
+                        $(".untid").val(res[0].UnitId).trigger('change.select2');
+                        $(".spcrmk").val(res[0].SpcRemark);
+                        $(".qty").val(res[0].Quantity);
+                        $(".price").val(res[0].Price);
+                        $(".gst").val(res[0].GST);
+                        $(".discount").val(res[0].Discount);
+                    }
+                },
+                error: function (e) {
+                    alert("Failed! Please try again.");
+                }
+            });
+        }
+        else {
+            $(".skuno").val("");
+            $(".prdid").val("");
+            $(".modelno").val("");
+            $(".prdctgid").val("");
+            $(".brndid").val("");
+            $(".hsncode").val("");
+            $(".untid").val("");
+            $(".spcrmk").val("");
+            $(".qty").val("");
+            $(".price").val("");
+            $(".gst").val("");
+            $(".discount").val("");
+        }
+    });
+
+    $(".pmntmode").change(function () {
+        var pmode = $('.pmntmode').val();
+        if (pmode !== "" && pmode !== "--Select Payment Mode--") {
+            if (pmode == "PDC CHEQUE") {
+                $(".noofdays").prop('readonly', false);
+            }
+            else {
+                $(".noofdays").prop('readonly', true);
+            }
+        }
+        else {
+            $(".noofdays").prop('readonly', true);
+        }
+    });
 
 
     $('#addtemppoline').click(function () { AddTempPOLine(); });
@@ -1290,7 +1438,7 @@ function AddTempPOSourced() {
         tmpposrc.Product = row.cells[7].innerText;
         tmpposrc.Quantity = row.cells[8].innerText;
         tmpposrc.Price = row.cells[10].innerText;
-        
+
         tmpposrc.GST = row.cells[13].innerText;
 
         $('#tblposource').find('tbody').append(
@@ -1682,9 +1830,9 @@ $('#posubmit').on('click', function (e) {
         var fUpload = $("#PurOrdModels_POFile").get(0);
         var files = fUpload.files;
         // Create FormData object  
-        var fileData = new FormData();  
-        fileData.append(files[0].name, files[0]); 
-        
+        var fileData = new FormData();
+        fileData.append(files[0].name, files[0]);
+
         var linkObj = $(this);
         var hdArr = new Array();
         var lnArr = new Array();
@@ -2022,7 +2170,7 @@ $('#poapprove').on('click', function (e) {
     // Iterate over all selected checkboxes
     $.each(rows_selected, function (index, row) {
         // Create a hidden element
-        list.push(row.cells[4].innerText);
+        list.push(row.cells[5].innerText);
     });
 
     if (list.length > 0) {
