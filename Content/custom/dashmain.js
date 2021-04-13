@@ -1168,13 +1168,13 @@ $(document).ready(function () {
             { 'targets': 7, 'orderable': false },       //Price
             { 'targets': 8, 'orderable': false },       //Margin
             { 'targets': 9, 'orderable': false },       //Download
-            { 'targets': 10, 'orderable': false },       //Download
-            { 'targets': 11, 'orderable': false },       //Download
+            { 'targets': 10, 'orderable': false },      //Download
+            { 'targets': 11, 'orderable': false },      //Download
         ],
         "paging": false,
         "searching": false,
         "info": false,
-	"scrollX":true
+        "scrollX": true
     });
     tblpodetails.on('order.dt search.dt', function () {
         tblpodetails.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
@@ -1508,7 +1508,7 @@ $(document).on('blur', '.senqid', function () {
                 }
             },
             error: function (e) {
-                alert("Failed! Please try again.");
+                alert("Failed! Please try again. ");
             }
         });
     }
@@ -2170,7 +2170,7 @@ $('#poapprove').on('click', function (e) {
     // Iterate over all selected checkboxes
     $.each(rows_selected, function (index, row) {
         // Create a hidden element
-        list.push(row.cells[5].innerText);
+        list.push(row.cells[4].innerText);
     });
 
     if (list.length > 0) {
