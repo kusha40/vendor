@@ -914,12 +914,27 @@ $(document).ready(function () {
             { 'targets': 8, 'width': '60', 'orderable': false },    //Contact
             { 'targets': 9, 'width': '60', 'orderable': false },    //Contact
             { 'targets': 10, 'width': '60', 'orderable': false },    //Contact
-            { 'targets': 11, 'width': '60', 'orderable': false },   //Contact
-            { 'targets': 12, 'width': '60', 'orderable': false }    //Contact
+            { 'targets': 11, 'width': '60', 'orderable': false },    //Contact
+            { 'targets': 12, 'width': '60', 'orderable': false },    //Contact
+            { 'targets': 13, 'width': '60' },   //Contact
+            { 'targets': 14, 'width': '60' }    //Contact
         ],
         "scrollX": true,
         "paging": false,
-        "info": false
+        "info": false,
+        "dom": 'Bfrtip',
+        "buttons": [
+            'pageLength',
+            {
+                extend: 'excel',
+                text: '<i class="far fa-file-excel"></i> Excel',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                footer: true
+            },
+            'colvis'
+        ]
     });
 
     tblpurchaseorder.on('order.dt search.dt', function () {
