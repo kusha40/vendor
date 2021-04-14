@@ -1445,11 +1445,11 @@ function AddTempPOSourced() {
             "<tr>" +
             "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_CustomerName_" + inc + "' name='PurchaseOrdersModelList_CustomerName_" + inc + "' value='" + tmpposrc.CustomerName + "' disabled required='True' class='form-control scstname m-b-0 bg-gray' type='text'></td>" +
             "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_PONumber_" + inc + "' name='PurchaseOrdersModelList_PONumber_" + inc + "' value='" + tmpposrc.PONumber + "' class='form-control spono m-b-0 bg-gray' disabled  type='text' /></td> " +
-            "<td class='w-12'> <input type='text' id='PurchaseOrdersModelList_POPId_" + inc + "' name='PurchaseOrdersModelList_POPId_" + inc + "' value='" + tmpposrc.POPId + "' disabled class='form-control spopid m-b-0 bg-gray'  type='text' /></td>" +
+            "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_POPId_" + inc + "' name='PurchaseOrdersModelList_POPId_" + inc + "' value='" + tmpposrc.POPId + "' disabled class='form-control spopid m-b-0 bg-gray'  type='text' /></td>" +
             "<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_Product_" + inc + "' name='PurchaseOrdersModelList_Product_" + inc + "' value='" + tmpposrc.Product + "' disabled class='form-control spopid m-b-0 bg-gray'  type='text' /></td>" +
-            "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_Price_" + inc + "' name='PurchaseOrdersModelList_Price_" + inc + "' value='" + tmpposrc.Price + "' disabled class='form-control spoprice m-b-0 bg-gray'  type='text' /></td>" +
-            "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_Quantity_" + inc + "' name='PurchaseOrdersModelList_Quantity_" + inc + "' value='" + tmpposrc.Quantity + "' disabled class='form-control spoqty m-b-0 bg-gray'  type='text' /></td>" +
-            "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_GST_" + inc + "' name='PurchaseOrdersModelList_GST_" + inc + "' value='" + tmpposrc.GST + "' class='form-control spogst onlynumdec m-b-0'  type='text' /></td>" +
+            "<td class='w-8'> <input type='text' id='PurchaseOrdersModelList_Price_" + inc + "' name='PurchaseOrdersModelList_Price_" + inc + "' value='" + tmpposrc.Price + "' disabled class='form-control spoprice m-b-0 bg-gray'  type='text' /></td>" +
+            "<td class='w-6'> <input type='text' id='PurchaseOrdersModelList_Quantity_" + inc + "' name='PurchaseOrdersModelList_Quantity_" + inc + "' value='" + tmpposrc.Quantity + "' disabled class='form-control spoqty m-b-0 bg-gray'  type='text' /></td>" +
+            "<td class='w-4'> <input type='text' id='PurchaseOrdersModelList_GST_" + inc + "' name='PurchaseOrdersModelList_GST_" + inc + "' value='" + tmpposrc.GST + "' class='form-control spogst onlynumdec m-b-0'  type='text' /></td>" +
             "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_EnqId_" + inc + "' name='PurchaseOrdersModelList_EnqId_" + inc + "' value='' class='form-control senqid m-b-0'  type='text' /></td>" +
             "<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_VendorId_" + inc + "' name='PurchaseOrdersModelList_VendorId_" + inc + "' placeholder='Vendor Name' value='' class='form-control svenid m-b-0'  type='text' /></br><input type='text' id='PurchaseOrdersModelList_VendorPrice_" + inc + "' name='PurchaseOrdersModelList_VendorPrice_" + inc + "' value='' placeholder='Vendor Price' class='form-control svenprc onlynumdec m-b-0' /></td>" +
             "<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_LastVendorId_" + inc + "' name='PurchaseOrdersModelList_LastVendorId_" + inc + "' disabled placeholder='Last Vendor Name' value='' class='form-control slvenid m-b-0 bg-gray' /></br><input type='text' id='PurchaseOrdersModelList_LastVendorPrice_" + inc + "' disabled name='PurchaseOrdersModelList_LastVendorPrice_" + inc + "' value='' placeholder='Last Vendor Price' class='form-control slvenprc m-b-0 bg-gray' /></td>" +
@@ -1493,18 +1493,25 @@ $(document).on('blur', '.senqid', function () {
             dataType: "JSON",
             contentType: "application/json; charset=utf-8",
             success: function (res) {
-                var lst = res;
-                if (lst === undefined || lst === "") {
+                if (res[0] === undefined || res[0] === "") {
                     curRow.find("td:eq(8)").find(".svenid").val("");
                     curRow.find("td:eq(8)").find(".svenprc").val("");
                     curRow.find("td:eq(9)").find(".slvenid").val("");
                     curRow.find("td:eq(9)").find(".slvenprc").val("");
                 }
                 else {
-                    curRow.find("td:eq(8)").find(".svenid").val(res[0].VendorName);
-                    curRow.find("td:eq(8)").find(".svenprc").val(res[0].VendorPrice);
-                    curRow.find("td:eq(9)").find(".slvenid").val(res[0].VendorName);
-                    curRow.find("td:eq(9)").find(".slvenprc").val(res[0].VendorPrice);
+                    if (res[0].Status == "1") {
+                        curRow.find("td:eq(8)").find(".svenid").val(res[0].VendorName);
+                        curRow.find("td:eq(8)").find(".svenprc").val(res[0].VendorPrice);
+                        curRow.find("td:eq(9)").find(".slvenid").val(res[0].VendorName);
+                        curRow.find("td:eq(9)").find(".slvenprc").val(res[0].VendorPrice);
+                    }
+                    else {
+                        curRow.find("td:eq(8)").find(".svenid").val("");
+                        curRow.find("td:eq(8)").find(".svenprc").val("");
+                        curRow.find("td:eq(9)").find(".slvenid").val(res[0].VendorName);
+                        curRow.find("td:eq(9)").find(".slvenprc").val(res[0].VendorPrice);
+                    }           
                 }
             },
             error: function (e) {

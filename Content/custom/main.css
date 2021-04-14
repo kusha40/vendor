@@ -444,6 +444,10 @@ td .form-group {
     width: 6%;
 }
 
+.w-8 {
+    width: 8%;
+}
+
 .w-10 {
     width: 10%;
 }
@@ -826,6 +830,6 @@ td.isrcbtn button {
     color:#ffffff;
 }
 
-.table {
+.table td .form-control {
     font-size: 12px !important;
 }
