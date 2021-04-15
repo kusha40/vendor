@@ -35,7 +35,6 @@
                 <div class="box">
                     <div class="box-header with-border">
                         <h3 class="box-title">@Html.ActionLink("New Purchase Order", "PurchaseOrder", "Admin", null, new { @class = "btn btn-edt bg-aqua", title = "New Purchase Order" })</h3>
-
                     </div>
                     <!-- /.box-body -->
                     <div class="box-body">
@@ -96,30 +95,30 @@
                             <tbody>
                                 @foreach (var item in Model.PurchaseOrdersModelList)
                                 {
-                                <tr>
-                                    <td></td>
-                                    <td>
-                                        @Html.EncodedActionLink("Edit", "EditPurchaseOrder", "Admin", new { id = item.Id }, new { @class = "", title = "Edit" })
-                                    </td>
-                                    <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
-                                    <td>
-                                        <a href='~/Content/upload/poupload/@item.POFile' target="_blank">@item.PONumber</a>
-                                    </td>
-                                    <td>
-                                        <a href='~/Content/upload/poupload/@item.POFile' target="_blank">@item.POId</a>
-                                    </td>
-                                    <td>@Html.DisplayFor(modelItem => item.POPId)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Product)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Brand)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.ModelNo)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Price)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Discount)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.GST)%</td>
-                                    <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.ExpDlvDate)</td>
-                                </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            @Html.EncodedActionLink("Edit", "EditPurchaseOrder", "Admin", new { id = item.Id }, new { @class = "", title = "Edit" })
+                                        </td>
+                                        <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
+                                        <td>
+                                            <a href='~/Content/upload/poupload/@item.POFile' target="_blank">@item.PONumber</a>
+                                        </td>
+                                        <td>
+                                            <a href='~/Content/upload/poupload/@item.POFile' target="_blank">@item.POId</a>
+                                        </td>
+                                        <td>@Html.DisplayFor(modelItem => item.POPId)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Product)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Brand)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.ModelNo)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Discount)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.GST)%</td>
+                                        <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.ExpDlvDate)</td>
+                                    </tr>
                                 }
                             </tbody>
                         </table>

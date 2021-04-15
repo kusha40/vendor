@@ -38,6 +38,9 @@
             <div class="col-lg-12">
                 <!-- Default box -->
                 <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">@Html.ActionLink("New Vendor", "VendorInfo", "Admin", null, new { @class = "btn btn-edt bg-aqua", title = "New Vendor" })</h3>
+                    </div>
                     @if (Model.VendorInfoModelList.Count > 0)
                     {
                         <div class="box-header with-border">
@@ -122,6 +125,8 @@
                                                 {
                                                     @Html.EncodedActionLink("<i class='fa fa-check'></i>", "ApproveVendor", "Admin",
                                                            new { id = u.Id }, new { @class = "btn btn-edt bg-green  btn-sm mb-act-confirm", title = "Approve", @data_box = "#mb-act-cnfrm" })
+                                                    @Html.EncodedActionLink("<i class='fa fa-check'></i>", "DeleteVendor", "Admin",
+                                                           new { id = u.Id }, new { @class = "btn btn-edt bg-red  btn-sm mb-act-confirm-del", title = "Delete", @data_box = "#mb-act-cnfrm-del" })
                                                 }
                                             </td>
                                             <td>@Html.DisplayFor(model => u.VendorCode)</td>
@@ -165,6 +170,23 @@
                     <div class="mb-footer">
                         <div class="pull-right">
                             <a id="confirmhref" href="#" class="btn btn-confirm-yes btn-lg">Yes</a>
+                            <button class="btn btn-confirm-no btn-lg mb-control-close">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="message-box animated fadeIn" data-sound="alert" id="mb-act-cnfrm-del">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-warning"></span> Confirm <strong>Box</strong> ?</div>
+                    <div class="mb-content">
+                        <p>Are you sure you want to delete?</p>
+                        <p>Press No if you want to Cancel. Press Yes to Delete the record.</p>
+                    </div>
+                    <div class="mb-footer">
+                        <div class="pull-right">
+                            <a id="confirmdelhref" href="#" class="btn btn-confirm-yes btn-lg">Yes</a>
                             <button class="btn btn-confirm-no btn-lg mb-control-close">No</button>
                         </div>
                     </div>

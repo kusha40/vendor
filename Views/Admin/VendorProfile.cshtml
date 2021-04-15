@@ -436,11 +436,11 @@
                                         </div>
                                     </div>
                                     @*<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
-                                        <div class="form-group">
-                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Cancel Cheque Image</label>
-                                            <iframe src="~/Content/upload/poupload/PO-21040009.pdf" frameBorder="0" scrolling="auto" height="400" width="300"></iframe>
-                                        </div>
-                                    </div>*@
+                                            <div class="form-group">
+                                                <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Cancel Cheque Image</label>
+                                                <iframe src="~/Content/upload/poupload/PO-21040009.pdf" frameBorder="0" scrolling="auto" height="400" width="300"></iframe>
+                                            </div>
+                                        </div>*@
                                 </div>
                             </div>
                         </div>
@@ -577,6 +577,14 @@
                     <!-- /.tab-content -->
                 </div>
                 <!-- /.nav-tabs-custom -->
+            </div>
+            <div class="col-md-9">
+                <div class="box box-primary">
+                    <div class="box-body box-profile">
+                        @Html.EncodedActionLink("Edit", "EditVendorInfo", "Admin",
+                                                       new { id = Model.VendorInfoModels.Id }, new { @class = "btn btn-edt btn-sm bg-aqua", title = "Edit" })
+                    </div>
+                </div>
             </div>
             <!-- /.col -->
         </div>

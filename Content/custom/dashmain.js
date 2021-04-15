@@ -99,6 +99,25 @@ function isAlphabet(evt) {
 
 $(document).ready(function () {
 
+    $(".mb-act-confirm-del").on("click", function (e) {
+        e.preventDefault();
+        var box = $($(this).data("box"));
+        if (box.length > 0) {
+            box.toggleClass("open");
+            //alert(id);
+            var sound = box.data("sound");
+
+            if (sound === 'alert')
+                playAudio('alert');
+
+            if (sound === 'fail')
+                playAudio('fail');
+            var clkHref = $(this).attr('href');
+            $("#confirmdelhref").attr("href", clkHref);
+        }
+        return false;
+    });
+
     $(".mb-act-confirm").on("click", function (e) {
         e.preventDefault();
         var box = $($(this).data("box"));
@@ -1302,6 +1321,46 @@ $(document).ready(function () {
         }
     });
 
+    $("#VendorContactModels_PickAddrLin1").blur(function (event) {
+        $("#VendorContactModels_BilAddrLin1").val($("#VendorContactModels_PickAddrLin1").val());
+        $("#VendorContactModels_RetAddrLin1").val($("#VendorContactModels_PickAddrLin1").val());
+    });
+    $("#VendorContactModels_PickAddrLin2").blur(function (event) {
+        $("#VendorContactModels_BilAddrLin2").val($("#VendorContactModels_PickAddrLin2").val());
+        $("#VendorContactModels_RetAddrLin2").val($("#VendorContactModels_PickAddrLin2").val());
+    });
+    $("#VendorContactModels_PickContact1").blur(function (event) {
+        $("#VendorContactModels_BilContact1").val($("#VendorContactModels_PickContact1").val());
+        $("#VendorContactModels_RetContact1").val($("#VendorContactModels_PickContact1").val());
+    });
+    $("#VendorContactModels_PickContact2").blur(function (event) {
+        $("#VendorContactModels_BilContact2").val($("#VendorContactModels_PickContact2").val());
+        $("#VendorContactModels_RetContact2").val($("#VendorContactModels_PickContact2").val());
+    });
+    $("#VendorContactModels_PickEmail").blur(function (event) {
+        $("#VendorContactModels_BilEmail").val($("#VendorContactModels_PickEmail").val());
+        $("#VendorContactModels_RetEmail").val($("#VendorContactModels_PickEmail").val());
+    });
+    $("#VendorContactModels_PickCity").blur(function (event) {
+        $("#VendorContactModels_BilCity").val($("#VendorContactModels_PickCity").val());
+        $("#VendorContactModels_RetCity").val($("#VendorContactModels_PickCity").val());
+    });
+    $("#VendorContactModels_PickPincode").blur(function (event) {
+        $("#VendorContactModels_BilPincode").val($("#VendorContactModels_PickPincode").val());
+        $("#VendorContactModels_RetPincode").val($("#VendorContactModels_PickPincode").val());
+    });
+
+    $("#VendorContactModels_PickState").change(function () {
+        var cstid = $('#VendorContactModels_PickState').val();
+        $("#VendorContactModels_BilState").val(cstid).trigger('change.select2');
+        $("#VendorContactModels_RetState").val(cstid).trigger('change.select2');
+    });
+
+    $("#VendorContactModels_PickCountry").change(function () {
+        var cstid = $('#VendorContactModels_PickCountry').val();
+        $("#VendorContactModels_BilCountry").val(cstid).trigger('change.select2');
+        $("#VendorContactModels_RetCountry").val(cstid).trigger('change.select2');
+    });
 
     $('#addtemppoline').click(function () { AddTempPOLine(); });
     $(".divsource").hide();
@@ -1499,6 +1558,7 @@ $(document).on('focus', '.svenid', function () {
 $(document).on('blur', '.senqid', function () {
     var curRow = $(this).closest("tr");
     var enqid = curRow.find(".senqid").val();
+    var cstName = curRow.find(".scstname").val();
     //e.preventDefault();
     if (enqid !== "") {
         $.ajax({
@@ -1515,18 +1575,25 @@ $(document).on('blur', '.senqid', function () {
                     curRow.find("td:eq(9)").find(".slvenprc").val("");
                 }
                 else {
-                    if (res[0].Status == "1") {
-                        curRow.find("td:eq(8)").find(".svenid").val(res[0].VendorName);
-                        curRow.find("td:eq(8)").find(".svenprc").val(res[0].VendorPrice);
-                        curRow.find("td:eq(9)").find(".slvenid").val(res[0].VendorName);
-                        curRow.find("td:eq(9)").find(".slvenprc").val(res[0].VendorPrice);
+                    if (res[0].CustomerName === cstName) {
+                        if (res[0].Status == "1") {
+                            curRow.find("td:eq(8)").find(".svenid").val(res[0].VendorName);
+                            curRow.find("td:eq(8)").find(".svenprc").val(res[0].VendorPrice);
+                            curRow.find("td:eq(9)").find(".slvenid").val(res[0].VendorName);
+                            curRow.find("td:eq(9)").find(".slvenprc").val(res[0].VendorPrice);
+                        }
+                        else {
+                            curRow.find("td:eq(8)").find(".svenid").val("");
+                            curRow.find("td:eq(8)").find(".svenprc").val("");
+                            curRow.find("td:eq(9)").find(".slvenid").val(res[0].VendorName);
+                            curRow.find("td:eq(9)").find(".slvenprc").val(res[0].VendorPrice);
+                        }
                     }
                     else {
-                        curRow.find("td:eq(8)").find(".svenid").val("");
-                        curRow.find("td:eq(8)").find(".svenprc").val("");
-                        curRow.find("td:eq(9)").find(".slvenid").val(res[0].VendorName);
-                        curRow.find("td:eq(9)").find(".slvenprc").val(res[0].VendorPrice);
-                    }           
+                        alert("This enquiry id is not quoted with this customer");
+                        curRow.find("td:eq(7)").find(".senqid").val("");
+                        curRow.find("td:eq(7)").find(".senqid").focus();
+                    }
                 }
             },
             error: function (e) {
@@ -2192,7 +2259,7 @@ $('#poapprove').on('click', function (e) {
     // Iterate over all selected checkboxes
     $.each(rows_selected, function (index, row) {
         // Create a hidden element
-        list.push(row.cells[4].innerText);
+        list.push(row.cells[5].innerText);
     });
 
     if (list.length > 0) {
