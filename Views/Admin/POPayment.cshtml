@@ -13,7 +13,7 @@
         string actType = "Add";
         string actBtn = "Submit";
         string pageTitle = Html.Raw(Html.PageTitle()) + "";
-        if (!String.IsNullOrEmpty(Model.POPaymentModels.VPONumber))
+        if (!String.IsNullOrEmpty(Model.POPaymentModels.Id))
         {
             actType = "Edit";
             actBtn = "Update";
@@ -89,6 +89,7 @@
                                 }
                             </div>
                             @Html.HiddenFor(model => model.POPaymentModels.VPONumber)
+                            @Html.HiddenFor(model => model.POPaymentModels.Id)
                         </div>
                         <div class="row">
                             <div class="col-md-12">
@@ -157,6 +158,19 @@
                                 }
                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                     <div class="form-group">
+                                        @Html.LabelFor(m => m.POPaymentModels.Amount, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextBoxFor(m => m.POPaymentModels.Amount,
+                                new
+                                {
+                                    @class = "form-control",
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.POPaymentModels.Amount)
+                                })
+                                        @Html.ValidationMessageFor(m => m.POPaymentModels.Amount, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
                                         @Html.LabelFor(m => m.POPaymentModels.PaymentDate, new { @class = "form-control-label" }) <sup>*</sup>
                                         @Html.TextBoxFor(m => m.POPaymentModels.PaymentDate,
                                 new
@@ -203,6 +217,68 @@
                         </div>
                     </div>
                     <!-- /.box-footer-->
+                </div>
+                <!-- /.box -->
+            </div>
+            <div class="col-lg-12">
+                <!-- Default box -->
+                <div class="box">
+                    @if (Model.POPaymentModelList.Count > 0)
+                    {
+                        <div class="box-header with-border">
+                            <h3 class="box-title">@pageTitle List</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                        title="Collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                                @*<button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                                        <i class="fa fa-times"></i>
+                                    </button>*@
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <table id="tblPOPayment" class="table table-bordered display nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>SNo.</th>
+                                        <th>Action</th>
+                                        <th>@Html.DisplayNameFor(model => model.POPaymentModelList.FirstOrDefault().PaymentMode)</th>
+                                        <th>@Html.DisplayNameFor(model => model.POPaymentModelList.FirstOrDefault().Amount)</th>
+                                        <th>@Html.DisplayNameFor(model => model.POPaymentModelList.FirstOrDefault().NoOfDays)</th>
+                                        <th>@Html.DisplayNameFor(model => model.POPaymentModelList.FirstOrDefault().PaymentDate)</th>
+                                        <th>@Html.DisplayNameFor(model => model.POPaymentModelList.FirstOrDefault().Remark)</th>
+                                        <th>@Html.DisplayNameFor(model => model.POPaymentModelList.FirstOrDefault().PaymentSlip)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var u in Model.POPaymentModelList)
+                                    {
+                                        <tr>
+                                            <td></td>
+                                            <td>
+                                                @Html.EncodedActionLink("<i class='fa fa-pencil-square-o'></i>", "EditPOPayment", "Admin", new { id = u.Id }, new { @class = "btn btn-edt bg-aqua", title = "Edit" })
+                                                @Html.EncodedActionLink("<i class='fa fa-times'></i>", "DeletePOPayment", "Admin", new { id = u.Id }, new { data_box = "#mb-act-cnfrm", @class = "btn btn-del m-l-5 mb-act-confirm bg-m-red", title = "Delete" })
+                                            </td>
+                                            <td>@Html.DisplayFor(modelSKU => u.PaymentMode) </td>
+                                            <td>@Html.DisplayFor(modelSKU => u.Amount) </td>
+                                            <td>@Html.DisplayFor(modelSKU => u.NoOfDays) </td>
+                                            <td>@Html.DisplayFor(modelSKU => u.PaymentDate) </td>
+                                            <td>@Html.DisplayFor(modelSKU => u.Remark) </td>
+                                            <td><img src="~/Content/upload/popayment/@u.PaymentSlip" height="100" width="100" /> </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    }
+                    else
+                    {
+                        <div class="box-body">
+                            <div class="no-record">No record found.</div>
+                        </div>
+                    }
                 </div>
                 <!-- /.box -->
             </div>

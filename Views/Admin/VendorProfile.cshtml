@@ -429,18 +429,33 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
-                                        <div class="form-group">
-                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Cancel Cheque Image</label>
-                                            <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorBankModels.CanChqImage" height="150" width="300" />
+                                    @{
+                                        string ccpdf = (@Model.VendorBankModels.CanChqImage + "").ToLower().Split('.')[1];
+                                        string pnpdf = (@Model.VendorTaxModels.PANImage + "").ToLower().Split('.')[1];
+                                        string gspdf = (@Model.VendorTaxModels.GSTINImage + "").ToLower().Split('.')[1];
+                                        string sgpdf = (@Model.VendorTaxModels.SignatureImage + "").ToLower().Split('.')[1];
+                                        string sepdf = (@Model.VendorAdtlInfoModels.ShpEstbCert + "").ToLower().Split('.')[1];
+                                        string adpdf = (@Model.VendorAdtlInfoModels.AuthDlrPrf + "").ToLower().Split('.')[1];
+                                        string cppdf = (@Model.VendorAdtlInfoModels.CpyPrtnDeedCOI + "").ToLower().Split('.')[1];
+                                        string mspdf = (@Model.VendorAdtlInfoModels.MSMERegsCert + "").ToLower().Split('.')[1];
+                                    }
+                                    @if (ccpdf == "pdf")
+                                    {
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Cancel Cheque</label>
+                                            <object data="~/Content/upload/vendor/doc/@Model.VendorBankModels.CanChqImage" type="application/pdf" width="100%" height="300px">
+                                            </object>
                                         </div>
-                                    </div>
-                                    @*<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                    }
+                                    else
+                                    {
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
                                             <div class="form-group">
-                                                <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Cancel Cheque Image</label>
-                                                <iframe src="~/Content/upload/poupload/PO-21040009.pdf" frameBorder="0" scrolling="auto" height="400" width="300"></iframe>
+                                                <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Cancel Cheque</label>
+                                                <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorBankModels.CanChqImage" height="150" width="300" />
                                             </div>
-                                        </div>*@
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -461,26 +476,59 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
-                                        <div class="form-group">
-                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">PAN Image</label>
-                                            <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorTaxModels.PANImage" height="150" width="300" />
+                                    @if (pnpdf == "pdf")
+                                    {
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">PAN Cheque</label>
+                                            <object data="~/Content/upload/vendor/doc/@Model.VendorTaxModels.PANImage" type="application/pdf" width="100%" height="300px">
+                                            </object>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
-                                        <div class="form-group">
+                                    }
+                                    else
+                                    {
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                            <div class="form-group">
+                                                <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">PAN Image</label>
+                                                <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorTaxModels.PANImage" height="150" width="300" />
+                                            </div>
+                                        </div>
+                                    }
+                                    @if (gspdf == "pdf")
+                                    {
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
                                             <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">GST Image</label>
-                                            <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorTaxModels.GSTINImage" height="150" width="300" />
+                                            <object data="~/Content/upload/vendor/doc/@Model.VendorTaxModels.GSTINImage" type="application/pdf" width="100%" height="300px">
+                                            </object>
                                         </div>
-                                    </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                            <div class="form-group">
+                                                <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">GST Image</label>
+                                                <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorTaxModels.GSTINImage" height="150" width="300" />
+                                            </div>
+                                        </div>
+                                    }
                                 </div>
                                 <div class="col-md-12">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
-                                        <div class="form-group">
+                                    @if (sgpdf == "pdf")
+                                    {
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
                                             <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Signature Image</label>
-                                            <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorTaxModels.SignatureImage" height="150" width="300" />
+                                            <object data="~/Content/upload/vendor/doc/@Model.VendorTaxModels.SignatureImage" type="application/pdf" width="100%" height="300px">
+                                            </object>
                                         </div>
-                                    </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                            <div class="form-group">
+                                                <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Signature Image</label>
+                                                <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorTaxModels.SignatureImage" height="150" width="300" />
+                                            </div>
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -543,32 +591,77 @@
                         <div class="tab-pane" id="adtinfo">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <div class="form-group">
+                                    @if (sepdf == "pdf")
+                                    {
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
                                             <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Shop & Establishment Certificate</label>
-                                            <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorAdtlInfoModels.ShpEstbCert" height="150" width="300" />
+                                            <object data="~/Content/upload/vendor/doc/@Model.VendorAdtlInfoModels.ShpEstbCert" type="application/pdf" width="100%" height="300px">
+                                            </object>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <div class="form-group">
+                                    }
+                                    else
+                                    {
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Shop & Establishment Certificate</label>
+                                                <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorAdtlInfoModels.ShpEstbCert" height="150" width="300" />
+                                            </div>
+                                        </div>
+                                    }
+                                    @if (adpdf == "pdf")
+                                    {
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
                                             <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Authorised Dealer Proof</label>
-                                            <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorAdtlInfoModels.AuthDlrPrf" height="150" width="300" />
+                                            <object data="~/Content/upload/vendor/doc/@Model.VendorAdtlInfoModels.AuthDlrPrf" type="application/pdf" width="100%" height="300px">
+                                            </object>
                                         </div>
-                                    </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Authorised Dealer Proof</label>
+                                                <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorAdtlInfoModels.AuthDlrPrf" height="150" width="300" />
+                                            </div>
+                                        </div>
+                                    }
                                 </div>
                                 <div class="col-md-12">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
-                                        <div class="form-group">
+                                    @if (cppdf == "pdf")
+                                    {
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
                                             <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Copy of Partnership Deed COI</label>
-                                            <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorAdtlInfoModels.CpyPrtnDeedCOI" height="150" width="300" />
+                                            <object data="~/Content/upload/vendor/doc/@Model.VendorAdtlInfoModels.CpyPrtnDeedCOI" type="application/pdf" width="100%" height="300px">
+                                            </object>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
-                                        <div class="form-group">
+                                    }
+                                    else
+                                    {
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                            <div class="form-group">
+                                                <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Copy of Partnership Deed COI</label>
+                                                <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorAdtlInfoModels.CpyPrtnDeedCOI" height="150" width="300" />
+                                            </div>
+                                        </div>
+                                    }
+                                    @if (mspdf == "pdf")
+                                    {
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
                                             <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">MSME Registration Certificate</label>
-                                            <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorAdtlInfoModels.MSMERegsCert" height="150" width="300" />
+                                            <object data="~/Content/upload/vendor/doc/@Model.VendorAdtlInfoModels.MSMERegsCert" type="application/pdf" width="100%" height="300px">
+                                            </object>
                                         </div>
-                                    </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                            <div class="form-group">
+                                                <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">MSME Registration Certificate</label>
+                                                <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorAdtlInfoModels.MSMERegsCert" height="150" width="300" />
+                                            </div>
+                                        </div>
+                                    }
+
                                 </div>
                             </div>
                         </div>

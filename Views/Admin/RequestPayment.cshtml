@@ -1,7 +1,7 @@
 ﻿@using Vendor_Indusuno.Extensions
 @model Vendor_Indusuno.ViewModels.RequestPaymentViewModel
 @{
-    ViewBag.Title = "Payment Processing";
+    ViewBag.Title = "Request Payment";
     TempData["Purchase"] = "active";
     TempData["RequestPayment"] = "active";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -67,21 +67,21 @@
                                 })
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.Status, new { @class = "form-control-label" })
-                                @Html.DropDownListFor(m => m.Status,
-                               new List<SelectListItem>
-                                  {
-                                    new SelectListItem{ Text="Success", Value = "Success", Selected = true },
-                                    new SelectListItem{ Text="Pending", Value = "Pending" },
-                                  },
-                                "--Select Status--", new { @class = "form-control select2" })
-                                @Html.ValidationMessageFor(m => m.Status, "",
-                        new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <table id="tblRequestPayment" class="table table-bordered display nowrap">
+                        @*<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Status, new { @class = "form-control-label" })
+                                    @Html.DropDownListFor(m => m.Status,
+                                   new List<SelectListItem>
+                                      {
+                                        new SelectListItem{ Text="Success", Value = "Success", Selected = true },
+                                        new SelectListItem{ Text="Pending", Value = "Pending" },
+                                      },
+                                    "--Select Status--", new { @class = "form-control select2" })
+                                    @Html.ValidationMessageFor(m => m.Status, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>*@
+                        <table id="tblRequestPayment" class="table table-bordered display">
                             <thead>
                                 <tr>
                                     <th>SNo</th>
@@ -95,7 +95,7 @@
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Price)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Margin)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POAssignTo)</th>
-                                    @*<th>Download PO</th>*@
+                                    <th>Status</th>
                                     <th>Request</th>
                                 </tr>
                             </thead>
@@ -111,17 +111,14 @@
                                             @Html.EncodedActionLink(item.POId, "PODetails", "Admin", new { id = item.POId }, new { @class = "", title = "Details", @target = "_blank" })
                                         </td>
                                         <td>
-                                            @Html.EncodedActionLink(item.VPONumber, "DownloadPO", "Admin", new { id = item.POId }, new { @class = "", title = "Download", @target = "_blank" })
+                                            @Html.EncodedActionLink(item.VPONumber, "DownloadPO", "Admin", new { id = item.VPONumber }, new { @class = "", title = "Download"})
                                         </td>
                                         <td>@Html.DisplayFor(modelItem => item.VendorId)</td>
                                         <td>@Html.DisplayFor(modelItem => item.VendorPrice)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Price)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Margin)</td>
                                         <td>@Html.DisplayFor(modelItem => item.POAssignTo)</td>
-                                        @*<td>
-                                                @Html.EncodedActionLink("Download", "DownloadPO", "Admin",
-                                                    new { id = item.POId }, new { @class = "btn btn-edt bg-aqua btn-sm", title = "Download PO" })
-                                            </td>*@
+                                        <td>@Html.DisplayFor(modelItem => item.Status)</td>
                                         <td>
                                             @if (Model.UserProfileModels.EmpType == "Administrator")
                                             {

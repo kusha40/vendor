@@ -1203,12 +1203,11 @@ $(document).ready(function () {
             { 'targets': 8, 'orderable': false },       //Margin
             { 'targets': 9, 'orderable': false },       //Download
             { 'targets': 10, 'orderable': false },      //Download
-            { 'targets': 11, 'orderable': false },      //Download
         ],
         "paging": false,
         "searching": false,
         "info": false,
-        "scrollX": true
+        //"scrollX": true
     });
     tblpodetails.on('order.dt search.dt', function () {
         tblpodetails.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
@@ -1216,6 +1215,93 @@ $(document).ready(function () {
             tblpodetails.cell(cell).invalidate('dom');
         });
     }).draw();
+
+    var tblRequestPayment = $('#tblRequestPayment').DataTable({
+        "scrollX": true,
+        "paging": false,
+        "info": false
+    });
+    tblRequestPayment.on('order.dt search.dt', function () {
+        tblRequestPayment.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblRequestPayment.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
+    $('.rppmnttype').change(function () {
+        $('.rppmntmode option[value="NEFT"]').prop('disabled', $(this).val() == 'CREDIT');
+        $('.rppmntmode option[value="CD CHEQUE"]').prop('disabled', $(this).val() == 'CREDIT');
+        $('.rppmntmode option[value="CASH"]').prop('disabled', $(this).val() == 'CREDIT');
+
+        $('.rppmntmode option[value="PDC CHEQUE"]').prop('disabled', $(this).val() == 'ADVANCE');
+        $('.rppmntmode option[value="OPEN CREDIT"]').prop('disabled', $(this).val() == 'ADVANCE');
+
+        var ptype = $('.rppmnttype').val();
+        if (ptype !== "" && ptype !== "--Select Payment Type--") {
+            if (ptype == "CREDIT") {
+                $(".noofdays").prop('readonly', false);
+                $(".advvalue").prop('readonly', true);
+                $(".advvalue").val("0");
+                $(".pdcvalue").prop('readonly', false);
+            }
+            else if (ptype == "ADVANCE") {
+                $(".noofdays").prop('readonly', true);
+                $(".noofdays").val("0");
+                $(".advvalue").prop('readonly', false);
+                $(".pdcvalue").prop('readonly', true);
+                $(".pdcvalue").val("0");
+            }
+            else if (ptype == "CREDIT+ADVANCE") {
+                $(".noofdays").prop('readonly', false);
+                $(".advvalue").prop('readonly', false);
+                $(".pdcvalue").prop('readonly', false);
+            }
+        }
+        else {
+            $(".noofdays").prop('readonly', true);
+        }
+    });
+
+    $('.rpmtsts').change(function () {
+        var mtsts = $('.rpmtsts').val();
+        if (mtsts !== "" && mtsts !== "--Select Material Status--") {
+            if (mtsts == "LEAD TIME") {
+                $(".ldtime").prop('readonly', false);
+            }
+            else {
+                $(".ldtime").prop('readonly', true);
+                $(".ldtime").val("0");
+            }
+        }
+        else {
+            $(".ldtime").prop('readonly', true);
+            $(".ldtime").val("0");
+        }
+    });
+
+    var tblPRApproval = $('#tblPRApproval').DataTable({
+        "columnDefs": [
+            {
+                'targets': 0, 'checkboxes':
+                {
+                    'selectRow': true
+                }
+            }
+        ],
+        select: {
+            style: 'multi',
+        },
+        "scrollX": true,
+        "paging": false,
+        "info": false
+    });
+    tblPRApproval.on('order.dt search.dt', function () {
+        tblPRApproval.column(1, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblPRApproval.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
 
     var tblPaymentProcessing = $('#tblPaymentProcessing').DataTable({
         "columnDefs": [
@@ -1241,6 +1327,28 @@ $(document).ready(function () {
         tblPaymentProcessing.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
             cell.innerHTML = i + 1;
             tblPaymentProcessing.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
+    var tblPOPayment = $('#tblPOPayment').DataTable({
+        "paging": false,
+        "info": false
+    });
+    tblPOPayment.on('order.dt search.dt', function () {
+        tblPOPayment.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblPOPayment.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
+    var tblMaterialPickup = $('#tblMaterialPickup').DataTable({
+        "paging": false,
+        "info": false
+    });
+    tblMaterialPickup.on('order.dt search.dt', function () {
+        tblMaterialPickup.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblMaterialPickup.cell(cell).invalidate('dom');
         });
     }).draw();
 
@@ -1573,6 +1681,7 @@ $(document).on('blur', '.senqid', function () {
                     curRow.find("td:eq(8)").find(".svenprc").val("");
                     curRow.find("td:eq(9)").find(".slvenid").val("");
                     curRow.find("td:eq(9)").find(".slvenprc").val("");
+                    alert("Vendor is not registered with us Please register and then enter enquiry Id.");
                 }
                 else {
                     if (res[0].CustomerName === cstName) {
@@ -2268,6 +2377,45 @@ $('#poapprove').on('click', function (e) {
             url: "/Admin/ApprovePO",
             dataType: "json",
             data: "{'poIds': '" + poIds + "'}",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                if (result.error === "") {
+                    location.reload();
+                }
+                else {
+                    alert(result.error);
+                }
+            },
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                alert(err.Message);
+            }
+        });
+    }
+    else {
+        alert("Please select atleast one po.");
+    }
+});
+
+
+$('#prapprove').on('click', function (e) {
+    $("#prapprove").attr("disabled", true);
+    e.preventDefault();
+    var rows_selected = $("#tblPRApproval tbody tr.selected");
+    var list = new Array();
+    // Iterate over all selected checkboxes
+    $.each(rows_selected, function (index, row) {
+        // Create a hidden element
+        list.push(row.cells[6].innerText);
+    });
+
+    if (list.length > 0) {
+        var vpoIds = JSON.stringify(list);
+        $.ajax({
+            url: "/Admin/ApprovePaymentRequest",
+            dataType: "json",
+            data: "{'vpoIds': '" + vpoIds + "'}",
             type: "POST",
             contentType: "application/json; charset=utf-8",
             success: function (result) {

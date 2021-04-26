@@ -95,7 +95,6 @@
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Price)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Margin)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POAssignTo)</th>
-                                    <th>Download PO</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Status)</th>
                                     <th>Payment</th>
                                 </tr>
@@ -112,16 +111,14 @@
                                             @Html.EncodedActionLink(item.POId, "PODetails", "Admin", new { id = item.POId }, new { @class = "", title = "Edit", @target = "_blank" })
 
                                         </td>
-                                        <td>@Html.DisplayFor(modelItem => item.VPONumber)</td>
+                                        <td>
+                                            @Html.EncodedActionLink(item.VPONumber, "DownloadPO", "Admin", new { id = item.VPONumber }, new { @class = "", title = "Download", @target = "_blank" })
+                                        </td>
                                         <td>@Html.DisplayFor(modelItem => item.VendorId)</td>
                                         <td>@Html.DisplayFor(modelItem => item.VendorPrice)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Price)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Margin)</td>
                                         <td>@Html.DisplayFor(modelItem => item.POAssignTo)</td>
-                                        <td>
-                                            @Html.EncodedActionLink("Download", "DownloadPO", "Admin",
-                                                new { id = item.POId }, new { @class = "btn btn-edt bg-aqua btn-sm", title = "Download PO" })
-                                        </td>
                                         <td>@Html.DisplayFor(modelItem => item.Status)</td>
                                         <td>
                                             @if (Model.UserProfileModels.EmpType == "Administrator")
