@@ -2027,9 +2027,7 @@ $('#posubmit').on('click', function (e) {
     if (row === lnitm) {
         var fUpload = $("#PurOrdModels_POFile").get(0);
         var files = fUpload.files;
-        // Create FormData object  
-        var fileData = new FormData();
-        fileData.append(files[0].name, files[0]);
+       
 
         var linkObj = $(this);
         var hdArr = new Array();
@@ -2042,9 +2040,12 @@ $('#posubmit').on('click', function (e) {
         var poedlvdate = $('.poedlvdate').val();
         var polneitm = $('.polneitm').val();
         var posentby = $('.posentby').val();
-        fileData.append('POId', poid);
-        if (cstId !== "" && poid !== "" && potype !== "" && polneitm !== "0" && polneitm !== "" && posentby !== "" && files[0].name !== "" && files[0].name !== undefined) {
 
+        if (cstId !== "" && poid !== "" && potype !== "" && polneitm !== "0" && polneitm !== "" && posentby !== "" && files.length > 0) {
+            // Create FormData object  
+            var fileData = new FormData();
+            fileData.append(files[0].name, files[0]);
+            fileData.append('POId', poid);
             $(".tbl tbody tr").each(function () {
                 var tds = $(this).find("td");
                 //you could use the Find method to find the texbox or the dropdownlist and get the value.
