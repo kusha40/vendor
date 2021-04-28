@@ -93,8 +93,8 @@
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().VendorId)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().VendorPrice)</th>
                                     @*<th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().GST)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Margin)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POAssignTo)</th>*@
+                                        <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Margin)</th>
+                                        <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POAssignTo)</th>*@
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Status)</th>
                                     <th>View</th>
                                 </tr>
@@ -117,14 +117,14 @@
                                         <td>@Html.DisplayFor(modelItem => item.VendorId)</td>
                                         <td>@Html.DisplayFor(modelItem => item.VendorPrice)</td>
                                         @*<td>@Html.DisplayFor(modelItem => item.GST)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Margin)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.POAssignTo)</td>*@
+                                            <td>@Html.DisplayFor(modelItem => item.Margin)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.POAssignTo)</td>*@
                                         <td>@Html.DisplayFor(modelItem => item.Status)</td>
                                         <td>
                                             @if (Model.UserProfileModels.EmpType == "Administrator")
                                             {
-                                                @Html.EncodedActionLink("View", "POPayment", "Admin",
-                                                    new { id = item.VPONumber }, new { @class = "btn btn-edt bg-aqua btn-sm", @target = "_blank", title = "Payment" })
+                                                @Html.EncodedActionLink("Receive", "MaterialReceive", "Admin",
+                                                    new { id = item.VPONumber }, new { @class = "btn btn-edt bg-aqua btn-sm", @target = "_blank", title = "Receive" })
                                             }
                                         </td>
                                     </tr>

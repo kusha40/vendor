@@ -429,32 +429,26 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    @{
-                                        string ccpdf = (@Model.VendorBankModels.CanChqImage + "").ToLower().Split('.')[1];
-                                        string pnpdf = (@Model.VendorTaxModels.PANImage + "").ToLower().Split('.')[1];
-                                        string gspdf = (@Model.VendorTaxModels.GSTINImage + "").ToLower().Split('.')[1];
-                                        string sgpdf = (@Model.VendorTaxModels.SignatureImage + "").ToLower().Split('.')[1];
-                                        string sepdf = (@Model.VendorAdtlInfoModels.ShpEstbCert + "").ToLower().Split('.')[1];
-                                        string adpdf = (@Model.VendorAdtlInfoModels.AuthDlrPrf + "").ToLower().Split('.')[1];
-                                        string cppdf = (@Model.VendorAdtlInfoModels.CpyPrtnDeedCOI + "").ToLower().Split('.')[1];
-                                        string mspdf = (@Model.VendorAdtlInfoModels.MSMERegsCert + "").ToLower().Split('.')[1];
-                                    }
-                                    @if (ccpdf == "pdf")
+                                    @if (!string.IsNullOrEmpty(Model.VendorBankModels.CanChqImage + ""))
                                     {
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
-                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Cancel Cheque</label>
-                                            <object data="~/Content/upload/vendor/doc/@Model.VendorBankModels.CanChqImage" type="application/pdf" width="100%" height="300px">
-                                            </object>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
-                                            <div class="form-group">
+                                        string ccpdf = (Model.VendorBankModels.CanChqImage + "").ToLower().Split('.')[1];
+                                        if (ccpdf == "pdf")
+                                        {
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
                                                 <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Cancel Cheque</label>
-                                                <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorBankModels.CanChqImage" height="150" width="300" />
+                                                <object data="~/Content/upload/vendor/doc/@Model.VendorBankModels.CanChqImage" type="application/pdf" width="100%" height="300px">
+                                                </object>
                                             </div>
-                                        </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                                <div class="form-group">
+                                                    <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Cancel Cheque</label>
+                                                    <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorBankModels.CanChqImage" height="150" width="300" />
+                                                </div>
+                                            </div>
+                                        }
                                     }
                                 </div>
                             </div>
@@ -476,58 +470,70 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    @if (pnpdf == "pdf")
+                                    @if (!string.IsNullOrEmpty(Model.VendorTaxModels.PANImage + ""))
                                     {
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
-                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">PAN Cheque</label>
-                                            <object data="~/Content/upload/vendor/doc/@Model.VendorTaxModels.PANImage" type="application/pdf" width="100%" height="300px">
-                                            </object>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
-                                            <div class="form-group">
-                                                <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">PAN Image</label>
-                                                <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorTaxModels.PANImage" height="150" width="300" />
+                                        string pnpdf = (Model.VendorTaxModels.PANImage + "").ToLower().Split('.')[1];
+                                        if (pnpdf == "pdf")
+                                        {
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                                <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">PAN Cheque</label>
+                                                <object data="~/Content/upload/vendor/doc/@Model.VendorTaxModels.PANImage" type="application/pdf" width="100%" height="300px">
+                                                </object>
                                             </div>
-                                        </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                                <div class="form-group">
+                                                    <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">PAN Image</label>
+                                                    <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorTaxModels.PANImage" height="150" width="300" />
+                                                </div>
+                                            </div>
+                                        }
                                     }
-                                    @if (gspdf == "pdf")
+                                    @if (!string.IsNullOrEmpty(Model.VendorTaxModels.GSTINImage + ""))
                                     {
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
-                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">GST Image</label>
-                                            <object data="~/Content/upload/vendor/doc/@Model.VendorTaxModels.GSTINImage" type="application/pdf" width="100%" height="300px">
-                                            </object>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
-                                            <div class="form-group">
+                                        string gspdf = (Model.VendorTaxModels.GSTINImage + "").ToLower().Split('.')[1];
+                                        if (gspdf == "pdf")
+                                        {
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
                                                 <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">GST Image</label>
-                                                <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorTaxModels.GSTINImage" height="150" width="300" />
+                                                <object data="~/Content/upload/vendor/doc/@Model.VendorTaxModels.GSTINImage" type="application/pdf" width="100%" height="300px">
+                                                </object>
                                             </div>
-                                        </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                                <div class="form-group">
+                                                    <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">GST Image</label>
+                                                    <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorTaxModels.GSTINImage" height="150" width="300" />
+                                                </div>
+                                            </div>
+                                        }
                                     }
                                 </div>
                                 <div class="col-md-12">
-                                    @if (sgpdf == "pdf")
+                                    @if (!string.IsNullOrEmpty(Model.VendorTaxModels.SignatureImage + ""))
                                     {
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
-                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Signature Image</label>
-                                            <object data="~/Content/upload/vendor/doc/@Model.VendorTaxModels.SignatureImage" type="application/pdf" width="100%" height="300px">
-                                            </object>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
-                                            <div class="form-group">
+                                        string sgpdf = (Model.VendorTaxModels.SignatureImage + "").ToLower().Split('.')[1];
+                                        if (sgpdf == "pdf")
+                                        {
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
                                                 <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Signature Image</label>
-                                                <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorTaxModels.SignatureImage" height="150" width="300" />
+                                                <object data="~/Content/upload/vendor/doc/@Model.VendorTaxModels.SignatureImage" type="application/pdf" width="100%" height="300px">
+                                                </object>
                                             </div>
-                                        </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                                <div class="form-group">
+                                                    <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Signature Image</label>
+                                                    <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorTaxModels.SignatureImage" height="150" width="300" />
+                                                </div>
+                                            </div>
+                                        }
                                     }
                                 </div>
                             </div>
@@ -591,77 +597,92 @@
                         <div class="tab-pane" id="adtinfo">
                             <div class="row">
                                 <div class="col-md-12">
-                                    @if (sepdf == "pdf")
+                                    @if (!string.IsNullOrEmpty(Model.VendorAdtlInfoModels.ShpEstbCert + ""))
                                     {
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
-                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Shop & Establishment Certificate</label>
-                                            <object data="~/Content/upload/vendor/doc/@Model.VendorAdtlInfoModels.ShpEstbCert" type="application/pdf" width="100%" height="300px">
-                                            </object>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                            <div class="form-group">
+                                        string sepdf = (Model.VendorAdtlInfoModels.ShpEstbCert + "").ToLower().Split('.')[1];
+                                        if (sepdf == "pdf")
+                                        {
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
                                                 <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Shop & Establishment Certificate</label>
-                                                <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorAdtlInfoModels.ShpEstbCert" height="150" width="300" />
+                                                <object data="~/Content/upload/vendor/doc/@Model.VendorAdtlInfoModels.ShpEstbCert" type="application/pdf" width="100%" height="300px">
+                                                </object>
                                             </div>
-                                        </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                <div class="form-group">
+                                                    <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Shop & Establishment Certificate</label>
+                                                    <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorAdtlInfoModels.ShpEstbCert" height="150" width="300" />
+                                                </div>
+                                            </div>
+                                        }
                                     }
-                                    @if (adpdf == "pdf")
+                                    @if (!string.IsNullOrEmpty(Model.VendorAdtlInfoModels.AuthDlrPrf + ""))
                                     {
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
-                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Authorised Dealer Proof</label>
-                                            <object data="~/Content/upload/vendor/doc/@Model.VendorAdtlInfoModels.AuthDlrPrf" type="application/pdf" width="100%" height="300px">
-                                            </object>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                            <div class="form-group">
+                                        string adpdf = (Model.VendorAdtlInfoModels.AuthDlrPrf + "").ToLower().Split('.')[1];
+                                        if (adpdf == "pdf")
+                                        {
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
                                                 <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Authorised Dealer Proof</label>
-                                                <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorAdtlInfoModels.AuthDlrPrf" height="150" width="300" />
+                                                <object data="~/Content/upload/vendor/doc/@Model.VendorAdtlInfoModels.AuthDlrPrf" type="application/pdf" width="100%" height="300px">
+                                                </object>
                                             </div>
-                                        </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                <div class="form-group">
+                                                    <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Authorised Dealer Proof</label>
+                                                    <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorAdtlInfoModels.AuthDlrPrf" height="150" width="300" />
+                                                </div>
+                                            </div>
+                                        }
                                     }
                                 </div>
                                 <div class="col-md-12">
-                                    @if (cppdf == "pdf")
+                                    @if (!string.IsNullOrEmpty(Model.VendorAdtlInfoModels.CpyPrtnDeedCOI + ""))
                                     {
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
-                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Copy of Partnership Deed COI</label>
-                                            <object data="~/Content/upload/vendor/doc/@Model.VendorAdtlInfoModels.CpyPrtnDeedCOI" type="application/pdf" width="100%" height="300px">
-                                            </object>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
-                                            <div class="form-group">
+                                        string cppdf = (Model.VendorAdtlInfoModels.CpyPrtnDeedCOI + "").ToLower().Split('.')[1];
+                                        if (cppdf == "pdf")
+                                        {
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
                                                 <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Copy of Partnership Deed COI</label>
-                                                <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorAdtlInfoModels.CpyPrtnDeedCOI" height="150" width="300" />
+                                                <object data="~/Content/upload/vendor/doc/@Model.VendorAdtlInfoModels.CpyPrtnDeedCOI" type="application/pdf" width="100%" height="300px">
+                                                </object>
                                             </div>
-                                        </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                                <div class="form-group">
+                                                    <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">Copy of Partnership Deed COI</label>
+                                                    <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorAdtlInfoModels.CpyPrtnDeedCOI" height="150" width="300" />
+                                                </div>
+                                            </div>
+                                        }
                                     }
-                                    @if (mspdf == "pdf")
+                                    @if (!string.IsNullOrEmpty(Model.VendorAdtlInfoModels.MSMERegsCert + ""))
                                     {
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
-                                            <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">MSME Registration Certificate</label>
-                                            <object data="~/Content/upload/vendor/doc/@Model.VendorAdtlInfoModels.MSMERegsCert" type="application/pdf" width="100%" height="300px">
-                                            </object>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
-                                            <div class="form-group">
+                                        string mspdf = (Model.VendorAdtlInfoModels.MSMERegsCert + "").ToLower().Split('.')[1];
+                                        if (mspdf == "pdf")
+                                        {
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
                                                 <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">MSME Registration Certificate</label>
-                                                <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorAdtlInfoModels.MSMERegsCert" height="150" width="300" />
+                                                <object data="~/Content/upload/vendor/doc/@Model.VendorAdtlInfoModels.MSMERegsCert" type="application/pdf" width="100%" height="300px">
+                                                </object>
                                             </div>
-                                        </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 b-t-1">
+                                                <div class="form-group">
+                                                    <label for="inputName" class="col-sm-6 control-label text-left l-h p-b-16">MSME Registration Certificate</label>
+                                                    <img class="img-responsive" src="~/Content/upload/vendor/doc/@Model.VendorAdtlInfoModels.MSMERegsCert" height="150" width="300" />
+                                                </div>
+                                            </div>
+                                        }
                                     }
-
                                 </div>
                             </div>
                         </div>

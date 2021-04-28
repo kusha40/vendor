@@ -1,5 +1,4 @@
 ﻿
-
 function AddNewRow(cont, rowcls, tblid) {
 
     var regex = /^(.*)(\d)+$/i;
@@ -1726,6 +1725,28 @@ $(document).on('blur', '.svenprc', function () {
         var qty = curRow.find("td:eq(4)").find(".sqty").val();
         var unitprc = parseFloat(prc) / parseFloat(qty);
         curRow.find("td:eq(8)").find(".svunitprc").val(unitprc);
+
+    }
+    else {
+        //curRow.find("td:eq(5)").find(".svenid").val("");
+    }
+});
+
+
+$(document).on('blur', '.ircvqty', function () {
+    var curRow = $(this).closest("tr");
+    var vprc = curRow.find(".vprc").html();
+    var qty = curRow.find(".qty").html();
+    var rcvqty = curRow.find(".ircvqty").val();
+    var gst = curRow.find(".gst").html();
+    //e.preventDefault();
+    if (rcvqty !== "" && rcvqty !== "0") {
+        var untprc = parseFloat(vprc) / parseFloat(qty);
+        var tot = parseFloat(untprc) * parseFloat(rcvqty);
+        var totwtax = parseFloat(tot) + (parseFloat(tot) * parseFloat(gst) / 100);
+
+        curRow.find(".tot").html(tot);
+        curRow.find(".totwtax").html(totwtax);
 
     }
     else {
