@@ -1342,7 +1342,8 @@ $(document).ready(function () {
 
     var tblMaterialPickup = $('#tblMaterialPickup').DataTable({
         "paging": false,
-        "info": false
+        "info": false,
+        "scrollX": true
     });
     tblMaterialPickup.on('order.dt search.dt', function () {
         tblMaterialPickup.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
@@ -2048,7 +2049,7 @@ $('#posubmit').on('click', function (e) {
     if (row === lnitm) {
         var fUpload = $("#PurOrdModels_POFile").get(0);
         var files = fUpload.files;
-       
+
 
         var linkObj = $(this);
         var hdArr = new Array();
