@@ -1206,7 +1206,7 @@ $(document).ready(function () {
         "paging": false,
         "searching": false,
         "info": false,
-        //"scrollX": true
+        "scrollX": true
     });
     tblpodetails.on('order.dt search.dt', function () {
         tblpodetails.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
@@ -2050,7 +2050,6 @@ $('#posubmit').on('click', function (e) {
         var fUpload = $("#PurOrdModels_POFile").get(0);
         var files = fUpload.files;
 
-
         var linkObj = $(this);
         var hdArr = new Array();
         var lnArr = new Array();
@@ -2439,6 +2438,53 @@ $('#prapprove').on('click', function (e) {
             url: "/Admin/ApprovePaymentRequest",
             dataType: "json",
             data: "{'vpoIds': '" + vpoIds + "'}",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                if (result.error === "") {
+                    location.reload();
+                }
+                else {
+                    alert(result.error);
+                }
+            },
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                alert(err.Message);
+            }
+        });
+    }
+    else {
+        alert("Please select atleast one po.");
+    }
+});
+
+$('#mrsubmit').on('click', function (e) {
+    $("#mrsubmit").attr("disabled", true);
+    e.preventDefault();
+    var list = new Array();
+    // Iterate over all selected checkboxes
+    $(".tbl tbody tr").each(function () {
+        var tds = $(this).find("td");
+        //you could use the Find method to find the texbox or the dropdownlist and get the value.
+        var popId = $(tds[1]).html();
+        var qty = parseFloat($(tds[6]).find('.ircvqty').val());
+        
+        if (popId !== "" && qty !== "" && qty !== "0") {
+            var lin = {
+                POPId: popId,
+                Quantity : qty
+            };
+            list.push(lin);
+        }
+    });
+
+    if (list.length > 0) {
+        var po = JSON.stringify(list);
+        $.ajax({
+            url: "/Admin/UpsertMaterialReceive",
+            dataType: "json",
+            data: "{'po': '" + po + "'}",
             type: "POST",
             contentType: "application/json; charset=utf-8",
             success: function (result) {

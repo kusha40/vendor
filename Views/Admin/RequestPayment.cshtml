@@ -120,11 +120,8 @@
                                         <td>@Html.DisplayFor(modelItem => item.POAssignTo)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Status)</td>
                                         <td>
-                                            @if (Model.UserProfileModels.EmpType == "Administrator")
-                                            {
                                                 @Html.EncodedActionLink("<i class='fa fa-money'></i>", "PORequestPayment", "Admin",
                                                     new { id = item.VPONumber }, new { @class = "btn btn-edt bg-aqua btn-sm", @target = "_blank", title = "Payment" })
-                                            }
                                         </td>
                                     </tr>
                                 }
