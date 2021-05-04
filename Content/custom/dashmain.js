@@ -1632,7 +1632,7 @@ function AddTempPOSourced() {
             "<td class='w-8'> <input type='text' id='PurchaseOrdersModelList_Price_" + inc + "' name='PurchaseOrdersModelList_Price_" + inc + "' value='" + tmpposrc.Price + "' disabled class='form-control spoprice m-b-0 bg-gray'  type='text' /></td>" +
             "<td class='w-6'> <input type='text' id='PurchaseOrdersModelList_Quantity_" + inc + "' name='PurchaseOrdersModelList_Quantity_" + inc + "' value='" + tmpposrc.Quantity + "' disabled class='form-control spoqty m-b-0 bg-gray'  type='text' /></td>" +
             "<td class='w-4'> <input type='text' id='PurchaseOrdersModelList_GST_" + inc + "' name='PurchaseOrdersModelList_GST_" + inc + "' value='" + tmpposrc.GST + "' class='form-control spogst onlynumdec m-b-0'  type='text' /></td>" +
-            "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_EnqId_" + inc + "' name='PurchaseOrdersModelList_EnqId_" + inc + "' value='' class='form-control senqid m-b-0'  type='text' /></td>" +
+            "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_EnqId_" + inc + "' name='PurchaseOrdersModelList_EnqId_" + inc + "' value='' disabled class='form-control senqid m-b-0 bg-gray'  type='text' /></td>" +
             "<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_VendorId_" + inc + "' name='PurchaseOrdersModelList_VendorId_" + inc + "' placeholder='Vendor Name' value='' class='form-control svenid m-b-0'  type='text' /></br><input type='text' id='PurchaseOrdersModelList_VendorPrice_" + inc + "' name='PurchaseOrdersModelList_VendorPrice_" + inc + "' value='' placeholder='Vendor Price' class='form-control svenprc onlynumdec m-b-0' /></td>" +
             "<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_LastVendorId_" + inc + "' name='PurchaseOrdersModelList_LastVendorId_" + inc + "' disabled placeholder='Last Vendor Name' value='' class='form-control slvenid m-b-0 bg-gray' /></br><input type='text' id='PurchaseOrdersModelList_LastVendorPrice_" + inc + "' disabled name='PurchaseOrdersModelList_LastVendorPrice_" + inc + "' value='' placeholder='Last Vendor Price' class='form-control slvenprc m-b-0 bg-gray' /></td>" +
             "</tr>");
@@ -1663,60 +1663,60 @@ $(document).on('focus', '.svenid', function () {
     });
 });
 
-$(document).on('blur', '.senqid', function () {
-    var curRow = $(this).closest("tr");
-    var enqid = curRow.find(".senqid").val();
-    var cstName = curRow.find(".scstname").val();
-    //e.preventDefault();
-    if (enqid !== "") {
-        $.ajax({
-            url: '/Admin/GetVendorPrice',
-            data: "{'enqid':'" + enqid + "'}",
-            type: "POST",
-            dataType: "JSON",
-            contentType: "application/json; charset=utf-8",
-            success: function (res) {
-                if (res[0] === undefined || res[0] === "") {
-                    curRow.find("td:eq(8)").find(".svenid").val("");
-                    curRow.find("td:eq(8)").find(".svenprc").val("");
-                    curRow.find("td:eq(9)").find(".slvenid").val("");
-                    curRow.find("td:eq(9)").find(".slvenprc").val("");
-                    alert("Vendor is not registered with us Please register and then enter enquiry Id.");
-                }
-                else {
-                    if (res[0].CustomerName === cstName) {
-                        if (res[0].Status == "1") {
-                            curRow.find("td:eq(8)").find(".svenid").val(res[0].VendorName);
-                            curRow.find("td:eq(8)").find(".svenprc").val(res[0].VendorPrice);
-                            curRow.find("td:eq(9)").find(".slvenid").val(res[0].VendorName);
-                            curRow.find("td:eq(9)").find(".slvenprc").val(res[0].VendorPrice);
-                        }
-                        else {
-                            curRow.find("td:eq(8)").find(".svenid").val("");
-                            curRow.find("td:eq(8)").find(".svenprc").val("");
-                            curRow.find("td:eq(9)").find(".slvenid").val(res[0].VendorName);
-                            curRow.find("td:eq(9)").find(".slvenprc").val(res[0].VendorPrice);
-                        }
-                    }
-                    else {
-                        alert("This enquiry id is not quoted with this customer");
-                        curRow.find("td:eq(7)").find(".senqid").val("");
-                        curRow.find("td:eq(7)").find(".senqid").focus();
-                    }
-                }
-            },
-            error: function (e) {
-                alert("Failed! Please try again. ");
-            }
-        });
-    }
-    else {
-        curRow.find("td:eq(8)").find(".svenid").val("");
-        curRow.find("td:eq(8)").find(".svenprc").val("");
-        curRow.find("td:eq(9)").find(".slvenid").val("");
-        curRow.find("td:eq(8)").find(".slvenprc").val("");
-    }
-});
+//$(document).on('blur', '.senqid', function () {
+//    var curRow = $(this).closest("tr");
+//    var enqid = curRow.find(".senqid").val();
+//    var cstName = curRow.find(".scstname").val();
+//    //e.preventDefault();
+//    if (enqid !== "") {
+//        $.ajax({
+//            url: '/Admin/GetVendorPrice',
+//            data: "{'enqid':'" + enqid + "'}",
+//            type: "POST",
+//            dataType: "JSON",
+//            contentType: "application/json; charset=utf-8",
+//            success: function (res) {
+//                if (res[0] === undefined || res[0] === "") {
+//                    curRow.find("td:eq(8)").find(".svenid").val("");
+//                    curRow.find("td:eq(8)").find(".svenprc").val("");
+//                    curRow.find("td:eq(9)").find(".slvenid").val("");
+//                    curRow.find("td:eq(9)").find(".slvenprc").val("");
+//                    alert("Vendor is not registered with us Please register and then enter enquiry Id.");
+//                }
+//                else {
+//                    if (res[0].CustomerName === cstName) {
+//                        if (res[0].Status == "1") {
+//                            curRow.find("td:eq(8)").find(".svenid").val(res[0].VendorName);
+//                            curRow.find("td:eq(8)").find(".svenprc").val(res[0].VendorPrice);
+//                            curRow.find("td:eq(9)").find(".slvenid").val(res[0].VendorName);
+//                            curRow.find("td:eq(9)").find(".slvenprc").val(res[0].VendorPrice);
+//                        }
+//                        else {
+//                            curRow.find("td:eq(8)").find(".svenid").val("");
+//                            curRow.find("td:eq(8)").find(".svenprc").val("");
+//                            curRow.find("td:eq(9)").find(".slvenid").val(res[0].VendorName);
+//                            curRow.find("td:eq(9)").find(".slvenprc").val(res[0].VendorPrice);
+//                        }
+//                    }
+//                    else {
+//                        alert("This enquiry id is not quoted with this customer");
+//                        curRow.find("td:eq(7)").find(".senqid").val("");
+//                        curRow.find("td:eq(7)").find(".senqid").focus();
+//                    }
+//                }
+//            },
+//            error: function (e) {
+//                alert("Failed! Please try again. ");
+//            }
+//        });
+//    }
+//    else {
+//        curRow.find("td:eq(8)").find(".svenid").val("");
+//        curRow.find("td:eq(8)").find(".svenprc").val("");
+//        curRow.find("td:eq(9)").find(".slvenid").val("");
+//        curRow.find("td:eq(8)").find(".slvenprc").val("");
+//    }
+//});
 
 $(document).on('blur', '.svenprc', function () {
     var curRow = $(this).closest("tr");
@@ -1738,20 +1738,25 @@ $(document).on('blur', '.ircvqty', function () {
     var curRow = $(this).closest("tr");
     var vprc = curRow.find(".vprc").html();
     var qty = curRow.find(".qty").html();
+    var remqty = curRow.find(".remqty").html();
     var rcvqty = curRow.find(".ircvqty").val();
     var gst = curRow.find(".gst").html();
     //e.preventDefault();
-    if (rcvqty !== "" && rcvqty !== "0") {
-        var untprc = parseFloat(vprc) / parseFloat(qty);
-        var tot = parseFloat(untprc) * parseFloat(rcvqty);
-        var totwtax = parseFloat(tot) + (parseFloat(tot) * parseFloat(gst) / 100);
+    if (rcvqty <= remqty) {
+        if (rcvqty !== "" && rcvqty !== "0") {
+            var untprc = parseFloat(vprc) / parseFloat(qty);
+            var tot = parseFloat(untprc) * parseFloat(rcvqty);
+            var totwtax = parseFloat(tot) + (parseFloat(tot) * parseFloat(gst) / 100);
 
-        curRow.find(".tot").html(tot);
-        curRow.find(".totwtax").html(totwtax);
-
+            curRow.find(".tot").html(tot);
+            curRow.find(".totwtax").html(totwtax);
+        }
     }
     else {
-        //curRow.find("td:eq(5)").find(".svenid").val("");
+        curRow.find(".ircvqty").val(remqty);
+        curRow.find(".tot").html(0);
+        curRow.find(".totwtax").html(0);
+        alert("Receive Quantity is greater than remaining Quantity");
     }
 });
 
@@ -2183,14 +2188,15 @@ $('.posousubmit').on('click', function (e) {
         var svenprc = $(tds[8]).find('.svenprc').val();
         var slvenid = $(tds[9]).find('.slvenid').val();
         var slvenprc = $(tds[9]).find('.slvenprc').val();
-        if (spopid !== "" && senqid !== "" && spogst != "" && svenid !== "" && svenprc !== "" && svenprc !== "0" && slvenid !== "" && slvenprc !== "0" && slvenprc !== "") {
+        if (spopid !== "" /*&& senqid !== ""*/ && spogst != "" && svenid !== "" && svenprc !== "" && svenprc !== "0"
+            /*&& slvenid !== "" && slvenprc !== "0" && slvenprc !== ""*/) {
             var lin = {
                 POPId: spopid,
                 EnqId: senqid,
                 VendorId: svenid,
                 VendorPrice: parseFloat(svenprc),
-                LastVendorId: slvenid,
-                LastVendorPrice: parseFloat(slvenprc),
+                //LastVendorId: slvenid,
+                //LastVendorPrice: parseFloat(slvenprc),
                 GST: parseFloat(spogst)
             };
             lnArr.push(lin);
