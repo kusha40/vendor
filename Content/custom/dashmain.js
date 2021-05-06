@@ -1742,6 +1742,8 @@ $(document).on('blur', '.ircvqty', function () {
     var rcvqty = curRow.find(".ircvqty").val();
     var gst = curRow.find(".gst").html();
     //e.preventDefault();
+    remqty = parseFloat(remqty);
+    rcvqty = parseFloat(rcvqty);
     if (rcvqty <= remqty) {
         if (rcvqty !== "" && rcvqty !== "0") {
             var untprc = parseFloat(vprc) / parseFloat(qty);
@@ -2468,6 +2470,9 @@ $('#prapprove').on('click', function (e) {
 $('#mrsubmit').on('click', function (e) {
     $("#mrsubmit").attr("disabled", true);
     e.preventDefault();
+    var fUpload = $("#InvStockModels_VendorInvoice").get(0);
+    var files = fUpload.files;
+    var fileData = new FormData();
     var list = new Array();
     // Iterate over all selected checkboxes
     $(".tbl tbody tr").each(function () {
@@ -2475,39 +2480,63 @@ $('#mrsubmit').on('click', function (e) {
         //you could use the Find method to find the texbox or the dropdownlist and get the value.
         var popId = $(tds[1]).html();
         var qty = parseFloat($(tds[6]).find('.ircvqty').val());
-        
-        if (popId !== "" && qty !== "" && qty !== "0") {
+
+        if (popId !== "" && qty !== "" && qty !== "0" && files.length > 0) {      
+            fileData.append(files[0].name, files[0]);
+            fileData.append('POPId', popId);
             var lin = {
                 POPId: popId,
-                Quantity : qty
+                Quantity: qty
             };
             list.push(lin);
         }
     });
-
-    if (list.length > 0) {
-        var po = JSON.stringify(list);
-        $.ajax({
-            url: "/Admin/UpsertMaterialReceive",
-            dataType: "json",
-            data: "{'po': '" + po + "'}",
-            type: "POST",
-            contentType: "application/json; charset=utf-8",
-            success: function (result) {
-                if (result.error === "") {
-                    location.reload();
+    if (files.length > 0) {
+        if (list.length > 0) {
+            var po = JSON.stringify(list);
+            $.ajax({
+                url: "/Admin/UpsertMaterialReceive",
+                dataType: "json",
+                data: "{'po': '" + po + "'}",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (result) {
+                    if (result.error === "") {
+                        $.ajax({
+                            url: "/Admin/UpdateMaterialReceive",
+                            type: "POST",
+                            contentType: false,
+                            processData: false, // Not to process data  
+                            data: fileData,
+                            success: function (result) {
+                                if (result.error === "") {
+                                    location.reload();
+                                }
+                                else {
+                                    alert(result.error);
+                                }
+                            },
+                            error: function (xhr, status, error) {
+                                var err = eval("(" + xhr.responseText + ")");
+                                alert(err.Message);
+                            }
+                        });
+                    }
+                    else {
+                        alert(result.error);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert(err.Message);
                 }
-                else {
-                    alert(result.error);
-                }
-            },
-            error: function (xhr, status, error) {
-                var err = eval("(" + xhr.responseText + ")");
-                alert(err.Message);
-            }
-        });
+            });
+        }
+        else {
+            alert("Please select atleast one po.");
+        }
     }
     else {
-        alert("Please select atleast one po.");
+        alert("Vendor Invoice is required");
     }
 });

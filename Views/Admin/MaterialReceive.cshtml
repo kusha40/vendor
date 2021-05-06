@@ -122,7 +122,21 @@
                     </div>
                     <div class="box-footer">
                         <div class="col-md-12">
-                            <div class="box-tools pull-left">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.InvStockModels.VendorInvoice, new { @class = "form-control-label" }) <sup>*</sup>
+                                    @Html.TextBoxFor(m => m.InvStockModels.VendorInvoice,
+                            new
+                            {
+                                @class = "form-control",
+                                @type = "file",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.InvStockModels.VendorInvoice)
+                            })
+                                    @Html.ValidationMessageFor(m => m.InvStockModels.VendorInvoice, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="box-tools pull-right">
                                 <button name="mrsubmit" id="mrsubmit" class="btn bg-aqua" title="SUBMIT"
                                         value="submit">
                                     SUBMIT
