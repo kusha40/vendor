@@ -91,7 +91,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                     <div class="form-group">
                                         @Html.LabelFor(m => m.PurOrdModels.CustomerId, new { @class = "form-control-label" }) <sup>*</sup>
                                         @Html.DropDownListFor(m => m.PurOrdModels.CustomerId, new SelectList(Model.CustomerModelList, "Key", "Value"),
@@ -100,7 +100,25 @@
                                 new { @class = "text-danger errcstid" })
                                     </div>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.PurOrdModels.CustomerBillAdd, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.DropDownListFor(m => m.PurOrdModels.CustomerBillAdd, new SelectList(Model.CustomerBilAddModelList, "Key", "Value"),
+                                        "--Customer Billing Address--", new { @class = "form-control select2 cstbadd" })
+                                        @Html.ValidationMessageFor(m => m.PurOrdModels.CustomerBillAdd, "",
+                                new { @class = "text-danger errcstbadd" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.PurOrdModels.CustomerShipAdd, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.DropDownListFor(m => m.PurOrdModels.CustomerShipAdd, new SelectList(Model.CustomerShipAddModelList, "Key", "Value"),
+                                        "--Customer Shipping Address--", new { @class = "form-control select2 cstsadd" })
+                                        @Html.ValidationMessageFor(m => m.PurOrdModels.CustomerShipAdd, "",
+                                new { @class = "text-danger errcstsadd" })
+                                    </div>
+                                </div>
+                                <div class="col-md-12 row">
                                     <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
                                         <div class="form-group">
                                             @Html.LabelFor(m => m.PurOrdModels.POType, new { @class = "form-control-label" })

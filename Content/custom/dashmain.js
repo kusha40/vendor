@@ -1008,6 +1008,89 @@ $(document).ready(function () {
     //    }
     //});
 
+    $("#PurOrdModels_CustomerId").change(function () {
+        var cstid = $('#PurOrdModels_CustomerId').val();
+        if (cstid !== "") {
+            $.ajax({
+                url: '/Admin/GetCustomerBillAdd',
+                data: { cstid: cstid },
+                type: "GET",
+                dataType: "JSON",
+                success: function (res) {
+                    var relsn = res;
+                    $('#PurOrdModels_CustomerBillAdd').empty();
+                    if (relsn.length === 0) {
+                        $("#PurOrdModels_CustomerBillAdd").attr("required", true);
+                        $("#PurOrdModels_CustomerBillAdd").attr("disabled", true);
+                    }
+                    else if (relsn.length === 1) {
+                        $("#PurOrdModels_CustomerBillAdd").attr("disabled", false);
+                        var optionrel = '<option value="' + relsn[0].Id + '">' + relsn[0].Value + '</option>';
+                        $('#PurOrdModels_CustomerBillAdd').append(optionrel);
+                        $('#PurOrdModels_CustomerBillAdd').val(relsn[0].Id);
+                    }
+                    else if (relsn.length > 1) {
+                        $('#PurOrdModels_CustomerBillAdd').val("");
+                        $("#PurOrdModels_CustomerBillAdd").attr("disabled", false);
+                        var optionrel = '<option value=""> --Customer Billing Address-- </option>';
+                        $('#PurOrdModels_CustomerBillAdd').append(optionrel);
+                        $("#PurOrdModels_CustomerBillAdd").attr("required", true);
+                        for (var i = 0; i < relsn.length; i++) {
+                            var optionrel = '<option value="' + relsn[i].Id + '">' + relsn[i].Value + '</option>';
+                            $('#PurOrdModels_CustomerBillAdd').append(optionrel);
+                        }
+                    }
+                },
+                error: function () {
+                    alert("Failed! Please try again.");
+                }
+            });
+
+            $.ajax({
+                url: '/Admin/GetCustomerShipAdd',
+                data: { cstid: cstid },
+                type: "GET",
+                dataType: "JSON",
+                success: function (res) {
+                    var relsn = res;
+                    $('#PurOrdModels_CustomerShipAdd').empty();
+                    if (relsn.length === 0) {
+                        $("#PurOrdModels_CustomerShipAdd").attr("required", true);
+                        $("#PurOrdModels_CustomerShipAdd").attr("disabled", true);
+                    }
+                    else if (relsn.length === 1) {
+                        $("#PurOrdModels_CustomerShipAdd").attr("disabled", false);
+                        var optionrel = '<option value="' + relsn[0].Id + '">' + relsn[0].Value + '</option>';
+                        $('#PurOrdModels_CustomerShipAdd').append(optionrel);
+                        $('#PurOrdModels_CustomerShipAdd').val(relsn[0].Id);
+                    }
+                    else if (relsn.length > 1) {
+                        $('#PurOrdModels_CustomerShipAdd').val("");
+                        $("#PurOrdModels_CustomerShipAdd").attr("disabled", false);
+                        var optionrel = '<option value=""> --Customer Shipping Address-- </option>';
+                        $('#PurOrdModels_CustomerShipAdd').append(optionrel);
+                        $("#PurOrdModels_CustomerShipAdd").attr("required", true);
+                        for (var i = 0; i < relsn.length; i++) {
+                            var optionrel = '<option value="' + relsn[i].Id + '">' + relsn[i].Value + '</option>';
+                            $('#PurOrdModels_CustomerShipAdd').append(optionrel);
+                        }
+                    }
+                },
+                error: function () {
+                    alert("Failed! Please try again.");
+                }
+            });
+        }
+        else {
+            $('#PurOrdModels_CustomerBillAdd').empty();
+            $("#PurOrdModels_CustomerBillAdd").attr("required", true);
+            $("#PurOrdModels_CustomerBillAdd").attr("disabled", true);
+            $('#PurOrdModels_CustomerShipAdd').empty();
+            $("#PurOrdModels_CustomerShipAdd").attr("required", true);
+            $("#PurOrdModels_CustomerShipAdd").attr("disabled", true);
+        }
+    });
+
     $('.select2').select2();
 
     var tblassignpo = $('#tblassignpo').DataTable({
@@ -2061,6 +2144,8 @@ $('#posubmit').on('click', function (e) {
         var hdArr = new Array();
         var lnArr = new Array();
         var cstId = $('.cstid').val();
+        var cstbadd = $('.cstbadd').val();
+        var cstsadd = $('.cstsadd').val();
         var potype = $('.potype').val();
         var poid = $('.poid').val();
         var pono = $('.pono').val();
@@ -2069,7 +2154,7 @@ $('#posubmit').on('click', function (e) {
         var polneitm = $('.polneitm').val();
         var posentby = $('.posentby').val();
 
-        if (cstId !== "" && poid !== "" && potype !== "" && polneitm !== "0" && polneitm !== "" && posentby !== "" && files.length > 0) {
+        if (cstId !== "" && cstbadd !== "" && cstsadd !== "" && poid !== "" && potype !== "" && polneitm !== "0" && polneitm !== "" && posentby !== "" && files.length > 0) {
             // Create FormData object  
             var fileData = new FormData();
             fileData.append(files[0].name, files[0]);
@@ -2096,6 +2181,8 @@ $('#posubmit').on('click', function (e) {
                 if (pprdid !== "" && ppctrid !== "" && pbrndid !== "" && punitid !== "" && pqty !== "0" && pqty !== "" && pprice !== "0" && pprice !== "" && pgst !== "") {
                     var lin = {
                         CustomerId: cstId,
+                        CustomerBillAdd: cstbadd,
+                        CustomerShipAdd: cstsadd,
                         POType: potype,
                         POId: poid,
                         OrderDate: poorddate,
