@@ -431,6 +431,21 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POGenerateModels.LMRemarks, new { @class = "form-control-label" })
+                                    @Html.TextAreaFor(m => m.POGenerateModels.LMRemarks,
+                            new
+                            {
+                                @class = "form-control lmremark",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.LMRemarks)
+                            })
+                                    @Html.ValidationMessageFor(m => m.POGenerateModels.LMRemarks, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
                         <button name="submit" id="pogen" class="btn bg-aqua m-t-20" title="Submit"
                                 value="pogen">
                             Submit

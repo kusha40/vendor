@@ -94,6 +94,7 @@
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().VendorPrice)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Price)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Margin)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().LMRemarks)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POAssignTo)</th>
                                     <th>Status</th>
                                     <th>Request</th>
@@ -111,17 +112,18 @@
                                             @Html.EncodedActionLink(item.POId, "PODetails", "Admin", new { id = item.POId }, new { @class = "", title = "Details", @target = "_blank" })
                                         </td>
                                         <td>
-                                            @Html.EncodedActionLink(item.VPONumber, "DownloadPO", "Admin", new { id = item.VPONumber }, new { @class = "", title = "Download"})
+                                            @Html.EncodedActionLink(item.VPONumber, "DownloadPO", "Admin", new { id = item.VPONumber }, new { @class = "", title = "Download" })
                                         </td>
                                         <td>@Html.DisplayFor(modelItem => item.VendorId)</td>
                                         <td>@Html.DisplayFor(modelItem => item.VendorPrice)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Price)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Margin)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.LMRemarks)</td>
                                         <td>@Html.DisplayFor(modelItem => item.POAssignTo)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Status)</td>
                                         <td>
-                                                @Html.EncodedActionLink("<i class='fa fa-money'></i>", "PORequestPayment", "Admin",
-                                                    new { id = item.VPONumber }, new { @class = "btn btn-edt bg-aqua btn-sm", @target = "_blank", title = "Payment" })
+                                            @Html.EncodedActionLink("<i class='fa fa-money'></i>", "PORequestPayment", "Admin",
+                                                new { id = item.VPONumber }, new { @class = "btn btn-edt bg-aqua btn-sm", @target = "_blank", title = "Payment" })
                                         </td>
                                     </tr>
                                 }

@@ -101,6 +101,7 @@
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().VendorPrice)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Price)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Margin)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().LMRemarks)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POAssignTo)</th>
                                     <th>Edit</th>
                                 </tr>
@@ -124,6 +125,7 @@
                                         <td>@Html.DisplayFor(modelItem => item.VendorPrice)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Price)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Margin)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.LMRemarks)</td>
                                         <td>@Html.DisplayFor(modelItem => item.POAssignTo)</td>
                                         <td>
                                             @if (Model.UserProfileModels.EmpType == "Administrator")

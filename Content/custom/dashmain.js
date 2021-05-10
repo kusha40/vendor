@@ -1435,6 +1435,17 @@ $(document).ready(function () {
         });
     }).draw();
 
+    var tblStock = $('#tblStock').DataTable({
+        "paging": false,
+        "info": false
+    });
+    tblStock.on('order.dt search.dt', function () {
+        tblStock.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblStock.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
     $(document).on('blur', '.cstmtrcd', function () {
         var matcode = $(".cstmtrcd").val();
         //e.preventDefault();
@@ -2132,6 +2143,7 @@ $('.poassign').on('click', function (e) {
 });
 
 $('#posubmit').on('click', function (e) {
+    $(this).find(':submit').attr('disabled', 'disabled');
     $("#posubmit").attr("disabled", true);
     e.preventDefault();
     var lnitm = parseInt($('.polneitm').val());
@@ -2398,6 +2410,7 @@ $('#pogen').on('click', function (e) {
     var valofpo = $('.valofpo').val();
     var misc = $('.misc').val();
     var remark = $('.remark').val();
+    var lmremark = $('.lmremark').val();
 
     if (vbid !== "" && bbid !== "") {
         $(".tbl tbody tr").each(function () {
@@ -2439,6 +2452,7 @@ $('#pogen').on('click', function (e) {
                     ValidityOfPO: valofpo,
                     Misc: misc,
                     Remarks: remark,
+                    LMRemarks: lmremark,
                 };
                 lnArr.push(lin);
             }

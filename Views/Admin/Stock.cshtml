@@ -71,14 +71,10 @@
                             <thead>
                                 <tr>
                                     <th>SNo</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().OrderDate)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().CustomerName)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().PONumber)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POId)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().VPONumber)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().VendorId)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().VendorPrice)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Status)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().CstMtrlCode)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Product)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Quantity)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Price)</th>
                                     <th>View</th>
                                 </tr>
                             </thead>
@@ -87,26 +83,11 @@
                                 {
                                     <tr>
                                         <td></td>
-                                        <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
-                                        <td><a href='~/Content/upload/poupload/@item.POFile' target="_blank">@item.PONumber</a></td>
-                                        <td>
-                                            @Html.EncodedActionLink(item.POId, "PODetails", "Admin", new { id = item.POId }, new { @class = "", title = "Edit", @target = "_blank" })
-
-                                        </td>
-                                        <td>
-                                            @Html.EncodedActionLink(item.VPONumber, "DownloadPO", "Admin", new { id = item.VPONumber }, new { @class = "", title = "Download", @target = "_blank" })
-                                        </td>
-                                        <td>@Html.DisplayFor(modelItem => item.VendorId)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.VendorPrice)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Status)</td>
-                                        <td>
-                                            @if (Model.UserProfileModels.EmpType == "Administrator")
-                                            {
-                                                @Html.EncodedActionLink("Receive", "MaterialReceive", "Admin",
-                                                    new { id = item.VPONumber }, new { @class = "btn btn-edt bg-aqua btn-sm", @target = "_blank", title = "Receive" })
-                                            }
-                                        </td>
+                                        <td>@Html.DisplayFor(modelItem => item.CstMtrlCode)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Product)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                                        <td></td>
                                     </tr>
                                 }
                             </tbody>
