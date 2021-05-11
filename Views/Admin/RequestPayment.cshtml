@@ -13,7 +13,8 @@
         string pageTitle = Html.Raw(Html.PageTitle()) + "";
     }
     <h1>
-        @pageTitle
+        @*@pageTitle*@
+        Request for Payment Approval
         <small></small>
     </h1>
     <ol class="breadcrumb">
@@ -109,7 +110,7 @@
                                         <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
                                         <td><a href='~/Content/upload/poupload/@item.POFile' target="_blank">@item.PONumber</a></td>
                                         <td>
-                                            @Html.EncodedActionLink(item.POId, "PODetails", "Admin", new { id = item.POId }, new { @class = "", title = "Details", @target = "_blank" })
+                                            @Html.EncodedActionLink(item.POId, "PODetails", "Admin", new { id = item.VPONumber }, new { @class = "", title = "Details", @target = "_blank" })
                                         </td>
                                         <td>
                                             @Html.EncodedActionLink(item.VPONumber, "DownloadPO", "Admin", new { id = item.VPONumber }, new { @class = "", title = "Download" })
