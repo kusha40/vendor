@@ -13,7 +13,8 @@
         string pageTitle = Html.Raw(Html.PageTitle()) + "";
     }
     <h1>
-        @pageTitle
+        @*@pageTitle*@
+        PO for Approval
         <small></small>
     </h1>
     <ol class="breadcrumb">
@@ -102,7 +103,7 @@
                                         <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
                                         <td>@Html.DisplayFor(modelItem => item.PONumber)</td>
                                         <td>
-                                            @Html.EncodedActionLink(item.POId, "PODetails", "Admin", new { id = item.POId }, new { @class = "", title = "Edit", @target = "_blank" })
+                                            @Html.EncodedActionLink(item.POId, "PODetails", "Admin", new { id = item.VPONumber }, new { @class = "", title = "Edit", @target = "_blank" })
                                         </td>
                                         <td>@Html.DisplayFor(modelItem => item.VPONumber)</td>
                                         <td>@Html.DisplayFor(modelItem => item.VendorId)</td>

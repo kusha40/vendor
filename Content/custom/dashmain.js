@@ -1727,7 +1727,7 @@ function AddTempPOSourced() {
             "<td class='w-6'> <input type='text' id='PurchaseOrdersModelList_Quantity_" + inc + "' name='PurchaseOrdersModelList_Quantity_" + inc + "' value='" + tmpposrc.Quantity + "' disabled class='form-control spoqty m-b-0 bg-gray'  type='text' /></td>" +
             "<td class='w-4'> <input type='text' id='PurchaseOrdersModelList_GST_" + inc + "' name='PurchaseOrdersModelList_GST_" + inc + "' value='" + tmpposrc.GST + "' class='form-control spogst onlynumdec m-b-0'  type='text' /></td>" +
             "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_EnqId_" + inc + "' name='PurchaseOrdersModelList_EnqId_" + inc + "' value='' disabled class='form-control senqid m-b-0 bg-gray'  type='text' /></td>" +
-            "<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_VendorId_" + inc + "' name='PurchaseOrdersModelList_VendorId_" + inc + "' placeholder='Vendor Name' value='' class='form-control svenid m-b-0'  type='text' /></br><input type='text' id='PurchaseOrdersModelList_VendorPrice_" + inc + "' name='PurchaseOrdersModelList_VendorPrice_" + inc + "' value='' placeholder='Vendor Price' class='form-control svenprc onlynumdec m-b-0' /></td>" +
+            "<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_VendorId_" + inc + "' name='PurchaseOrdersModelList_VendorId_" + inc + "' placeholder='Vendor Name' value='' class='form-control svenid m-b-0'  type='text' /></br><input type='text' id='PurchaseOrdersModelList_VendorPrice_" + inc + "' name='PurchaseOrdersModelList_VendorPrice_" + inc + "' value='' placeholder='Vendor Price' class='form-control svenprc svenprcmrg onlynumdec m-b-0 w-70 float-left' /><input type='text' id='PurchaseOrdersModelList_Margin_" + inc + "' name='PurchaseOrdersModelList_Margin_" + inc + "' value='' disabled placeholder='Margin' class='form-control onlynumdec posmarg m-b-0 w-30' /></td>" +
             "<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_LastVendorId_" + inc + "' name='PurchaseOrdersModelList_LastVendorId_" + inc + "' disabled placeholder='Last Vendor Name' value='' class='form-control slvenid m-b-0 bg-gray' /></br><input type='text' id='PurchaseOrdersModelList_LastVendorPrice_" + inc + "' disabled name='PurchaseOrdersModelList_LastVendorPrice_" + inc + "' value='' placeholder='Last Vendor Price' class='form-control slvenprc m-b-0 bg-gray' /></td>" +
             "</tr>");
         inc++;
@@ -1812,6 +1812,22 @@ $(document).on('focus', '.svenid', function () {
 //    }
 //});
 
+//Get Margin
+$(document).on('blur', '.svenprcmrg', function () {
+    var curRow = $(this).closest("tr");
+    var venprc = curRow.find(".svenprcmrg").val();
+    var slprc = curRow.find(".spoprice").val();
+    //e.preventDefault();
+    if (venprc !== "" && venprc !== "0") {
+        var mrg = (parseFloat(slprc) - parseFloat(venprc)) * 100 / parseFloat(slprc);
+        curRow.find("td:eq(8)").find(".posmarg").val(mrg.toFixed(2));
+    }
+    else {
+        curRow.find("td:eq(8)").find(".posmarg").val("");
+    }
+});
+//Get Margin
+
 $(document).on('blur', '.svenprc', function () {
     var curRow = $(this).closest("tr");
     var prc = curRow.find(".svenprc").val();
@@ -1820,7 +1836,6 @@ $(document).on('blur', '.svenprc', function () {
         var qty = curRow.find("td:eq(4)").find(".sqty").val();
         var unitprc = parseFloat(prc) / parseFloat(qty);
         curRow.find("td:eq(8)").find(".svunitprc").val(unitprc);
-
     }
     else {
         //curRow.find("td:eq(5)").find(".svenid").val("");
@@ -2582,7 +2597,7 @@ $('#mrsubmit').on('click', function (e) {
         var popId = $(tds[1]).html();
         var qty = parseFloat($(tds[6]).find('.ircvqty').val());
 
-        if (popId !== "" && qty !== "" && qty !== "0" && files.length > 0) {      
+        if (popId !== "" && qty !== "" && qty !== "0" && files.length > 0) {
             fileData.append(files[0].name, files[0]);
             fileData.append('POPId', popId);
             var lin = {

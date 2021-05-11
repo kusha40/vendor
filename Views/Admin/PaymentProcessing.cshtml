@@ -109,7 +109,7 @@
                                         <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
                                         <td><a href='~/Content/upload/poupload/@item.POFile' target="_blank">@item.PONumber</a></td>
                                         <td>
-                                            @Html.EncodedActionLink(item.POId, "PODetails", "Admin", new { id = item.POId }, new { @class = "", title = "Edit", @target = "_blank" })
+                                            @Html.EncodedActionLink(item.POId, "PODetails", "Admin", new { id = item.VPONumber }, new { @class = "", title = "Edit", @target = "_blank" })
 
                                         </td>
                                         <td>

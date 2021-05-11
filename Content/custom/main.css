@@ -477,11 +477,11 @@ td .form-group {
 }
 
 .w-30 {
-    width: 30%;
+    width: 30% !important;
 }
 
 .w-40 {
-    width: 40%;
+    width: 40% !important;
 }
 
 .w-50 {
@@ -489,7 +489,11 @@ td .form-group {
 }
 
 .w-60 {
-    width: 60%;
+    width: 60% !important;
+}
+
+.w-70 {
+    width: 70% !important;
 }
 
 .w-15 {
