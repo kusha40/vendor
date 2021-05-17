@@ -1446,6 +1446,69 @@ $(document).ready(function () {
         });
     }).draw();
 
+    var tblUsers = $('#tblUsers').DataTable({
+        "paging": false,
+        "info": false,
+        "scrollX": true
+    });
+    tblUsers.on('order.dt search.dt', function () {
+        tblUsers.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblUsers.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
+    var emploginlist = $('#emploginlist').DataTable({
+        "paging": false,
+        "info": false
+    });
+    emploginlist.on('order.dt search.dt', function () {
+        emploginlist.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            emploginlist.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
+    var sel_emp_list = $('#sel_emp_list').DataTable({
+        "columnDefs": [
+            { 'targets': 0, 'width': '50', 'searchable': false, 'orderable': false, 'className': 'select-checkbox' },   //SNo.
+            { 'targets': 1, 'width': '100', 'searchable': false, 'orderable': false },  //Id Hidden
+            { 'targets': 2, 'width': '100' },       //EmployeeCode
+            { 'targets': 3, 'width': '100' },       //Name
+            { 'targets': 4, 'width': '100' },       //MobileNo
+            { 'targets': 5, 'width': '200' }        //Address
+        ],
+        select: {
+            style: 'os',
+            selector: 'td:first-child'
+        },
+        "order": [3, 'asc'],
+        "paging": true
+    });
+
+    $("#sel_emp_list_filter input").keypress(function () {
+        $('#sel_emp_list tbody tr').removeClass("selected");
+    });
+
+    $('#btn_SelEmp').click(function () {
+        var tbl = $('#sel_emp_list').DataTable();
+        var empcode = $.map(tbl.rows('.selected').data(), function (item) {
+            return item[2];
+        });
+        var empname = $.map(tbl.rows('.selected').data(), function (item) {
+            return item[3];
+        });
+
+        $(".empcode").val(empcode);
+        $(".empname").val(empname);
+        $('#sel_emp_list tbody tr').removeClass("selected");
+    });
+
+    $('#sel_emp_list tbody').on('click', 'tr', function () {
+        $('#sel_emp_list tbody tr').removeClass('selected');
+        $(this).toggleClass('selected');
+    });
+
     $(document).on('blur', '.cstmtrcd', function () {
         var matcode = $(".cstmtrcd").val();
         //e.preventDefault();
@@ -1820,7 +1883,7 @@ $(document).on('blur', '.svenprcmrg', function () {
     //e.preventDefault();
     if (venprc !== "" && venprc !== "0") {
         var mrg = (parseFloat(slprc) - parseFloat(venprc)) * 100 / parseFloat(slprc);
-        curRow.find("td:eq(8)").find(".posmarg").val(mrg.toFixed(2));
+        curRow.find("td:eq(8)").find(".posmarg").val(mrg.toFixed(2)+"%");
     }
     else {
         curRow.find("td:eq(8)").find(".posmarg").val("");

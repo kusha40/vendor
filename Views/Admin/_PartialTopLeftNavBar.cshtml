@@ -97,6 +97,25 @@
             <li class='@TempData["Index"]'>
                 <a href='@Url.Action("Index", "Admin")'><i class="fa fa-file-text"></i>  Dashboard</a>
             </li>
+            <li class='@TempData["HRM"] treeview'>
+                <a href="#">
+                    <i class="fa fa-code-fork"></i> <span>HRM</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class='@TempData["Users"]'>
+                        <a href='@Url.Action("Users", "Admin")'><i class="fa fa-code-fork"></i>  Users</a>
+                    </li>
+                    <li class='@TempData["UserLogin"]'>
+                        <a href='@Url.Action("UserLogin", "Admin")'><i class="fa fa-code-fork"></i>  User Login</a>
+                    </li>
+                    @*<li class='@TempData["UserPermissions"]'>
+                        <a href='@Url.Action("UserPermissions", "Admin")'><i class="fa fa-code-fork"></i>  User Permission</a>
+                    </li>*@
+                </ul>
+            </li>
             <li class='@TempData["Vendor"] treeview'>
                 <a href="#">
                     <i class="fa fa-code-fork"></i> <span>Vendor</span>
