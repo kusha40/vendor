@@ -100,6 +100,14 @@
                                 })
                             </div>
                         </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="box-tools pull-left">
+                                <button type="submit" name="search" class="btn bg-aqua" title="SEARCH"
+                                        value="search">
+                                    SEARCH
+                                </button>
+                            </div>
+                        </div>
                         <table id="tblposourced" class="table table-bordered display">
                             <thead>
                                 <tr>
@@ -120,6 +128,8 @@
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Status)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POCreatedBy)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POAssignTo)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Notes)</th>
+                                    <th>Edit</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -132,7 +142,7 @@
                                     <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
                                     <td>
                                         <a href='~/Content/upload/poupload/@item.POFile' target="_blank">@item.POId</a>
-                                        
+
                                     </td>
                                     <td>
                                         <a href='~/Content/upload/poupload/@item.POFile' target="_blank">@item.PONumber</a>
@@ -152,6 +162,13 @@
                                     <td>@Html.DisplayFor(modelItem => item.Status)</td>
                                     <td>@Html.DisplayFor(modelItem => item.POCreatedBy)</td>
                                     <td>@Html.DisplayFor(modelItem => item.POAssignTo)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Notes)</td>
+                                    <td>
+                                        @if (item.Status != "G" && item.Status != "AP")
+                                        {
+                                            @Html.EncodedActionLink("Edit", "EditPurchaseOrder", "Admin", new { id = item.Id }, new { @class = "", title = "Edit", @target = "_blank" })
+                                        }
+                                    </td>
                                 </tr>
                                 }
                             </tbody>

@@ -1124,7 +1124,20 @@ $(document).ready(function () {
         "scrollX": true,
         "paging": false,
         "searching": false,
-        "info": false
+        "info": false,
+        "dom": 'Bfrtip',
+        "buttons": [
+            'pageLength',
+            {
+                extend: 'excel',
+                text: '<i class="far fa-file-excel"></i> Excel',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                footer: true
+            },
+            'colvis'
+        ]
     });
     tblassignpo.on('order.dt search.dt', function () {
         tblassignpo.column(1, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
@@ -1164,7 +1177,20 @@ $(document).ready(function () {
         "scrollX": true,
         "paging": false,
         "searching": false,
-        "info": false
+        "info": false,
+        "dom": 'Bfrtip',
+        "buttons": [
+            'pageLength',
+            {
+                extend: 'excel',
+                text: '<i class="far fa-file-excel"></i> Excel',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                footer: true
+            },
+            'colvis'
+        ]
     });
     tblposourced.on('order.dt search.dt', function () {
         tblposourced.column(1, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
@@ -2355,6 +2381,7 @@ $('#posubmit').on('click', function (e) {
 
 $('.posousubmit').on('click', function (e) {
     $(".posousubmit").attr("disabled", true);
+    $(this).find(':submit').attr('disabled', 'disabled');
     e.preventDefault();
     var lnArr = new Array();
     $(".tbl tbody tr").each(function () {
@@ -2453,6 +2480,7 @@ $('#chksameadd').change(function () {
 
 $('#pogen').on('click', function (e) {
     $("#pogen").attr("disabled", true);
+    $(this).find(':submit').attr('disabled', 'disabled');
     e.preventDefault();
     var linkObj = $(this);
     var hdArr = new Array();
@@ -2648,6 +2676,7 @@ $('#prapprove').on('click', function (e) {
 
 $('#mrsubmit').on('click', function (e) {
     $("#mrsubmit").attr("disabled", true);
+    $(this).find(':submit').attr('disabled', 'disabled');
     e.preventDefault();
     var fUpload = $("#InvStockModels_VendorInvoice").get(0);
     var files = fUpload.files;

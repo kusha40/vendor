@@ -67,18 +67,26 @@
                                 })
                             </div>
                         </div>
+                        @*<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Status, new { @class = "form-control-label" })
+                                    @Html.DropDownListFor(m => m.Status,
+                                   new List<SelectListItem>
+                                      {
+                                        new SelectListItem{ Text="Success", Value = "Success", Selected = true },
+                                        new SelectListItem{ Text="Pending", Value = "Pending" },
+                                      },
+                                    "--Select Status--", new { @class = "form-control select2" })
+                                    @Html.ValidationMessageFor(m => m.Status, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>*@
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.Status, new { @class = "form-control-label" })
-                                @Html.DropDownListFor(m => m.Status,
-                               new List<SelectListItem>
-                                  {
-                                    new SelectListItem{ Text="Success", Value = "Success", Selected = true },
-                                    new SelectListItem{ Text="Pending", Value = "Pending" },
-                                  },
-                                "--Select Status--", new { @class = "form-control select2" })
-                                @Html.ValidationMessageFor(m => m.Status, "",
-                        new { @class = "text-danger" })
+                            <div class="box-tools pull-left">
+                                <button type="submit" name="search" class="btn bg-aqua" title="SEARCH"
+                                        value="search">
+                                    SEARCH
+                                </button>
                             </div>
                         </div>
                         <table id="tblMaterialPickup" class="table table-bordered display nowrap">

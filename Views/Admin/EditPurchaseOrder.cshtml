@@ -344,6 +344,19 @@
                             new { @class = "text-danger" })
                                 </div>
                             </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.PurOrdModels.Notes, new { @class = "form-control-label" })
+                                    @Html.TextAreaFor(m => m.PurOrdModels.Notes,
+                            new
+                            {
+                                @class = "form-control text-capitalize notest",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.PurOrdModels.Notes)
+                            })
+                                    @Html.ValidationMessageFor(m => m.PurOrdModels.Notes, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
