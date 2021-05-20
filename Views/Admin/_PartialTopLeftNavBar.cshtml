@@ -226,11 +226,11 @@
                         <a href='@Url.Action("Country", "Admin")'><i class="fa fa-code-fork"></i>  Country</a>
                     </li>
                     @*<li class='@TempData["Operation"]'>
-                            <a href='@Url.Action("Operation", "Admin")'><i class="fa fa-code-fork"></i>  Operation</a>
-                        </li>
-                        <li class='@TempData["Operation"]'>
-                            <a href='@Url.Action("Operation", "Admin")'><i class="fa fa-code-fork"></i>  Operation</a>
-                        </li>*@
+                    <a href='@Url.Action("Operation", "Admin")'><i class="fa fa-code-fork"></i>  Operation</a>
+                </li>
+                <li class='@TempData["Operation"]'>
+                    <a href='@Url.Action("Operation", "Admin")'><i class="fa fa-code-fork"></i>  Operation</a>
+                </li>*@
                 </ul>
             </li>
             <li class='@TempData["Purchase"] treeview'>
@@ -259,6 +259,16 @@
                     <li class='@TempData["POApproved"]'>
                         <a href='@Url.Action("POApproved", "Admin")'><i class="fa fa-code-fork"></i> Approved PO</a>
                     </li>
+                </ul>
+            </li>
+            <li class='@TempData["Payment"] treeview'>
+                <a href="#">
+                    <i class="fa fa-code-fork"></i> <span>Payment</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
                     <li class='@TempData["RequestPayment"]'>
                         <a href='@Url.Action("RequestPayment", "Admin")'><i class="fa fa-code-fork"></i> Request  for Payment</a>
                     </li>
@@ -268,23 +278,43 @@
                     <li class='@TempData["PaymentProcessing"]'>
                         <a href='@Url.Action("PaymentProcessing", "Admin")'><i class="fa fa-code-fork"></i>  Payment Processing</a>
                     </li>
+                </ul>
+            </li>
+            <li class='@TempData["Operations"] treeview'>
+                <a href="#">
+                    <i class="fa fa-code-fork"></i> <span>Operations</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
                     <li class='@TempData["MaterialPickup"]'>
                         <a href='@Url.Action("MaterialPickup", "Admin")'><i class="fa fa-code-fork"></i>  Material Pickup</a>
                     </li>
+                </ul>
+            </li>
+            <li class='@TempData["Stocks"] treeview'>
+                <a href="#">
+                    <i class="fa fa-code-fork"></i> <span>Stocks</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
                     <li class='@TempData["Stock"]'>
                         <a href='@Url.Action("Stock", "Admin")'><i class="fa fa-code-fork"></i>  Stock</a>
                     </li>
                 </ul>
             </li>
             @*<li class='@TempData["Payments"]'>
-                    <a href='@Url.Action("Payments", "Dashboard")'><i class="fa fa-file-text"></i> Payments</a>
-                </li>
-                <li class='@TempData["PurchaseOrders"]'>
-                    <a href='@Url.Action("PurchaseOrders", "Dashboard")'><i class="fa fa-file-text"></i> Purchase Orders</a>
-                </li>
-                <li class='@TempData["Invoices"]'>
-                    <a href='@Url.Action("Invoices", "Dashboard")'><i class="fa fa-file-text"></i> Invoices</a>
-                </li>*@
+            <a href='@Url.Action("Payments", "Dashboard")'><i class="fa fa-file-text"></i> Payments</a>
+        </li>
+        <li class='@TempData["PurchaseOrders"]'>
+            <a href='@Url.Action("PurchaseOrders", "Dashboard")'><i class="fa fa-file-text"></i> Purchase Orders</a>
+        </li>
+        <li class='@TempData["Invoices"]'>
+            <a href='@Url.Action("Invoices", "Dashboard")'><i class="fa fa-file-text"></i> Invoices</a>
+        </li>*@
         </ul>
     </section>
 </aside>

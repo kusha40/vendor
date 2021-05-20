@@ -2,7 +2,7 @@
 @model Vendor_Indusuno.ViewModels.RequestPaymentViewModel
 @{
     ViewBag.Title = "Request Payment";
-    TempData["Purchase"] = "active";
+    TempData["Payment"] = "active";
     TempData["RequestPayment"] = "active";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
@@ -123,7 +123,14 @@
                                         <td>
                                             @Html.EncodedActionLink(item.VPONumber, "DownloadPO", "Admin", new { id = item.VPONumber }, new { @class = "", title = "Download" })
                                         </td>
-                                        <td>@Html.DisplayFor(modelItem => item.VendorId)</td>
+                                        @if (!string.IsNullOrEmpty(item.PIUpload))
+                                        {
+                                            <td><a href='~/Content/upload/popayment/@item.PIUpload' target="_blank">@item.VendorId</a></td>
+                                        }
+                                        else
+                                        {
+                                            <td>@Html.DisplayFor(modelItem => item.VendorId)</td>
+                                        }
                                         <td>@Html.DisplayFor(modelItem => item.VendorPrice)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Price)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Margin)</td>
