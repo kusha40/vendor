@@ -2748,3 +2748,45 @@ $('#mrsubmit').on('click', function (e) {
         alert("Vendor Invoice is required");
     }
 });
+
+$("#upsubmit").on("click", function (e) {
+    e.preventDefault();
+    var hdArr = new Array();
+    var userId = $('#AddUserModels_UserCode').val();
+    $("input:checkbox[class=chk]").each(function () {
+        var allchk = {
+            Name: $(this).attr("id"),
+            Value: $(this).val(),
+            Checked: $(this).is(":checked"),
+            UserId: userId
+        };
+        hdArr.push(allchk);
+    });
+    if (hdArr.length > 0) {
+        var frmact = "";
+        var pgn = JSON.stringify(hdArr);
+        $.ajax({
+            url: "/Admin/UpsertUserPermission",
+            dataType: "json",
+            data: "{'pgn': '" + pgn + "', 'act': '" + frmact + "' }",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                if (result.error === "") {
+                    window.location.href = window.location.href;
+                }
+                else {
+                    alert(result.error);
+                }
+                //location.reload();
+            },
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                alert(err.Message);
+            }
+        });
+    }
+    else {
+        alert("Please Select 1 Page");
+    }
+});
