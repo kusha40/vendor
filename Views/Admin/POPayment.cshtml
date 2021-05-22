@@ -109,15 +109,15 @@
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                     <div class="form-group">
-                                        @Html.LabelFor(m => m.POPaymentModels.Amount, new { @class = "form-control-label" }) <sup>*</sup>
-                                        @Html.TextBoxFor(m => m.POPaymentModels.Amount,
+                                        @Html.LabelFor(m => m.POPaymentModels.VendorAmount, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextBoxFor(m => m.POPaymentModels.VendorAmount,
                                 new
                                 {
                                     @class = "form-control",
                                     @readonly = true,
-                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.POPaymentModels.Amount)
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.POPaymentModels.VendorAmount)
                                 })
-                                        @Html.ValidationMessageFor(m => m.POPaymentModels.Amount, "",
+                                        @Html.ValidationMessageFor(m => m.POPaymentModels.VendorAmount, "",
                                 new { @class = "text-danger" })
                                     </div>
                                 </div>

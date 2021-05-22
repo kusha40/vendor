@@ -2124,28 +2124,46 @@ $('#pocalculate').on('click', function (e) {
         var vsts = vba.split('-').pop();
         var bsts = bba.split('-').pop();
 
+        var pnfamnt = $('.pnfamnt').val();
+        var frghtamnt = $('.frghtamnt').val();
+
+        var pnfamnta = 0;
+        var frghtamnta = 0;
+
         var tamountbeforetax = 0, totl_cgst = 0, totl_sgst = 0, totl_igst = 0, totalTax = 0, netAmount = 0;
         var gstPercentage = 0, cgstPercentage = 0, sgstPercentage = 0, igstPercentage = 0, cgstAmt = 0, igstAmt = 0, sgstAmt = 0;
         // Iterate over all selected checkboxes
+        var i = 0;
         $("#tblpogen tbody tr").each(function () {
             var tds = $(this).find("td");
+            if (i == 0) {
+                pnfamnt = parseFloat(pnfamnt);
+                frghtamnt = parseFloat(frghtamnt);
 
+               pnfamnta = parseFloat(pnfamnt);
+               frghtamnta = parseFloat(frghtamnt);
+            }
+            else {
+                pnfamnt = 0;
+                frghtamnt = 0;
+            }
             var amountBeforeTax = parseFloat($(tds[8]).find('.svenprc').val());
             tamountbeforetax += parseFloat(amountBeforeTax);
             var gstPercentage = parseFloat($(tds[9]).find('.svengst').val());
             if (vsts.toLowerCase() == bsts.toLowerCase()) {
                 cgstPercentage = gstPercentage / 2;
                 sgstPercentage = gstPercentage / 2;
-                cgstAmt = amountBeforeTax * cgstPercentage / 100;
-                sgstAmt = amountBeforeTax * sgstPercentage / 100;
+                cgstAmt = (amountBeforeTax + pnfamnt + frghtamnt) * cgstPercentage / 100;
+                sgstAmt = (amountBeforeTax + pnfamnt + frghtamnt) * sgstPercentage / 100;
             }
             else {
                 igstPercentage = gstPercentage;
-                igstAmt = amountBeforeTax * igstPercentage / 100;
+                igstAmt = (amountBeforeTax + pnfamnt + frghtamnt) * igstPercentage / 100;
             }
             totl_cgst += cgstAmt;
             totl_sgst += sgstAmt;
             totl_igst += igstAmt;
+            i++;
         });
 
         $(".totamnt").val(ReplaceNumberWithCommas(tamountbeforetax.toFixed(2)));
@@ -2155,7 +2173,7 @@ $('#pocalculate').on('click', function (e) {
 
         $(".totamntgst").val(ReplaceNumberWithCommas((totl_cgst + totl_igst + totl_sgst).toFixed(2)));
 
-        $(".netamnt").val(ReplaceNumberWithCommas((tamountbeforetax + totl_cgst + totl_igst + totl_sgst).toFixed(2)));
+        $(".netamnt").val(ReplaceNumberWithCommas((tamountbeforetax + totl_cgst + totl_igst + totl_sgst + pnfamnta + frghtamnta).toFixed(2)));
         $("#pogen").show();
     }
 });
@@ -2498,6 +2516,8 @@ $('#pogen').on('click', function (e) {
     var shpgst = $('.shpgst').val();
     var shppan = $('.shppan').val();
 
+    var pnfamnt = $('.pnfamnt').val().replace(/,/g, "");
+    var frghtamnt = $('.frghtamnt').val().replace(/,/g, "");
     var totamnt = $('.totamnt').val().replace(/,/g, "");
     var cgstamnt = $('.cgstamnt').val().replace(/,/g, "");
     var sgstamnt = $('.sgstamnt').val().replace(/,/g, "");
@@ -2541,6 +2561,8 @@ $('#pogen').on('click', function (e) {
                     BuyerShippingContact: shpcntct,
                     BuyerShippingGST: shpgst,
                     BuyerShippingPAN: shppan,
+                    PNFAmount: parseFloat(pnfamnt),
+                    FreightAmount: parseFloat(frghtamnt),
                     TotalAmount: parseFloat(totamnt),
                     CGSTAmount: parseFloat(cgstamnt),
                     SGSTAmount: parseFloat(sgstamnt),
@@ -2605,7 +2627,7 @@ $('#poapprove').on('click', function (e) {
     // Iterate over all selected checkboxes
     $.each(rows_selected, function (index, row) {
         // Create a hidden element
-        list.push(row.cells[5].innerText);
+        list.push(row.cells[6].innerText);
     });
 
     if (list.length > 0) {

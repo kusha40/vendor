@@ -85,12 +85,7 @@
                                     new { @class = "text-danger errbba" })
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                <button name="submit" id="pocalculate" class="btn bg-aqua m-t-20" title="Submit"
-                                        value="">
-                                    Calculate
-                                </button>
-                            </div>
+                            
                         </div>
                         <div class="col-md-12 box-footer">
                             <h4>Shipping Details</h4>
@@ -202,6 +197,40 @@
                                     @Html.ValidationMessageFor(m => m.POGenerateModels.BuyerShippingPAN, "",
                             new { @class = "text-danger" })
                                 </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 box-footer">
+                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POGenerateModels.PNFAmount, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.POGenerateModels.PNFAmount,
+                            new
+                            {
+                                @class = "form-control pnfamnt",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.PNFAmount)
+                            })
+                                    @Html.ValidationMessageFor(m => m.POGenerateModels.PNFAmount, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POGenerateModels.FreightAmount, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.POGenerateModels.FreightAmount,
+                            new
+                            {
+                                @class = "form-control frghtamnt",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.FreightAmount)
+                            })
+                                    @Html.ValidationMessageFor(m => m.POGenerateModels.FreightAmount, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <button name="submit" id="pocalculate" class="btn bg-aqua m-t-20" title="Submit"
+                                        value="">
+                                    Calculate
+                                </button>
                             </div>
                         </div>
                         <div class="col-md-12 box-footer">
@@ -404,7 +433,7 @@
                             new { @class = "text-danger" })
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            @*<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     @Html.LabelFor(m => m.POGenerateModels.Misc, new { @class = "form-control-label" })
                                     @Html.TextBoxFor(m => m.POGenerateModels.Misc,
@@ -416,7 +445,7 @@
                                     @Html.ValidationMessageFor(m => m.POGenerateModels.Misc, "",
                             new { @class = "text-danger" })
                                 </div>
-                            </div>
+                            </div>*@
                             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     @Html.LabelFor(m => m.POGenerateModels.Remarks, new { @class = "form-control-label" })
