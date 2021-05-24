@@ -196,20 +196,41 @@
                                 new { @class = "text-danger" })
                                     </div>
                                 </div>
-                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                    <div class="form-group">
-                                        @Html.LabelFor(m => m.POPaymentModels.PaymentSlip, new { @class = "form-control-label" }) <sup>*</sup>
-                                        @Html.TextBoxFor(m => m.POPaymentModels.PaymentSlip,
-                                new
+                                @if (!string.IsNullOrEmpty(Model.POPaymentModels.Id))
                                 {
-                                    @class = "form-control",
-                                    @type = "file",
-                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.POPaymentModels.PaymentSlip)
-                                })
-                                        @Html.ValidationMessageFor(m => m.POPaymentModels.PaymentSlip, "",
-                                new { @class = "text-danger" })
+                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.POPaymentModels.PaymentSlip, new { @class = "form-control-label" }) <sup>*</sup>
+                                            @Html.TextBoxFor(m => m.POPaymentModels.PaymentSlip,
+                                 new
+                                 {
+                                     @class = "form-control",
+                                     @type = "file",
+                                     placeholder = "Enter " + @Html.DisplayNameFor(m => m.POPaymentModels.PaymentSlip)
+                                 })
+                                            @Html.ValidationMessageFor(m => m.POPaymentModels.PaymentSlip, "",
+                                 new { @class = "text-danger" })
+                                        </div>
                                     </div>
-                                </div>
+                                }
+                                else
+                                {
+                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.POPaymentModels.PaymentSlip, new { @class = "form-control-label" }) <sup>*</sup>
+                                            @Html.TextBoxFor(m => m.POPaymentModels.PaymentSlip,
+                                 new
+                                 {
+                                     @class = "form-control",
+                                     @type = "file",
+                                     @required = true,
+                                     placeholder = "Enter " + @Html.DisplayNameFor(m => m.POPaymentModels.PaymentSlip)
+                                 })
+                                            @Html.ValidationMessageFor(m => m.POPaymentModels.PaymentSlip, "",
+                                 new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
@@ -268,19 +289,19 @@
                                 <tbody>
                                     @foreach (var u in Model.POPaymentModelList)
                                     {
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                            @Html.EncodedActionLink("<i class='fa fa-pencil-square-o'></i>", "EditPOPayment", "Admin", new { id = u.Id }, new { @class = "btn btn-edt bg-aqua", title = "Edit" })
-                                            @Html.EncodedActionLink("<i class='fa fa-times'></i>", "DeletePOPayment", "Admin", new { id = u.Id }, new { data_box = "#mb-act-cnfrm", @class = "btn btn-del m-l-5 mb-act-confirm bg-m-red", title = "Delete" })
-                                        </td>
-                                        <td>@Html.DisplayFor(modelSKU => u.PaymentMode) </td>
-                                        <td>@Html.DisplayFor(modelSKU => u.Amount) </td>
-                                        <td>@Html.DisplayFor(modelSKU => u.NoOfDays) </td>
-                                        <td>@Html.DisplayFor(modelSKU => u.PaymentDate) </td>
-                                        <td>@Html.DisplayFor(modelSKU => u.Remark) </td>
-                                        <td><a href='~/Content/upload/popayment/@u.PaymentSlip' target="_blank">Download</a></td>
-                                    </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>
+                                                @Html.EncodedActionLink("<i class='fa fa-pencil-square-o'></i>", "EditPOPayment", "Admin", new { id = u.Id }, new { @class = "btn btn-edt bg-aqua", title = "Edit" })
+                                                @Html.EncodedActionLink("<i class='fa fa-times'></i>", "DeletePOPayment", "Admin", new { id = u.Id }, new { data_box = "#mb-act-cnfrm", @class = "btn btn-del m-l-5 mb-act-confirm bg-m-red", title = "Delete" })
+                                            </td>
+                                            <td>@Html.DisplayFor(modelSKU => u.PaymentMode) </td>
+                                            <td>@Html.DisplayFor(modelSKU => u.Amount) </td>
+                                            <td>@Html.DisplayFor(modelSKU => u.NoOfDays) </td>
+                                            <td>@Html.DisplayFor(modelSKU => u.PaymentDate) </td>
+                                            <td>@Html.DisplayFor(modelSKU => u.Remark) </td>
+                                            <td><a href='~/Content/upload/popayment/@u.PaymentSlip' target="_blank">Download</a></td>
+                                        </tr>
                                     }
                                 </tbody>
                             </table>

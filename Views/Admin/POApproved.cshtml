@@ -103,7 +103,7 @@
                                         <td>
                                             @if (item.POADate == "01/01/1900")
                                             {
-                                                
+
                                             }
                                             else
                                             {
@@ -124,11 +124,11 @@
                                         <td>@Html.DisplayFor(modelItem => item.LMRemarks)</td>
                                         <td>@Html.DisplayFor(modelItem => item.POAssignTo)</td>
                                         <td>
-                                            @if (item.Status == "AP")
-                                            {
-                                                @Html.EncodedActionLink("Download", "DownloadPO", "Admin",
-                                                    new { id = item.VPONumber }, new { @class = "btn btn-edt bg-aqua btn-sm", title = "Edit" })
-                                            }
+                                            @*@if (item.Status == "AP")
+                                                {*@
+                                            @Html.EncodedActionLink("Download", "DownloadPO", "Admin",
+                                                new { id = item.VPONumber }, new { @class = "btn btn-edt bg-aqua btn-sm", title = "Edit" })
+                                            @* } *@
                                         </td>
                                     </tr>
                                 }

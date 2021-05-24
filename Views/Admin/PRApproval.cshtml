@@ -100,6 +100,7 @@
                                 <tr>
                                     <th><input type="checkbox" id="seallasnpo" /></th>
                                     <th>SNo</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().PReqDate)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().OrderDate)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().CustomerName)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().PONumber)</th>
@@ -121,6 +122,7 @@
                                     <tr>
                                         <td></td>
                                         <td></td>
+                                        <td>@Html.DisplayFor(modelItem => item.PReqDate)</td>
                                         <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
                                         <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
                                         <td><a href='~/Content/upload/poupload/@item.POFile' target="_blank">@item.PONumber</a></td>

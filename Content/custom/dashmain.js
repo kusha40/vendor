@@ -265,7 +265,7 @@ $(document).ready(function () {
         "scrollX": true,
         "order": [2, 'asc'],
         "paging": false,
-        "searching": false,
+        //"searching": false,
         "info": false,
         "pageLength": 100
     });
@@ -299,7 +299,7 @@ $(document).ready(function () {
         "scrollX": true,
         "order": [2, 'asc'],
         "paging": false,
-        "searching": false,
+        //"searching": false,
         "info": false,
         "pageLength": 100
     });
@@ -1123,7 +1123,7 @@ $(document).ready(function () {
         },
         "scrollX": true,
         "paging": false,
-        "searching": false,
+        //"searching": false,
         "info": false,
         "dom": 'Bfrtip',
         "buttons": [
@@ -1176,7 +1176,7 @@ $(document).ready(function () {
         },
         "scrollX": true,
         "paging": false,
-        "searching": false,
+        //"searching": false,
         "info": false,
         "dom": 'Bfrtip',
         "buttons": [
@@ -1229,7 +1229,7 @@ $(document).ready(function () {
         },
         "scrollX": true,
         "paging": false,
-        "searching": false,
+        //"searching": false,
         "info": false
     });
     tblPOGenerate.on('order.dt search.dt', function () {
@@ -1263,7 +1263,7 @@ $(document).ready(function () {
         },
         "scrollX": true,
         "paging": false,
-        "searching": false,
+        //"searching": false,
         "info": false
     });
     tblPOApprove.on('order.dt search.dt', function () {
@@ -1288,7 +1288,7 @@ $(document).ready(function () {
         ],
         "scrollX": true,
         "paging": false,
-        "searching": false,
+        //"searching": false,
         "info": false
     });
     tblPOApproved.on('order.dt search.dt', function () {
@@ -1948,8 +1948,8 @@ $(document).on('blur', '.ircvqty', function () {
             var tot = parseFloat(untprc) * parseFloat(rcvqty);
             var totwtax = parseFloat(tot) + (parseFloat(tot) * parseFloat(gst) / 100);
 
-            curRow.find(".tot").html(tot);
-            curRow.find(".totwtax").html(totwtax);
+            curRow.find(".tot").html(tot.toFixed(2));
+            curRow.find(".totwtax").html(totwtax.toFixed(2));
         }
     }
     else {
@@ -2666,7 +2666,7 @@ $('#prapprove').on('click', function (e) {
     // Iterate over all selected checkboxes
     $.each(rows_selected, function (index, row) {
         // Create a hidden element
-        list.push(row.cells[6].innerText);
+        list.push(row.cells[7].innerText);
     });
 
     if (list.length > 0) {
