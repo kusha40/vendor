@@ -147,7 +147,7 @@
                                         <td>@Html.DisplayFor(modelItem => item.PORRemarks)</td>
                                         <td>@Html.DisplayFor(modelItem => item.POAssignTo)</td>
                                         <td>
-                                            @if (Model.UserProfileModels.EmpType == "Administrator")
+                                            @if (Model.UserProfileModels.EmpType != "User")
                                             {
                                                 @Html.EncodedActionLink("<i class='fa fa-money'></i>", "PORequestPayment", "Admin",
                                                     new { id = item.VPONumber }, new { @class = "btn btn-edt bg-aqua btn-sm", @target = "_blank", title = "Payment" })

@@ -129,7 +129,7 @@
                                             <td>@Html.DisplayFor(modelItem => item.POAssignTo)</td>*@
                                         <td>@Html.DisplayFor(modelItem => item.Status)</td>
                                         <td>
-                                            @if (Model.UserProfileModels.EmpType == "Administrator")
+                                            @if (Model.UserProfileModels.EmpType != "User")
                                             {
                                                 @Html.EncodedActionLink("Receive", "MaterialReceive", "Admin",
                                                     new { id = item.VPONumber }, new { @class = "btn btn-edt bg-aqua btn-sm", @target = "_blank", title = "Receive" })

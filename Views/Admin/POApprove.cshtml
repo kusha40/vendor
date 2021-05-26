@@ -36,7 +36,7 @@
                     <!-- /.box-body -->
                     <div class="box-body">
                         <div class="col-md-12">
-                            @if (Model.UserProfileModels.EmpType == "Administrator")
+                            @if (Model.UserProfileModels.EmpType != "User")
                             {
                                 <a href="javascript:void(0)" class="btn bg-aqua" id="poapprove">Approve</a>
                             }

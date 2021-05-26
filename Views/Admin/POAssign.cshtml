@@ -33,7 +33,7 @@
                 <!-- Default box -->
                 <div class="box">
                     <div class="box-header with-border">
-                        @if (Model.UserProfileModels.EmpType == "Administrator")
+                        @if (Model.UserProfileModels.EmpType != "User")
                         {
                             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                 <div class="form-group">

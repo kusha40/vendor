@@ -121,7 +121,7 @@
                                                new { id = u.Id }, new { @class = "btn btn-edt btn-sm bg-aqua", title = "Edit" })
                                                 @Html.EncodedActionLink("<i class='fa fa-user'></i>", "VendorProfile", "Admin",
                                           new { id = u.Id }, new { @class = "btn btn-edt  btn-sm bg-aqua", title = "Profile" })
-                                                @if (Model.UserProfileModels.EmpType == "Administrator")
+                                                @if (Model.UserProfileModels.EmpType != "User")
                                                 {
                                                     @Html.EncodedActionLink("<i class='fa fa-check'></i>", "ApproveVendor", "Admin",
                                                            new { id = u.Id }, new { @class = "btn btn-edt bg-green  btn-sm mb-act-confirm", title = "Approve", @data_box = "#mb-act-cnfrm" })
