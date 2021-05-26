@@ -94,8 +94,8 @@
             <!-- /.search form -->*@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
-            @*@Html.Action("Menu", "Admin")*@
-            <li class='@TempData["Index"]'>
+            @Html.Action("Menu", "Admin")
+            <!--<li class='@TempData["Index"]'>
                 <a href='@Url.Action("Index", "Admin")'><i class="fa fa-file-text"></i>  Dashboard</a>
             </li>
             <li class='@TempData["HRM"] treeview'>
@@ -225,14 +225,14 @@
                     </li>
                     <li class='@TempData["Country"]'>
                         <a href='@Url.Action("Country", "Admin")'><i class="fa fa-code-fork"></i>  Country</a>
-                    </li>
+                    </li>-->
                     @*<li class='@TempData["Operation"]'>
                     <a href='@Url.Action("Operation", "Admin")'><i class="fa fa-code-fork"></i>  Operation</a>
                 </li>
                 <li class='@TempData["Operation"]'>
                     <a href='@Url.Action("Operation", "Admin")'><i class="fa fa-code-fork"></i>  Operation</a>
                 </li>*@
-                </ul>
+                <!--</ul>
             </li>
             <li class='@TempData["Purchase"] treeview'>
                 <a href="#">
@@ -306,7 +306,7 @@
                         <a href='@Url.Action("Stock", "Admin")'><i class="fa fa-code-fork"></i>  Stock</a>
                     </li>
                 </ul>
-            </li>
+            </li>-->
             @*<li class='@TempData["Payments"]'>
             <a href='@Url.Action("Payments", "Dashboard")'><i class="fa fa-file-text"></i> Payments</a>
         </li>

@@ -1,0 +1,113 @@
+﻿
+@model Vendor_Indusuno.ViewModels.PageNameViewModel
+
+@*<li class="xn-title">Navigation</li>*@
+@foreach (var item in Model.PageNameModelList)
+{
+    string act = "";
+    string url = "";
+    string micon = "";
+    string sicon = "";
+
+    if (item.GroupName == "Dashboard")
+    {
+        string[] gArr = item.GroupName.Split('#');
+        string gName = gArr[0] + "";
+        string gTitle = gArr[1] + "";
+
+        string[] pArr = item.PageName.Split('#');
+        string pName = pArr[0] + "";
+        string pTitle = pArr[1] + "";
+
+        act = (pName + "").Replace(" ", "");
+        if (act == "Home")
+        {
+            micon = "fa-home";
+        }
+        else if (act == "ProfileInfo")
+        {
+            micon = "fa-user";
+        }
+        else if (act == "MonthlySheet")
+        {
+            micon = "fa-desktop";
+        }
+        else if (act == "BasicSettings")
+        {
+            micon = "fa-cog";
+        }
+        else if (act == "SalarySlip" || act == "Form16")
+        {
+            micon = "fa-file-invoice";
+        }
+        else if (act == "ChangePassword")
+        {
+            micon = "fa-lock";
+        }
+        <li class='@TempData[""+act]'>
+            <a href='@Url.Action(url, "Admin")'><i class="fa @micon"></i>  @pTitle</a>
+        </li>
+    }
+    else
+    {
+        string[] gArr = item.GroupName.Split('#');
+        string gName = gArr[0] + "";
+        string gTitle = gArr[1] + "";
+
+        string grpName = (gName + "").Replace(" ", "");
+
+        if (grpName == "Reports")
+        {
+            micon = "fa-file-invoice";
+        }
+        else if (grpName == "Users")
+        {
+            micon = "fa-users";
+        }
+        else if (grpName == "Employee")
+        {
+            micon = "fa-user";
+        }
+        
+        string[] pages = item.PageName.Split(',');
+
+        <li class='@TempData[""+grpName] treeview'>
+            <a href="#"><i class="fa fa-code-fork"></i> <span>@gTitle</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
+            <ul class="treeview-menu">
+                @foreach (string page in pages)
+                {
+                    string[] pArr = page.Split('#');
+                    string pName = pArr[0] + "";
+                    string pTitle = pArr[1] + "";
+
+                    string pg = (pName + "").Replace(" ", "");
+                    if (pg == "SGMSalaryReport" || pg == "SGMReport2" || pg == "SGMBankTransferReport" || pg == "ESIReport" || pg == "EPFReport" || pg == "SSTSalaryReport" || pg == "SSTReport2" || pg == "SSTBankTransferReport" || pg == "SSTESIReport" || pg == "SSTEPFReport")
+                    {
+                        sicon = "fa-file-invoice";
+                    }
+                    else if (pg == "AddUser")
+                    {
+                        sicon = "fa-user";
+                    }
+                    else if (pg == "UserPermission")
+                    {
+                        sicon = "fa-user-shield";
+                    }
+                    else if (pg == "EmployeeList" || pg == "ResignEmployeeList")
+                    {
+                        sicon = "fa-users";
+                    }
+                    else if (pg == "AddEmployee")
+                    {
+                        sicon = "fa-user";
+                    }
+                    else if (pg == "Loan" || pg == "Advance" || pg == "Increment" || pg == "OtherPay" || pg == "OtherDeduction")
+                    {
+                        sicon = "fa-rupee-sign";
+                    }
+                    <li class="@TempData[""+pg]"><a href='@Url.Action(pg, "Admin")'><i class="fa fa-code-fork"></i>&nbsp;@pTitle</a></li>
+                }
+            </ul>
+        </li>
+    }
+}

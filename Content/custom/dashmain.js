@@ -1535,6 +1535,28 @@ $(document).ready(function () {
         $(this).toggleClass('selected');
     });
 
+    var tblGroupName = $('#tblGroupName').DataTable({
+        "paging": false,
+        "info": false,
+    });
+    tblGroupName.on('order.dt search.dt', function () {
+        tblGroupName.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblGroupName.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
+    var tblPageName = $('#tblPageName').DataTable({
+        "paging": false,
+        "info": false,
+    });
+    tblPageName.on('order.dt search.dt', function () {
+        tblPageName.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblPageName.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
     $(document).on('blur', '.cstmtrcd', function () {
         var matcode = $(".cstmtrcd").val();
         //e.preventDefault();
@@ -2773,6 +2795,9 @@ $('#mrsubmit').on('click', function (e) {
 
 $("#upsubmit").on("click", function (e) {
     e.preventDefault();
+    $(this).find(':submit').attr('disabled', 'disabled');
+    $("#upsubmit").attr("disabled", true);
+ 
     var hdArr = new Array();
     var userId = $('#AddUserModels_UserCode').val();
     $("input:checkbox[class=chk]").each(function () {

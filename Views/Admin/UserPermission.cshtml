@@ -107,20 +107,23 @@
                         </div>
                         @foreach (var item in Model.PageModelList)
                         {
-                            //string act = "";
-                            //string url = "";
+                            //string module = (item.GroupName + "").Replace(" ", "");
 
-                            string module = (item.GroupName + "").Replace(" ", "");
-
-                            string[] pages = item.Name.Split(',');
+                            string[] pages = item.PageName.Split(',');
                             string[] access = item.PageAccess.Split(',');
+
+                            string[] gArr = item.GroupName.Split('#');
+                            string gName = gArr[0] + "";
+                            string gTitle = gArr[1] + "";
+
                             <div class="col-md-4 m-t-20">
                                 <!-- Widget: user widget style 1 -->
                                 <div class="box box-widget widget-user-2">
                                     <!-- Add the bg color to the header using any of the bg-* classes -->
                                     <div class="widget-user-header bg-m-black">
                                         <!-- /.widget-user-image -->
-                                        <h3 class="widget-user-username m-l-0">@item.GroupName</h3>
+                                        @*<h3 class="widget-user-username m-l-0">@item.GroupName</h3>*@
+                                        <h3 class="widget-user-username m-l-0">@gTitle</h3>
                                     </div>
                                     <div class="box-footer no-padding scrollstyle">
                                         <ul class="nav nav-stacked">
@@ -129,12 +132,17 @@
                                             }
                                             @foreach (string page in pages)
                                             {
-                                                string pgn = (page + "").Trim();
-                                                string pg = (page + "").Replace(" ", "");
+                                                string[] pArr = page.Split('#');
+                                                string pName = pArr[0] + "";
+                                                string pTitle = pArr[1] + "";
+
+                                                string pgn = (pName + "").Trim();
+                                                string pg = (pName + "").Replace(" ", "");
 
                                                 <li>
                                                     <a>
-                                                        @page
+                                                        @*@page*@
+                                                        @pTitle
                                                         <div class="checkbox chk float-right m-t-0 m-b-0">
                                                             <label>
                                                                 @Html.CheckBox(pgn, (access[row].Trim() == "1" ? true : false), new { @class = "chk" })
