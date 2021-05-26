@@ -14,7 +14,7 @@
     @{
         string actType = "Add";
         string actBtn = "Submit";
-        string pageTitle = Html.Raw(Html.PageTitle()) + "";
+        string pageTitle = Html.Raw(Html.PageGTitle()) + "";
         if (!String.IsNullOrEmpty(Model.UserProfileModels.Id))
         {
             actType = "Edit";

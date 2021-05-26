@@ -12,7 +12,7 @@
 	@{
 		string actType = "Add";
 		string actBtn = "Submit";
-		string pageTitle = Html.Raw(Html.PageTitle()) + "";
+		string pageTitle = Html.Raw(Html.PageGTitle()) + "";
 		if (!String.IsNullOrEmpty(Model.SKUModels.Id))
 		{
 			actType = "Edit";
@@ -20,8 +20,7 @@
 		}
 	}
 	<h1>
-		@*@pageTitle*@
-		SKU No
+		@pageTitle
 		<small></small>
 	</h1>
 	<ol class="breadcrumb">

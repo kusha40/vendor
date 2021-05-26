@@ -12,7 +12,7 @@
 	@{
 		string actType = "Add";
 		string actBtn = "Submit";
-		string pageTitle = Html.Raw(Html.PageTitle()) + "";
+		string pageTitle = Html.Raw(Html.PageGTitle()) + "";
 		if (!String.IsNullOrEmpty(Model.TradeTypeModels.Id))
 		{
 			actType = "Edit";
@@ -21,7 +21,6 @@
 	}
 	<h1>
 		@pageTitle
-		@*Unit of Measure*@
 		<small></small>
 	</h1>
 	<ol class="breadcrumb">
