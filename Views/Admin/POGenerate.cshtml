@@ -206,7 +206,7 @@
                                     @Html.TextBoxFor(m => m.POGenerateModels.PNFAmount,
                             new
                             {
-                                @class = "form-control pnfamnt",
+                                @class = "form-control pnfamnt onlynumdec",
                                 placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.PNFAmount)
                             })
                                     @Html.ValidationMessageFor(m => m.POGenerateModels.PNFAmount, "",
@@ -219,13 +219,26 @@
                                     @Html.TextBoxFor(m => m.POGenerateModels.FreightAmount,
                             new
                             {
-                                @class = "form-control frghtamnt",
+                                @class = "form-control frghtamnt onlynumdec",
                                 placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.FreightAmount)
                             })
                                     @Html.ValidationMessageFor(m => m.POGenerateModels.FreightAmount, "",
                             new { @class = "text-danger" })
                                 </div>
                             </div>
+                            @*<div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POGenerateModels.FreightPNFGST, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.POGenerateModels.FreightPNFGST,
+                            new
+                            {
+                                @class = "form-control fpnfgst onlynumdec",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.FreightPNFGST)
+                            })
+                                    @Html.ValidationMessageFor(m => m.POGenerateModels.FreightPNFGST, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>*@
                             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                 <button name="submit" id="pocalculate" class="btn bg-aqua m-t-20" title="Submit"
                                         value="">
@@ -240,7 +253,8 @@
                                     @Html.TextBoxFor(m => m.POGenerateModels.TotalAmount,
                             new
                             {
-                                @class = "form-control totamnt",
+                                @class = "form-control onlynumdec totamnt",
+                                @readonly = true,
                                 placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.TotalAmount)
                             })
                                     @Html.ValidationMessageFor(m => m.POGenerateModels.TotalAmount, "",
@@ -253,7 +267,8 @@
                                     @Html.TextBoxFor(m => m.POGenerateModels.CGSTAmount,
                             new
                             {
-                                @class = "form-control cgstamnt",
+                                @class = "form-control onlynumdec cgstamnt",
+                                @readonly = true,
                                 placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.CGSTAmount)
                             })
                                     @Html.ValidationMessageFor(m => m.POGenerateModels.CGSTAmount, "",
@@ -266,7 +281,8 @@
                                     @Html.TextBoxFor(m => m.POGenerateModels.SGSTAmount,
                             new
                             {
-                                @class = "form-control sgstamnt",
+                                @class = "form-control onlynumdec sgstamnt",
+                                @readonly = true,
                                 placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.SGSTAmount)
                             })
                                     @Html.ValidationMessageFor(m => m.POGenerateModels.SGSTAmount, "",
@@ -279,7 +295,8 @@
                                     @Html.TextBoxFor(m => m.POGenerateModels.IGSTAmount,
                             new
                             {
-                                @class = "form-control igstamnt",
+                                @class = "form-control onlynumdec igstamnt",
+                                @readonly = true,
                                 placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.IGSTAmount)
                             })
                                     @Html.ValidationMessageFor(m => m.POGenerateModels.IGSTAmount, "",
@@ -292,7 +309,8 @@
                                     @Html.TextBoxFor(m => m.POGenerateModels.TotalAmountGST,
                             new
                             {
-                                @class = "form-control totamntgst",
+                                @class = "form-control onlynumdec totamntgst",
+                                @readonly = true,
                                 placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.TotalAmountGST)
                             })
                                     @Html.ValidationMessageFor(m => m.POGenerateModels.TotalAmountGST, "",
@@ -305,7 +323,8 @@
                                     @Html.TextBoxFor(m => m.POGenerateModels.NetAmount,
                             new
                             {
-                                @class = "form-control netamnt",
+                                @class = "form-control onlynumdec netamnt",
+                                @readonly=true,
                                 placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.NetAmount)
                             })
                                     @Html.ValidationMessageFor(m => m.POGenerateModels.NetAmount, "",

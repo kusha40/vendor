@@ -1557,6 +1557,30 @@ $(document).ready(function () {
         });
     }).draw();
 
+    var tblpobackstage = $('#tblpobackstage').DataTable({
+        "columnDefs": [
+            {
+                'targets': 0, 'checkboxes':
+                {
+                    'selectRow': true
+                }
+            }
+        ],
+        select: {
+            style: 'multi',
+        },
+        "scrollX": true,
+        "paging": false,
+        //"searching": false,
+        "info": false,
+    });
+    tblpobackstage.on('order.dt search.dt', function () {
+        tblpobackstage.column(1, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblpobackstage.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
     $(document).on('blur', '.cstmtrcd', function () {
         var matcode = $(".cstmtrcd").val();
         //e.preventDefault();
@@ -2148,6 +2172,7 @@ $('#pocalculate').on('click', function (e) {
 
         var pnfamnt = $('.pnfamnt').val();
         var frghtamnt = $('.frghtamnt').val();
+        var fpnfgst = $('.fpnfgst').val();
 
         var pnfamnta = 0;
         var frghtamnta = 0;
@@ -2210,6 +2235,7 @@ function ReplaceNumberWithCommas(yourNumber) {
 }
 
 $('#ApproveSel').on('click', function (e) {
+    $(this).find(':submit').attr('disabled', 'disabled');
     $("#ApproveSel").attr("disabled", true);
     e.preventDefault();
     var rows_selected = $("#tblProductApprove tbody tr.selected");
@@ -2248,6 +2274,7 @@ $('#ApproveSel').on('click', function (e) {
 });
 
 $('.poassign').on('click', function (e) {
+    $(this).find(':submit').attr('disabled', 'disabled');
     $(".poassign").attr("disabled", true);
     e.preventDefault();
     var asn = $(".poasnto").val();
@@ -2420,8 +2447,9 @@ $('#posubmit').on('click', function (e) {
 });
 
 $('.posousubmit').on('click', function (e) {
-    $(".posousubmit").attr("disabled", true);
     $(this).find(':submit').attr('disabled', 'disabled');
+    $(".posousubmit").attr("disabled", true);
+   
     e.preventDefault();
     var lnArr = new Array();
     $(".tbl tbody tr").each(function () {
@@ -2519,8 +2547,9 @@ $('#chksameadd').change(function () {
 });
 
 $('#pogen').on('click', function (e) {
-    $("#pogen").attr("disabled", true);
     $(this).find(':submit').attr('disabled', 'disabled');
+    $("#pogen").attr("disabled", true);
+   
     e.preventDefault();
     var linkObj = $(this);
     var hdArr = new Array();
@@ -2642,6 +2671,7 @@ $('#pogen').on('click', function (e) {
 });
 
 $('#poapprove').on('click', function (e) {
+    $(this).find(':submit').attr('disabled', 'disabled');
     $("#poapprove").attr("disabled", true);
     e.preventDefault();
     var rows_selected = $("#tblPOApprove tbody tr.selected");
@@ -2681,6 +2711,7 @@ $('#poapprove').on('click', function (e) {
 
 
 $('#prapprove').on('click', function (e) {
+    $(this).find(':submit').attr('disabled', 'disabled');
     $("#prapprove").attr("disabled", true);
     e.preventDefault();
     var rows_selected = $("#tblPRApproval tbody tr.selected");
@@ -2719,8 +2750,9 @@ $('#prapprove').on('click', function (e) {
 });
 
 $('#mrsubmit').on('click', function (e) {
-    $("#mrsubmit").attr("disabled", true);
     $(this).find(':submit').attr('disabled', 'disabled');
+    $("#mrsubmit").attr("disabled", true);
+ 
     e.preventDefault();
     var fUpload = $("#InvStockModels_VendorInvoice").get(0);
     var files = fUpload.files;
@@ -2835,5 +2867,45 @@ $("#upsubmit").on("click", function (e) {
     }
     else {
         alert("Please Select 1 Page");
+    }
+});
+
+$('.pobackstage').on('click', function (e) {
+    $(this).find(':submit').attr('disabled', 'disabled');
+    $(".pobackstage").attr("disabled", true);
+    e.preventDefault();
+    var stg = $(".pobckstg").val();
+    var rows_selected = $("#tblpobackstage tbody tr.selected");
+    var list = new Array();
+    // Iterate over all selected checkboxes
+    $.each(rows_selected, function (index, row) {
+        // Create a hidden element
+        list.push(row.cells[6].innerText);
+    });
+
+    if (list.length > 0) {
+        var poIds = JSON.stringify(list);
+        $.ajax({
+            url: "/Admin/UpdatePOBackstage",
+            dataType: "json",
+            data: "{'poIds': '" + poIds + "', 'sts': '" + stg + "'}",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                if (result.error === "") {
+                    location.reload();
+                }
+                else {
+                    alert(result.error);
+                }
+            },
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                alert(err.Message);
+            }
+        });
+    }
+    else {
+        alert("Please select atleast one po.");
     }
 });
