@@ -41,22 +41,23 @@
                                     @Html.DropDownListFor(m => m.PurOrdModels.BackStage,
                                 new List<SelectListItem>
                                    {
-                                        new SelectListItem{ Text="ASSIGN", Value = "I" },
-                                        new SelectListItem{ Text="SOURCED", Value = "A"  },
-                                        new SelectListItem{ Text="GENERATE", Value = "S" },
-                                        new SelectListItem{ Text="PO for Approval", Value = "G" },
-                                        new SelectListItem{ Text="PO Approved", Value = "AP" },
-                                        new SelectListItem{ Text="PO Request Payment", Value = "RP" },
-                                        new SelectListItem{ Text="PR Approval", Value = "RPA" },
+                                        new SelectListItem{ Text="ASSIGN", Value = "A" },
+                                        new SelectListItem{ Text="SOURCED", Value = "S"  },
+                                        new SelectListItem{ Text="GENERATE", Value = "G" },
+                                        new SelectListItem{ Text="PO for Approval", Value = "AP" },
+                                        new SelectListItem{ Text="PO Approved", Value = "RP" },
+                                        new SelectListItem{ Text="PO Request Payment", Value = "RPA" },
+                                        //new SelectListItem{ Text="PR Approval", Value = "RPA" },
+                                        //new SelectListItem{ Text="PR Approval", Value = "RPA" },
                                    },
                                  "--Select Backstage--", new { @class = "form-control select2 pobckstg" })
                                     @Html.ValidationMessageFor(m => m.PurOrdModels.BackStage, "",
                          new { @class = "text-danger" })
                                 </div>
                             </div>
-                            @*<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                 <a href="javascript:void(0)" class="btn bg-aqua m-t-20 pobackstage">Backstage</a>
-                            </div>*@
+                            </div>
                         }
                     </div>
                     <!-- /.box-body -->

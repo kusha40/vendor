@@ -79,7 +79,7 @@
                                 </button>
                             </div>
                         </div>
-                        
+
                         <table id="tblpurchaseorder" class="table table-bordered display">
                             <thead>
                                 <tr>
@@ -99,6 +99,7 @@
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().GST)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().OrderDate)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().ExpDlvDate)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().CurrentStage)</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -130,6 +131,7 @@
                                         <td>@Html.DisplayFor(modelItem => item.GST)%</td>
                                         <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
                                         <td>@Html.DisplayFor(modelItem => item.ExpDlvDate)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.CurrentStage)</td>
                                     </tr>
                                 }
                             </tbody>

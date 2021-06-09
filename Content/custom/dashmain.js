@@ -1648,13 +1648,16 @@ $(document).ready(function () {
         if (pmode !== "" && pmode !== "--Select Payment Mode--") {
             if (pmode == "PDC CHEQUE") {
                 $(".noofdays").prop('readonly', false);
+                $(".cheqno").prop('readonly', false);
             }
             else {
                 $(".noofdays").prop('readonly', true);
+                $(".cheqno").prop('readonly', false);
             }
         }
         else {
             $(".noofdays").prop('readonly', true);
+            $(".cheqno").prop('readonly', false);
         }
     });
 

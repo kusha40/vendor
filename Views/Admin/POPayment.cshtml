@@ -228,6 +228,19 @@
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                         <div class="form-group">
+                                            @Html.LabelFor(m => m.POPaymentModels.ChequeNo, new { @class = "form-control-label" }) <sup>*</sup>
+                                            @Html.TextBoxFor(m => m.POPaymentModels.ChequeNo,
+                 new
+                 {
+                     @class = "form-control cheqno",
+                     placeholder = "Enter " + @Html.DisplayNameFor(m => m.POPaymentModels.ChequeNo)
+                 })
+                                            @Html.ValidationMessageFor(m => m.POPaymentModels.ChequeNo, "",
+                 new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                        <div class="form-group">
                                             @Html.LabelFor(m => m.POPaymentModels.PaymentDate, new { @class = "form-control-label" }) <sup>*</sup>
                                             @Html.TextBoxFor(m => m.POPaymentModels.PaymentDate,
                  new
@@ -325,6 +338,7 @@
                                         <th>@Html.DisplayNameFor(model => model.POPaymentModelList.FirstOrDefault().PaymentMode)</th>
                                         <th>@Html.DisplayNameFor(model => model.POPaymentModelList.FirstOrDefault().Amount)</th>
                                         <th>@Html.DisplayNameFor(model => model.POPaymentModelList.FirstOrDefault().NoOfDays)</th>
+                                        <th>@Html.DisplayNameFor(model => model.POPaymentModelList.FirstOrDefault().ChequeNo)</th>
                                         <th>@Html.DisplayNameFor(model => model.POPaymentModelList.FirstOrDefault().PaymentDate)</th>
                                         <th>@Html.DisplayNameFor(model => model.POPaymentModelList.FirstOrDefault().Remark)</th>
                                         <th>@Html.DisplayNameFor(model => model.POPaymentModelList.FirstOrDefault().PaymentSlip)</th>
@@ -342,6 +356,7 @@
                                             <td>@Html.DisplayFor(modelSKU => u.PaymentMode) </td>
                                             <td>@Html.DisplayFor(modelSKU => u.Amount) </td>
                                             <td>@Html.DisplayFor(modelSKU => u.NoOfDays) </td>
+                                            <td>@Html.DisplayFor(modelSKU => u.ChequeNo) </td>
                                             <td>@Html.DisplayFor(modelSKU => u.PaymentDate) </td>
                                             <td>@Html.DisplayFor(modelSKU => u.Remark) </td>
                                             <td><a href='~/Content/upload/popayment/@u.PaymentSlip' target="_blank">Download</a></td>
