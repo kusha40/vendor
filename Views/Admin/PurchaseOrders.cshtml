@@ -108,7 +108,7 @@
                                     <tr>
                                         <td></td>
                                         <td>
-                                            @if (item.Status != "G" && item.Status != "AP")
+                                            @if (item.Status == "I" && item.Status == "A" && item.Status == "S")
                                             {
                                                 @Html.EncodedActionLink("Edit", "EditPurchaseOrder", "Admin", new { id = item.Id }, new { @class = "", title = "Edit", @target = "_blank" })
                                             }

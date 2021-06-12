@@ -1557,6 +1557,17 @@ $(document).ready(function () {
         });
     }).draw();
 
+    var tblRequestInvoice = $('#tblRequestInvoice').DataTable({
+        "paging": false,
+        "info": false,
+    });
+    tblRequestInvoice.on('order.dt search.dt', function () {
+        tblRequestInvoice.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblRequestInvoice.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
     var tblpobackstage = $('#tblpobackstage').DataTable({
         "columnDefs": [
             {
@@ -1958,7 +1969,7 @@ $(document).on('blur', '.svenprcmrg', function () {
     //e.preventDefault();
     if (venprc !== "" && venprc !== "0") {
         var mrg = (parseFloat(slprc) - parseFloat(venprc)) * 100 / parseFloat(slprc);
-        curRow.find("td:eq(8)").find(".posmarg").val(mrg.toFixed(2)+"%");
+        curRow.find("td:eq(8)").find(".posmarg").val(mrg.toFixed(2) + "%");
     }
     else {
         curRow.find("td:eq(8)").find(".posmarg").val("");
@@ -1992,7 +2003,7 @@ $(document).on('blur', '.ircvqty', function () {
     remqty = parseFloat(remqty);
     rcvqty = parseFloat(rcvqty);
     if (rcvqty <= remqty) {
-        if (rcvqty !== "" && rcvqty !== "0") {
+        if (rcvqty !== "" && rcvqty !== 0) {
             var untprc = parseFloat(vprc) / parseFloat(qty);
             var tot = parseFloat(untprc) * parseFloat(rcvqty);
             var totwtax = parseFloat(tot) + (parseFloat(tot) * parseFloat(gst) / 100);
@@ -2006,6 +2017,21 @@ $(document).on('blur', '.ircvqty', function () {
         curRow.find(".tot").html(0);
         curRow.find(".totwtax").html(0);
         alert("Receive Quantity is greater than remaining Quantity");
+    }
+});
+
+$(document).on('blur', '.ireqqty', function () {
+    var curRow = $(this).closest("tr");
+    var remqty = curRow.find(".remqty").html();
+    var reqqty = curRow.find(".ireqqty").val();
+    //e.preventDefault();
+    remqty = parseFloat(remqty);
+    reqqty = parseFloat(reqqty);
+    if (reqqty <= remqty) {
+    }
+    else {
+        curRow.find(".ireqqty").val(remqty);
+        alert("Request Quantity is greater than remaining Quantity");
     }
 });
 
@@ -2190,8 +2216,8 @@ $('#pocalculate').on('click', function (e) {
                 pnfamnt = parseFloat(pnfamnt);
                 frghtamnt = parseFloat(frghtamnt);
 
-               pnfamnta = parseFloat(pnfamnt);
-               frghtamnta = parseFloat(frghtamnt);
+                pnfamnta = parseFloat(pnfamnt);
+                frghtamnta = parseFloat(frghtamnt);
             }
             else {
                 pnfamnt = 0;
@@ -2452,7 +2478,7 @@ $('#posubmit').on('click', function (e) {
 $('.posousubmit').on('click', function (e) {
     $(this).find(':submit').attr('disabled', 'disabled');
     $(".posousubmit").attr("disabled", true);
-   
+
     e.preventDefault();
     var lnArr = new Array();
     $(".tbl tbody tr").each(function () {
@@ -2552,7 +2578,7 @@ $('#chksameadd').change(function () {
 $('#pogen').on('click', function (e) {
     $(this).find(':submit').attr('disabled', 'disabled');
     $("#pogen").attr("disabled", true);
-   
+
     e.preventDefault();
     var linkObj = $(this);
     var hdArr = new Array();
@@ -2755,7 +2781,7 @@ $('#prapprove').on('click', function (e) {
 $('#mrsubmit').on('click', function (e) {
     $(this).find(':submit').attr('disabled', 'disabled');
     $("#mrsubmit").attr("disabled", true);
- 
+
     e.preventDefault();
     var fUpload = $("#InvStockModels_VendorInvoice").get(0);
     var files = fUpload.files;
@@ -2768,7 +2794,7 @@ $('#mrsubmit').on('click', function (e) {
         var popId = $(tds[1]).html();
         var qty = parseFloat($(tds[6]).find('.ircvqty').val());
 
-        if (popId !== "" && qty !== "" && qty !== "0" && files.length > 0) {
+        if (popId !== "" && qty !== "" && qty !== 0 && files.length > 0) {
             fileData.append(files[0].name, files[0]);
             fileData.append('POPId', popId);
             var lin = {
@@ -2828,11 +2854,61 @@ $('#mrsubmit').on('click', function (e) {
     }
 });
 
+
+$('#porisubmit').on('click', function (e) {
+    $(this).find(':submit').attr('disabled', 'disabled');
+    $("#porisubmit").attr("disabled", true);
+
+    e.preventDefault();
+    var list = new Array();
+    // Iterate over all selected checkboxes
+    $(".tbl tbody tr").each(function () {
+        var tds = $(this).find("td");
+        //you could use the Find method to find the texbox or the dropdownlist and get the value.
+        var popId = $(tds[1]).html();
+        var qty = parseFloat($(tds[5]).find('.ireqqty').val());
+
+        if (popId !== "" && qty !== "" && qty !== 0) {
+            var lin = {
+                POPId: popId,
+                Quantity: qty
+            };
+            list.push(lin);
+        }
+    });
+    if (list.length > 0) {
+        var po = JSON.stringify(list);
+        $.ajax({
+            url: "/Admin/UpsertPORequestInvoice",
+            dataType: "json",
+            data: "{'po': '" + po + "'}",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                if (result.error === "") {
+                    location.reload();
+                }
+                else {
+                    alert(result.error);
+                }
+            },
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                alert(err.Message);
+            }
+        });
+    }
+    else {
+        alert("Please select atleast one po.");
+    }
+});
+
+
 $("#upsubmit").on("click", function (e) {
     e.preventDefault();
     $(this).find(':submit').attr('disabled', 'disabled');
     $("#upsubmit").attr("disabled", true);
- 
+
     var hdArr = new Array();
     var userId = $('#AddUserModels_UserCode').val();
     $("input:checkbox[class=chk]").each(function () {
@@ -2912,3 +2988,4 @@ $('.pobackstage').on('click', function (e) {
         alert("Please select atleast one po.");
     }
 });
+
