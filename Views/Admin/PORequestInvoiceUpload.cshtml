@@ -92,6 +92,158 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.PurOrdModels.CustomerId, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextAreaFor(m => m.PurOrdModels.CustomerId,
+                                new
+                                {
+                                    @class = "form-control text-capitalize cstid",
+                                    @readonly = true,
+                                    placeholder = @Html.DisplayNameFor(m => m.PurOrdModels.CustomerId)
+                                })
+                                        @Html.ValidationMessageFor(m => m.PurOrdModels.CustomerId, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.PurOrdModels.CustomerBillAdd, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextAreaFor(m => m.PurOrdModels.CustomerBillAdd,
+                                new
+                                {
+                                    @class = "form-control text-capitalize cstbadd",
+                                    @readonly = true,
+                                    placeholder = @Html.DisplayNameFor(m => m.PurOrdModels.CustomerBillAdd)
+                                })
+                                        @Html.ValidationMessageFor(m => m.PurOrdModels.CustomerBillAdd, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.PurOrdModels.CustomerShipAdd, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextAreaFor(m => m.PurOrdModels.CustomerShipAdd,
+                                new
+                                {
+                                    @class = "form-control text-capitalize cstsadd",
+                                    @readonly = true,
+                                    placeholder = @Html.DisplayNameFor(m => m.PurOrdModels.CustomerShipAdd)
+                                })
+                                        @Html.ValidationMessageFor(m => m.PurOrdModels.CustomerShipAdd, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                @*<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.PurOrdModels.CustomerBillAdd, new { @class = "form-control-label" }) <sup>*</sup>
+                                            @Html.DropDownListFor(m => m.PurOrdModels.CustomerBillAdd, new SelectList(Model.CustomerBilAddModelList, "Key", "Value"),
+                                            "--Customer Billing Address--", new { @class = "form-control select2 cstbadd" })
+                                            @Html.ValidationMessageFor(m => m.PurOrdModels.CustomerBillAdd, "",
+                                    new { @class = "text-danger errcstbadd" })
+                                        </div>
+                                    </div>*@
+                                @*<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.PurOrdModels.CustomerShipAdd, new { @class = "form-control-label" }) <sup>*</sup>
+                                            @Html.DropDownListFor(m => m.PurOrdModels.CustomerShipAdd, new SelectList(Model.CustomerShipAddModelList, "Key", "Value"),
+                                            "--Customer Shipping Address--", new { @class = "form-control select2 cstsadd" })
+                                            @Html.ValidationMessageFor(m => m.PurOrdModels.CustomerShipAdd, "",
+                                    new { @class = "text-danger errcstsadd" })
+                                        </div>
+                                    </div>*@
+                                <div class="col-md-12 row">
+                                    <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.PurOrdModels.POType, new { @class = "form-control-label" })
+                                            @Html.DropDownListFor(m => m.PurOrdModels.POType,
+                                           new List<SelectListItem>
+                                              {
+                                                new SelectListItem{ Text="Regular", Value = "Regular", Selected = true  },
+                                                new SelectListItem{ Text="Open PO", Value = "Open PO" },
+                                                new SelectListItem{ Text="ARC", Value = "ARC" },
+                                              },
+                                            "--Select PO Type--", new { @class = "form-control select2 potype", @disabled = true })
+                                            @Html.ValidationMessageFor(m => m.PurOrdModels.POType, "",
+                                    new { @class = "text-danger errpotype" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.PurOrdModels.POId, new { @class = "form-control-label" }) <sup>*</sup>
+                                            @Html.TextBoxFor(m => m.PurOrdModels.POId,
+                                    new
+                                    {
+                                        @class = "form-control text-capitalize poid",
+                                        @readonly = true,
+                                        placeholder = @Html.DisplayNameFor(m => m.PurOrdModels.POId)
+                                    })
+                                            @Html.ValidationMessageFor(m => m.PurOrdModels.POId, "",
+                                    new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.PurOrdModels.PONumber, new { @class = "form-control-label" }) <sup>*</sup>
+                                            @Html.TextBoxFor(m => m.PurOrdModels.PONumber,
+                                    new
+                                    {
+                                        @readonly = true,
+                                        @class = "form-control text-capitalize pono",
+                                        placeholder = @Html.DisplayNameFor(m => m.PurOrdModels.PONumber)
+                                    })
+                                            @Html.ValidationMessageFor(m => m.PurOrdModels.PONumber, "",
+                                    new { @class = "text-danger errpono" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.PurOrdModels.LineItems, new { @class = "form-control-label" }) <sup>*</sup>
+                                            @Html.TextBoxFor(m => m.PurOrdModels.LineItems,
+                                    new
+                                    {
+                                        @class = "form-control polneitm",
+                                        @type = "number",
+                                        @readonly = true,
+                                        placeholder = @Html.DisplayNameFor(m => m.PurOrdModels.LineItems)
+                                    })
+                                            @Html.ValidationMessageFor(m => m.PurOrdModels.LineItems, "",
+                                    new { @class = "text-danger errpolneitm" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.PurOrdModels.OrderDate, new { @class = "form-control-label" }) <sup>*</sup>
+                                            @Html.TextBoxFor(m => m.PurOrdModels.OrderDate,
+                                    new
+                                    {
+                                        @class = "form-control poorddate datepicker",
+                                        @readonly = true,
+                                        placeholder = @Html.DisplayNameFor(m => m.PurOrdModels.OrderDate)
+                                    })
+                                            @Html.ValidationMessageFor(m => m.PurOrdModels.OrderDate, "",
+                                    new { @class = "text-danger errpoorddate" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.PurOrdModels.ExpDlvDate, new { @class = "form-control-label" }) <sup>*</sup>
+                                            @Html.TextBoxFor(m => m.PurOrdModels.ExpDlvDate,
+                                    new
+                                    {
+                                        @class = "form-control poedlvdate datepicker",
+                                        @readonly = true,
+                                        placeholder = @Html.DisplayNameFor(m => m.PurOrdModels.ExpDlvDate)
+                                    })
+                                            @Html.ValidationMessageFor(m => m.PurOrdModels.ExpDlvDate, "",
+                                    new { @class = "text-danger errpoedlvdate" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                     <div class="form-group">
                                         @Html.LabelFor(m => m.RequestInvoiceUploadModels.RInvoiceNo, new { @class = "form-control-label" })
