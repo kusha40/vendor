@@ -1568,6 +1568,17 @@ $(document).ready(function () {
         });
     }).draw();
 
+    var tblmrhdetails = $('#tblmrhdetails').DataTable({
+        "paging": false,
+        "info": false,
+    });
+    tblmrhdetails.on('order.dt search.dt', function () {
+        tblmrhdetails.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblmrhdetails.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
     var tblpobackstage = $('#tblpobackstage').DataTable({
         "columnDefs": [
             {
