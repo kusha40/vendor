@@ -1,9 +1,9 @@
 ﻿@using Vendor_Indusuno.Extensions
 @model Vendor_Indusuno.ViewModels.StockOutViewModel
 @{
-    ViewBag.Title = "Stock Out";
+    ViewBag.Title = "Dispatched";
     TempData["Stocks"] = "active";
-    TempData["StockOut"] = "active";
+    TempData["Dispatched"] = "active";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -24,7 +24,7 @@
 </section>
 <!-- Main content -->
 <section class="content">
-    @using (Html.BeginForm("StockOut", "Admin", FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off", enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("Dispatched", "Admin", FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off", enctype = "multipart/form-data" }))
     {
 
         @Html.AntiForgeryToken()
@@ -87,7 +87,6 @@
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().PONumber)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POId)</th>
                                     <th>Invoice</th>
-                                    <th>Stock</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -102,10 +101,6 @@
                                             @Html.EncodedActionLink(item.POId, "PODetailsWithPOId", "Admin", new { id = item.POId }, new { @class = "", title = "Edit", @target = "_blank" })
                                         </td>
                                         <td><a href='~/Content/upload/poreqinvoice/@item.InvUpload' target="_blank">Download</a></td>
-                                        <td>
-                                            @Html.EncodedActionLink("Stock Out", "POStockOut", "Admin",
-                                                new { id = item.RInvoiceNo }, new { @class = "btn btn-edt bg-aqua btn-sm", title = "Stock Out" })
-                                        </td>
                                     </tr>
                                 }
                             </tbody>
