@@ -101,7 +101,14 @@
                                     <td>
                                         @Html.EncodedActionLink(item.POId, "PODetailsWithPOId", "Admin", new { id = item.POId }, new { @class = "", title = "Edit", @target = "_blank" })
                                     </td>
-                                    <td><a href='~/Content/upload/poreqinvoice/@item.InvUpload' target="_blank">Download</a></td>
+                                    @if (!string.IsNullOrEmpty(item.InvUpload))
+                                    {
+                                        <td><a href='~/Content/upload/poreqinvoice/@item.InvUpload' target="_blank">Download</a></td>
+                                    }
+                                    else
+                                    {
+                                        <td></td>
+                                    }
                                     <td>
                                         @Html.EncodedActionLink("Stock Out", "POStockOut", "Admin",
                                             new { id = item.RInvoiceNo }, new { @class = "btn btn-edt bg-aqua btn-sm", title = "Stock Out" })

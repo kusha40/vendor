@@ -1873,9 +1873,11 @@ function AddTempPOSourced() {
         tmpposrc.POPId = row.cells[6].innerText;
         tmpposrc.Product = row.cells[7].innerText;
         tmpposrc.Quantity = row.cells[8].innerText;
-        tmpposrc.Price = row.cells[10].innerText;
-
+        //tmpposrc.Price = row.cells[10].innerText;
+        tmpposrc.Discount = row.cells[11].innerText;
         tmpposrc.GST = row.cells[13].innerText;
+
+        tmpposrc.Price = parseFloat(row.cells[10].innerText) - parseFloat(row.cells[11].innerText)
 
         $('#tblposource').find('tbody').append(
             "<tr>" +
