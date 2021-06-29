@@ -1886,7 +1886,7 @@ function AddTempPOSourced() {
             "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_POPId_" + inc + "' name='PurchaseOrdersModelList_POPId_" + inc + "' value='" + tmpposrc.POPId + "' disabled class='form-control spopid m-b-0 bg-gray'  type='text' /></td>" +
             "<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_Product_" + inc + "' name='PurchaseOrdersModelList_Product_" + inc + "' value='" + tmpposrc.Product + "' disabled class='form-control spopid m-b-0 bg-gray'  type='text' /></td>" +
             "<td class='w-8'> <input type='text' id='PurchaseOrdersModelList_Price_" + inc + "' name='PurchaseOrdersModelList_Price_" + inc + "' value='" + tmpposrc.Price + "' disabled class='form-control spoprice m-b-0 bg-gray'  type='text' /></td>" +
-            "<td class='w-6'> <input type='text' id='PurchaseOrdersModelList_Quantity_" + inc + "' name='PurchaseOrdersModelList_Quantity_" + inc + "' value='" + tmpposrc.Quantity + "' disabled class='form-control spoqty m-b-0 bg-gray'  type='text' /></td>" +
+            "<td class='w-6'> <input type='text' id='PurchaseOrdersModelList_Quantity_" + inc + "' name='PurchaseOrdersModelList_Quantity_" + inc + "' value='" + tmpposrc.Quantity + "' disabled class='form-control spoqty m-b-0 bg-gray'  type='text' /></br><input type='text' id='PurchaseOrdersModelList_OrderedQuantity_" + inc + "' name='PurchaseOrdersModelList_OrderedQuantity_" + inc + "' value='" + tmpposrc.Quantity + "' placeholder='Ord Qty' class='form-control sordqty onlynumdec m-b-0 float-left' /></td>" +
             "<td class='w-4'> <input type='text' id='PurchaseOrdersModelList_GST_" + inc + "' name='PurchaseOrdersModelList_GST_" + inc + "' value='" + tmpposrc.GST + "' class='form-control spogst onlynumdec m-b-0'  type='text' /></td>" +
             "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_EnqId_" + inc + "' name='PurchaseOrdersModelList_EnqId_" + inc + "' value='' disabled class='form-control senqid m-b-0 bg-gray'  type='text' /></td>" +
             "<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_VendorId_" + inc + "' name='PurchaseOrdersModelList_VendorId_" + inc + "' placeholder='Vendor Name' value='' class='form-control svenid m-b-0'  type='text' /></br><input type='text' id='PurchaseOrdersModelList_VendorPrice_" + inc + "' name='PurchaseOrdersModelList_VendorPrice_" + inc + "' value='' placeholder='Vendor Price' class='form-control svenprc svenprcmrg onlynumdec m-b-0 w-70 float-left' /><input type='text' id='PurchaseOrdersModelList_Margin_" + inc + "' name='PurchaseOrdersModelList_Margin_" + inc + "' value='' disabled placeholder='Margin' class='form-control onlynumdec posmarg m-b-0 w-30' /></td>" +
@@ -2045,6 +2045,28 @@ $(document).on('blur', '.ireqqty', function () {
     else {
         curRow.find(".ireqqty").val(remqty);
         alert("Request Quantity is greater than remaining Quantity");
+    }
+});
+
+$(document).on('blur', '.sordqty', function () {
+    var curRow = $(this).closest("tr");
+    var poqty = curRow.find(".spoqty").val();
+    var ordqty = curRow.find(".sordqty").val();
+    //e.preventDefault();
+    poqty = parseFloat(poqty);
+    ordqty = parseFloat(ordqty);
+    if (ordqty <= poqty) {
+        if (ordqty != 0) {
+
+        }
+        else {
+            curRow.find(".sordqty").val(poqty);
+            alert("Order Quantity can not be Zero");
+        }
+    }
+    else {
+        curRow.find(".sordqty").val(poqty);
+        alert("Order Quantity is greater than PO Quantity");
     }
 });
 
@@ -2498,22 +2520,26 @@ $('.posousubmit').on('click', function (e) {
         var tds = $(this).find("td");
         //you could use the Find method to find the texbox or the dropdownlist and get the value.
         var spopid = $(tds[2]).find('.spopid').val();
+        var sordqty = $(tds[5]).find('.sordqty').val();
         var spogst = $(tds[6]).find('.spogst').val();
         var senqid = $(tds[7]).find('.senqid').val();
         var svenid = $(tds[8]).find('.svenid').val();
         var svenprc = $(tds[8]).find('.svenprc').val();
         var slvenid = $(tds[9]).find('.slvenid').val();
         var slvenprc = $(tds[9]).find('.slvenprc').val();
-        if (spopid !== "" /*&& senqid !== ""*/ && spogst != "" && svenid !== "" && svenprc !== "" && svenprc !== "0"
+        
+        if (spopid !== "" /*&& senqid !== ""*/ && spogst != "" && svenid !== "" && svenprc !== "" && svenprc !== "0" &&
+            sordqty !== "" && sordqty !== "0"
             /*&& slvenid !== "" && slvenprc !== "0" && slvenprc !== ""*/) {
             var lin = {
                 POPId: spopid,
                 EnqId: senqid,
+                OrderedQuantity: parseFloat(sordqty),
                 VendorId: svenid,
                 VendorPrice: parseFloat(svenprc),
                 //LastVendorId: slvenid,
                 //LastVendorPrice: parseFloat(slvenprc),
-                GST: parseFloat(spogst)
+                GST: parseFloat(spogst)  
             };
             lnArr.push(lin);
         }

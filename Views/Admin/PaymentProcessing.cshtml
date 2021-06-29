@@ -113,51 +113,150 @@
                             <tbody>
                                 @foreach (var item in Model.PurchaseOrdersModelList)
                                 {
-                                <tr>
-                                    <td></td>
-                                    <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
-                                    <td>
-                                        @if (item.PADate == "01/01/1900")
-                                        {
-
-                                        }
-                                        else
-                                        {
-                                            @Html.DisplayFor(modelItem => item.PADate)
-                                        }
-                                    </td>
-                                    <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
-                                    <td><a href='~/Content/upload/poupload/@item.POFile' target="_blank">@item.PONumber</a></td>
-                                    <td>
-                                        @Html.EncodedActionLink(item.POId, "PODetails", "Admin", new { id = item.VPONumber }, new { @class = "", title = "Edit", @target = "_blank" })
-
-                                    </td>
-                                    <td>
-                                        @Html.EncodedActionLink(item.VPONumber, "DownloadPO", "Admin", new { id = item.VPONumber }, new { @class = "", title = "Download", @target = "_blank" })
-                                    </td>
-                                    @if (!string.IsNullOrEmpty(item.PIUpload))
+                                    if (item.Status == "Success")
                                     {
-                                        <td><a href='~/Content/upload/popayment/@item.PIUpload' target="_blank">@item.VendorId</a></td>
+                                        <tr class="suc-tbl-row">
+                                            <td></td>
+                                            <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
+                                            <td>
+                                                @if (item.PADate == "01/01/1900")
+                                                {
+
+                                                }
+                                                else
+                                                {
+                                                    @Html.DisplayFor(modelItem => item.PADate)
+                                                }
+                                            </td>
+                                            <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
+                                            <td><a href='~/Content/upload/poupload/@item.POFile' target="_blank">@item.PONumber</a></td>
+                                            <td>
+                                                @Html.EncodedActionLink(item.POId, "PODetails", "Admin", new { id = item.VPONumber }, new { @class = "", title = "Edit", @target = "_blank" })
+
+                                            </td>
+                                            <td>
+                                                @Html.EncodedActionLink(item.VPONumber, "DownloadPO", "Admin", new { id = item.VPONumber }, new { @class = "", title = "Download", @target = "_blank" })
+                                            </td>
+                                            @if (!string.IsNullOrEmpty(item.PIUpload))
+                                            {
+                                                <td><a href='~/Content/upload/popayment/@item.PIUpload' target="_blank">@item.VendorId</a></td>
+                                            }
+                                            else
+                                            {
+                                                <td>@Html.DisplayFor(modelItem => item.VendorId)</td>
+                                            }
+                                            <td>@Html.DisplayFor(modelItem => item.VendorPrice)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Margin)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.LMRemarks)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.POAssignTo)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.PORRemarks)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                                            <td>
+                                                @*@if (Model.UserProfileModels.EmpType != "User")
+                                                    {*@
+                                                @Html.EncodedActionLink("<i class='fa fa-money'></i>", "POPayment", "Admin",
+                                                 new { id = item.VPONumber }, new { @class = "btn btn-edt bg-aqua btn-sm", @target = "_blank", title = "Payment" })
+                                                @*  }*@
+                                            </td>
+                                        </tr>
+                                    }
+                                    else if (item.Status == "Partial")
+                                    {
+                                        <tr class="pen-tbl-row">
+                                            <td></td>
+                                            <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
+                                            <td>
+                                                @if (item.PADate == "01/01/1900")
+                                                {
+
+                                                }
+                                                else
+                                                {
+                                                    @Html.DisplayFor(modelItem => item.PADate)
+                                                }
+                                            </td>
+                                            <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
+                                            <td><a href='~/Content/upload/poupload/@item.POFile' target="_blank">@item.PONumber</a></td>
+                                            <td>
+                                                @Html.EncodedActionLink(item.POId, "PODetails", "Admin", new { id = item.VPONumber }, new { @class = "", title = "Edit", @target = "_blank" })
+
+                                            </td>
+                                            <td>
+                                                @Html.EncodedActionLink(item.VPONumber, "DownloadPO", "Admin", new { id = item.VPONumber }, new { @class = "", title = "Download", @target = "_blank" })
+                                            </td>
+                                            @if (!string.IsNullOrEmpty(item.PIUpload))
+                                            {
+                                                <td><a href='~/Content/upload/popayment/@item.PIUpload' target="_blank">@item.VendorId</a></td>
+                                            }
+                                            else
+                                            {
+                                                <td>@Html.DisplayFor(modelItem => item.VendorId)</td>
+                                            }
+                                            <td>@Html.DisplayFor(modelItem => item.VendorPrice)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Margin)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.LMRemarks)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.POAssignTo)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.PORRemarks)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                                            <td>
+                                                @*@if (Model.UserProfileModels.EmpType != "User")
+                                                    {*@
+                                                @Html.EncodedActionLink("<i class='fa fa-money'></i>", "POPayment", "Admin",
+                                                 new { id = item.VPONumber }, new { @class = "btn btn-edt bg-aqua btn-sm", @target = "_blank", title = "Payment" })
+                                                @*  }*@
+                                            </td>
+                                        </tr>
                                     }
                                     else
                                     {
-                                        <td>@Html.DisplayFor(modelItem => item.VendorId)</td>
+                                        <tr>
+                                            <td></td>
+                                            <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
+                                            <td>
+                                                @if (item.PADate == "01/01/1900")
+                                                {
+
+                                                }
+                                                else
+                                                {
+                                                    @Html.DisplayFor(modelItem => item.PADate)
+                                                }
+                                            </td>
+                                            <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
+                                            <td><a href='~/Content/upload/poupload/@item.POFile' target="_blank">@item.PONumber</a></td>
+                                            <td>
+                                                @Html.EncodedActionLink(item.POId, "PODetails", "Admin", new { id = item.VPONumber }, new { @class = "", title = "Edit", @target = "_blank" })
+
+                                            </td>
+                                            <td>
+                                                @Html.EncodedActionLink(item.VPONumber, "DownloadPO", "Admin", new { id = item.VPONumber }, new { @class = "", title = "Download", @target = "_blank" })
+                                            </td>
+                                            @if (!string.IsNullOrEmpty(item.PIUpload))
+                                            {
+                                                <td><a href='~/Content/upload/popayment/@item.PIUpload' target="_blank">@item.VendorId</a></td>
+                                            }
+                                            else
+                                            {
+                                                <td>@Html.DisplayFor(modelItem => item.VendorId)</td>
+                                            }
+                                            <td>@Html.DisplayFor(modelItem => item.VendorPrice)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Margin)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.LMRemarks)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.POAssignTo)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.PORRemarks)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                                            <td>
+                                                @*@if (Model.UserProfileModels.EmpType != "User")
+                                                    {*@
+                                                @Html.EncodedActionLink("<i class='fa fa-money'></i>", "POPayment", "Admin",
+                                                 new { id = item.VPONumber }, new { @class = "btn btn-edt bg-aqua btn-sm", @target = "_blank", title = "Payment" })
+                                                @*  }*@
+                                            </td>
+                                        </tr>
                                     }
-                                    <td>@Html.DisplayFor(modelItem => item.VendorPrice)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Price)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Margin)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.LMRemarks)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.POAssignTo)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.PORRemarks)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Status)</td>
-                                    <td>
-                                        @*@if (Model.UserProfileModels.EmpType != "User")
-        {*@
-                                        @Html.EncodedActionLink("<i class='fa fa-money'></i>", "POPayment", "Admin",
-                                            new { id = item.VPONumber }, new { @class = "btn btn-edt bg-aqua btn-sm", @target = "_blank", title = "Payment" })
-                                        @*  }*@
-                                    </td>
-                                </tr>
                                 }
                             </tbody>
                         </table>

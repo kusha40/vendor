@@ -841,3 +841,13 @@ td.isrcbtn button {
 .table {
     font-size: 12px !important;
 }
+
+.suc-tbl-row {
+    background-color: #84ffff !important;
+    color: #000 !important;
+}
+
+.pen-tbl-row {
+    background-color: #d1c4e9 !important;
+    color: #000 !important;
+}
