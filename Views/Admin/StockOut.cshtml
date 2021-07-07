@@ -104,7 +104,7 @@
                                         <td><a href='~/Content/upload/poreqinvoice/@item.InvUpload' target="_blank">Download</a></td>
                                         <td>
                                             @Html.EncodedActionLink("Stock Out", "POStockOut", "Admin",
-                                                new { id = item.RInvoiceNo }, new { @class = "btn btn-edt bg-aqua btn-sm", title = "Stock Out" })
+                                                new { id = item.RInvoiceNo }, new { @class = "btn btn-edt bg-aqua btn-sm", @target = "_blank", title = "Stock Out" })
                                         </td>
                                     </tr>
                                 }

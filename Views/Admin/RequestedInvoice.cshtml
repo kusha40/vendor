@@ -86,8 +86,9 @@
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().CustomerName)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().PONumber)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POId)</th>
+                                    <th>Requested By</th>
                                     <th>Invoice</th>
-                                    <th>Download</th>
+                                    <th>Invoice</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -101,17 +102,21 @@
                                         <td>
                                             @Html.EncodedActionLink(item.POId, "PODetailsWithPOId", "Admin", new { id = item.POId }, new { @class = "", title = "Edit", @target = "_blank" })
                                         </td>
+                                        <td>@Html.DisplayFor(modelItem => item.RequestedBy)</td>
                                         @if (!string.IsNullOrEmpty(item.InvUpload))
                                         {
-                                            <td><a href='~/Content/upload/poreqinvoice/@item.InvUpload' target="_blank">Download</a></td>
+                                            <td><a href='~/Content/upload/poreqinvoice/@item.InvUpload' target="_blank">@item.InvoiceNo</a></td>
                                         }
                                         else
                                         {
                                             <td></td>
                                         }
                                         <td>
-                                            @Html.EncodedActionLink("Upload", "PORequestInvoiceUpload", "Admin",
-                                                new { id = item.RInvoiceNo }, new { @class = "btn btn-edt bg-aqua btn-sm", @target = "_blank", title = "Upload" })
+                                            @if (item.Status != "SO")
+                                            {
+                                                @Html.EncodedActionLink("Upload", "PORequestInvoiceUpload", "Admin",
+                                                             new { id = item.RInvoiceNo }, new { @class = "btn btn-edt bg-aqua btn-sm", @target = "_blank", title = "Upload" })
+                                            }
                                         </td>
                                     </tr>
                                 }

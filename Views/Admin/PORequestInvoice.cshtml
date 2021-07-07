@@ -287,10 +287,35 @@
                             new
                             {
                                 @class = "form-control",
-                                @type = "file",
                                 placeholder = "Enter " + @Html.DisplayNameFor(m => m.RequestInvoiceModels.Remarks)
                             })
                                     @Html.ValidationMessageFor(m => m.RequestInvoiceModels.Remarks, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.RequestInvoiceModels.ContactNo, new { @class = "form-control-label" }) <sup>*</sup>
+                                    @Html.TextBoxFor(m => m.RequestInvoiceModels.ContactNo,
+                            new
+                            {
+                                @class = "form-control",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.RequestInvoiceModels.ContactNo)
+                            })
+                                    @Html.ValidationMessageFor(m => m.RequestInvoiceModels.ContactNo, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.RequestInvoiceModels.ContactPerson, new { @class = "form-control-label" }) <sup>*</sup>
+                                    @Html.TextBoxFor(m => m.RequestInvoiceModels.ContactPerson,
+                            new
+                            {
+                                @class = "form-control",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.RequestInvoiceModels.ContactPerson)
+                            })
+                                    @Html.ValidationMessageFor(m => m.RequestInvoiceModels.ContactPerson, "",
                             new { @class = "text-danger" })
                                 </div>
                             </div>

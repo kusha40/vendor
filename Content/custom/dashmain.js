@@ -1315,7 +1315,7 @@ $(document).ready(function () {
         "paging": false,
         "searching": false,
         "info": false,
-        "scrollX": true
+        "scrollX": true,
     });
     tblpodetails.on('order.dt search.dt', function () {
         tblpodetails.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
@@ -2897,7 +2897,9 @@ $('#mrsubmit').on('click', function (e) {
 $('#porisubmit').on('click', function (e) {
     $(this).find(':submit').attr('disabled', 'disabled');
     $("#porisubmit").attr("disabled", true);
-
+    var rmk = $("#RequestInvoiceModels_Remarks").val();
+    var cntno = $("#RequestInvoiceModels_ContactNo").val();
+    var cntpr = $("#RequestInvoiceModels_ContactPerson").val();
     e.preventDefault();
     var list = new Array();
     // Iterate over all selected checkboxes
@@ -2910,7 +2912,10 @@ $('#porisubmit').on('click', function (e) {
         if (popId !== "" && qty !== "" && qty !== 0) {
             var lin = {
                 POPId: popId,
-                Quantity: qty
+                Quantity: qty,
+                Remarks: rmk,
+                ContactNo: cntno,
+                ContactPerson: cntpr
             };
             list.push(lin);
         }

@@ -113,7 +113,7 @@
                             <tbody>
                                 @foreach (var item in Model.PurchaseOrdersModelList)
                                 {
-                                    if (item.Status == "Success")
+                                    if (item.Status == "Success" || item.Status == "MR")
                                     {
                                         <tr class="suc-tbl-row">
                                             <td></td>
@@ -153,11 +153,11 @@
                                             <td>@Html.DisplayFor(modelItem => item.PORRemarks)</td>
                                             <td>@Html.DisplayFor(modelItem => item.Status)</td>
                                             <td>
-                                                @*@if (Model.UserProfileModels.EmpType != "User")
-                                                    {*@
-                                                @Html.EncodedActionLink("<i class='fa fa-money'></i>", "POPayment", "Admin",
-                                                 new { id = item.VPONumber }, new { @class = "btn btn-edt bg-aqua btn-sm", @target = "_blank", title = "Payment" })
-                                                @*  }*@
+                                                @if (item.Status != "MR")
+                                                {
+                                                    @Html.EncodedActionLink("<i class='fa fa-money'></i>", "POPayment", "Admin",
+                                                     new { id = item.VPONumber }, new { @class = "btn btn-edt bg-aqua btn-sm", @target = "_blank", title = "Payment" })
+                                                }
                                             </td>
                                         </tr>
                                     }
