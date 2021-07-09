@@ -2217,15 +2217,15 @@ function Delete(row) { // remove row from table
 function CheckSubmitBtn() {
     if ($('#tblTempPOLine > tbody  > tr').length > 0) { // count items in table if at least 1 item is found then enable button  
         //$('#SubmitMoviesBtn').removeAttr("disabled");
-        $('#posubmit').show();
+        $('.posubmit').show();
     } else {
         //$('#SubmitMoviesBtn').attr("disabled", "disabled");
-        $('#posubmit').hide();
+        $('.posubmit').hide();
     }
 }
 //Add PO item to temp table  
 
-$("#pogen").hide();
+$(".pogen").hide();
 $('#pocalculate').on('click', function (e) {
     e.preventDefault();
     var vba = $('.vba option:selected').text();
@@ -2285,7 +2285,7 @@ $('#pocalculate').on('click', function (e) {
         $(".totamntgst").val(ReplaceNumberWithCommas((totl_cgst + totl_igst + totl_sgst).toFixed(2)));
 
         $(".netamnt").val(ReplaceNumberWithCommas((tamountbeforetax + totl_cgst + totl_igst + totl_sgst + pnfamnta + frghtamnta).toFixed(2)));
-        $("#pogen").show();
+        $(".pogen").show();
     }
 });
 
@@ -2340,6 +2340,7 @@ $('#ApproveSel').on('click', function (e) {
 $('.poassign').on('click', function (e) {
     $(this).find(':submit').attr('disabled', 'disabled');
     $(".poassign").attr("disabled", true);
+    $(".poassign").hide();
     e.preventDefault();
     var asn = $(".poasnto").val();
     var rows_selected = $("#tblassignpo tbody tr.selected");
@@ -2377,9 +2378,10 @@ $('.poassign').on('click', function (e) {
     }
 });
 
-$('#posubmit').on('click', function (e) {
+$('.posubmit').on('click', function (e) {
     $(this).find(':submit').attr('disabled', 'disabled');
-    $("#posubmit").attr("disabled", true);
+    $(".posubmit").attr("disabled", true);
+    $(".posubmit").hide();
     e.preventDefault();
     var lnitm = parseInt($('.polneitm').val());
     var row = parseInt($('#tblTempPOLine tbody tr').length);
@@ -2507,13 +2509,13 @@ $('#posubmit').on('click', function (e) {
     else {
         alert("Line item not matched.");
     }
-    $("#posubmit").attr("disabled", false);
+    $(".posubmit").attr("disabled", false);
 });
 
 $('.posousubmit').on('click', function (e) {
     $(this).find(':submit').attr('disabled', 'disabled');
     $(".posousubmit").attr("disabled", true);
-
+    $(".posousubmit").hide();
     e.preventDefault();
     var lnArr = new Array();
     $(".tbl tbody tr").each(function () {
@@ -2614,10 +2616,10 @@ $('#chksameadd').change(function () {
     }
 });
 
-$('#pogen').on('click', function (e) {
+$('.pogen').on('click', function (e) {
     $(this).find(':submit').attr('disabled', 'disabled');
-    $("#pogen").attr("disabled", true);
-
+    $(".pogen").attr("disabled", true);
+    $(".pogen").hide();
     e.preventDefault();
     var linkObj = $(this);
     var hdArr = new Array();
@@ -2735,12 +2737,13 @@ $('#pogen').on('click', function (e) {
     else {
         alert("Please fill the required fields.");
     }
-    $("#pogen").attr("disabled", false);
+    $(".pogen").attr("disabled", false);
 });
 
-$('#poapprove').on('click', function (e) {
+$('.poapprove').on('click', function (e) {
     $(this).find(':submit').attr('disabled', 'disabled');
-    $("#poapprove").attr("disabled", true);
+    $(".poapprove").attr("disabled", true);
+    $(".poapprove").hide();
     e.preventDefault();
     var rows_selected = $("#tblPOApprove tbody tr.selected");
     var list = new Array();
@@ -2778,9 +2781,10 @@ $('#poapprove').on('click', function (e) {
 });
 
 
-$('#prapprove').on('click', function (e) {
+$('.prapprove').on('click', function (e) {
     $(this).find(':submit').attr('disabled', 'disabled');
-    $("#prapprove").attr("disabled", true);
+    $(".prapprove").attr("disabled", true);
+    $(".prapprove").hide();
     e.preventDefault();
     var rows_selected = $("#tblPRApproval tbody tr.selected");
     var list = new Array();
