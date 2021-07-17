@@ -2078,16 +2078,19 @@ function AddTempPOGenerate() {
     var inc = 1;
     var venid = "";
     var pIdNo = "";
+    var cvenid = "";
     $("#tblpogen > tbody > tr").remove();
     $.each(rows_selected, function (index, row) {
         // Create a hidden element
         var index = $("#tblPOGenerate tbody tr.selected").index(this);
         if (index == 0) {
             pIdNo = row.cells[4].innerText;
+            cvenid = row.cells[12].innerText;
         }
         var peid = row.cells[4].innerText;
-        if (pIdNo != "") {
-            if (pIdNo == peid) {
+        var veneid = row.cells[12].innerText;
+        if (pIdNo != "" && cvenid != "") {
+            if (pIdNo == peid && cvenid == veneid) {
                 //$.each(rows_selected, function (index, row) {
                 // Create a hidden element
                 list.push(row.cells[6].innerText);
@@ -2529,7 +2532,7 @@ $('.posousubmit').on('click', function (e) {
         var svenprc = $(tds[8]).find('.svenprc').val();
         var slvenid = $(tds[9]).find('.slvenid').val();
         var slvenprc = $(tds[9]).find('.slvenprc').val();
-        
+
         if (spopid !== "" /*&& senqid !== ""*/ && spogst != "" && svenid !== "" && svenprc !== "" && svenprc !== "0" &&
             sordqty !== "" && sordqty !== "0"
             /*&& slvenid !== "" && slvenprc !== "0" && slvenprc !== ""*/) {
@@ -2541,7 +2544,7 @@ $('.posousubmit').on('click', function (e) {
                 VendorPrice: parseFloat(svenprc),
                 //LastVendorId: slvenid,
                 //LastVendorPrice: parseFloat(slvenprc),
-                GST: parseFloat(spogst)  
+                GST: parseFloat(spogst)
             };
             lnArr.push(lin);
         }
@@ -2759,6 +2762,46 @@ $('.poapprove').on('click', function (e) {
             url: "/Admin/ApprovePO",
             dataType: "json",
             data: "{'poIds': '" + poIds + "'}",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                if (result.error === "") {
+                    location.reload();
+                }
+                else {
+                    alert(result.error);
+                }
+            },
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                alert(err.Message);
+            }
+        });
+    }
+    else {
+        alert("Please select atleast one po.");
+    }
+});
+
+$('.ponotapprove').on('click', function (e) {
+    $(this).find(':submit').attr('disabled', 'disabled');
+    $(".ponotapprove").attr("disabled", true);
+    $(".ponotapprove").hide();
+    e.preventDefault();
+    var rows_selected = $("#tblPOApprove tbody tr.selected");
+    var list = new Array();
+    // Iterate over all selected checkboxes
+    $.each(rows_selected, function (index, row) {
+        // Create a hidden element
+        list.push(row.cells[7].innerText);
+    });
+
+    if (list.length > 0) {
+        var vpoNos = JSON.stringify(list);
+        $.ajax({
+            url: "/Admin/PONotApprovedList",
+            dataType: "json",
+            data: "{'vpoNos': '" + vpoNos + "'}",
             type: "POST",
             contentType: "application/json; charset=utf-8",
             success: function (result) {

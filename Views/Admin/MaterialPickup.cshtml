@@ -67,20 +67,6 @@
                                 })
                             </div>
                         </div>
-                        @*<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.Status, new { @class = "form-control-label" })
-                                    @Html.DropDownListFor(m => m.Status,
-                                   new List<SelectListItem>
-                                      {
-                                        new SelectListItem{ Text="Success", Value = "Success", Selected = true },
-                                        new SelectListItem{ Text="Pending", Value = "Pending" },
-                                      },
-                                    "--Select Status--", new { @class = "form-control select2" })
-                                    @Html.ValidationMessageFor(m => m.Status, "",
-                            new { @class = "text-danger" })
-                                </div>
-                            </div>*@
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <div class="box-tools pull-left">
                                 <button type="submit" name="search" class="btn bg-aqua" title="SEARCH"
@@ -100,11 +86,12 @@
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().VPONumber)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().VendorId)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().VendorPrice)</th>
-                                    @*<th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().GST)</th>
-                                        <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Margin)</th>
-                                        <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POAssignTo)</th>*@
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Status)</th>
-                                    <th>View</th>
+                                    @if (Model.UserProfileModels.EmpType != "User")
+                                    {
+                                        <th>View</th>
+                                    }
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -124,17 +111,14 @@
                                         </td>
                                         <td>@Html.DisplayFor(modelItem => item.VendorId)</td>
                                         <td>@Html.DisplayFor(modelItem => item.VendorPrice)</td>
-                                        @*<td>@Html.DisplayFor(modelItem => item.GST)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Margin)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.POAssignTo)</td>*@
                                         <td>@Html.DisplayFor(modelItem => item.Status)</td>
-                                        <td>
-                                            @if (Model.UserProfileModels.EmpType != "User")
-                                            {
+                                        @if (Model.UserProfileModels.EmpType != "User")
+                                        {
+                                            <td>
                                                 @Html.EncodedActionLink("Receive", "MaterialReceive", "Admin",
                                                     new { id = item.VPONumber }, new { @class = "btn btn-edt bg-aqua btn-sm", @target = "_blank", title = "Receive" })
-                                            }
-                                        </td>
+                                            </td>
+                                        }
                                     </tr>
                                 }
                             </tbody>

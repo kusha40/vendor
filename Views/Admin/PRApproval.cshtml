@@ -73,20 +73,6 @@
                                 })
                             </div>
                         </div>
-                        @*<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.Status, new { @class = "form-control-label" })
-                                    @Html.DropDownListFor(m => m.Status,
-                                   new List<SelectListItem>
-                                      {
-                                        new SelectListItem{ Text="Success", Value = "Success", Selected = true },
-                                        new SelectListItem{ Text="Pending", Value = "Pending" },
-                                      },
-                                    "--Select Status--", new { @class = "form-control select2" })
-                                    @Html.ValidationMessageFor(m => m.Status, "",
-                            new { @class = "text-danger" })
-                                </div>
-                            </div>*@
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <div class="box-tools pull-left">
                                 <button type="submit" name="search" class="btn bg-aqua" title="SEARCH"
@@ -113,7 +99,10 @@
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().LMRemarks)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().PORRemarks)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POAssignTo)</th>
-                                    <th>Edit</th>
+                                    @if (Model.UserProfileModels.EmpType != "User")
+                                    {
+                                        <th>Edit</th>
+                                    }
                                 </tr>
                             </thead>
                             <tbody>
@@ -146,13 +135,13 @@
                                         <td>@Html.DisplayFor(modelItem => item.LMRemarks)</td>
                                         <td>@Html.DisplayFor(modelItem => item.PORRemarks)</td>
                                         <td>@Html.DisplayFor(modelItem => item.POAssignTo)</td>
-                                        <td>
-                                            @if (Model.UserProfileModels.EmpType != "User")
-                                            {
+                                        @if (Model.UserProfileModels.EmpType != "User")
+                                        {
+                                            <td>
                                                 @Html.EncodedActionLink("<i class='fa fa-money'></i>", "PORequestPayment", "Admin",
                                                     new { id = item.VPONumber }, new { @class = "btn btn-edt bg-aqua btn-sm", @target = "_blank", title = "Payment" })
-                                            }
-                                        </td>
+                                            </td>
+                                        }
                                     </tr>
                                 }
                             </tbody>

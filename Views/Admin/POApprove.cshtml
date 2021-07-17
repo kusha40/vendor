@@ -38,6 +38,7 @@
                             @if (Model.UserProfileModels.EmpType != "User")
                             {
                                 <a href="javascript:void(0)" class="btn bg-aqua poapprove" id="poapprove">Approve</a>
+                                <a href="javascript:void(0)" class="btn bg-red float-right ponotapprove" id="ponotapprove">Not Approve</a>
                             }
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -98,6 +99,10 @@
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Margin)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().LMRemarks)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POAssignTo)</th>
+                                    @if (Model.UserProfileModels.EmpType != "User")
+                                    {
+                                        <th>Not Approved</th>
+                                    }
                                 </tr>
                             </thead>
                             <tbody>
@@ -115,7 +120,7 @@
                                             {
                                                 @Html.DisplayFor(modelItem => item.POGDate)
                                             }
-                                                                            </td>
+                                        </td>
                                         <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
                                         <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
                                         <td>@Html.DisplayFor(modelItem => item.PONumber)</td>
@@ -129,6 +134,13 @@
                                         <td>@Html.DisplayFor(modelItem => item.Margin)</td>
                                         <td>@Html.DisplayFor(modelItem => item.LMRemarks)</td>
                                         <td>@Html.DisplayFor(modelItem => item.POAssignTo)</td>
+                                        @if (Model.UserProfileModels.EmpType != "User")
+                                        {
+                                            <td>
+                                                @Html.EncodedActionLink("<i class='fa fa-times'></i>", "PONotApproved", "Admin",
+                                                    new { id = item.VPONumber }, new { @class = "btn btn-edt bg-red btn-sm mb-act-confirm", @data_box = "#mb-act-cnfrm", title = "PO Not Approved" })
+                                            </td>
+                                        }
                                     </tr>
                                 }
                             </tbody>
@@ -139,19 +151,17 @@
             </div>
         </div>
         <!-- danger with sound -->
-        <div class="message-box animated fadeIn" data-sound="alert" id="mb-sub-confirm">
+        <div class="message-box animated fadeIn" data-sound="alert" id="mb-act-cnfrm">
             <div class="mb-container">
                 <div class="mb-middle">
                     <div class="mb-title"><span class="fa fa-warning"></span> Confirm <strong>Box</strong> ?</div>
                     <div class="mb-content">
-                        <p>Are you sure you want to submit?</p>
-                        <p>Press No if you want to Cancel. Press Yes to Submit the record.</p>
+                        <p>Are you sure you want to approve?</p>
+                        <p>Press No if you want to Cancel. Press Yes to Approve the record.</p>
                     </div>
                     <div class="mb-footer">
                         <div class="pull-right">
-                            <button name="posubmit" class="btn btn-confirm-yes btn-lg" title="Yes">
-                                Yes
-                            </button>
+                            <a id="confirmhref" href="#" class="btn btn-confirm-yes btn-lg">Yes</a>
                             <button class="btn btn-confirm-no btn-lg mb-control-close">No</button>
                         </div>
                     </div>
