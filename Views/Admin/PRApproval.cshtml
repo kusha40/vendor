@@ -99,10 +99,7 @@
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().LMRemarks)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().PORRemarks)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POAssignTo)</th>
-                                    @if (Model.UserProfileModels.EmpType != "User")
-                                    {
-                                        <th>Edit</th>
-                                    }
+                                    <th>Edit</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -135,13 +132,10 @@
                                         <td>@Html.DisplayFor(modelItem => item.LMRemarks)</td>
                                         <td>@Html.DisplayFor(modelItem => item.PORRemarks)</td>
                                         <td>@Html.DisplayFor(modelItem => item.POAssignTo)</td>
-                                        @if (Model.UserProfileModels.EmpType != "User")
-                                        {
-                                            <td>
-                                                @Html.EncodedActionLink("<i class='fa fa-money'></i>", "PORequestPayment", "Admin",
-                                                    new { id = item.VPONumber }, new { @class = "btn btn-edt bg-aqua btn-sm", @target = "_blank", title = "Payment" })
-                                            </td>
-                                        }
+                                        <td>
+                                            @Html.EncodedActionLink("<i class='fa fa-money'></i>", "PORequestPayment", "Admin",
+                                                new { id = item.VPONumber }, new { @class = "btn btn-edt bg-aqua btn-sm", @target = "_blank", title = "Payment" })
+                                        </td>
                                     </tr>
                                 }
                             </tbody>

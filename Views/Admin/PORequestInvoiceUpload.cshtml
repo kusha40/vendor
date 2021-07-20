@@ -334,6 +334,19 @@
          new { @class = "text-danger" })
                                 </div>
                             </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.RequestInvoiceUploadModels.InvoiceDate, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.RequestInvoiceUploadModels.InvoiceDate,
+         new
+         {
+             @class = "form-control datepicker",
+             placeholder = "Enter " + @Html.DisplayNameFor(m => m.RequestInvoiceUploadModels.InvoiceDate)
+         })
+                                    @Html.ValidationMessageFor(m => m.RequestInvoiceUploadModels.InvoiceDate, "",
+         new { @class = "text-danger" })
+                                </div>
+                            </div>
                             @if (!string.IsNullOrEmpty(Model.RequestInvoiceUploadModels.RInvoiceNo))
                             {
                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">

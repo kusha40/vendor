@@ -2944,6 +2944,7 @@ $('#mrsubmit').on('click', function (e) {
 $('#porisubmit').on('click', function (e) {
     $(this).find(':submit').attr('disabled', 'disabled');
     $("#porisubmit").attr("disabled", true);
+    $("#porisubmit").hide();
     var rmk = $("#RequestInvoiceModels_Remarks").val();
     var cntno = $("#RequestInvoiceModels_ContactNo").val();
     var cntpr = $("#RequestInvoiceModels_ContactPerson").val();

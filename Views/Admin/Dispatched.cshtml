@@ -87,10 +87,10 @@
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().PONumber)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POId)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().TransCourier)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().AlrAwbNo)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().BilTNo)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().LRAwbNo)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().BilT)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().CourierCharges)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().LeadTime)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().ExpDlvDate)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().DispatchRemarks)</th>
                                     <th>Invoice</th>
                                 </tr>
@@ -102,17 +102,19 @@
                                         <td></td>
                                         <td>@Html.DisplayFor(modelItem => item.RInvoiceNo)</td>
                                         <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.PONumber)</td>
+                                        <td>
+                                            <a href='~/Content/upload/poupload/@item.POFile' target="_blank">@item.PONumber</a>
+                                        </td>
                                         <td>
                                             @Html.EncodedActionLink(item.POId, "PODetailsWithPOId", "Admin", new { id = item.POId }, new { @class = "", title = "Edit", @target = "_blank" })
                                         </td>
                                         <td>@Html.DisplayFor(modelItem => item.TransCourier)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.AlrAwbNo)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.BilTNo)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.LRAwbNo)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.BilT)</td>
                                         <td>@Html.DisplayFor(modelItem => item.CourierCharges)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.LeadTime)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.ExpDlvDate)</td>
                                         <td>@Html.DisplayFor(modelItem => item.DispatchRemarks)</td>
-                                        <td><a href='~/Content/upload/poreqinvoice/@item.InvUpload' target="_blank">Download</a></td>
+                                        <td><a href='~/Content/upload/poreqinvoice/@item.InvUpload' target="_blank">@item.InvoiceNo</a></td>
                                     </tr>
                                 }
                             </tbody>

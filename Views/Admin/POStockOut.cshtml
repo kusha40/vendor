@@ -93,6 +93,34 @@
                             <div class="col-md-12">
                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                     <div class="form-group">
+                                        @Html.LabelFor(m => m.PODispatchDetailModels.InvoiceNo, new { @class = "form-control-label" })
+                                        @Html.TextBoxFor(m => m.PODispatchDetailModels.InvoiceNo,
+                                         new
+                                         {
+                                             @class = "form-control text-uppercase",
+                                             @readonly = true,
+                                             placeholder = "Enter " + @Html.DisplayNameFor(m => m.PODispatchDetailModels.InvoiceNo)
+                                         })
+                                        @Html.ValidationMessageFor(m => m.PODispatchDetailModels.InvoiceNo, "",
+                                        new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.PODispatchDetailModels.InvoiceDate, new { @class = "form-control-label" })
+                                        @Html.TextBoxFor(m => m.PODispatchDetailModels.InvoiceDate,
+                                         new
+                                         {
+                                             @class = "form-control text-uppercase",
+                                             @readonly = true,
+                                             placeholder = "Enter " + @Html.DisplayNameFor(m => m.PODispatchDetailModels.InvoiceDate)
+                                         })
+                                        @Html.ValidationMessageFor(m => m.PODispatchDetailModels.InvoiceDate, "",
+                                        new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
                                         @Html.LabelFor(m => m.PODispatchDetailModels.RInvoiceNo, new { @class = "form-control-label" })
                                         @Html.TextBoxFor(m => m.PODispatchDetailModels.RInvoiceNo,
                                          new
@@ -102,6 +130,19 @@
                                              placeholder = "Enter " + @Html.DisplayNameFor(m => m.PODispatchDetailModels.RInvoiceNo)
                                          })
                                         @Html.ValidationMessageFor(m => m.PODispatchDetailModels.RInvoiceNo, "",
+                                        new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.PODispatchDetailModels.StockOutDate, new { @class = "form-control-label" })
+                                        @Html.TextBoxFor(m => m.PODispatchDetailModels.StockOutDate,
+                                         new
+                                         {
+                                             @class = "form-control datepicker",
+                                             placeholder = "Enter " + @Html.DisplayNameFor(m => m.PODispatchDetailModels.StockOutDate)
+                                         })
+                                        @Html.ValidationMessageFor(m => m.PODispatchDetailModels.StockOutDate, "",
                                         new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -120,27 +161,28 @@
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                     <div class="form-group">
-                                        @Html.LabelFor(m => m.PODispatchDetailModels.AlrAwbNo, new { @class = "form-control-label" })
-                                        @Html.TextBoxFor(m => m.PODispatchDetailModels.AlrAwbNo,
+                                        @Html.LabelFor(m => m.PODispatchDetailModels.LRAwbNo, new { @class = "form-control-label" })
+                                        @Html.TextBoxFor(m => m.PODispatchDetailModels.LRAwbNo,
                                          new
                                          {
                                              @class = "form-control text-uppercase",
-                                             placeholder = "Enter " + @Html.DisplayNameFor(m => m.PODispatchDetailModels.AlrAwbNo)
+                                             placeholder = "Enter " + @Html.DisplayNameFor(m => m.PODispatchDetailModels.LRAwbNo)
                                          })
-                                        @Html.ValidationMessageFor(m => m.PODispatchDetailModels.AlrAwbNo, "",
+                                        @Html.ValidationMessageFor(m => m.PODispatchDetailModels.LRAwbNo, "",
                                         new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                     <div class="form-group">
-                                        @Html.LabelFor(m => m.PODispatchDetailModels.BilTNo, new { @class = "form-control-label" })
-                                        @Html.TextBoxFor(m => m.PODispatchDetailModels.BilTNo,
+                                        @Html.LabelFor(m => m.PODispatchDetailModels.BilT, new { @class = "form-control-label" })
+                                        @Html.TextBoxFor(m => m.PODispatchDetailModels.BilT,
                                          new
                                          {
                                              @class = "form-control text-uppercase",
-                                             placeholder = "Enter " + @Html.DisplayNameFor(m => m.PODispatchDetailModels.BilTNo)
+                                             @type = "file",
+                                             placeholder = "Enter " + @Html.DisplayNameFor(m => m.PODispatchDetailModels.BilT)
                                          })
-                                        @Html.ValidationMessageFor(m => m.PODispatchDetailModels.BilTNo, "",
+                                        @Html.ValidationMessageFor(m => m.PODispatchDetailModels.BilT, "",
                                         new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -159,14 +201,14 @@
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                     <div class="form-group">
-                                        @Html.LabelFor(m => m.PODispatchDetailModels.LeadTime, new { @class = "form-control-label" })
-                                        @Html.TextBoxFor(m => m.PODispatchDetailModels.LeadTime,
+                                        @Html.LabelFor(m => m.PODispatchDetailModels.ExpDelvDate, new { @class = "form-control-label" })
+                                        @Html.TextBoxFor(m => m.PODispatchDetailModels.ExpDelvDate,
                                          new
                                          {
-                                             @class = "form-control onlynumdec",
-                                             placeholder = "Enter " + @Html.DisplayNameFor(m => m.PODispatchDetailModels.LeadTime)
+                                             @class = "form-control datepicker",
+                                             placeholder = "Enter " + @Html.DisplayNameFor(m => m.PODispatchDetailModels.ExpDelvDate)
                                          })
-                                        @Html.ValidationMessageFor(m => m.PODispatchDetailModels.LeadTime, "",
+                                        @Html.ValidationMessageFor(m => m.PODispatchDetailModels.ExpDelvDate, "",
                                         new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -211,7 +253,7 @@
                 <!-- Default box -->
                 <div class="box">
                     <!-- /.box-body -->
-                    
+
                 </div>
                 <!-- /.box -->
             </div>
