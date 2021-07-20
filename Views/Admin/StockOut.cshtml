@@ -87,6 +87,7 @@
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().PONumber)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POId)</th>
                                     <th>Invoice</th>
+                                    <th>Invoice Date</th>
                                     <th>Stock</th>
                                 </tr>
                             </thead>
@@ -103,7 +104,8 @@
                                         <td>
                                             @Html.EncodedActionLink(item.POId, "PODetailsWithPOId", "Admin", new { id = item.POId }, new { @class = "", title = "Edit", @target = "_blank" })
                                         </td>
-                                        <td><a href='~/Content/upload/poreqinvoice/@item.InvUpload' target="_blank">Download</a></td>
+                                        <td><a href='~/Content/upload/poreqinvoice/@item.InvUpload' target="_blank">@item.InvoiceNo</a></td>
+                                        <td>@Html.DisplayFor(modelItem => item.InvUploadDate)</td>
                                         <td>
                                             @Html.EncodedActionLink("Stock Out", "POStockOut", "Admin",
                                                 new { id = item.RInvoiceNo }, new { @class = "btn btn-edt bg-aqua btn-sm", @target = "_blank", title = "Stock Out" })
