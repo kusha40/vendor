@@ -83,7 +83,10 @@
                                     <tr>
                                         <td></td>
                                         <td>@Html.DisplayFor(modelItem => item.CstMtrlCode)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Product)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Product)<br>
+                                            Brand : @item.Brand<br>
+                                            Model : @item.ModelNo
+                                        </td>
                                         <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Price)</td>
                                     </tr>

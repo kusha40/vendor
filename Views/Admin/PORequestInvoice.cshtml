@@ -137,14 +137,14 @@
                                         </div>
                                     </div>*@
                                 @*<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                    <div class="form-group">
-                                        @Html.LabelFor(m => m.PurOrdModels.CustomerShipAdd, new { @class = "form-control-label" }) <sup>*</sup>
-                                        @Html.DropDownListFor(m => m.PurOrdModels.CustomerShipAdd, new SelectList(Model.CustomerShipAddModelList, "Key", "Value"),
-                                        "--Customer Shipping Address--", new { @class = "form-control select2 cstsadd" })
-                                        @Html.ValidationMessageFor(m => m.PurOrdModels.CustomerShipAdd, "",
-                                new { @class = "text-danger errcstsadd" })
-                                    </div>
-                                </div>*@
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.PurOrdModels.CustomerShipAdd, new { @class = "form-control-label" }) <sup>*</sup>
+                                            @Html.DropDownListFor(m => m.PurOrdModels.CustomerShipAdd, new SelectList(Model.CustomerShipAddModelList, "Key", "Value"),
+                                            "--Customer Shipping Address--", new { @class = "form-control select2 cstsadd" })
+                                            @Html.ValidationMessageFor(m => m.PurOrdModels.CustomerShipAdd, "",
+                                    new { @class = "text-danger errcstsadd" })
+                                        </div>
+                                    </div>*@
                                 <div class="col-md-12 row">
                                     <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
                                         <div class="form-group">
@@ -251,6 +251,7 @@
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POPId)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Product)</th>
                                     <th>PO Qty</th>
+                                    <th>Stock Qty</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().RemainingQuantity)</th>
                                     <th width="10%">@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().RequestQuantity)</th>
                                 </tr>
@@ -270,8 +271,14 @@
                                             Model : @item.ModelNo
                                         </td>
                                         <td class="qty">@Html.DisplayFor(modelItem => item.Quantity)</td>
+                                        <td class="stkqty">@Html.DisplayFor(modelItem => item.StockQty)</td>
                                         <td class="remqty">@Html.DisplayFor(modelItem => item.RemainingQuantity)</td>
-                                        <td>@Html.TextBox("PurchaseOrdersModelList_RequestQuantity" + i, item.RequestQuantity, new { @class = "form-control ireqqty onlynumdec", @data_required = true })</td>
+                                        <td>
+                                            @if (item.RemainingQuantity != 0)
+                                            {
+                                                @Html.TextBox("PurchaseOrdersModelList_RequestQuantity" + i, "0", new { @class = "form-control ireqqty onlynumdec", @data_required = true })
+                                            }
+                                        </td>
                                     </tr>
                                     i++;
                                 }

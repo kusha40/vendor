@@ -2033,21 +2033,6 @@ $(document).on('blur', '.ircvqty', function () {
     }
 });
 
-$(document).on('blur', '.ireqqty', function () {
-    var curRow = $(this).closest("tr");
-    var remqty = curRow.find(".remqty").html();
-    var reqqty = curRow.find(".ireqqty").val();
-    //e.preventDefault();
-    remqty = parseFloat(remqty);
-    reqqty = parseFloat(reqqty);
-    if (reqqty <= remqty) {
-    }
-    else {
-        curRow.find(".ireqqty").val(remqty);
-        alert("Request Quantity is greater than remaining Quantity");
-    }
-});
-
 $(document).on('blur', '.sordqty', function () {
     var curRow = $(this).closest("tr");
     var poqty = curRow.find(".spoqty").val();
@@ -2940,6 +2925,44 @@ $('#mrsubmit').on('click', function (e) {
     }
 });
 
+//$(document).on('blur', '.ireqqty', function () {
+//    var curRow = $(this).closest("tr");
+//    var remqty = curRow.find(".remqty").html();
+//    var reqqty = curRow.find(".ireqqty").val();
+//    //e.preventDefault();
+//    remqty = parseFloat(remqty);
+//    reqqty = parseFloat(reqqty);
+//    if (reqqty <= remqty) {
+//    }
+//    else {
+//        curRow.find(".ireqqty").val(remqty);
+//        alert("Request Quantity is greater than remaining Quantity");
+//    }
+//});
+
+$(document).on('blur', '.ireqqty', function () {
+    var curRow = $(this).closest("tr");
+    var reqqty = curRow.find(".ireqqty").val();
+    var remqty = curRow.find(".remqty").html();
+    var stkqty = curRow.find(".stkqty").html();
+
+    reqqty = parseFloat(reqqty);
+    remqty = parseFloat(remqty);
+    stkqty = parseFloat(stkqty);
+    //e.preventDefault();
+    if (stkqty !== 0) {
+        if (reqqty > remqty) {
+            curRow.find(".ireqqty").val("0");
+            curRow.find(".ireqqty").focus();
+            alert("Request quantity can not greater than remaining quantity...!");
+        }
+    }
+    else {
+        curRow.find(".ireqqty").val("0");
+        curRow.find(".ireqqty").focus();
+        alert("Stock quantity is not available...!");
+    }
+});
 
 $('#porisubmit').on('click', function (e) {
     $(this).find(':submit').attr('disabled', 'disabled');
@@ -2955,9 +2978,12 @@ $('#porisubmit').on('click', function (e) {
         var tds = $(this).find("td");
         //you could use the Find method to find the texbox or the dropdownlist and get the value.
         var popId = $(tds[1]).html();
-        var qty = parseFloat($(tds[5]).find('.ireqqty').val());
+        var stkqty = parseFloat($(tds[4]).html());
+        var remqty = parseFloat($(tds[5]).html());
+        var qty = parseFloat($(tds[6]).find('.ireqqty').val());
 
-        if (popId !== "" && qty !== "" && qty !== 0) {
+
+        if (popId !== "" && qty !== "" && qty !== 0 && qty <= remqty && stkqty != 0) {
             var lin = {
                 POPId: popId,
                 Quantity: qty,
