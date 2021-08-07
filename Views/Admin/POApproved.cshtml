@@ -92,6 +92,10 @@
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Margin)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().LMRemarks)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POAssignTo)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POAssignBy)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POSourcedBy)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POGenerateBy)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POApprovedBy)</th>
                                     <th>Download PO</th>
                                 </tr>
                             </thead>
@@ -123,12 +127,13 @@
                                         <td>@Html.DisplayFor(modelItem => item.Margin)</td>
                                         <td>@Html.DisplayFor(modelItem => item.LMRemarks)</td>
                                         <td>@Html.DisplayFor(modelItem => item.POAssignTo)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.POAssignBy)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.POSourcedBy)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.POGenerateBy)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.POApprovedBy)</td>
                                         <td>
-                                            @*@if (item.Status == "AP")
-                                                {*@
                                             @Html.EncodedActionLink("Download", "DownloadPO", "Admin",
                                                 new { id = item.VPONumber }, new { @class = "btn btn-edt bg-aqua btn-sm", title = "Edit" })
-                                            @* } *@
                                         </td>
                                     </tr>
                                 }

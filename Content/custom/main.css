@@ -829,9 +829,8 @@ td.isrcbtn button {
     font-size: 14px !important;
 }
 
-.c-w
-{
-    color:#ffffff;
+.c-w {
+    color: #ffffff;
 }
 
 .table td .form-control {
@@ -850,4 +849,12 @@ td.isrcbtn button {
 .pen-tbl-row {
     background-color: #d1c4e9 !important;
     color: #000 !important;
+}
+
+.navbar-nav > .notifications-menu > .dropdown-menu > li.header {
+    font-size: 14px !important;
+}
+
+.navbar .dropdown-menu li > a {
+    font-size: 12px !important;
 }

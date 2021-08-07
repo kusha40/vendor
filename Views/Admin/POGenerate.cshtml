@@ -85,7 +85,7 @@
                                     new { @class = "text-danger errbba" })
                                 </div>
                             </div>
-                            
+
                         </div>
                         <div class="col-md-12 box-footer">
                             <h4>Shipping Details</h4>
@@ -227,18 +227,18 @@
                                 </div>
                             </div>
                             @*<div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.POGenerateModels.FreightPNFGST, new { @class = "form-control-label" })
-                                    @Html.TextBoxFor(m => m.POGenerateModels.FreightPNFGST,
-                            new
-                            {
-                                @class = "form-control fpnfgst onlynumdec",
-                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.FreightPNFGST)
-                            })
-                                    @Html.ValidationMessageFor(m => m.POGenerateModels.FreightPNFGST, "",
-                            new { @class = "text-danger" })
-                                </div>
-                            </div>*@
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.POGenerateModels.FreightPNFGST, new { @class = "form-control-label" })
+                                        @Html.TextBoxFor(m => m.POGenerateModels.FreightPNFGST,
+                                new
+                                {
+                                    @class = "form-control fpnfgst onlynumdec",
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.FreightPNFGST)
+                                })
+                                        @Html.ValidationMessageFor(m => m.POGenerateModels.FreightPNFGST, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>*@
                             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                 <button name="submit" id="pocalculate" class="btn bg-aqua m-t-20" title="Submit"
                                         value="">
@@ -324,7 +324,7 @@
                             new
                             {
                                 @class = "form-control onlynumdec netamnt",
-                                @readonly=true,
+                                @readonly = true,
                                 placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.NetAmount)
                             })
                                     @Html.ValidationMessageFor(m => m.POGenerateModels.NetAmount, "",
@@ -453,18 +453,18 @@
                                 </div>
                             </div>
                             @*<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.POGenerateModels.Misc, new { @class = "form-control-label" })
-                                    @Html.TextBoxFor(m => m.POGenerateModels.Misc,
-                            new
-                            {
-                                @class = "form-control misc",
-                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.Misc)
-                            })
-                                    @Html.ValidationMessageFor(m => m.POGenerateModels.Misc, "",
-                            new { @class = "text-danger" })
-                                </div>
-                            </div>*@
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.POGenerateModels.Misc, new { @class = "form-control-label" })
+                                        @Html.TextBoxFor(m => m.POGenerateModels.Misc,
+                                new
+                                {
+                                    @class = "form-control misc",
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.Misc)
+                                })
+                                        @Html.ValidationMessageFor(m => m.POGenerateModels.Misc, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>*@
                             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     @Html.LabelFor(m => m.POGenerateModels.Remarks, new { @class = "form-control-label" })
@@ -574,6 +574,8 @@
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Status)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POCreatedBy)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POAssignTo)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POAssignBy)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POSourcedBy)</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -602,6 +604,8 @@
                                         <td>@Html.DisplayFor(modelItem => item.Status)</td>
                                         <td>@Html.DisplayFor(modelItem => item.POCreatedBy)</td>
                                         <td>@Html.DisplayFor(modelItem => item.POAssignTo)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.POAssignBy)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.POSourcedBy)</td>
                                     </tr>
                                 }
                             </tbody>

@@ -99,6 +99,9 @@
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Margin)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().LMRemarks)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POAssignTo)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POAssignBy)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POSourcedBy)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POGenerateBy)</th>
                                     @if (Model.UserProfileModels.EmpType != "User")
                                     {
                                         <th>Not Approved</th>
@@ -134,6 +137,9 @@
                                         <td>@Html.DisplayFor(modelItem => item.Margin)</td>
                                         <td>@Html.DisplayFor(modelItem => item.LMRemarks)</td>
                                         <td>@Html.DisplayFor(modelItem => item.POAssignTo)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.POAssignBy)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.POSourcedBy)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.POGenerateBy)</td>
                                         @if (Model.UserProfileModels.EmpType != "User")
                                         {
                                             <td>
