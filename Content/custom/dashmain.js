@@ -1116,7 +1116,7 @@ $(document).ready(function () {
             { 'targets': 13, 'width': '20', 'orderable': false },       //GST
             { 'targets': 14, 'width': '20', 'orderable': false },      //Status
             { 'targets': 15, 'width': '40', 'orderable': false },      //POCreatedBy
-            { 'targets': 16, 'width': '40', 'orderable': false }       //POAssingTo
+            { 'targets': 16, 'width': '40'}       //POAssingTo
         ],
         select: {
             style: 'multi',
