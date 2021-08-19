@@ -167,47 +167,47 @@
                                         </div>
                                     </div>
                                     @*<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <div class="form-group">
-                                            @Html.LabelFor(m => m.RequestInvoiceModels.Remarks, new { @class = "form-control-label" }) <sup>*</sup>
-                                            @Html.TextAreaFor(m => m.RequestInvoiceModels.Remarks,
-                                    new
-                                    {
-                                        @class = "form-control",
-                                        @readonly = true,
-                                        placeholder = @Html.DisplayNameFor(m => m.RequestInvoiceModels.Remarks)
-                                    })
-                                            @Html.ValidationMessageFor(m => m.RequestInvoiceModels.Remarks, "",
-                                    new { @class = "text-danger" })
+                                            <div class="form-group">
+                                                @Html.LabelFor(m => m.RequestInvoiceModels.Remarks, new { @class = "form-control-label" }) <sup>*</sup>
+                                                @Html.TextAreaFor(m => m.RequestInvoiceModels.Remarks,
+                                        new
+                                        {
+                                            @class = "form-control",
+                                            @readonly = true,
+                                            placeholder = @Html.DisplayNameFor(m => m.RequestInvoiceModels.Remarks)
+                                        })
+                                                @Html.ValidationMessageFor(m => m.RequestInvoiceModels.Remarks, "",
+                                        new { @class = "text-danger" })
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                        <div class="form-group">
-                                            @Html.LabelFor(m => m.RequestInvoiceModels.ContactNo, new { @class = "form-control-label" }) <sup>*</sup>
-                                            @Html.TextBoxFor(m => m.RequestInvoiceModels.ContactNo,
-                                    new
-                                    {
-                                        @class = "form-control",
-                                        @readonly = true,
-                                        placeholder = @Html.DisplayNameFor(m => m.RequestInvoiceModels.ContactNo)
-                                    })
-                                            @Html.ValidationMessageFor(m => m.RequestInvoiceModels.ContactNo, "",
-                                    new { @class = "text-danger" })
+                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                @Html.LabelFor(m => m.RequestInvoiceModels.ContactNo, new { @class = "form-control-label" }) <sup>*</sup>
+                                                @Html.TextBoxFor(m => m.RequestInvoiceModels.ContactNo,
+                                        new
+                                        {
+                                            @class = "form-control",
+                                            @readonly = true,
+                                            placeholder = @Html.DisplayNameFor(m => m.RequestInvoiceModels.ContactNo)
+                                        })
+                                                @Html.ValidationMessageFor(m => m.RequestInvoiceModels.ContactNo, "",
+                                        new { @class = "text-danger" })
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                        <div class="form-group">
-                                            @Html.LabelFor(m => m.RequestInvoiceModels.ContactPerson, new { @class = "form-control-label" }) <sup>*</sup>
-                                            @Html.TextBoxFor(m => m.RequestInvoiceModels.ContactPerson,
-                                    new
-                                    {
-                                        @class = "form-control",
-                                        @readonly = true,
-                                        placeholder = @Html.DisplayNameFor(m => m.RequestInvoiceModels.ContactPerson)
-                                    })
-                                            @Html.ValidationMessageFor(m => m.RequestInvoiceModels.ContactPerson, "",
-                                    new { @class = "text-danger" })
-                                        </div>
-                                    </div>*@
+                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                @Html.LabelFor(m => m.RequestInvoiceModels.ContactPerson, new { @class = "form-control-label" }) <sup>*</sup>
+                                                @Html.TextBoxFor(m => m.RequestInvoiceModels.ContactPerson,
+                                        new
+                                        {
+                                            @class = "form-control",
+                                            @readonly = true,
+                                            placeholder = @Html.DisplayNameFor(m => m.RequestInvoiceModels.ContactPerson)
+                                        })
+                                                @Html.ValidationMessageFor(m => m.RequestInvoiceModels.ContactPerson, "",
+                                        new { @class = "text-danger" })
+                                            </div>
+                                        </div>*@
                                 </div>
                             </div>
                         </div>
@@ -246,9 +246,10 @@
                                 {
                                     <tr>
                                         <td></td>
-                                        <td>@Html.DisplayFor(modelItem => item.PONumber)</td>
+                                        <td><a href='~/Content/upload/poupload/@item.POFile' target="_blank">@item.PONumber</a></td>
                                         <td>@Html.DisplayFor(modelItem => item.POId)</td>
                                         <td>@Html.DisplayFor(modelItem => item.POPId)</td>
+
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Product)<br>
                                             Brand : @item.Brand<br>

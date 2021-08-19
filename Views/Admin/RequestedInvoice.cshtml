@@ -97,60 +97,60 @@
                             <tbody>
                                 @foreach (var item in Model.PurchaseOrdersModelList)
                                 {
-                                <tr>
-                                    <td></td>
-                                    <td>@Html.DisplayFor(modelItem => item.RInvoiceNo)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
-                                    <td>
-                                        <a href='~/Content/upload/poupload/@item.POFile' target="_blank">@item.PONumber</a>
-                                    </td>
-                                    <td>
-                                        @Html.EncodedActionLink(item.POId, "PODetailsWithPOId", "Admin", new { id = item.POId }, new { @class = "", title = "Edit", @target = "_blank" })
-                                    </td>
-                                    <td>@Html.DisplayFor(modelItem => item.RequestedBy)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.PReqDate)</td>
-                                    <td>@Html.EncodedActionLink(item.VendorInvoice, "MaterialReceiveHistory", "Admin", new { id = item.POId }, new { @class = "", title = "History", @target = "_blank" })</td>
-                                    @if (!string.IsNullOrEmpty(item.InvUpload))
-                                    {
-                                        <td><a href='~/Content/upload/poreqinvoice/@item.InvUpload' target="_blank">@item.InvoiceNo</a></td>
-                                    }
-                                    else
-                                    {
+                                    <tr>
                                         <td></td>
-                                    }
-                                    @if (!string.IsNullOrEmpty(item.InvUpload))
-                                    {
+                                        <td>@Html.DisplayFor(modelItem => item.RInvoiceNo)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
                                         <td>
-                                            @if (item.InvUploadDate == "01-01-1900")
-                                            {
-
-                                            }
-                                            else
-                                            {
-                                                @Html.DisplayFor(modelItem => item.InvUploadDate)
-                                            }
+                                            <a href='~/Content/upload/poupload/@item.POFile' target="_blank">@item.PONumber</a>
                                         </td>
-                                    }
-                                    else
-                                    {
-                                        <td></td>
-                                    }
-                                    <td>
-                                        @if (Model.UserProfileModels.EmpType == "User")
+                                        <td>
+                                            @Html.EncodedActionLink(item.POId, "PODetailsWithPOId", "Admin", new { id = item.POId }, new { @class = "", title = "Edit", @target = "_blank" })
+                                        </td>
+                                        <td>@Html.DisplayFor(modelItem => item.RequestedBy)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.PReqDate)</td>
+                                        <td>@Html.EncodedActionLink(item.VendorInvoice, "MaterialReceiveHistory", "Admin", new { id = item.POId }, new { @class = "", title = "History", @target = "_blank" })</td>
+                                        @if (!string.IsNullOrEmpty(item.InvUpload))
                                         {
-                                            if (item.Status != "SO")
-                                            {
-                                                @Html.EncodedActionLink("Upload", "PORequestInvoiceUpload", "Admin",
-                                                             new { id = item.RInvoiceNo }, new { @class = "btn btn-edt bg-aqua btn-sm", @target = "_blank", title = "Upload" })
-                                            }
+                                            <td><a href='~/Content/upload/poreqinvoice/@item.InvUpload' target="_blank">@item.InvoiceNo</a></td>
                                         }
                                         else
                                         {
-                                            @Html.EncodedActionLink("Upload", "PORequestInvoiceUpload", "Admin",
-                                                                 new { id = item.RInvoiceNo }, new { @class = "btn btn-edt bg-aqua btn-sm", @target = "_blank", title = "Upload" })
+                                            <td></td>
                                         }
-                                    </td>
-                                </tr>
+                                        @if (!string.IsNullOrEmpty(item.InvUpload))
+                                        {
+                                            <td>
+                                                @if (item.InvUploadDate == "01-01-1900")
+                                                {
+
+                                                }
+                                                else
+                                                {
+                                                    @Html.DisplayFor(modelItem => item.InvUploadDate)
+                                                }
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td></td>
+                                        }
+                                        <td>
+                                            @if (Model.UserProfileModels.EmpType == "User")
+                                            {
+                                                if (item.Status != "SO")
+                                                {
+                                                    @Html.EncodedActionLink("Upload", "PORequestInvoiceUpload", "Admin",
+                                                                 new { id = item.RInvoiceNo }, new { @class = "btn btn-edt bg-aqua btn-sm", @target = "_blank", title = "Upload" })
+                                                }
+                                            }
+                                            else
+                                            {
+                                                @Html.EncodedActionLink("Upload", "PORequestInvoiceUpload", "Admin",
+                                                                     new { id = item.RInvoiceNo }, new { @class = "btn btn-edt bg-aqua btn-sm", @target = "_blank", title = "Upload" })
+                                            }
+                                        </td>
+                                    </tr>
                                 }
                             </tbody>
                         </table>

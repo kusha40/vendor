@@ -83,6 +83,16 @@
                                               new { id = u.Id }, new { @class = "btn btn-edt bg-aqua btn-sm", title = "Edit" })
                                                 @Html.EncodedActionLink("<i class='fa fa-user'></i>", "VendorProfile", "Admin",
                                               new { id = u.Id }, new { @class = "btn btn-edt bg-aqua btn-sm", title = "Profile" })
+                                                @if (u.IsActive == true)
+                                                {
+                                                    @Html.EncodedActionLink("<i class='fa fa-lock'></i>", "BlockVendor", "Admin",
+                                                           new { id = u.Id }, new { @class = "btn btn-edt bg-red btn-sm", title = "Block" })
+                                                }
+                                                else
+                                                {
+                                                    @Html.EncodedActionLink("<i class='fa fa-unlock'></i>", "UnblockVendor", "Admin",
+                                                           new { id = u.Id }, new { @class = "btn btn-edt bg-green btn-sm", title = "Unblock" })
+                                                }
                                             </td>
                                             <td>@Html.DisplayFor(model => u.VendorCode)</td>
                                             <td>@Html.DisplayFor(model => u.CompanyName)</td>
