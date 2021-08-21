@@ -98,43 +98,45 @@
                                     {
                                         if (item.Status == "Partial")
                                         {
-                                            <tr class="pen-tbl-row">
-                                                <td></td>
-                                                <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
-                                                <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
-                                                <td>
-                                                    <a href='~/Content/upload/poupload/@item.POFile' target="_blank">@item.PONumber</a>
-                                                </td>
-                                                <td>
-                                                    @Html.EncodedActionLink(item.POId, "PODetailsWithPOId", "Admin", new { id = item.POId }, new { @class = "", title = "Details", @target = "_blank" })
-                                                </td>
-                                                <td>@Html.EncodedActionLink(item.VendorInvoice, "MaterialReceiveHistory", "Admin", new { id = item.POId }, new { @class = "", title = "History", @target = "_blank" })</td>
-                                                <td>@Html.DisplayFor(modelItem => item.Status)</td>
-                                                <td>
-                                                    @Html.EncodedActionLink("Request", "PORequestInvoice", "Admin",
-                                                         new { id = item.POId }, new { @class = "btn btn-edt bg-aqua btn-sm", @target = "_blank", title = "Request" })
-                                                </td>
-                                            </tr>
+                                <tr class="pen-tbl-row">
+                                    <td></td>
+                                    <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.PONumber)</td>
+                                    @*<td>
+                                        <a href='~/Content/upload/poupload/@item.POFile' target="_blank">@item.PONumber</a>
+                                    </td>*@
+                                    <td>
+                                        @Html.EncodedActionLink(item.POId, "PODetailsWithPOId", "Admin", new { id = item.POId }, new { @class = "", title = "Details", @target = "_blank" })
+                                    </td>
+                                    <td>@Html.EncodedActionLink(item.VendorInvoice, "MaterialReceiveHistory", "Admin", new { id = item.POId }, new { @class = "", title = "History", @target = "_blank" })</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                                    <td>
+                                        @Html.EncodedActionLink("Request", "PORequestInvoice", "Admin",
+                                             new { id = item.POId }, new { @class = "btn btn-edt bg-aqua btn-sm", @target = "_blank", title = "Request" })
+                                    </td>
+                                </tr>
                                         }
                                         else
                                         {
-                                            <tr>
-                                                <td></td>
-                                                <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
-                                                <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
-                                                <td>
-                                                    <a href='~/Content/upload/poupload/@item.POFile' target="_blank">@item.PONumber</a>
-                                                </td>
-                                                <td>
-                                                    @Html.EncodedActionLink(item.POId, "PODetailsWithPOId", "Admin", new { id = item.POId }, new { @class = "", title = "Details", @target = "_blank" })
-                                                </td>
-                                                <td>@Html.EncodedActionLink(item.VendorInvoice, "MaterialReceiveHistory", "Admin", new { id = item.POId }, new { @class = "", title = "History", @target = "_blank" })</td>
-                                                <td>@Html.DisplayFor(modelItem => item.Status)</td>
-                                                <td>
-                                                    @Html.EncodedActionLink("Request", "PORequestInvoice", "Admin",
-                                                         new { id = item.POId }, new { @class = "btn btn-edt bg-aqua btn-sm", @target = "_blank", title = "Request" })
-                                                </td>
-                                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
+                                <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.PONumber)</td>
+                                @*<td>
+                                    <a href='~/Content/upload/poupload/@item.POFile' target="_blank">@item.PONumber</a>
+                                </td>*@
+                                <td>
+                                    @Html.EncodedActionLink(item.POId, "PODetailsWithPOId", "Admin", new { id = item.POId }, new { @class = "", title = "Details", @target = "_blank" })
+                                </td>
+                                <td>@Html.EncodedActionLink(item.VendorInvoice, "MaterialReceiveHistory", "Admin", new { id = item.POId }, new { @class = "", title = "History", @target = "_blank" })</td>
+                                <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                                <td>
+                                    @Html.EncodedActionLink("Request", "PORequestInvoice", "Admin",
+                                         new { id = item.POId }, new { @class = "btn btn-edt bg-aqua btn-sm", @target = "_blank", title = "Request" })
+                                </td>
+                            </tr>
                                         }
                                     }
                                 }

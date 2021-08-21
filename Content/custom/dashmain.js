@@ -1603,6 +1603,17 @@ $(document).ready(function () {
         });
     }).draw();
 
+    var tblDispatched = $('#tblDispatched').DataTable({
+        "paging": false,
+        "info": false,
+    });
+    tblDispatched.on('order.dt search.dt', function () {
+        tblDispatched.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblDispatched.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
     $(document).on('blur', '.cstmtrcd', function () {
         var matcode = $(".cstmtrcd").val();
         //e.preventDefault();
