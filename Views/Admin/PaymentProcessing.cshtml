@@ -115,7 +115,8 @@
                                                 }
                                             </td>
                                             <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
-                                            <td><a href='~/Content/upload/poupload/@item.POFile' target="_blank">@item.PONumber</a></td>
+                                            <td>@Html.DisplayFor(modelItem => item.PONumber)</td>
+                                           @* <td><a href='~/Content/upload/poupload/@item.POFile' target="_blank">@item.PONumber</a></td>*@
                                             <td>
                                                 @Html.EncodedActionLink(item.POId, "PODetails", "Admin", new { id = item.VPONumber }, new { @class = "", title = "Edit", @target = "_blank" })
 
@@ -140,9 +141,9 @@
                                             <td>@Html.DisplayFor(modelItem => item.Status)</td>
                                             <td>
                                                 @*@if (item.Status != "Material Received")
-                                                {*@
-                                                    @Html.EncodedActionLink("<i class='fa fa-money'></i>", "POPayment", "Admin",
-                                                     new { id = item.VPONumber }, new { @class = "btn btn-edt bg-aqua btn-sm", @target = "_blank", title = "Payment" })
+                                                    {*@
+                                                @Html.EncodedActionLink("<i class='fa fa-money'></i>", "POPayment", "Admin",
+                                                 new { id = item.VPONumber }, new { @class = "btn btn-edt bg-aqua btn-sm", @target = "_blank", title = "Payment" })
                                                 @*}*@
                                             </td>
                                         </tr>
@@ -163,7 +164,8 @@
                                                 }
                                             </td>
                                             <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
-                                            <td><a href='~/Content/upload/poupload/@item.POFile' target="_blank">@item.PONumber</a></td>
+                                            <td>@Html.DisplayFor(modelItem => item.PONumber)</td>
+                                            @*<td><a href='~/Content/upload/poupload/@item.POFile' target="_blank">@item.PONumber</a></td>*@
                                             <td>
                                                 @Html.EncodedActionLink(item.POId, "PODetails", "Admin", new { id = item.VPONumber }, new { @class = "", title = "Edit", @target = "_blank" })
 
@@ -208,7 +210,8 @@
                                                 }
                                             </td>
                                             <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
-                                            <td><a href='~/Content/upload/poupload/@item.POFile' target="_blank">@item.PONumber</a></td>
+                                            <td>@Html.DisplayFor(modelItem => item.PONumber)</td>
+                                            @* <td><a href='~/Content/upload/poupload/@item.POFile' target="_blank">@item.PONumber</a></td>*@
                                             <td>
                                                 @Html.EncodedActionLink(item.POId, "PODetails", "Admin", new { id = item.VPONumber }, new { @class = "", title = "Edit", @target = "_blank" })
 
