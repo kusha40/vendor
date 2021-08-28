@@ -1603,6 +1603,17 @@ $(document).ready(function () {
         });
     }).draw();
 
+    var tblDispatched = $('#tblDispatched').DataTable({
+        "paging": false,
+        "info": false,
+    });
+    tblDispatched.on('order.dt search.dt', function () {
+        tblDispatched.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblDispatched.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
     $(document).on('blur', '.cstmtrcd', function () {
         var matcode = $(".cstmtrcd").val();
         //e.preventDefault();
@@ -1881,10 +1892,10 @@ function AddTempPOSourced() {
 
         $('#tblposource').find('tbody').append(
             "<tr>" +
-            "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_CustomerName_" + inc + "' name='PurchaseOrdersModelList_CustomerName_" + inc + "' value='" + tmpposrc.CustomerName + "' disabled required='True' class='form-control scstname m-b-0 bg-gray' type='text'></td>" +
-            "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_PONumber_" + inc + "' name='PurchaseOrdersModelList_PONumber_" + inc + "' value='" + tmpposrc.PONumber + "' class='form-control spono m-b-0 bg-gray' disabled  type='text' /></td> " +
-            "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_POPId_" + inc + "' name='PurchaseOrdersModelList_POPId_" + inc + "' value='" + tmpposrc.POPId + "' disabled class='form-control spopid m-b-0 bg-gray'  type='text' /></td>" +
-            "<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_Product_" + inc + "' name='PurchaseOrdersModelList_Product_" + inc + "' value='" + tmpposrc.Product + "' disabled class='form-control spopid m-b-0 bg-gray'  type='text' /></td>" +
+            "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_CustomerName_" + inc + "' name='PurchaseOrdersModelList_CustomerName_" + inc + "' data-toggle='tooltip' title='" + tmpposrc.CustomerName + "' value='" + tmpposrc.CustomerName + "' disabled required='True' class='form-control scstname m-b-0 bg-gray' type='text'></td>" +
+            "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_PONumber_" + inc + "' name='PurchaseOrdersModelList_PONumber_" + inc + "' data-toggle='tooltip' title='" + tmpposrc.PONumber + "' value='" + tmpposrc.PONumber + "' class='form-control spono m-b-0 bg-gray' disabled  type='text' /></td> " +
+            "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_POPId_" + inc + "' name='PurchaseOrdersModelList_POPId_" + inc + "' data-toggle='tooltip' title='" + tmpposrc.POPId + "' value='" + tmpposrc.POPId + "' disabled class='form-control spopid m-b-0 bg-gray'  type='text' /></td>" +
+            "<td class='w-15'><input type='text' id='PurchaseOrdersModelList_Product_" + inc + "' name='PurchaseOrdersModelList_Product_" + inc + "' data-toggle='tooltip' title='" + tmpposrc.Product + "' disabled value='" + tmpposrc.Product + "' class='form-control spopid m-b-0 bg-gray'  type='text' /></td>" +
             "<td class='w-8'> <input type='text' id='PurchaseOrdersModelList_Price_" + inc + "' name='PurchaseOrdersModelList_Price_" + inc + "' value='" + tmpposrc.Price + "' disabled class='form-control spoprice m-b-0 bg-gray'  type='text' /></td>" +
             "<td class='w-6'> <input type='text' id='PurchaseOrdersModelList_Quantity_" + inc + "' name='PurchaseOrdersModelList_Quantity_" + inc + "' value='" + tmpposrc.Quantity + "' disabled class='form-control spoqty m-b-0 bg-gray'  type='text' /></br><input type='text' id='PurchaseOrdersModelList_OrderedQuantity_" + inc + "' name='PurchaseOrdersModelList_OrderedQuantity_" + inc + "' value='" + tmpposrc.Quantity + "' placeholder='Ord Qty' class='form-control sordqty onlynumdec m-b-0 float-left' /></td>" +
             "<td class='w-4'> <input type='text' id='PurchaseOrdersModelList_GST_" + inc + "' name='PurchaseOrdersModelList_GST_" + inc + "' value='" + tmpposrc.GST + "' class='form-control spogst onlynumdec m-b-0'  type='text' /></td>" +
@@ -2096,14 +2107,14 @@ function AddTempPOGenerate() {
                 var amnt = parseFloat(tmpposrc.Quantity) * parseFloat(tmpposrc.VendorPrice);
                 $('#tblpogen').find('tbody').append(
                     "<tr class='selected'>" +
-                    "<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_CustomerName_" + inc + "' name='PurchaseOrdersModelList_CustomerName_" + inc + "' value='" + tmpposrc.CustomerName + "' disabled required='True' class='form-control scstname m-b-0' type='text'></td>" +
-                    "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_PONumber_" + inc + "' name='PurchaseOrdersModelList_PONumber_" + inc + "' value='" + tmpposrc.PONumber + "' class='form-control spono m-b-0' disabled  type='text' /></td> " +
-                    "<td class='w-12'> <input type='text' id='PurchaseOrdersModelList_POPId_" + inc + "' name='PurchaseOrdersModelList_POPId_" + inc + "' value='" + tmpposrc.POPId + "' disabled class='form-control spopid m-b-0'  type='text' /></td>" +
-                    "<td class='w-20'> <input type='text' id='PurchaseOrdersModelList_Product_" + inc + "' name='PurchaseOrdersModelList_Product_" + inc + "' value='" + tmpposrc.Product + "' disabled class='form-control spopid m-b-0'  type='text' /></td>" +
+                    "<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_CustomerName_" + inc + "' name='PurchaseOrdersModelList_CustomerName_" + inc + "' data-toggle='tooltip' title='" + tmpposrc.CustomerName + "' value='" + tmpposrc.CustomerName + "' disabled required='True' class='form-control scstname m-b-0' type='text'></td>" +
+                    "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_PONumber_" + inc + "' name='PurchaseOrdersModelList_PONumber_" + inc + "' data-toggle='tooltip' title='" + tmpposrc.PONumber + "' value='" + tmpposrc.PONumber + "' class='form-control spono m-b-0' disabled  type='text' /></td> " +
+                    "<td class='w-12'> <input type='text' id='PurchaseOrdersModelList_POPId_" + inc + "' name='PurchaseOrdersModelList_POPId_" + inc + "' data-toggle='tooltip' title='" + tmpposrc.POPId + "' value='" + tmpposrc.POPId + "' disabled class='form-control spopid m-b-0'  type='text' /></td>" +
+                    "<td class='w-20'> <input type='text' id='PurchaseOrdersModelList_Product_" + inc + "' name='PurchaseOrdersModelList_Product_" + inc + "' data-toggle='tooltip' title='" + tmpposrc.Product + "' value='" + tmpposrc.Product + "' disabled class='form-control spopid m-b-0'  type='text' /></td>" +
                     "<td class='w-8'>  <input type='text' id='PurchaseOrdersModelList_Quantity_" + inc + "' name='PurchaseOrdersModelList_Quantity_" + inc + "' value='" + tmpposrc.Quantity + "' disabled class='form-control sqty m-b-0'  type='text' /></td>" +
                     "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_Unit_" + inc + "' name='PurchaseOrdersModelList_Unit_" + inc + "' value='" + tmpposrc.Unit + "' disabled class='form-control sunit m-b-0'  type='text' /></td>" +
                     "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_EnqId_" + inc + "' name='PurchaseOrdersModelList_EnqId_" + inc + "' value='" + tmpposrc.EnqId + "' disabled class='form-control senqid m-b-0'  type='text' /></td>" +
-                    "<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_VendorId_" + inc + "' name='PurchaseOrdersModelList_VendorId_" + inc + "' placeholder='Vendor Name' value='" + tmpposrc.VendorId + "' disabled class='form-control svenid m-b-0'  type='text' />" +
+                    "<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_VendorId_" + inc + "' name='PurchaseOrdersModelList_VendorId_" + inc + "' data-toggle='tooltip' title='" + tmpposrc.VendorId + "' placeholder='Vendor Name' value='" + tmpposrc.VendorId + "' disabled class='form-control svenid m-b-0'  type='text' />" +
                     "<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_VendorPrice_" + inc + "' name='PurchaseOrdersModelList_VendorPrice_" + inc + "' value='" + amnt + "' placeholder='Vendor Price' class='form-control svenprc m-b-0' /></br><input type='text' id='PurchaseOrdersModelList_UnitPrice_" + inc + "' name='PurchaseOrdersModelList_UnitPrice_" + inc + "' value='" + tmpposrc.VendorPrice + "' placeholder='Vendor Price' disabled class='form-control svunitprc m-b-0' /></td>" +
                     "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_GST_" + inc + "' name='PurchaseOrdersModelList_GST_" + inc + "' value='" + tmpposrc.VendorGST + "' placeholder='GST' disabled class='form-control svengst m-b-0' /></td > " +
                     "</tr>");
@@ -2173,102 +2184,102 @@ function AddTempPOGenerate() {
             }
         }
         else
-        if (pIdNo != "" && cvenid != "") {
-            if (pIdNo == peid && cvenid == veneid) {
-                //$.each(rows_selected, function (index, row) {
-                // Create a hidden element
-                list.push(row.cells[6].innerText);
-                venid = row.cells[12].innerText;
-                var tmpposrc = {};
-                tmpposrc.CustomerName = row.cells[3].innerText;
-                tmpposrc.PONumber = row.cells[5].innerText;
-                tmpposrc.POPId = row.cells[6].innerText;
-                tmpposrc.Product = row.cells[7].innerText;
-                tmpposrc.Quantity = row.cells[8].innerText;
-                tmpposrc.Unit = row.cells[9].innerText;
-                tmpposrc.EnqId = row.cells[11].innerText;
-                tmpposrc.VendorId = row.cells[12].innerText;
-                tmpposrc.VendorPrice = row.cells[13].innerText;
-                tmpposrc.VendorGST = row.cells[14].innerText;
-                var amnt = parseFloat(tmpposrc.Quantity) * parseFloat(tmpposrc.VendorPrice);
-                $('#tblpogen').find('tbody').append(
-                    "<tr class='selected'>" +
-                    "<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_CustomerName_" + inc + "' name='PurchaseOrdersModelList_CustomerName_" + inc + "' value='" + tmpposrc.CustomerName + "' disabled required='True' class='form-control scstname m-b-0' type='text'></td>" +
-                    "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_PONumber_" + inc + "' name='PurchaseOrdersModelList_PONumber_" + inc + "' value='" + tmpposrc.PONumber + "' class='form-control spono m-b-0' disabled  type='text' /></td> " +
-                    "<td class='w-12'> <input type='text' id='PurchaseOrdersModelList_POPId_" + inc + "' name='PurchaseOrdersModelList_POPId_" + inc + "' value='" + tmpposrc.POPId + "' disabled class='form-control spopid m-b-0'  type='text' /></td>" +
-                    "<td class='w-20'> <input type='text' id='PurchaseOrdersModelList_Product_" + inc + "' name='PurchaseOrdersModelList_Product_" + inc + "' value='" + tmpposrc.Product + "' disabled class='form-control spopid m-b-0'  type='text' /></td>" +
-                    "<td class='w-8'>  <input type='text' id='PurchaseOrdersModelList_Quantity_" + inc + "' name='PurchaseOrdersModelList_Quantity_" + inc + "' value='" + tmpposrc.Quantity + "' disabled class='form-control sqty m-b-0'  type='text' /></td>" +
-                    "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_Unit_" + inc + "' name='PurchaseOrdersModelList_Unit_" + inc + "' value='" + tmpposrc.Unit + "' disabled class='form-control sunit m-b-0'  type='text' /></td>" +
-                    "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_EnqId_" + inc + "' name='PurchaseOrdersModelList_EnqId_" + inc + "' value='" + tmpposrc.EnqId + "' disabled class='form-control senqid m-b-0'  type='text' /></td>" +
-                    "<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_VendorId_" + inc + "' name='PurchaseOrdersModelList_VendorId_" + inc + "' placeholder='Vendor Name' value='" + tmpposrc.VendorId + "' disabled class='form-control svenid m-b-0'  type='text' />" +
-                    "<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_VendorPrice_" + inc + "' name='PurchaseOrdersModelList_VendorPrice_" + inc + "' value='" + amnt + "' placeholder='Vendor Price' class='form-control svenprc m-b-0' /></br><input type='text' id='PurchaseOrdersModelList_UnitPrice_" + inc + "' name='PurchaseOrdersModelList_UnitPrice_" + inc + "' value='" + tmpposrc.VendorPrice + "' placeholder='Vendor Price' disabled class='form-control svunitprc m-b-0' /></td>" +
-                    "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_GST_" + inc + "' name='PurchaseOrdersModelList_GST_" + inc + "' value='" + tmpposrc.VendorGST + "' placeholder='GST' disabled class='form-control svengst m-b-0' /></td > " +
-                    "</tr>");
-                inc++;
-                //});
-                if (venid !== "") {
-                    $.ajax({
-                        url: '/Admin/GetVendorByName',
-                        data: { venid: venid },
-                        type: "GET",
-                        dataType: "JSON",
-                        success: function (res) {
-                            var relsn = res;
-                            $('#POGenerateModels_VendorBillingAddress').empty();
-                            if (relsn.length === 0) {
-                                $("#POGenerateModels_VendorBillingAddress").attr("required", true);
-                                $("#POGenerateModels_VendorBillingAddress").attr("disabled", true);
-                            }
-                            else if (relsn.length === 1) {
-                                $("#POGenerateModels_VendorBillingAddress").attr("disabled", false);
-                                var optionrel = '<option value="' + relsn[0].Id + '">' + relsn[0].Name + '</option>';
-                                $('#POGenerateModels_VendorBillingAddress').append(optionrel);
-                                $('#POGenerateModels_VendorBillingAddress').val(relsn[0].Id);
-                            }
-                            else if (relsn.length > 1) {
-                                $('#POGenerateModels_VendorBillingAddress').val("");
-                                $("#POGenerateModels_VendorBillingAddress").attr("disabled", false);
-                                var optionrel = '<option value="">--Select Vendor Billing Address--</option>';
-                                $('#POGenerateModels_VendorBillingAddress').append(optionrel);
-                                $("#POGenerateModels_VendorBillingAddress").attr("required", true);
-                                for (var i = 0; i < relsn.length; i++) {
-                                    var optionrel = '<option value="' + relsn[i].Id + '">' + relsn[i].Name + '</option>';
-                                    $('#POGenerateModels_VendorBillingAddress').append(optionrel);
+            if (pIdNo != "" && cvenid != "") {
+                if (pIdNo == peid && cvenid == veneid) {
+                    //$.each(rows_selected, function (index, row) {
+                    // Create a hidden element
+                    list.push(row.cells[6].innerText);
+                    venid = row.cells[12].innerText;
+                    var tmpposrc = {};
+                    tmpposrc.CustomerName = row.cells[3].innerText;
+                    tmpposrc.PONumber = row.cells[5].innerText;
+                    tmpposrc.POPId = row.cells[6].innerText;
+                    tmpposrc.Product = row.cells[7].innerText;
+                    tmpposrc.Quantity = row.cells[8].innerText;
+                    tmpposrc.Unit = row.cells[9].innerText;
+                    tmpposrc.EnqId = row.cells[11].innerText;
+                    tmpposrc.VendorId = row.cells[12].innerText;
+                    tmpposrc.VendorPrice = row.cells[13].innerText;
+                    tmpposrc.VendorGST = row.cells[14].innerText;
+                    var amnt = parseFloat(tmpposrc.Quantity) * parseFloat(tmpposrc.VendorPrice);
+                    $('#tblpogen').find('tbody').append(
+                        "<tr class='selected'>" +
+                        "<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_CustomerName_" + inc + "' name='PurchaseOrdersModelList_CustomerName_" + inc + "' value='" + tmpposrc.CustomerName + "' disabled required='True' class='form-control scstname m-b-0' type='text'></td>" +
+                        "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_PONumber_" + inc + "' name='PurchaseOrdersModelList_PONumber_" + inc + "' value='" + tmpposrc.PONumber + "' class='form-control spono m-b-0' disabled  type='text' /></td> " +
+                        "<td class='w-12'> <input type='text' id='PurchaseOrdersModelList_POPId_" + inc + "' name='PurchaseOrdersModelList_POPId_" + inc + "' value='" + tmpposrc.POPId + "' disabled class='form-control spopid m-b-0'  type='text' /></td>" +
+                        "<td class='w-20'> <input type='text' id='PurchaseOrdersModelList_Product_" + inc + "' name='PurchaseOrdersModelList_Product_" + inc + "' value='" + tmpposrc.Product + "' disabled class='form-control spopid m-b-0'  type='text' /></td>" +
+                        "<td class='w-8'>  <input type='text' id='PurchaseOrdersModelList_Quantity_" + inc + "' name='PurchaseOrdersModelList_Quantity_" + inc + "' value='" + tmpposrc.Quantity + "' disabled class='form-control sqty m-b-0'  type='text' /></td>" +
+                        "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_Unit_" + inc + "' name='PurchaseOrdersModelList_Unit_" + inc + "' value='" + tmpposrc.Unit + "' disabled class='form-control sunit m-b-0'  type='text' /></td>" +
+                        "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_EnqId_" + inc + "' name='PurchaseOrdersModelList_EnqId_" + inc + "' value='" + tmpposrc.EnqId + "' disabled class='form-control senqid m-b-0'  type='text' /></td>" +
+                        "<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_VendorId_" + inc + "' name='PurchaseOrdersModelList_VendorId_" + inc + "' placeholder='Vendor Name' value='" + tmpposrc.VendorId + "' disabled class='form-control svenid m-b-0'  type='text' />" +
+                        "<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_VendorPrice_" + inc + "' name='PurchaseOrdersModelList_VendorPrice_" + inc + "' value='" + amnt + "' placeholder='Vendor Price' class='form-control svenprc m-b-0' /></br><input type='text' id='PurchaseOrdersModelList_UnitPrice_" + inc + "' name='PurchaseOrdersModelList_UnitPrice_" + inc + "' value='" + tmpposrc.VendorPrice + "' placeholder='Vendor Price' disabled class='form-control svunitprc m-b-0' /></td>" +
+                        "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_GST_" + inc + "' name='PurchaseOrdersModelList_GST_" + inc + "' value='" + tmpposrc.VendorGST + "' placeholder='GST' disabled class='form-control svengst m-b-0' /></td > " +
+                        "</tr>");
+                    inc++;
+                    //});
+                    if (venid !== "") {
+                        $.ajax({
+                            url: '/Admin/GetVendorByName',
+                            data: { venid: venid },
+                            type: "GET",
+                            dataType: "JSON",
+                            success: function (res) {
+                                var relsn = res;
+                                $('#POGenerateModels_VendorBillingAddress').empty();
+                                if (relsn.length === 0) {
+                                    $("#POGenerateModels_VendorBillingAddress").attr("required", true);
+                                    $("#POGenerateModels_VendorBillingAddress").attr("disabled", true);
                                 }
+                                else if (relsn.length === 1) {
+                                    $("#POGenerateModels_VendorBillingAddress").attr("disabled", false);
+                                    var optionrel = '<option value="' + relsn[0].Id + '">' + relsn[0].Name + '</option>';
+                                    $('#POGenerateModels_VendorBillingAddress').append(optionrel);
+                                    $('#POGenerateModels_VendorBillingAddress').val(relsn[0].Id);
+                                }
+                                else if (relsn.length > 1) {
+                                    $('#POGenerateModels_VendorBillingAddress').val("");
+                                    $("#POGenerateModels_VendorBillingAddress").attr("disabled", false);
+                                    var optionrel = '<option value="">--Select Vendor Billing Address--</option>';
+                                    $('#POGenerateModels_VendorBillingAddress').append(optionrel);
+                                    $("#POGenerateModels_VendorBillingAddress").attr("required", true);
+                                    for (var i = 0; i < relsn.length; i++) {
+                                        var optionrel = '<option value="' + relsn[i].Id + '">' + relsn[i].Name + '</option>';
+                                        $('#POGenerateModels_VendorBillingAddress').append(optionrel);
+                                    }
+                                }
+                            },
+                            error: function () {
+                                alert("Failed! Please try again.");
                             }
-                        },
-                        error: function () {
-                            alert("Failed! Please try again.");
-                        }
-                    });
-                }
+                        });
+                    }
 
-                if (venid !== "") {
-                    $.ajax({
-                        url: '/Admin/GetVendorPaymentTerms',
-                        data: { venid: venid },
-                        type: "GET",
-                        dataType: "JSON",
-                        success: function (res) {
-                            var relsn = res;
-                            $('.pterms').val();
-                            if (relsn.length !== 0) {
-                                $(".pterms").val(relsn[0].PTerms);
+                    if (venid !== "") {
+                        $.ajax({
+                            url: '/Admin/GetVendorPaymentTerms',
+                            data: { venid: venid },
+                            type: "GET",
+                            dataType: "JSON",
+                            success: function (res) {
+                                var relsn = res;
+                                $('.pterms').val();
+                                if (relsn.length !== 0) {
+                                    $(".pterms").val(relsn[0].PTerms);
+                                }
+                            },
+                            error: function () {
+                                alert("Failed! Please try again.");
                             }
-                        },
-                        error: function () {
-                            alert("Failed! Please try again.");
-                        }
-                    });
+                        });
+                    }
+                    else {
+                        $(".pterms").val("");
+                    }
+                    //Create Movie Object  
+                    $(".divsourced").hide();
+                    $(".divgen").show();
                 }
-                else {
-                    $(".pterms").val("");
-                }
-                //Create Movie Object  
-                $(".divsourced").hide();
-                $(".divgen").show();
             }
-        }
         pIdNo = row.cells[4].innerText;
     });
     // Iterate over all selected checkboxes

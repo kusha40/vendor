@@ -249,8 +249,7 @@
                                         <td><a href='~/Content/upload/poupload/@item.POFile' target="_blank">@item.PONumber</a></td>
                                         <td>@Html.DisplayFor(modelItem => item.POId)</td>
                                         <td>@Html.DisplayFor(modelItem => item.POPId)</td>
-
-                                        <td>
+                                        <td title="@item.SpcRemark">
                                             @Html.DisplayFor(modelItem => item.Product)<br>
                                             Brand : @item.Brand<br>
                                             Model : @item.ModelNo
