@@ -89,7 +89,6 @@
                                         </div>
                                     }
                                 </div>
-                                @Html.HiddenFor(model => model.POPaymentModels.VPONumber)
                                 @Html.HiddenFor(model => model.POPaymentModels.Id)
                             </div>
                             <div class="row">
@@ -105,6 +104,20 @@
                      placeholder = "Enter " + @Html.DisplayNameFor(m => m.POPaymentModels.VPONumber)
                  })
                                             @Html.ValidationMessageFor(m => m.POPaymentModels.VPONumber, "",
+                 new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.POPaymentModels.PmntReqNo, new { @class = "form-control-label" })
+                                            @Html.TextBoxFor(m => m.POPaymentModels.PmntReqNo,
+                 new
+                 {
+                     @class = "form-control text-uppercase",
+                     @readonly = true,
+                     placeholder = "Enter " + @Html.DisplayNameFor(m => m.POPaymentModels.PmntReqNo)
+                 })
+                                            @Html.ValidationMessageFor(m => m.POPaymentModels.PmntReqNo, "",
                  new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -173,6 +186,7 @@
                                                 new SelectListItem{ Text="NEFT", Value = "NEFT", Selected = true },
                                                 new SelectListItem{ Text="PDC CHEQUE", Value = "PDC CHEQUE" },
                                                 new SelectListItem{ Text="CD CHEQUE", Value = "CD CHEQUE" },
+                                                new SelectListItem{ Text="OPEN CREDIT", Value = "OPEN CREDIT"  },
                                                 new SelectListItem{ Text="CASH", Value = "CASH"  },
                            },
                          "--Select Payment Mode--", new { @class = "form-control select2 pmntmode" })
@@ -220,6 +234,7 @@
                  new
                  {
                      @class = "form-control",
+                     @readonly = true,
                      placeholder = "Enter " + @Html.DisplayNameFor(m => m.POPaymentModels.Amount)
                  })
                                             @Html.ValidationMessageFor(m => m.POPaymentModels.Amount, "",
@@ -375,8 +390,8 @@
                                             @if (Model.UserProfileModels.EmpType != "User")
                                             {
                                                 <td>
-                                                    @Html.EncodedActionLink("<i class='fa fa-pencil-square-o'></i>", "EditPOPayment", "Admin", new { id = u.Id }, new { @class = "btn btn-edt bg-aqua", title = "Edit" })
-                                                    @Html.EncodedActionLink("<i class='fa fa-times'></i>", "DeletePOPayment", "Admin", new { id = u.Id }, new { data_box = "#mb-act-cnfrm", @class = "btn btn-del m-l-5 mb-act-confirm bg-m-red", title = "Delete" })
+                                                    @*@Html.EncodedActionLink("<i class='fa fa-pencil-square-o'></i>", "EditPOPayment", "Admin", new { id = u.Id }, new { @class = "btn btn-sm btn-edt bg-aqua", title = "Edit" })*@
+                                                    @Html.EncodedActionLink("<i class='fa fa-times'></i>", "DeletePOPayment", "Admin", new { id = u.Id }, new { data_box = "#mb-act-cnfrm", @class = "btn btn-sm btn-del m-l-5 mb-act-confirm bg-m-red", title = "Delete" })
                                                 </td>
                                             }
                                             <td>@Html.DisplayFor(modelSKU => u.PaymentMode) </td>

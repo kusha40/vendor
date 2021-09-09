@@ -39,6 +39,17 @@
                             {
                                 <a href="javascript:void(0)" class="btn bg-aqua poapprove" id="poapprove">Approve</a>
                                 <a href="javascript:void(0)" class="btn bg-red float-right ponotapprove" id="ponotapprove">Not Approve</a>
+                                <!--<div class="col-md-4">
+                                    <a href="javascript:void(0)" class="btn bg-aqua poapprove" id="poapprove">Approve</a>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="col-md-8">
+                                        <textarea class="float-right form-control napprmk" placeholder = "Enter Not Approval Remarks"></textarea>
+                                    </div>
+                                    <div class="col-md-4 float-right">
+                                    <a href="javascript:void(0)" class="btn bg-red btn-edt float-right ponotapprove" id="ponotapprove">Not Approve</a>
+                                    </div>
+                                </div>-->
                             }
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -144,7 +155,7 @@
                                         {
                                             <td>
                                                 @Html.EncodedActionLink("<i class='fa fa-times'></i>", "PONotApproved", "Admin",
-                                                    new { id = item.VPONumber }, new { @class = "btn btn-edt bg-red btn-sm mb-act-confirm", @data_box = "#mb-act-cnfrm", title = "PO Not Approved" })
+                                                    new { id = item.VPONumber }, new { @class = "btn btn-edt bg-red btn-sm", title = "PO Not Approved" })
                                             </td>
                                         }
                                     </tr>
@@ -162,8 +173,18 @@
                 <div class="mb-middle">
                     <div class="mb-title"><span class="fa fa-warning"></span> Confirm <strong>Box</strong> ?</div>
                     <div class="mb-content">
-                        <p>Are you sure you want to approve?</p>
-                        <p>Press No if you want to Cancel. Press Yes to Approve the record.</p>
+                        <p>Are you sure you want to not approve?</p>
+                        <p>Press No if you want to Cancel. Press Yes to not Approve the record.</p>
+                        <div class="col-md-12 m-t-20">
+                            <div class="form-group">
+                                <label class="control-label">Remark</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-id-badge"></span></span>
+                                    @Html.TextAreaFor(model => model.PurOrdModels.SpcRemark, new { @class = "form-control", type = "text" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.PurOrdModels.SpcRemark, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
                     </div>
                     <div class="mb-footer">
                         <div class="pull-right">

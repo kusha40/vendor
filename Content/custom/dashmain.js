@@ -1387,6 +1387,18 @@ $(document).ready(function () {
         }
     });
 
+    var tblPORequestPayment = $('#tblPORequestPayment').DataTable({
+        "paging": false,
+        "info": false,
+        "scrollX": true
+    });
+    tblPORequestPayment.on('order.dt search.dt', function () {
+        tblPORequestPayment.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblPORequestPayment.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
     var tblPRApproval = $('#tblPRApproval').DataTable({
         "columnDefs": [
             {
@@ -2890,28 +2902,36 @@ $('.ponotapprove').on('click', function (e) {
         // Create a hidden element
         list.push(row.cells[7].innerText);
     });
-
+    var napprmk = $(".napprmk").val();
     if (list.length > 0) {
-        var vpoNos = JSON.stringify(list);
-        $.ajax({
-            url: "/Admin/PONotApprovedList",
-            dataType: "json",
-            data: "{'vpoNos': '" + vpoNos + "'}",
-            type: "POST",
-            contentType: "application/json; charset=utf-8",
-            success: function (result) {
-                if (result.error === "") {
-                    location.reload();
+        //if (napprmk != "") {
+            var vpoNos = JSON.stringify(list);
+            $.ajax({
+                url: "/Admin/PONotApprovedList",
+                dataType: "json",
+                /*data: "{'vpoNos': '" + vpoNos + "','napprmk': '" + napprmk + "'}",*/
+                data: "{'vpoNos': '" + vpoNos + "'}",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (result) {
+                    if (result.error === "") {
+                        location.reload();
+                    }
+                    else {
+                        alert(result.error);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert(err.Message);
                 }
-                else {
-                    alert(result.error);
-                }
-            },
-            error: function (xhr, status, error) {
-                var err = eval("(" + xhr.responseText + ")");
-                alert(err.Message);
-            }
-        });
+            });
+        //} else {
+        //    alert("Please enter remarks");
+        //    $(this).find(':submit').attr('disabled', 'disabled');
+        //    $(".ponotapprove").attr("disabled", true);
+        //    $(".ponotapprove").show();
+        //}
     }
     else {
         alert("Please select atleast one po.");
@@ -2929,7 +2949,7 @@ $('.prapprove').on('click', function (e) {
     // Iterate over all selected checkboxes
     $.each(rows_selected, function (index, row) {
         // Create a hidden element
-        list.push(row.cells[7].innerText);
+        list.push(row.cells[2].innerText);
     });
 
     if (list.length > 0) {

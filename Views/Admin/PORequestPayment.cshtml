@@ -13,10 +13,10 @@
         string actType = "Add";
         string actBtn = "Submit";
         string pageTitle = Html.Raw(Html.PageGTitle()) + "";
-        if (!String.IsNullOrEmpty(Model.PORequestPaymentModels.VPONumber))
+        if (!string.IsNullOrEmpty(Model.PORequestPaymentModels.Id))
         {
-            actType = "Add";
-            actBtn = "Submit";
+            actType = "Edit";
+            actBtn = "Update";
         }
     }
     <h1>
@@ -87,7 +87,7 @@
                                     </div>
                                 }
                             </div>
-                            @Html.HiddenFor(model => model.PORequestPaymentModels.VPONumber)
+                            @Html.HiddenFor(model => model.PORequestPaymentModels.Id)
                         </div>
                         <div class="row">
                             <div class="col-md-12">
@@ -125,7 +125,7 @@
                                         @Html.DropDownListFor(m => m.PORequestPaymentModels.PaymentType,
                                        new List<SelectListItem>
                                           {
-                                            new SelectListItem{ Text="CREDIT", Value = "CREDIT", Selected = true },
+                                            new SelectListItem{ Text="CREDIT", Value = "CREDIT" },
                                             new SelectListItem{ Text="ADVANCE", Value = "ADVANCE" },
                                             new SelectListItem{ Text="CREDIT+ADVANCE", Value = "CREDIT+ADVANCE" },
                                           },
@@ -422,6 +422,89 @@
                         </div>
                     </div>
                     <!-- /.box-footer-->
+                </div>
+                <!-- /.box -->
+            </div>
+            <div class="col-lg-12">
+                <!-- Default box -->
+                <div class="box">
+                    @if (Model.PORequestPaymentModelList.Count > 0)
+                    {
+                        <div class="box-header with-border">
+                            <h3 class="box-title">@pageTitle List</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                        title="Collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <table id="tblPORequestPayment" class="table table-bordered display nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>SNo.</th>
+                                        @if (Model.UserProfileModels.EmpType != "User")
+                                        {
+                                            <th>Action</th>
+                                        }
+                                        @*<th>@Html.DisplayNameFor(model => model.PORequestPaymentModelList.FirstOrDefault().PmntReqNo)</th>*@
+                                        <th>@Html.DisplayNameFor(model => model.PORequestPaymentModelList.FirstOrDefault().PaymentType)</th>
+                                        <th>@Html.DisplayNameFor(model => model.PORequestPaymentModelList.FirstOrDefault().PaymentMode)</th>
+                                        <th>@Html.DisplayNameFor(model => model.PORequestPaymentModelList.FirstOrDefault().NoOfDays)</th>
+                                        <th>@Html.DisplayNameFor(model => model.PORequestPaymentModelList.FirstOrDefault().MaterialStatus)</th>
+                                        <th>@Html.DisplayNameFor(model => model.PORequestPaymentModelList.FirstOrDefault().LeadTime)</th>
+                                        <th>@Html.DisplayNameFor(model => model.PORequestPaymentModelList.FirstOrDefault().AdvanceValue)</th>
+                                        <th>@Html.DisplayNameFor(model => model.PORequestPaymentModelList.FirstOrDefault().PDCChequeValue)</th>
+                                        <th>@Html.DisplayNameFor(model => model.PORequestPaymentModelList.FirstOrDefault().Priority)</th>
+                                        <th>@Html.DisplayNameFor(model => model.PORequestPaymentModelList.FirstOrDefault().Remark)</th>
+                                        <th>@Html.DisplayNameFor(model => model.PORequestPaymentModelList.FirstOrDefault().PIUpload)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var u in Model.PORequestPaymentModelList)
+                                    {
+                                        <tr>
+                                            <td></td>
+                                            @if (Model.UserProfileModels.EmpType != "User")
+                                            {
+                                                <td>
+                                                    @if (u.Status != "RPC")
+                                                    {
+                                                        @*@Html.EncodedActionLink("<i class='fa fa-pencil-square-o'></i>", "EditPORequestPayment", "Admin", new { id = u.Id }, new { @class = "btn btn-edt btn-sm bg-aqua", title = "Edit" })*@
+                                                        @Html.EncodedActionLink("<i class='fa fa-times'></i>", "DeletePORequestPayment", "Admin", new { id = u.Id }, new { data_box = "#mb-act-cnfrm", @class = "btn btn-del btn-sm m-l-5 mb-act-confirm bg-m-red", title = "Delete" })
+                                                    }
+                                                </td>
+                                            }
+                                            @*<td>@Html.DisplayFor(modelSKU => u.PmntReqNo) </td>*@
+                                            <td>@Html.DisplayFor(modelSKU => u.PaymentType) </td>
+                                            <td>@Html.DisplayFor(modelSKU => u.PaymentMode) </td>
+                                            <td>@Html.DisplayFor(modelSKU => u.NoOfDays) </td>
+                                            <td>@Html.DisplayFor(modelSKU => u.MaterialStatus) </td>
+                                            <td>@Html.DisplayFor(modelSKU => u.LeadTime) </td>
+                                            <td>@Html.DisplayFor(modelSKU => u.AdvanceValue) </td>
+                                            <td>@Html.DisplayFor(modelSKU => u.PDCChequeValue) </td>
+                                            <td>@Html.DisplayFor(modelSKU => u.Priority) </td>
+                                            <td>@Html.DisplayFor(modelSKU => u.Remark) </td>
+                                            <td>
+                                                @if (!string.IsNullOrEmpty(u.PIUpload))
+                                                {
+                                                    <a href='~/Content/upload/popayment/@u.PIUpload' target="_blank">Download</a>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    }
+                    else
+                    {
+                        <div class="box-body">
+                            <div class="no-record">No record found.</div>
+                        </div>
+                    }
                 </div>
                 <!-- /.box -->
             </div>
