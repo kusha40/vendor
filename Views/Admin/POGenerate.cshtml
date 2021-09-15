@@ -572,6 +572,7 @@
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().VendorPrice)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().GST)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Status)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().NotAppRemark)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POCreatedBy)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POAssignTo)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POAssignBy)</th>
@@ -581,32 +582,33 @@
                             <tbody>
                                 @foreach (var item in Model.PurchaseOrdersModelList)
                                 {
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.POId)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.PONumber)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.POPId)</td>
-                                        <td title="@item.SpcRemark">
-                                            @Html.DisplayFor(modelItem => item.Product)<br>
-                                            Brand : @item.Brand<br>
-                                            Model : @item.ModelNo
-                                        </td>
-                                        <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Unit)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Price)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.EnqId)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.VendorId)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.VendorPrice)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.GST)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Status)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.POCreatedBy)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.POAssignTo)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.POAssignBy)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.POSourcedBy)</td>
-                                    </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.POId)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.PONumber)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.POPId)</td>
+                                    <td title="@item.SpcRemark">
+                                        @Html.DisplayFor(modelItem => item.Product)<br>
+                                        Brand : @item.Brand<br>
+                                        Model : @item.ModelNo
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Unit)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EnqId)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.VendorId)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.VendorPrice)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.GST)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.NotAppRemark)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.POCreatedBy)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.POAssignTo)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.POAssignBy)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.POSourcedBy)</td>
+                                </tr>
                                 }
                             </tbody>
                         </table>

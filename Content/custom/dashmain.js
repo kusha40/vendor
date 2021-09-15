@@ -2905,27 +2905,27 @@ $('.ponotapprove').on('click', function (e) {
     var napprmk = $(".napprmk").val();
     if (list.length > 0) {
         //if (napprmk != "") {
-            var vpoNos = JSON.stringify(list);
-            $.ajax({
-                url: "/Admin/PONotApprovedList",
-                dataType: "json",
-                /*data: "{'vpoNos': '" + vpoNos + "','napprmk': '" + napprmk + "'}",*/
-                data: "{'vpoNos': '" + vpoNos + "'}",
-                type: "POST",
-                contentType: "application/json; charset=utf-8",
-                success: function (result) {
-                    if (result.error === "") {
-                        location.reload();
-                    }
-                    else {
-                        alert(result.error);
-                    }
-                },
-                error: function (xhr, status, error) {
-                    var err = eval("(" + xhr.responseText + ")");
-                    alert(err.Message);
+        var vpoNos = JSON.stringify(list);
+        $.ajax({
+            url: "/Admin/PONotApprovedList",
+            dataType: "json",
+            data: "{'vpoNos': '" + vpoNos + "','napprmk': '" + napprmk + "'}",
+            //data: "{'vpoNos': '" + vpoNos + "'}",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                if (result.error === "") {
+                    location.reload();
                 }
-            });
+                else {
+                    alert(result.error);
+                }
+            },
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                alert(err.Message);
+            }
+        });
         //} else {
         //    alert("Please enter remarks");
         //    $(this).find(':submit').attr('disabled', 'disabled');
@@ -2988,19 +2988,23 @@ $('#mrsubmit').on('click', function (e) {
     var files = fUpload.files;
     var fileData = new FormData();
     var list = new Array();
+    var warehouse = $("#InvStockModels_Warehouse").val();
+    var dlvexc = $("#InvStockModels_DelvExecutive").val();
     // Iterate over all selected checkboxes
     $(".tbl tbody tr").each(function () {
         var tds = $(this).find("td");
-        //you could use the Find method to find the texbox or the dropdownlist and get the value.
+        //you could use the Find method to find the textbox or the dropdownlist and get the value.
         var popId = $(tds[1]).html();
         var qty = parseFloat($(tds[6]).find('.ircvqty').val());
 
-        if (popId !== "" && qty !== "" && qty !== 0 && files.length > 0) {
+        if (popId !== "" && qty !== "" && qty !== 0 && files.length > 0 && warehouse != undefined && warehouse != "" && dlvexc != "" && dlvexc != undefined) {
             fileData.append(files[0].name, files[0]);
             fileData.append('POPId', popId);
             var lin = {
                 POPId: popId,
-                Quantity: qty
+                Quantity: qty,
+                Warehouse: warehouse,
+                DelvExecutive: dlvexc
             };
             list.push(lin);
         }

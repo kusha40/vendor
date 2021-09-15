@@ -37,9 +37,9 @@
                         <div class="col-md-12">
                             @if (Model.UserProfileModels.EmpType != "User")
                             {
-                                <a href="javascript:void(0)" class="btn bg-aqua poapprove" id="poapprove">Approve</a>
-                                <a href="javascript:void(0)" class="btn bg-red float-right ponotapprove" id="ponotapprove">Not Approve</a>
-                                <!--<div class="col-md-4">
+                                @*<a href="javascript:void(0)" class="btn bg-aqua poapprove" id="poapprove">Approve</a>
+                                <a href="javascript:void(0)" class="btn bg-red float-right ponotapprove" id="ponotapprove">Not Approve</a>*@
+                                <div class="col-md-4">
                                     <a href="javascript:void(0)" class="btn bg-aqua poapprove" id="poapprove">Approve</a>
                                 </div>
                                 <div class="col-md-8">
@@ -49,7 +49,7 @@
                                     <div class="col-md-4 float-right">
                                     <a href="javascript:void(0)" class="btn bg-red btn-edt float-right ponotapprove" id="ponotapprove">Not Approve</a>
                                     </div>
-                                </div>-->
+                                </div>
                             }
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -113,10 +113,10 @@
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POAssignBy)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POSourcedBy)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POGenerateBy)</th>
-                                    @if (Model.UserProfileModels.EmpType != "User")
+                                    @*@if (Model.UserProfileModels.EmpType != "User")
                                     {
                                         <th>Not Approved</th>
-                                    }
+                                    }*@
                                 </tr>
                             </thead>
                             <tbody>
@@ -151,13 +151,13 @@
                                         <td>@Html.DisplayFor(modelItem => item.POAssignBy)</td>
                                         <td>@Html.DisplayFor(modelItem => item.POSourcedBy)</td>
                                         <td>@Html.DisplayFor(modelItem => item.POGenerateBy)</td>
-                                        @if (Model.UserProfileModels.EmpType != "User")
+                                        @*@if (Model.UserProfileModels.EmpType != "User")
                                         {
                                             <td>
                                                 @Html.EncodedActionLink("<i class='fa fa-times'></i>", "PONotApproved", "Admin",
                                                     new { id = item.VPONumber }, new { @class = "btn btn-edt bg-red btn-sm", title = "PO Not Approved" })
                                             </td>
-                                        }
+                                        }*@
                                     </tr>
                                 }
                             </tbody>

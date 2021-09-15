@@ -136,6 +136,24 @@
                             new { @class = "text-danger" })
                                 </div>
                             </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.InvStockModels.Warehouse, new { @class = "form-control-label" }) <sup>*</sup>
+                                    @Html.DropDownListFor(m => m.InvStockModels.Warehouse, new SelectList(Model.WarehouseModelList, "Key", "Value"),
+                                    "--Select Warehouse--", new { @class = "form-control select2 cstsadd" })
+                                    @Html.ValidationMessageFor(m => m.InvStockModels.Warehouse, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.InvStockModels.DelvExecutive, new { @class = "form-control-label" }) <sup>*</sup>
+                                    @Html.DropDownListFor(m => m.InvStockModels.DelvExecutive, new SelectList(Model.UserProfileModelList, "Key", "Value"),
+                                    "--Select Delv. Executive--", new { @class = "form-control select2" })
+                                    @Html.ValidationMessageFor(m => m.InvStockModels.DelvExecutive, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
                             <div class="box-tools pull-right">
                                 <button name="mrsubmit" id="mrsubmit" class="btn bg-aqua" title="SUBMIT"
                                         value="submit">
