@@ -34,68 +34,90 @@
                 <div class="box">
                     <!-- /.box-body -->
                     <div class="box-body">
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.Search, new { @class = "form-control-label" }) <sup>*</sup>
-                                @Html.TextBoxFor(m => m.Search,
-                                new
-                                {
-                                    @class = "form-control text-capitalize",
-                                    placeholder = @Html.DisplayNameFor(m => m.Search)
-                                })
+                        <div class="col-md-12">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Search, new { @class = "form-control-label" }) <sup>*</sup>
+                                    @Html.TextBoxFor(m => m.Search,
+                                    new
+                                    {
+                                        @class = "form-control text-capitalize",
+                                        placeholder = @Html.DisplayNameFor(m => m.Search)
+                                    })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.StartDate, new { @class = "form-control-label" }) <sup>*</sup>
+                                    @Html.TextBoxFor(m => m.StartDate,
+                                    new
+                                    {
+                                        @class = "form-control datepicker",
+                                        placeholder = @Html.DisplayNameFor(m => m.StartDate)
+                                    })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.EndDate, new { @class = "form-control-label" }) <sup>*</sup>
+                                    @Html.TextBoxFor(m => m.EndDate,
+                                    new
+                                    {
+                                        @class = "form-control datepicker",
+                                        placeholder = @Html.DisplayNameFor(m => m.EndDate)
+                                    })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Warehouse, new { @class = "form-control-label" }) <sup>*</sup>
+                                    @Html.DropDownListFor(m => m.Warehouse, new SelectList(Model.WarehouseModelList, "Key", "Value"),
+                                    "--Select Warehouse--", new { @class = "form-control select2 cstsadd" })
+                                    @Html.ValidationMessageFor(m => m.Warehouse, "",
+                            new { @class = "text-danger" })
+                                </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.StartDate, new { @class = "form-control-label" }) <sup>*</sup>
-                                @Html.TextBoxFor(m => m.StartDate,
-                                new
-                                {
-                                    @class = "form-control datepicker",
-                                    placeholder = @Html.DisplayNameFor(m => m.StartDate)
-                                })
+                        <div class="col-md-12">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="box-tools float-left">
+                                    <button type="submit" name="search" class="btn bg-aqua" title="SEARCH"
+                                            value="search">
+                                        SEARCH
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.EndDate, new { @class = "form-control-label" }) <sup>*</sup>
-                                @Html.TextBoxFor(m => m.EndDate,
-                                new
-                                {
-                                    @class = "form-control datepicker",
-                                    placeholder = @Html.DisplayNameFor(m => m.EndDate)
-                                })
-                            </div>
-                        </div>
-                        <table id="tblStock" class="table table-bordered display">
-                            <thead>
-                                <tr>
-                                    <th>SNo</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().CstMtrlCode)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Product)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Quantity)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Price)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.PurchaseOrdersModelList)
-                                {
+                            <table id="tblStock" class="table table-bordered display">
+                                <thead>
                                     <tr>
-                                        <td></td>
-                                        <td>@Html.DisplayFor(modelItem => item.CstMtrlCode)</td>
-                                        <td title="@item.SpcRemark">@Html.DisplayFor(modelItem => item.Product)<br>
-                                            Brand : @item.Brand<br>
-                                            Model : @item.ModelNo
-                                        </td>
-                                        <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                                        <th>SNo</th>
+                                        <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().CstMtrlCode)</th>
+                                        <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Product)</th>
+                                        <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Quantity)</th>
+                                        <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Price)</th>
                                     </tr>
-                                }
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.PurchaseOrdersModelList)
+                                    {
+                                        <tr>
+                                            <td></td>
+                                            <td>@Html.DisplayFor(modelItem => item.CstMtrlCode)</td>
+                                            <td title="@item.SpcRemark">
+                                                @Html.DisplayFor(modelItem => item.Product)<br>
+                                                Brand : @item.Brand<br>
+                                                Model : @item.ModelNo
+                                            </td>
+                                            <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.box -->
                     </div>
-                    <!-- /.box -->
-                </div>
             </div>
         </div>
         <!-- danger with sound -->
