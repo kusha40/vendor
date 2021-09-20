@@ -26,7 +26,6 @@
 <section class="content">
     @using (Html.BeginForm("PurchaseOrders", "Admin", FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off", enctype = "multipart/form-data" }))
     {
-
         @Html.AntiForgeryToken()
         <!-- Main row -->
         <div class="row">
@@ -112,10 +111,10 @@
                                     <tr>
                                         <td></td>
                                         <td>
-                                            @if (item.Status == "I" || item.Status == "A" || item.Status == "S")
-                                            {
+                                            @*@if (item.Status == "I" || item.Status == "A" || item.Status == "S")
+                                            {*@
                                                 @Html.EncodedActionLink("Edit", "EditPurchaseOrder", "Admin", new { id = item.Id }, new { @class = "", title = "Edit", @target = "_blank" })
-                                            }
+                                            @*}*@
                                         </td>
                                         <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
                                         <td>
