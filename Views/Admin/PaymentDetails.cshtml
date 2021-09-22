@@ -1,0 +1,151 @@
+﻿@using Vendor_Indusuno.Extensions
+@model Vendor_Indusuno.ViewModels.POPaymentViewModel
+@{
+    ViewBag.Title = "Payment Details";
+    TempData["Payment"] = "active";
+    TempData["PaymentDetails"] = "active";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    @{
+        string pageTitle = Html.Raw(Html.PageGTitle()) + "";
+    }
+    <h1>
+        @pageTitle
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index")"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        @Html.Raw(Html.BuildBreadcrumbNavigation())
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    @using (Html.BeginForm("PaymentDetails", "Admin", FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <!-- Main row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Default box -->
+                <div class="box">
+                    
+                        <div class="box-header with-border">
+                            <h3 class="box-title">@pageTitle List</h3>
+                            <div class="box-tools pull-right">
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POPaymentModels.SubmitDate, new { @class = "form-control-label" }) <sup>*</sup>
+                                    @Html.TextBoxFor(m => m.POPaymentModels.SubmitDate,
+                                    new
+                                    {
+                                        @class = "form-control datepicker",
+                                        placeholder = @Html.DisplayNameFor(m => m.POPaymentModels.SubmitDate)
+                                    })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="box-tools pull-left">
+                                    <button type="submit" name="search" class="btn bg-aqua" title="SEARCH"
+                                            value="search">
+                                        SEARCH
+                                    </button>
+                                </div>
+                            </div>
+                            @if (Model.POPaymentModelList.Count > 0)
+                            {
+                                <table id="tblPaymentDetails" class="table table-bordered display nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>SNo.</th>
+                                            <th>@Html.DisplayNameFor(model => model.POPaymentModelList.FirstOrDefault().PONumber)</th>
+                                            <th>@Html.DisplayNameFor(model => model.POPaymentModelList.FirstOrDefault().POId)</th>
+                                            <th>@Html.DisplayNameFor(model => model.POPaymentModelList.FirstOrDefault().VPONumber)</th>
+                                            <th>@Html.DisplayNameFor(model => model.POPaymentModelList.FirstOrDefault().PaymentMode)</th>
+                                            <th>@Html.DisplayNameFor(model => model.POPaymentModelList.FirstOrDefault().Amount)</th>
+                                            <th>@Html.DisplayNameFor(model => model.POPaymentModelList.FirstOrDefault().PaymentDate)</th>
+                                            <th>@Html.DisplayNameFor(model => model.POPaymentModelList.FirstOrDefault().SubmitDate)</th>
+                                            <th>@Html.DisplayNameFor(model => model.POPaymentModelList.FirstOrDefault().PaymentSlip)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var u in Model.POPaymentModelList)
+                                        {
+                                            <tr>
+                                                <td></td>
+                                                <td>@Html.DisplayFor(modelSKU => u.PONumber) </td>
+                                                <td>@Html.DisplayFor(modelSKU => u.POId) </td>
+                                                <td>@Html.DisplayFor(modelSKU => u.VPONumber) </td>
+                                                <td>@Html.DisplayFor(modelSKU => u.PaymentMode) </td>
+                                                <td>@Html.DisplayFor(modelSKU => u.Amount) </td>
+                                                <td>@Html.DisplayFor(modelSKU => u.PaymentDate) </td>
+                                                <td>@Html.DisplayFor(modelSKU => u.SubmitDate) </td>
+                                                <td><a href='~/Content/upload/popayment/@u.PaymentSlip' target="_blank">Download</a></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            }
+                            else
+                            {
+                                <div class="box-body">
+                                    <div class="no-record">No record found.</div>
+                                </div>
+                            }
+                        </div>
+                        <!-- /.box-body -->
+                    
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+        <!-- danger with sound -->
+        <div class="message-box animated fadeIn" data-sound="alert" id="mb-act-cnfrm">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-warning"></span> Confirm <strong>Box</strong> ?</div>
+                    <div class="mb-content">
+                        <p>Are you sure you want to delete?</p>
+                        <p>Press No if you want to Cancel. Press Yes to Delete the record.</p>
+                    </div>
+                    <div class="mb-footer">
+                        <div class="pull-right">
+                            <a id="confirmhref" href="#" class="btn btn-confirm-yes btn-lg">Yes</a>
+                            <button class="btn btn-confirm-no btn-lg mb-control-close">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end danger with sound -->
+        <!-- /.row (main row) -->
+        <!-- Modal -->
+        @*<div class="modal fade" id="modalAddBranch" style="display: none;">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <h4 class="modal-title">Default Modal</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>One fine body…</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>*@
+    }
+</section>
+<!-- /.content -->

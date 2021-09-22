@@ -1461,6 +1461,29 @@ $(document).ready(function () {
         });
     }).draw();
 
+    var tblPaymentDetails = $('#tblPaymentDetails').DataTable({
+        "paging": false,
+        "info": false,
+        "dom": 'Bfrtip',
+        "buttons": [
+            {
+                extend: 'excel',
+                text: '<i class="far fa-file-excel"></i> Excel',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                footer: true
+            },
+            'colvis'
+        ]
+    });
+    tblPaymentDetails.on('order.dt search.dt', function () {
+        tblPaymentDetails.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblPaymentDetails.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
     var tblMaterialPickup = $('#tblMaterialPickup').DataTable({
         "paging": false,
         "info": false,
@@ -2890,6 +2913,7 @@ $('.poapprove').on('click', function (e) {
     }
 });
 
+
 $('.ponotapprove').on('click', function (e) {
     $(this).find(':submit').attr('disabled', 'disabled');
     $(".ponotapprove").attr("disabled", true);
@@ -2904,34 +2928,34 @@ $('.ponotapprove').on('click', function (e) {
     });
     var napprmk = $(".napprmk").val();
     if (list.length > 0) {
-        //if (napprmk != "") {
-        var vpoNos = JSON.stringify(list);
-        $.ajax({
-            url: "/Admin/PONotApprovedList",
-            dataType: "json",
-            data: "{'vpoNos': '" + vpoNos + "','napprmk': '" + napprmk + "'}",
-            //data: "{'vpoNos': '" + vpoNos + "'}",
-            type: "POST",
-            contentType: "application/json; charset=utf-8",
-            success: function (result) {
-                if (result.error === "") {
-                    location.reload();
+        if (napprmk != "") {
+            var vpoNos = JSON.stringify(list);
+            $.ajax({
+                url: "/Admin/PONotApprovedList",
+                dataType: "json",
+                data: "{'vpoNos': '" + vpoNos + "','napprmk': '" + napprmk + "'}",
+                //data: "{'vpoNos': '" + vpoNos + "'}",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (result) {
+                    if (result.error === "") {
+                        location.reload();
+                    }
+                    else {
+                        alert(result.error);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert(err.Message);
                 }
-                else {
-                    alert(result.error);
-                }
-            },
-            error: function (xhr, status, error) {
-                var err = eval("(" + xhr.responseText + ")");
-                alert(err.Message);
-            }
-        });
-        //} else {
-        //    alert("Please enter remarks");
-        //    $(this).find(':submit').attr('disabled', 'disabled');
-        //    $(".ponotapprove").attr("disabled", true);
-        //    $(".ponotapprove").show();
-        //}
+            });
+        } else {
+            alert("Please enter remarks");
+            $(this).find(':submit').attr('disabled', 'disabled');
+            $(".ponotapprove").attr("disabled", true);
+            $(".ponotapprove").show();
+        }
     }
     else {
         alert("Please select atleast one po.");
