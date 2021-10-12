@@ -83,7 +83,7 @@
                             <thead>
                                 <tr>
                                     <th>SNo</th>
-                                    <th>Edit</th>
+                                    <th>Action</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().CustomerName)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().PONumber)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POId)</th>
@@ -112,9 +112,14 @@
                                         <td></td>
                                         <td>
                                             @*@if (item.Status == "I" || item.Status == "A" || item.Status == "S")
-                                            {*@
-                                                @Html.EncodedActionLink("Edit", "EditPurchaseOrder", "Admin", new { id = item.Id }, new { @class = "", title = "Edit", @target = "_blank" })
+        {*@
+                                            @Html.EncodedActionLink("<i class='fa fa-pencil-square-o'></i>", "EditPurchaseOrder", "Admin", new { id = item.Id }, new { @class = "btn btn-edt bg-aqua btn-sm", title = "Edit", @target = "_blank" })
                                             @*}*@
+                                            @if (item.Status == "I" || item.Status == "A")
+                                            {
+                                                @Html.EncodedActionLink("<i class='fa fa-times'></i>", "DeletePurchaseOrder", "Admin", new { id = item.Id }, new { @class = "btn btn-del m-l-5 mb-act-confirm bg-m-red btn-sm", title = "Delete", @target = "_blank" })
+                                            }
+
                                         </td>
                                         <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
                                         <td>
