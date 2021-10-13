@@ -117,7 +117,8 @@
                                             @*}*@
                                             @if (item.Status == "I" || item.Status == "A")
                                             {
-                                                @Html.EncodedActionLink("<i class='fa fa-times'></i>", "DeletePurchaseOrder", "Admin", new { id = item.Id }, new { @class = "btn btn-del m-l-5 mb-act-confirm bg-m-red btn-sm", title = "Delete", @target = "_blank" })
+                                                @Html.EncodedActionLink("<i class='fa fa-times'></i>", "DeletePurchaseOrder", "Admin", new { id = item.Id }, new { @class = "btn btn-del m-l-5 bg-m-red btn-sm", title = "Delete"
+                                           })
                                             }
 
                                         </td>
