@@ -1,5 +1,4 @@
-﻿
-function AddNewRow(cont, rowcls, tblid) {
+﻿function AddNewRow(cont, rowcls, tblid) {
 
     var regex = /^(.*)(\d)+$/i;
     var rowCount = $('.' + rowcls).length;
@@ -1299,19 +1298,6 @@ $(document).ready(function () {
     }).draw();
 
     var tblpodetails = $('#tblpodetails').DataTable({
-        "columnDefs": [
-            { 'targets': 0, 'orderable': false },       //SNo
-            { 'targets': 1, 'orderable': false },       //OrderDate
-            { 'targets': 2, 'orderable': false },       //CustomerName
-            { 'targets': 3, 'orderable': false },       //POId
-            { 'targets': 4, 'orderable': false },       //PONumber
-            { 'targets': 5, 'orderable': false },       //Vendor
-            { 'targets': 6, 'orderable': false },       //VendorPrice
-            { 'targets': 7, 'orderable': false },       //Price
-            { 'targets': 8, 'orderable': false },       //Margin
-            { 'targets': 9, 'orderable': false },       //Download
-            { 'targets': 10, 'orderable': false },      //Download
-        ],
         "paging": false,
         "searching": false,
         "info": false,
@@ -1776,6 +1762,353 @@ $(document).ready(function () {
     $(".divgen").hide();
     $('#POGenerate').click(function () { AddTempPOGenerate(); });
 
+
+    var tblEnquiry = $('#tblEnquiry').DataTable({
+        "columnDefs": [
+            { 'targets': 0, 'width': '20', 'searchable': false, 'orderable': false },   //SNo.
+            { 'targets': 1, 'width': '30', 'searchable': false, 'orderable': false },  //Edit
+            { 'targets': 2, 'width': '120', 'orderable': false },   //ContactPerson
+            { 'targets': 3, 'width': '60', 'orderable': false },    //Contact
+            { 'targets': 4, 'width': '60', 'orderable': false },    //Contact
+            { 'targets': 5, 'width': '60', 'orderable': false },    //Contact
+            { 'targets': 6, 'width': '300', 'orderable': false },    //Contact
+            { 'targets': 7, 'width': '60', 'orderable': false },    //Contact
+            { 'targets': 8, 'width': '60', 'orderable': false },    //Contact
+            { 'targets': 9, 'width': '60', 'orderable': false },    //Contact
+            { 'targets': 10, 'width': '60', 'orderable': false },    //Contact
+            { 'targets': 11, 'width': '60', 'orderable': false },    //Contact
+            { 'targets': 12, 'width': '60', 'orderable': false },    //Contact
+            { 'targets': 13, 'width': '60' },   //Contact
+        ],
+        "scrollX": true,
+        "paging": false,
+        "info": false,
+        "dom": 'Bfrtip',
+        "buttons": [
+            'pageLength',
+            {
+                extend: 'excel',
+                text: '<i class="far fa-file-excel"></i> Excel',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                footer: true
+            },
+            'colvis'
+        ]
+    });
+
+    tblEnquiry.on('order.dt search.dt', function () {
+        tblEnquiry.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblEnquiry.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
+    $("#EnquiryModels_CustomerId").change(function () {
+        var cstid = $('#EnquiryModels_CustomerId').val();
+        if (cstid !== "") {
+            $.ajax({
+                url: '/Admin/GetCustomerBillAdd',
+                data: { cstid: cstid },
+                type: "GET",
+                dataType: "JSON",
+                success: function (res) {
+                    var relsn = res;
+                    $('#EnquiryModels_CustomerBillAdd').empty();
+                    if (relsn.length === 0) {
+                        $("#EnquiryModels_CustomerBillAdd").attr("required", true);
+                        $("#EnquiryModels_CustomerBillAdd").attr("disabled", true);
+                    }
+                    else if (relsn.length === 1) {
+                        $("#EnquiryModels_CustomerBillAdd").attr("disabled", false);
+                        var optionrel = '<option value="' + relsn[0].Id + '">' + relsn[0].Value + '</option>';
+                        $('#EnquiryModels_CustomerBillAdd').append(optionrel);
+                        $('#EnquiryModels_CustomerBillAdd').val(relsn[0].Id);
+                    }
+                    else if (relsn.length > 1) {
+                        $('#EnquiryModels_CustomerBillAdd').val("");
+                        $("#EnquiryModels_CustomerBillAdd").attr("disabled", false);
+                        var optionrel = '<option value=""> --Customer Billing Address-- </option>';
+                        $('#EnquiryModels_CustomerBillAdd').append(optionrel);
+                        $("#EnquiryModels_CustomerBillAdd").attr("required", true);
+                        for (var i = 0; i < relsn.length; i++) {
+                            var optionrel = '<option value="' + relsn[i].Id + '">' + relsn[i].Value + '</option>';
+                            $('#EnquiryModels_CustomerBillAdd').append(optionrel);
+                        }
+                    }
+                },
+                error: function () {
+                    alert("Failed! Please try again.");
+                }
+            });
+
+            $.ajax({
+                url: '/Admin/GetCustomerShipAdd',
+                data: { cstid: cstid },
+                type: "GET",
+                dataType: "JSON",
+                success: function (res) {
+                    var relsn = res;
+                    $('#EnquiryModels_CustomerShipAdd').empty();
+                    if (relsn.length === 0) {
+                        $("#EnquiryModels_CustomerShipAdd").attr("required", true);
+                        $("#EnquiryModels_CustomerShipAdd").attr("disabled", true);
+                    }
+                    else if (relsn.length === 1) {
+                        $("#EnquiryModels_CustomerShipAdd").attr("disabled", false);
+                        var optionrel = '<option value="' + relsn[0].Id + '">' + relsn[0].Value + '</option>';
+                        $('#EnquiryModels_CustomerShipAdd').append(optionrel);
+                        $('#EnquiryModels_CustomerShipAdd').val(relsn[0].Id);
+                    }
+                    else if (relsn.length > 1) {
+                        $('#EnquiryModels_CustomerShipAdd').val("");
+                        $("#EnquiryModels_CustomerShipAdd").attr("disabled", false);
+                        var optionrel = '<option value=""> --Customer Shipping Address-- </option>';
+                        $('#EnquiryModels_CustomerShipAdd').append(optionrel);
+                        $("#EnquiryModels_CustomerShipAdd").attr("required", true);
+                        for (var i = 0; i < relsn.length; i++) {
+                            var optionrel = '<option value="' + relsn[i].Id + '">' + relsn[i].Value + '</option>';
+                            $('#EnquiryModels_CustomerShipAdd').append(optionrel);
+                        }
+                    }
+                },
+                error: function () {
+                    alert("Failed! Please try again.");
+                }
+            });
+        }
+        else {
+            $('#EnquiryModels_CustomerBillAdd').empty();
+            $("#EnquiryModels_CustomerBillAdd").attr("required", true);
+            $("#EnquiryModels_CustomerBillAdd").attr("disabled", true);
+            $('#EnquiryModels_CustomerShipAdd').empty();
+            $("#EnquiryModels_CustomerShipAdd").attr("required", true);
+            $("#EnquiryModels_CustomerShipAdd").attr("disabled", true);
+        }
+    });
+
+    var tblassignenq = $('#tblassignenq').DataTable({
+        "columnDefs": [
+            {
+                'targets': 0, 'checkboxes':
+                {
+                    'selectRow': true
+                }
+            },                      //Select
+            { 'targets': 1, 'width': '20', 'orderable': false },       //SNo
+            { 'targets': 2, 'width': '30', 'orderable': false },       //OrderDate
+            { 'targets': 3, 'width': '80', 'orderable': false },       //CustomerName
+            { 'targets': 4, 'width': '30', 'orderable': false },       //POId
+            { 'targets': 5, 'width': '30', 'orderable': false },       //POPId
+            { 'targets': 6, 'width': '200', 'orderable': false },       //Product
+            { 'targets': 7, 'width': '20', 'orderable': false },       //Quantity
+            { 'targets': 8, 'width': '20', 'orderable': false },       //Unit
+            { 'targets': 9, 'width': '20', 'orderable': false },      //Price
+            { 'targets': 10, 'width': '30', 'orderable': false },       //TotalPrice
+            { 'targets': 11, 'width': '20', 'orderable': false },      //Status
+            { 'targets': 12, 'width': '40', 'orderable': false },      //POCreatedBy
+            { 'targets': 13, 'width': '40', 'orderable': false }       //POAssingTo
+        ],
+        select: {
+            style: 'multi',
+        },
+        "scrollX": true,
+        "paging": false,
+        //"searching": false,
+        "info": false,
+        "dom": 'Bfrtip',
+        "buttons": [
+            'pageLength',
+            {
+                extend: 'excel',
+                text: '<i class="far fa-file-excel"></i> Excel',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                footer: true
+            },
+            'colvis'
+        ]
+    });
+    tblassignenq.on('order.dt search.dt', function () {
+        tblassignenq.column(1, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblassignenq.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
+    var tblsourced = $('#tblsourced').DataTable({
+        "columnDefs": [
+            {
+                'targets': 0, 'checkboxes':
+                {
+                    'selectRow': true
+                }
+            },                      //Select
+            { 'targets': 1, 'width': '20', 'orderable': false },       //SNo
+            { 'targets': 2, 'width': '30', 'orderable': false },       //OrderDate
+            { 'targets': 3, 'width': '80', 'orderable': false },       //CustomerName
+            { 'targets': 4, 'width': '30', 'orderable': false },       //POId
+            { 'targets': 5, 'width': '30', 'orderable': false },       //POPId
+            { 'targets': 6, 'width': '200', 'orderable': false },      //Product
+            { 'targets': 7, 'width': '20', 'orderable': false },       //Quantity
+            { 'targets': 8, 'width': '20', 'orderable': false },       //Unit
+            { 'targets': 9, 'width': '20', 'orderable': false },      //Price
+            { 'targets': 10, 'width': '30', 'orderable': false },      //TotalPrice
+            { 'targets': 11, 'width': '20', 'orderable': false },      //Status
+            { 'targets': 12, 'width': '40', 'orderable': false },      //POCreatedBy
+            { 'targets': 13, 'width': '40', 'orderable': false }       //POAssingTo
+        ],
+        select: {
+            style: 'multi',
+        },
+        "scrollX": true,
+        "paging": false,
+        //"searching": false,
+        "info": false,
+        "dom": 'Bfrtip',
+        "buttons": [
+            'pageLength',
+            {
+                extend: 'excel',
+                text: '<i class="far fa-file-excel"></i> Excel',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                footer: true
+            },
+            'colvis'
+        ]
+    });
+    tblsourced.on('order.dt search.dt', function () {
+        tblsourced.column(1, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblsourced.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
+    var tblquoted = $('#tblquoted').DataTable({
+        "columnDefs": [
+            {
+                'targets': 0, 'checkboxes':
+                {
+                    'selectRow': true
+                }
+            },                      //Select
+        ],
+        select: {
+            style: 'multi',
+        },
+        "scrollX": true,
+        "paging": false,
+        //"searching": false,
+        "info": false,
+        "dom": 'Bfrtip',
+        "buttons": [
+            'pageLength',
+            {
+                extend: 'excel',
+                text: '<i class="far fa-file-excel"></i> Excel',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                footer: true
+            },
+            'colvis'
+        ]
+    });
+    tblquoted.on('order.dt search.dt', function () {
+        tblquoted.column(1, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblquoted.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
+    var tblQuotation = $('#tblQuotation').DataTable({
+        "columnDefs": [
+            {
+                'targets': 0, 'checkboxes':
+                {
+                    'selectRow': true
+                }
+            },                      //SNo
+        ],
+        select: {
+            style: 'multi',
+        },
+        "scrollX": true,
+        "paging": false,
+        //"searching": false,
+        "info": false
+    });
+    tblQuotation.on('order.dt search.dt', function () {
+        tblQuotation.column(1, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblQuotation.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
+
+    var tblQuotationApprove = $('#tblQuotationApprove').DataTable({
+        "columnDefs": [
+            {
+                'targets': 0, 'checkboxes':
+                {
+                    'selectRow': true
+                }
+            },                      //SNo
+        ],
+        select: {
+            style: 'multi',
+        },
+        "scrollX": true,
+        "paging": false,
+        //"searching": false,
+        "info": false
+    });
+    tblQuotationApprove.on('order.dt search.dt', function () {
+        tblQuotationApprove.column(1, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblQuotationApprove.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
+    var tblQuotationApproved = $('#tblQuotationApproved').DataTable({
+        "scrollX": true,
+        "paging": false,
+        //"searching": false,
+        "info": false
+    });
+    tblQuotationApproved.on('order.dt search.dt', function () {
+        tblQuotationApproved.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblQuotationApproved.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
+    var tblenqdetails = $('#tblenqdetails').DataTable({
+        "columnDefs": [
+        ],
+        "paging": false,
+        "searching": false,
+        "info": false,
+    });
+    tblenqdetails.on('order.dt search.dt', function () {
+        tblenqdetails.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblenqdetails.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
+    $('#addtempenqline').click(function () { AddTempEnqLine(); });
+    $(".divsource").hide();
+    $('.sourced').click(function () { AddTempSourced(); });
+    $(".divquote").hide();
+    $('.quoted').click(function () { AddTempQuoted(); });
+    $(".divgen").hide();
+    $('#quotation').click(function () { AddTempQuotation(); });
+
 });
 
 //Add PO item to temp table   
@@ -2097,7 +2430,7 @@ $(document).on('blur', '.sordqty', function () {
     }
     else {
         curRow.find(".sordqty").val(poqty);
-        alert("Order Quantity is greater than PO Quantity");
+        alert("Order Quantity is greater than Enquiry Quantity");
     }
 });
 
@@ -2354,6 +2687,14 @@ function CheckSubmitBtn() {
     } else {
         //$('#SubmitMoviesBtn').attr("disabled", "disabled");
         $('.posubmit').hide();
+    }
+
+    if ($('#tblTempEnqLine > tbody  > tr').length > 0) { // count items in table if at least 1 item is found then enable button
+        //$('#SubmitMoviesBtn').removeAttr("disabled");
+        $('.enqsubmit').show();
+    } else {
+        //$('#SubmitMoviesBtn').attr("disabled", "disabled");
+        $('.enqsubmit').hide();
     }
 }
 //Add PO item to temp table  
@@ -3265,3 +3606,1296 @@ $('.pobackstage').on('click', function (e) {
     }
 });
 
+$(document).on('blur', '.ecstmtrcd', function () {
+    var matcode = $(".ecstmtrcd").val();
+    //e.preventDefault();
+    if (matcode !== "") {
+        $.ajax({
+            url: '/Admin/GetProductDetWMatCode',
+            data: "{'matcode':'" + matcode + "'}",
+            type: "POST",
+            dataType: "JSON",
+            contentType: "application/json; charset=utf-8",
+            success: function (res) {
+                var lst = res;
+                if (lst === undefined || lst === "") {
+                    $(".skuno").val("");
+                    $(".prdid").val("");
+                    $(".modelno").val("");
+                    $(".prdctgid").val("");
+                    $(".brndid").val("");
+                    $(".hsncode").val("");
+                    $(".untid").val("");
+                    $(".spcrmk").val("");
+                    $(".qty").val("");
+                    $(".price").val("");
+                }
+                else {
+                    $(".skuno").val(res[0].SKUNo).trigger('change.select2');
+                    $(".prdid").val(res[0].ProductId);
+                    $(".modelno").val(res[0].ModelNo);
+                    $(".prdctgid").val(res[0].PrdCtgryId).trigger('change.select2');
+                    $(".brndid").val(res[0].BrandId).trigger('change.select2');
+                    $(".hsncode").val(res[0].HSNCode);
+                    $(".untid").val(res[0].UnitId).trigger('change.select2');
+                    $(".spcrmk").val(res[0].SpcRemark);
+                    $(".qty").val(res[0].Quantity);
+                    $(".price").val(res[0].Price);
+                }
+            },
+            error: function (e) {
+                alert("Failed! Please try again.");
+            }
+        });
+    }
+    else {
+        $(".skuno").val("");
+        $(".prdid").val("");
+        $(".modelno").val("");
+        $(".prdctgid").val("");
+        $(".brndid").val("");
+        $(".hsncode").val("");
+        $(".untid").val("");
+        $(".spcrmk").val("");
+        $(".qty").val("");
+        $(".price").val("");
+    }
+});
+
+//Add PO item to temp table   
+function AddTempEnqLine() {
+    var lnitm = parseInt($('.enqlneitm').val());
+    //Create Movie Object  
+    var tmpenqline = {};
+    tmpenqline.CstMtrlCode = $('.cstmtrcd').val();
+    tmpenqline.SKUNo = $('.skuno option:selected').text();
+    tmpenqline.ProductId = $('.prdid').val();
+    tmpenqline.ModelNo = $('.modelno').val();
+    tmpenqline.PrdCtgryId = $('.prdctgid option:selected').text();
+    tmpenqline.BrandId = $('.brndid option:selected').text();
+    tmpenqline.HSNCode = $('.hsncode').val();
+    tmpenqline.SpcRemark = $('.spcrmk').val();
+    tmpenqline.Quantity = $('.qty').val();
+    tmpenqline.UnitId = $('.untid option:selected').text();
+    tmpenqline.Price = $('.price').val();
+
+    if (tmpenqline.SKUNo === "--Select SKU No--") {
+        tmpenqline.SKUNo = "";
+    }
+    if (tmpenqline.PrdCtgryId === "--Select Product Category--") {
+        tmpenqline.PrdCtgryId = "";
+    }
+    if (tmpenqline.BrandId === "--Select Brand--") {
+        tmpenqline.BrandId = "";
+    }
+    if (tmpenqline.UnitId === "--Select Unit--") {
+        tmpenqline.UnitId = "";
+    }
+
+    var Errors = "";
+    if (tmpenqline.ProductId === "") {
+        $('.errprdid').text("Product Name required");
+        Errors = "Product Name required";
+    }
+    else {
+        $('.errprdid').text("");
+    }
+    if (tmpenqline.PrdCtgryId === "") {
+        $('.errprdctgid').text("Product Category required");
+        Errors = "Product Category required";
+    } else {
+        $('.errprdctgid').text("");
+    }
+    if (tmpenqline.BrandId === "") {
+        $('.errbrndid').text("Brand required");
+        Errors = "Brand required";
+    } else {
+        $('.errbrndid').text("");
+    }
+    if (tmpenqline.UnitId === "") {
+        $('.erruntid').text("Unit required");
+        Errors = "Unit required";
+    } else {
+        $('.erruntid').text("");
+    }
+    if (tmpenqline.Quantity === "" || tmpenqline.Quantity === "0") {
+        $('.errqty').text("Quantity required");
+        Errors = "Quantity required";
+    } else {
+        $('.errqty').text("");
+    }
+
+    if (Errors.length === 0) {
+        var row = parseInt($('#tblTempEnqLine tbody tr').length);
+        if (row < lnitm) {
+            //Validate no duplicated Titles  
+            var ExistTitle = false; // < -- Main indicator  
+            $('#tblTempEnqLine > tbody  > tr').each(function () {
+                var Title = $(this).find('.pcstcode').text(); // get text of current row by class selector  
+                if ($('.cstmtrcd').val() !== "") {
+                    if (tmpenqline.CstMtrlCode.toLowerCase() == Title.toLowerCase()) { //Compare provided and existing title
+                        ExistTitle = true;
+                        return false;
+                    }
+                }
+            });
+
+            //Add movie if title is not duplicated otherwise show error  
+            if (ExistTitle === false) {
+                //Create Row element with provided data  
+                var Row = $('<tr>');
+                $('<td>').html(tmpenqline.CstMtrlCode).addClass("pcstcode").appendTo(Row);
+                $('<td>').html(tmpenqline.SKUNo).addClass("pskuno").appendTo(Row);
+                $('<td>').html(tmpenqline.ProductId).addClass("pprdid").appendTo(Row);
+                $('<td>').html(tmpenqline.ModelNo).addClass("pmodelno").appendTo(Row);
+                $('<td>').html(tmpenqline.PrdCtgryId).addClass("ppctrid").appendTo(Row);
+                $('<td>').html(tmpenqline.BrandId).addClass("pbrndid").appendTo(Row);
+                $('<td>').html(tmpenqline.HSNCode).addClass("phsncode").appendTo(Row);
+                $('<td>').html(tmpenqline.UnitId).addClass("punitid").appendTo(Row);
+                $('<td>').html(tmpenqline.SpcRemark).addClass("pspcrmk").appendTo(Row);
+                $('<td>').html(tmpenqline.Quantity).addClass("pqty").appendTo(Row);
+                $('<td>').html(tmpenqline.Price).addClass("pprice").appendTo(Row);
+                $('<td>').html("<div class='text-center'><button class='btn btn-danger btn-sm' onclick='Delete($(this))'>Remove</button></div>").appendTo(Row);
+
+                //Append row to table's body  
+                $('#table-body').append(Row);
+                ClearForm();
+                CheckSubmitBtn(); // Enable submit button  
+            }
+        }
+        else {
+            alert("You can't add more than No of Line Items");
+        }
+    }
+}
+
+$('.enqsubmit').on('click', function (e) {
+    $(this).find(':submit').attr('disabled', 'disabled');
+    $(".enqsubmit").attr("disabled", true);
+    $(".enqsubmit").hide();
+    e.preventDefault();
+    var lnitm = parseInt($('.enqlneitm').val());
+    var row = parseInt($('#tblTempEnqLine tbody tr').length);
+    if (row === lnitm) {
+
+        var linkObj = $(this);
+        var hdArr = new Array();
+        var lnArr = new Array();
+        var cstId = $('.cstid').val();
+        var cstbadd = $('.cstbadd').val();
+        var cstsadd = $('.cstsadd').val();
+        var enqtype = $('.enqtype').val();
+        var enqid = $('.enqid').val();
+        var enqdate = $('.enqdate').val();
+        var enddate = $('.enddate').val();
+        var enqlneitm = $('.enqlneitm').val();
+        var enqsentby = $('.enqsentby').val();
+
+        if (cstId !== "" && cstbadd !== "" && cstsadd !== "" && enqid !== "" && enqtype !== "" && enqlneitm !== "0" && enqlneitm !== "" && enqsentby !== "") {
+
+            $(".tbl tbody tr").each(function () {
+                var tds = $(this).find("td");
+                //you could use the Find method to find the texbox or the dropdownlist and get the value.
+                var pcstcode = $(tds[0]).text();
+                var pskuno = $(tds[1]).text();
+                var pprdid = $(tds[2]).text();
+                var pmodelno = $(tds[3]).text();
+                var ppctrid = $(tds[4]).text();
+                var pbrndid = $(tds[5]).text();
+                var phsncode = $(tds[6]).text();
+                var punitid = $(tds[7]).text();
+                var pspcrmk = $(tds[8]).text();
+                var pqty = $(tds[9]).text();
+                var pprice = $(tds[10]).text();
+                if (pprice == "") {
+                    pprice = 0;
+                }
+                if (pprdid !== "" && ppctrid !== "" && pbrndid !== "" && punitid !== "" && pqty !== "0" && pqty !== "") {
+                    var lin = {
+                        CustomerId: cstId,
+                        CustomerBillAdd: cstbadd,
+                        CustomerShipAdd: cstsadd,
+                        EnqType: enqtype,
+                        EnqId: enqid,
+                        EnquiryDate: enqdate,
+                        EndDate: enddate,
+                        LineItems: enqlneitm,
+                        EnqSentBy: enqsentby,
+                        CstMtrlCode: pcstcode,
+                        SKUNo: pskuno,
+                        ProductId: pprdid,
+                        ModelNo: pmodelno,
+                        PrdCtgryId: ppctrid,
+                        BrandId: pbrndid,
+                        HSNCode: phsncode,
+                        SpcRemark: pspcrmk,
+                        Quantity: parseFloat(pqty),
+                        UnitId: punitid,
+                        Price: parseFloat(pprice)
+                    };
+                    lnArr.push(lin);
+                }
+            });
+
+            if (lnArr.length > 0) {
+                var enq = JSON.stringify(lnArr);
+
+                $.ajax({
+                    url: "/Admin/InsertEnquiry",
+                    dataType: "json",
+                    data: "{'enq': '" + enq + "'}",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (result) {
+                        if (result.error === "") {
+                            location.reload();
+                        }
+                        else {
+                            alert(result.error);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        var err = eval("(" + xhr.responseText + ")");
+                        alert(err.Message);
+                    }
+                });
+            }
+            else {
+                alert("Please add atleast 1 line item.");
+            }
+        }
+        else {
+            alert("Please fill the required fields.");
+        }
+    }
+    else {
+        alert("Line item not matched.");
+    }
+    $(".enqsubmit").attr("disabled", false);
+});
+
+$('.enqassign').on('click', function (e) {
+    $(this).find(':submit').attr('disabled', 'disabled');
+    $(".enqassign").attr("disabled", true);
+    $(".enqassign").hide();
+    e.preventDefault();
+    var asn = $(".enqasnto").val();
+    var rows_selected = $("#tblassignenq tbody tr.selected");
+    var list = new Array();
+    // Iterate over all selected checkboxes
+    $.each(rows_selected, function (index, row) {
+        // Create a hidden element
+        list.push(row.cells[5].innerText);
+    });
+
+    if (list.length > 0) {
+        var enqIds = JSON.stringify(list);
+        $.ajax({
+            url: "/Admin/AssignEnquiry",
+            dataType: "json",
+            data: "{'enqIds': '" + enqIds + "', 'asn': '" + asn + "'}",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                if (result.error === "") {
+                    location.reload();
+                }
+                else {
+                    alert(result.error);
+                }
+            },
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                alert(err.Message);
+            }
+        });
+    }
+    else {
+        alert("Please select atleast one po.");
+    }
+});
+
+//$('.sousubmit').on('click', function (e) {
+//    $(this).find(':submit').attr('disabled', 'disabled');
+//    $(".sousubmit").attr("disabled", true);
+//    $(".sousubmit").hide();
+//    e.preventDefault();
+//    var lnArr = new Array();
+//    $(".tbl tbody tr").each(function () {
+//        var tds = $(this).find("td");
+//        //you could use the Find method to find the texbox or the dropdownlist and get the value.
+//        var senqpid = $(tds[2]).find('.senqpid').val();
+//        var sordqty = $(tds[5]).find('.sordqty').val();
+//        var svenid = $(tds[8]).find('.svenid').val();
+//        var svenprc = $(tds[8]).find('.svenprc').val();
+//        var slvenid = $(tds[9]).find('.slvenid').val();
+//        var slvenprc = $(tds[9]).find('.slvenprc').val();
+
+//        if (senqpid !== "" /*&& senqid !== ""*/ && svenid !== "" && svenprc !== "" && svenprc !== "0" &&
+//            sordqty !== "" && sordqty !== "0"  
+//            /*&& slvenid !== "" && slvenprc !== "0" && slvenprc !== ""*/) {
+//            var lin = {
+//                EnqPId: senqpid,
+//                OrderedQuantity: parseFloat(sordqty),
+//                VendorId: svenid,
+//                VendorPrice: parseFloat(svenprc),
+//                //LastVendorId: slvenid,
+//                //LastVendorPrice: parseFloat(slvenprc),
+//            };
+//            lnArr.push(lin);
+//        }
+//    });
+
+//    if (lnArr.length > 0) {
+//        var enq = JSON.stringify(lnArr);
+
+//        $.ajax({
+//            url: "/Admin/UpdateSourced",
+//            dataType: "json",
+//            data: "{'enq': '" + enq + "'}",
+//            type: "POST",
+//            contentType: "application/json; charset=utf-8",
+//            success: function (result) {
+//                if (result.error === "") {
+//                    location.reload();
+//                }
+//                else {
+//                    alert(result.error);
+//                }
+//            },
+//            error: function (xhr, status, error) {
+//                var err = eval("(" + xhr.responseText + ")");
+//                alert(err.Message);
+//            }
+//        });
+//    }
+//    else {
+//        alert("Please add atleast 1 line item.");
+//    }
+//    $(".sousubmit").attr("disabled", false);
+//});
+
+
+function AddTempSourced() {
+    var rows_selected = $("#tblsourced tbody tr.selected");
+    var list = new Array();
+    var inc = 1;
+    // Iterate over all selected checkboxes
+    $.each(rows_selected, function (index, row) {
+        // Create a hidden element
+        list.push(row.cells[5].innerText);
+        var tmpsrc = {};
+        tmpsrc.CustomerName = row.cells[3].innerText;
+        tmpsrc.EnqPId = row.cells[5].innerText;
+        tmpsrc.Product = row.cells[6].innerText;
+        tmpsrc.Quantity = row.cells[7].innerText;
+        tmpsrc.Price = row.cells[9].innerText;
+
+        $('#tblsource').find('tbody').append(
+            "<tr>" +
+            "<td class='w-10'> <input type='text' id='EnquiriesModelList_CustomerName_" + inc + "' name='EnquiriesModelList_CustomerName_" + inc + "' data-toggle='tooltip' title='" + tmpsrc.CustomerName + "' value='" + tmpsrc.CustomerName + "' disabled required='True' class='form-control scstname m-b-0 bg-gray' type='text'></td>" +
+            "<td class='w-10'> <input type='text' id='EnquiriesModelList_EnqPId_" + inc + "' name='EnquiriesModelList_EnqPId_" + inc + "' data-toggle='tooltip' title='" + tmpsrc.EnqPId + "' value='" + tmpsrc.EnqPId + "' disabled class='form-control spid m-b-0 bg-gray'  type='text' /></td>" +
+            "<td class='w-15'> <input type='text' id='EnquiriesModelList_Product_" + inc + "' name='EnquiriesModelList_Product_" + inc + "' data-toggle='tooltip' title='" + tmpsrc.Product + "' disabled value='" + tmpsrc.Product + "' class='form-control sprdid m-b-0 bg-gray'  type='text' /></td>" +
+            "<td class='w-6'>  <input type='text' id='EnquiriesModelList_Price_" + inc + "' name='EnquiriesModelList_Price_" + inc + "' value='" + tmpsrc.Price + "' disabled class='form-control svenprc m-b-0 bg-gray'  type='text' /></td>" +
+            "<td class='w-6'>  <input type='text' id='EnquiriesModelList_Quantity_" + inc + "' name='EnquiriesModelList_Quantity_" + inc + "' value='" + tmpsrc.Quantity + "' disabled class='form-control sqty m-b-0 bg-gray'  type='text' /></td>" +
+            "<td class='w-10'> <input type='text' id='EnquiriesModelList_Vendor1Id_" + inc + "' name='EnquiriesModelList_Vendor1Id_" + inc + "' placeholder='Vendor1 Name' value='' class='form-control sven1id sven m-b-0'  type='text' /></br><input type='text' id='EnquiriesModelList_Vendor1Price_" + inc + "' name='EnquiriesModelList_Vendor1Price_" + inc + "' value='' placeholder='Vendor1 Price' class='form-control sven1prc onlynumdec m-b-0 float-left' /></td>" +
+            "<td class='w-10'> <input type='text' id='EnquiriesModelList_Vendor2Id_" + inc + "' name='EnquiriesModelList_Vendor2Id_" + inc + "' placeholder='Vendor2 Name' value='' class='form-control sven2id sven m-b-0'  type='text' /></br><input type='text' id='EnquiriesModelList_Vendor2Price_" + inc + "' name='EnquiriesModelList_Vendor2Price_" + inc + "' value='' placeholder='Vendor2 Price' class='form-control sven2prc onlynumdec m-b-0 float-left' /></td > " +
+            "<td class='w-10'> <input type='text' id='EnquiriesModelList_Vendor3Id_" + inc + "' name='EnquiriesModelList_Vendor3Id_" + inc + "' placeholder='Vendor3 Name' value='' class='form-control sven3id sven m-b-0'  type='text' /></br><input type='text' id='EnquiriesModelList_Vendor3Price_" + inc + "' name='EnquiriesModelList_Vendor3Price_" + inc + "' value='' placeholder='Vendor3 Price' class='form-control sven3prc onlynumdec m-b-0 float-left' /></td > " +
+            "<td class='w-6'> <select name='gst' class='form-control select2 sgst' id='gst'><option value = '0'> 0 %</option><option value='5'>5 %</option><option value='12'>12 %</option><option value='18' selected>18 %</option><option value='28'>28 %</option></select ></td>" +
+            "</tr>");
+        inc++;
+    });
+
+    $(".divsourced").hide();
+    $(".divsource").show();
+}
+
+$(document).on('focus', '.sven', function () {
+    var id = this.id;
+    $('#' + id).autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: '/Admin/GetVendorList',
+                type: "POST",
+                dataType: "json",
+                data: { Prefix: request.term },
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return { label: item.Name, value: item.Name };
+                    }));
+                    //return response(data.d);
+                }
+            });
+        },
+    });
+});
+
+//Get Margin
+$(document).on('blur', '.senqvenprcmrg', function () {
+    var curRow = $(this).closest("tr");
+    var venprc = curRow.find(".senqvenprcmrg").val();
+    var slprc = curRow.find(".svenprc").val();
+    //e.preventDefault();
+    if (venprc !== "" && venprc !== "0") {
+        var mrg = (parseFloat(slprc) - parseFloat(venprc)) * 100 / parseFloat(slprc);
+        curRow.find("td:eq(5)").find(".senqmarg").val(mrg.toFixed(2) + "%");
+    }
+    else {
+        curRow.find("td:eq(5)").find(".senqmarg").val("");
+    }
+});
+//Get Margin
+
+$('.sosubmit').on('click', function (e) {
+    $(this).find(':submit').attr('disabled', 'disabled');
+    $(".sosubmit").attr("disabled", true);
+    $(".sosubmit").hide();
+    e.preventDefault();
+    var lnArr = new Array();
+    $(".tbl tbody tr").each(function () {
+        var tds = $(this).find("td");
+        //you could use the Find method to find the texbox or the dropdownlist and get the value.
+        var spid = $(tds[1]).find('.spid').val();
+        var sqty = $(tds[4]).find('.sqty').val();
+        var sven1id = $(tds[5]).find('.sven1id').val();
+        var sven1prc = $(tds[5]).find('.sven1prc').val();
+        var sven2id = $(tds[6]).find('.sven2id').val();
+        var sven2prc = $(tds[6]).find('.sven2prc').val();
+        var sven3id = $(tds[7]).find('.sven3id').val();
+        var sven3prc = $(tds[7]).find('.sven3prc').val();
+        var sgst = $(tds[8]).find('.sgst').val();
+
+        if (sven2prc === "") {
+            sven2prc = 0;
+        }
+        if (sven3prc === "") {
+            sven3prc = 0;
+        }
+
+        if (spid !== "" && sven1id !== "" && sven1prc !== "" && sven1prc !== "0" &&
+            sqty !== "" && sqty !== "0" && sgst !== "") {
+            var lin = {
+                EnqPId: spid,
+                OrderedQuantity: parseFloat(sqty),
+                Vendor1Id: sven1id,
+                Vendor1Price: parseFloat(sven1prc),
+                Vendor2Id: sven2id,
+                Vendor2Price: parseFloat(sven2prc),
+                Vendor3Id: sven3id,
+                Vendor3Price: parseFloat(sven3prc),
+                GST: sgst
+                //LastVendorId: slvenid,
+                //LastVendorPrice: parseFloat(slvenprc)
+            };
+            lnArr.push(lin);
+        }
+    });
+
+    if (lnArr.length > 0) {
+        var enqs = JSON.stringify(lnArr);
+
+        $.ajax({
+            url: "/Admin/UpdateSourced",
+            dataType: "json",
+            data: "{'enqs': '" + enqs + "'}",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                if (result.error === "") {
+                    location.reload();
+                }
+                else {
+                    alert(result.error);
+                }
+            },
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                alert(err.Message);
+            }
+        });
+    }
+    else {
+        alert("Please add atleast 1 line item.");
+    }
+    $(".sosubmit").attr("disabled", false);
+});
+
+function AddTempQuoted() {
+    var rows_selected = $("#tblquoted tbody tr.selected");
+    var list = new Array();
+    var inc = 1;
+    // Iterate over all selected checkboxes
+    $.each(rows_selected, function (index, row) {
+        // Create a hidden element
+        list.push(row.cells[5].innerText);
+        var tmpquoted = {};
+        tmpquoted.CustomerName = row.cells[3].innerText;
+        tmpquoted.EnqPId = row.cells[5].innerText;
+        tmpquoted.Product = row.cells[6].innerText;
+        tmpquoted.Quantity = row.cells[7].innerText;
+        tmpquoted.Price = row.cells[9].innerText;
+        tmpquoted.GST = row.cells[10].innerText;
+        tmpquoted.Vendor1 = row.cells[11].innerText;
+        tmpquoted.Vendor2 = row.cells[12].innerText;
+        tmpquoted.Vendor3 = row.cells[13].innerText;
+
+        var ven1 = tmpquoted.Vendor1.split(' - ');
+        if (tmpquoted.Vendor2 != "Name -\nPrice - 0") {
+            var ven2 = tmpquoted.Vendor2.split(' - ');
+            tmpquoted.Vendor2 = ven2[1].split('\nPrice')[0] + " - " + ven2[2];
+        }
+        else {
+            tmpquoted.Vendor2 = "";
+            ven2 = 0;
+        }
+        if (tmpquoted.Vendor3 != "Name -\nPrice - 0") {
+            var ven3 = tmpquoted.Vendor3.split(' - ');
+            tmpquoted.Vendor3 = ven3[1].split('\nPrice')[0] + " - " + ven3[2];
+        }
+        else {
+            tmpquoted.Vendor3 = "";
+            ven3 = 0;
+        }
+        var vexist = 0;
+        tmpquoted.Vendor1 = ven1[1].split('\nPrice')[0] + " - " + ven1[2];
+        if (ven1 !== 0 && ven2 !== 0 && ven3 !== 0) {
+            tmpquoted.Vendor1Price = Math.min(parseFloat(ven1[2]), parseFloat(ven2[2]), parseFloat(ven3[2]));
+            vexist = 3;
+        }
+        if (ven1 !== 0 && ven2 !== 0 && ven3 === 0) {
+            tmpquoted.Vendor1Price = Math.min(parseFloat(ven1[2]), parseFloat(ven2[2]));
+            vexist = 2;
+        }
+        if (ven1 !== 0 && ven2 === 0 && ven3 === 0) {
+            tmpquoted.Vendor1Price = parseFloat(ven1[2]);
+            vexist = 1;
+        }
+
+        var seq1 = 0, seq2 = 0, seq3 = 0;
+        if ((tmpquoted.Vendor1).includes(tmpquoted.Vendor1Price)) {
+            seq1 = tmpquoted.Vendor1;
+            seq2 = tmpquoted.Vendor2;
+            seq3 = tmpquoted.Vendor3;
+        }
+        else if ((tmpquoted.Vendor2).includes(tmpquoted.Vendor1Price)) {
+            seq1 = tmpquoted.Vendor2;
+            seq2 = tmpquoted.Vendor1;
+            seq3 = tmpquoted.Vendor3;
+        }
+        else if ((tmpquoted.Vendor3).includes(tmpquoted.Vendor1Price)) {
+            seq1 = tmpquoted.Vendor3;
+            seq2 = tmpquoted.Vendor1;
+            seq3 = tmpquoted.Vendor2;
+        }
+
+        if (vexist === 3) {
+            var rt = "<select name='selvendor' class='form-control select2 selven' id='selvendor'>" +
+                "<option value='" + seq1 + "'> " + seq1.split(' - ')[0] + "</option>" +
+                "<option value='" + seq2 + "'> " + seq2.split(' - ')[0] + "</option>" +
+                "<option value='" + seq3 + "'> " + seq3.split(' - ')[0] + "</option>" +
+                "</select>";
+        }
+        else if (vexist === 2) {
+            var rt = "<select name='selvendor' class='form-control select2 selven' id='selvendor'>" +
+                "<option value='" + seq1 + "'> " + seq1.split(' - ')[0] + "</option>" +
+                "<option value='" + seq2 + "'> " + seq2.split(' - ')[0] + "</option>" +
+                "</select>";
+        }
+        else if (vexist === 1) {
+            var rt = "<select name='selvendor' class='form-control select2 selven' id='selvendor'>" +
+                "<option value='" + seq1 + "'> " + seq1.split(' - ')[0] + "</option>" +
+                "</select>";
+        }
+
+        $('#tblquote').find('tbody').append(
+            "<tr>" +
+            "<td class='w-10'> <input type='text' id='EnquiriesModelList_CustomerName_" + inc + "' name='EnquiriesModelList_CustomerName_" + inc + "' data-toggle='tooltip' title='" + tmpquoted.CustomerName + "' value='" + tmpquoted.CustomerName + "' disabled required='True' class='form-control scstname m-b-0 bg-gray' type='text'></td>" +
+            "<td class='w-10'> <input type='text' id='EnquiriesModelList_EnqPId_" + inc + "' name='EnquiriesModelList_EnqPId_" + inc + "' data-toggle='tooltip' title='" + tmpquoted.EnqPId + "' value='" + tmpquoted.EnqPId + "' disabled class='form-control spid m-b-0 bg-gray'  type='text' /></td>" +
+            "<td class='w-15'> <input type='text' id='EnquiriesModelList_Product_" + inc + "' name='EnquiriesModelList_Product_" + inc + "' data-toggle='tooltip' title='" + tmpquoted.Product + "' disabled value='" + tmpquoted.Product + "' class='form-control sprdid m-b-0 bg-gray'  type='text' /></td>" +
+            "<td class='w-6'>  <input type='text' id='EnquiriesModelList_Price_" + inc + "' name='EnquiriesModelList_Price_" + inc + "' value='" + tmpquoted.Price + "' disabled class='form-control svenprc m-b-0 bg-gray'  type='text' /></td>" +
+            "<td class='w-6'>  <input type='text' id='EnquiriesModelList_Quantity_" + inc + "' name='EnquiriesModelList_Quantity_" + inc + "' value='" + tmpquoted.Quantity + "' disabled class='form-control sqty m-b-0 bg-gray'  type='text' /></td>" +
+            "<td class='w-10'> " + rt + "</br > " +
+            "<input type='text' id='EnquiriesModelList_Vendor1Price_" + inc + "' name='EnquiriesModelList_Vendor1Price_" + inc + "' value='" + tmpquoted.Vendor1Price + "' placeholder='Vendor1 Price' class='form-control sven1prc onlynumdec m-b-0 float-left' /></td > " +
+            "<td class='w-10'> <input type='text' id='EnquiriesModelList_QuotePrice_" + inc + "' name='EnquiriesModelList_QuotePrice_" + inc + "' placeholder='Quote Price' value='' class='form-control squotprc m-b-0'  type='text' /></br><input type='text' id='EnquiriesModelList_Margin_" + inc + "' name='EnquiriesModelList_Margin_" + inc + "' value='' placeholder='Margin' class='form-control smarg onlynumdec m-b-0 float-left' /></td > " +
+            "<td class='w-6'>  <input type='text' id='EnquiriesModelList_GST_" + inc + "' name='EnquiriesModelList_GST_" + inc + "' value='" + tmpquoted.GST + "' disabled class='form-control sgst m-b-0 bg-gray'  type='text' /></td>" +
+            "</tr>");
+        inc++;
+    });
+
+    $(".divquoted").hide();
+    $(".divquote").show();
+}
+
+//Get Margin
+$(document).on('blur', '.squotprc', function () {
+    var curRow = $(this).closest("tr");
+    var squotprc = curRow.find(".squotprc").val();
+    var sven1prc = curRow.find(".sven1prc").val();
+    var smarg = curRow.find(".smarg").val();
+    //e.preventDefault();
+    if (squotprc !== "" && squotprc !== "0" && smarg === "") {
+        var mrg = (parseFloat(squotprc) - parseFloat(sven1prc)) * 100 / parseFloat(squotprc);
+        curRow.find("td:eq(6)").find(".smarg").val(mrg.toFixed(2) + "%");
+        curRow.find("td:eq(7)").find(".sgst").focus();
+    }
+});
+//Get Margin
+
+//Get Quoted Price
+$(document).on('blur', '.smarg', function () {
+    var curRow = $(this).closest("tr");
+    var sven1prc = curRow.find(".sven1prc").val();
+    var smrg = curRow.find(".smarg").val();
+    var squotprc = curRow.find(".squotprc").val();
+    //e.preventDefault();
+    if (smrg !== "" && smrg !== "0" && squotprc === "") {
+        var mrg = (parseFloat(sven1prc) / (100 - parseFloat(smrg))) * 100;
+        curRow.find("td:eq(6)").find(".squotprc").val(mrg.toFixed(2));
+        curRow.find("td:eq(7)").find(".sgst").focus();
+    }
+});
+//Get Quoted Price
+
+//Get Vendor Price
+$(document).on('change', '.selven', function () {
+    var curRow = $(this).closest("tr");
+    var sven = curRow.find(".selven").val();
+    var sprc = sven.split(' - ')[1];
+    curRow.find("td:eq(5)").find(".sven1prc").val(sprc);
+});
+//Get Vendor Price
+
+$('.quotedsubmit').on('click', function (e) {
+    $(this).find(':submit').attr('disabled', 'disabled');
+    $(".quotedsubmit").attr("disabled", true);
+    $(".quotedsubmit").hide();
+    e.preventDefault();
+    var lnArr = new Array();
+    $(".tbl tbody tr").each(function () {
+        var tds = $(this).find("td");
+        //you could use the Find method to find the texbox or the dropdownlist and get the value.
+        var spid = $(tds[1]).find('.spid').val();
+        var sven = $(tds[5]).find('.selven').val();
+        var sven1prc = $(tds[5]).find('.sven1prc').val();
+        var squotprc = $(tds[6]).find('.squotprc').val();
+        var smarg = $(tds[6]).find('.smarg').val();
+        var sgst = $(tds[7]).find('.sgst').val();
+
+        if (spid !== "" && sven !== "" && sven1prc !== "" && sven1prc !== "0" &&
+            squotprc !== "" && squotprc !== "0" && sgst !== "") {
+            var lin = {
+                EnqPId: spid,
+                VendorId: sven,
+                VendorPrice: parseFloat(sven1prc),
+                QuotePrice: parseFloat(squotprc),
+                Margin: parseFloat(smarg),
+                GST: sgst
+                //LastVendorId: slvenid,
+                //LastVendorPrice: parseFloat(slvenprc)
+            };
+            lnArr.push(lin);
+        }
+    });
+
+    if (lnArr.length > 0) {
+        var enqs = JSON.stringify(lnArr);
+
+        $.ajax({
+            url: "/Admin/UpdateQuoted",
+            dataType: "json",
+            data: "{'enqs': '" + enqs + "'}",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                if (result.error === "") {
+                    location.reload();
+                }
+                else {
+                    alert(result.error);
+                }
+            },
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                alert(err.Message);
+            }
+        });
+    }
+    else {
+        alert("Please add atleast 1 line item.");
+    }
+    $(".sosubmit").attr("disabled", false);
+});
+
+function AddTempQuotation() {
+    var rows_selected = $("#tblQuotation tbody tr.selected");
+    var list = new Array();
+    var inc = 1;
+    var ccstId = "";
+    var venid = "";
+    var cstid = "";
+    var eIdNo = "";
+    var cvenid = "";
+    $("#tblquot > tbody > tr").remove();
+    $.each(rows_selected, function (index, row) {
+        // Create a hidden element
+        var index = $("#tblQuotation tbody tr.selected").index(this);
+        if (index == 0) {
+            ccstId = row.cells[3].innerText;
+            eIdNo = row.cells[4].innerText;
+            cvenid = row.cells[10].innerText;
+        }
+        var cstId = row.cells[3].innerText;
+        var eeid = row.cells[4].innerText;
+        var veneid = row.cells[10].innerText;
+
+        if (ccstId !== "" && cvenid != "" && eIdNo != "") {
+            if (ccstId == cstId && cvenid == veneid) {
+                list.push(row.cells[5].innerText);
+                venid = row.cells[10].innerText;
+                cstid = row.cells[3].innerText;
+                var tmpquotsrc = {};
+                tmpquotsrc.CustomerName = row.cells[3].innerText;
+                tmpquotsrc.EnqPId = row.cells[5].innerText;
+                tmpquotsrc.Product = row.cells[6].innerText;
+                tmpquotsrc.Quantity = row.cells[7].innerText;
+                tmpquotsrc.Unit = row.cells[8].innerText;
+                tmpquotsrc.VendorId = row.cells[10].innerText;
+                tmpquotsrc.QuotePrice = row.cells[12].innerText;
+                tmpquotsrc.GST = row.cells[13].innerText;
+                var amnt = parseFloat(tmpquotsrc.Quantity) * parseFloat(tmpquotsrc.QuotePrice);
+                $('#tblquot').find('tbody').append(
+                    "<tr class='selected'>" +
+                    "<td class='w-15'> <input type='text' id='EnquiriesModelList_CustomerName_" + inc + "' name='EnquiriesModelList_CustomerName_" + inc + "' data-toggle='tooltip' title='" + tmpquotsrc.CustomerName + "' value='" + tmpquotsrc.CustomerName + "' disabled required='True' class='form-control scstname m-b-0' type='text'></td>" +
+                    "<td class='w-12'> <input type='text' id='EnquiriesModelList_EnqPId_" + inc + "' name='EnquiriesModelList_EnqPId_" + inc + "' data-toggle='tooltip' title='" + tmpquotsrc.EnqPId + "' value='" + tmpquotsrc.EnqPId + "' disabled class='form-control senqpid m-b-0'  type='text' /></td>" +
+                    "<td class='w-20'> <input type='text' id='EnquiriesModelList_Product_" + inc + "' name='EnquiriesModelList_Product_" + inc + "' data-toggle='tooltip' title='" + tmpquotsrc.Product + "' value='" + tmpquotsrc.Product + "' disabled class='form-control sprdid m-b-0'  type='text' /></td>" +
+                    "<td class='w-8'>  <input type='text' id='EnquiriesModelList_Quantity_" + inc + "' name='EnquiriesModelList_Quantity_" + inc + "' value='" + tmpquotsrc.Quantity + "' disabled class='form-control sqty m-b-0'  type='text' /></td>" +
+                    "<td class='w-10'> <input type='text' id='EnquiriesModelList_Unit_" + inc + "' name='EnquiriesModelList_Unit_" + inc + "' value='" + tmpquotsrc.Unit + "' disabled class='form-control sunit m-b-0'  type='text' /></td>" +
+                    "<td class='w-8'>  <input type='text' id='EnquiriesModelList_UnitPrice_" + inc + "' name='EnquiriesModelList_UnitPrice_" + inc + "' value='" + tmpquotsrc.QuotePrice + "' placeholder='Unit Price' disabled class='form-control svunitprc m-b-0' /></td>" +
+                    "<td class='w-8'> <input type='text' id='EnquiriesModelList_Discount_" + inc + "' name='EnquiriesModelList_Discount_" + inc + "' value='' placeholder='Discount' class='form-control sdisc m-b-0' /></br><input type='text' id='EnquiriesModelList_Value_" + inc + "' name='EnquiriesModelList_Value_" + inc + "' value='' placeholder='Value' class='form-control svalue m-b-0' /></td>" +
+                    "<td class='w-8'> <input type='text' id='EnquiriesModelList_TotalPrice_" + inc + "' name='EnquiriesModelList_TotalPrice_" + inc + "' value='" + amnt+"' placeholder='TotalPrice' disabled class='form-control stotprc m-b-0' />" +
+                    "<td class='w-10'> <input type='text' id='EnquiriesModelList_GST_" + inc + "' name='EnquiriesModelList_GST_" + inc + "' value='" + tmpquotsrc.GST + "' placeholder='GST' disabled class='form-control svengst m-b-0' /></td > " +
+                    "</tr>");
+                inc++;
+                //});
+                if (cstid !== "") {
+                    $.ajax({
+                        url: '/Admin/GetCustomerByName',
+                        data: { cstid: cstid },
+                        type: "GET",
+                        dataType: "JSON",
+                        success: function (res) {
+                            var relsn = res;
+                            $('#QuotationModels_CustomerBillingAddress').empty();
+                            if (relsn.length === 0) {
+                                $("#QuotationModels_CustomerBillingAddress").attr("required", true);
+                                $("#QuotationModels_CustomerBillingAddress").attr("disabled", true);
+                            }
+                            else if (relsn.length === 1) {
+                                $("#QuotationModels_CustomerBillingAddress").attr("disabled", false);
+                                var optionrel = '<option value="' + relsn[0].Id + '">' + relsn[0].Name + '</option>';
+                                $('#QuotationModels_CustomerBillingAddress').append(optionrel);
+                                $('#QuotationModels_CustomerBillingAddress').val(relsn[0].Id);
+                            }
+                            else if (relsn.length > 1) {
+                                $('#QuotationModels_CustomerBillingAddress').val("");
+                                $("#QuotationModels_CustomerBillingAddress").attr("disabled", false);
+                                var optionrel = '<option value="">--Select Customer Billing Address--</option>';
+                                $('#QuotationModels_CustomerBillingAddress').append(optionrel);
+                                $("#QuotationModels_CustomerBillingAddress").attr("required", true);
+                                for (var i = 0; i < relsn.length; i++) {
+                                    var optionrel = '<option value="' + relsn[i].Id + '">' + relsn[i].Name + '</option>';
+                                    $('#QuotationModels_CustomerBillingAddress').append(optionrel);
+                                }
+                            }
+                        },
+                        error: function () {
+                            alert("Failed! Please try again.");
+                        }
+                    });
+                }
+
+                if (cstid !== "") {
+                    $.ajax({
+                        url: '/Admin/GetCustomerPaymentTerms',
+                        data: { cstid: cstid },
+                        type: "GET",
+                        dataType: "JSON",
+                        success: function (res) {
+                            var relsn = res;
+                            $('.pterms').val();
+                            if (relsn.length !== 0) {
+                                $(".pterms").val(relsn[0].PTerms);
+                            }
+                        },
+                        error: function () {
+                            alert("Failed! Please try again.");
+                        }
+                    });
+                }
+                else {
+                    $(".pterms").val("");
+                }
+                //Create Movie Object  
+                $(".divsourced").hide();
+                $(".divgen").show();
+            }
+        }
+        else
+            if (eIdNo != "" && cvenid != "") {
+                if (eIdNo == eeid && cvenid == veneid) {
+                    //$.each(rows_selected, function (index, row) {
+                    // Create a hidden element
+                    list.push(row.cells[5].innerText);
+                    venid = row.cells[10].innerText;
+                    cstid = row.cells[3].innerText;
+                    var tmpquotsrc = {};
+                    tmpquotsrc.CustomerName = row.cells[3].innerText;
+                    tmpquotsrc.EnqPId = row.cells[5].innerText;
+                    tmpquotsrc.Product = row.cells[6].innerText;
+                    tmpquotsrc.Quantity = row.cells[7].innerText;
+                    tmpquotsrc.Unit = row.cells[8].innerText;
+                    tmpquotsrc.VendorId = row.cells[10].innerText;
+                    tmpquotsrc.QuotePrice = row.cells[12].innerText;
+                    tmpquotsrc.GST = row.cells[13].innerText;
+                    var amnt = parseFloat(tmpquotsrc.Quantity) * parseFloat(tmpquotsrc.QuotePrice);
+                    $('#tblquot').find('tbody').append(
+                        "<tr class='selected'>" +
+                        "<td class='w-15'> <input type='text' id='EnquiriesModelList_CustomerName_" + inc + "' name='EnquiriesModelList_CustomerName_" + inc + "' data-toggle='tooltip' title='" + tmpquotsrc.CustomerName + "' value='" + tmpquotsrc.CustomerName + "' disabled required='True' class='form-control scstname m-b-0' type='text'></td>" +
+                        "<td class='w-12'> <input type='text' id='EnquiriesModelList_EnqPId_" + inc + "' name='EnquiriesModelList_EnqPId_" + inc + "' data-toggle='tooltip' title='" + tmpquotsrc.EnqPId + "' value='" + tmpquotsrc.EnqPId + "' disabled class='form-control senqpid m-b-0'  type='text' /></td>" +
+                        "<td class='w-20'> <input type='text' id='EnquiriesModelList_Product_" + inc + "' name='EnquiriesModelList_Product_" + inc + "' data-toggle='tooltip' title='" + tmpquotsrc.Product + "' value='" + tmpquotsrc.Product + "' disabled class='form-control sprdid m-b-0'  type='text' /></td>" +
+                        "<td class='w-8'>  <input type='text' id='EnquiriesModelList_Quantity_" + inc + "' name='EnquiriesModelList_Quantity_" + inc + "' value='" + tmpquotsrc.Quantity + "' disabled class='form-control sqty m-b-0'  type='text' /></td>" +
+                        "<td class='w-10'> <input type='text' id='EnquiriesModelList_Unit_" + inc + "' name='EnquiriesModelList_Unit_" + inc + "' value='" + tmpquotsrc.Unit + "' disabled class='form-control sunit m-b-0'  type='text' /></td>" +
+                        "<td class='w-8'>  <input type='text' id='EnquiriesModelList_UnitPrice_" + inc + "' name='EnquiriesModelList_UnitPrice_" + inc + "' value='" + tmpquotsrc.QuotePrice + "' placeholder='Unit Price' disabled class='form-control svunitprc m-b-0' /></td>" +
+                        "<td class='w-8'> <input type='text' id='EnquiriesModelList_Discount_" + inc + "' name='EnquiriesModelList_Discount_" + inc + "' value='' placeholder='Discount' class='form-control sdisc m-b-0' /></br><input type='text' id='EnquiriesModelList_Value_" + inc + "' name='EnquiriesModelList_Value_" + inc + "' value='' placeholder='Value' class='form-control svalue m-b-0' /></td>" +
+                        "<td class='w-8'> <input type='text' id='EnquiriesModelList_TotalPrice_" + inc + "' name='EnquiriesModelList_TotalPrice_" + inc + "' value='' placeholder='TotalPrice' disabled class='form-control stotprc m-b-0' />"+
+                        "<td class='w-10'> <input type='text' id='EnquiriesModelList_GST_" + inc + "' name='EnquiriesModelList_GST_" + inc + "' value='" + tmpquotsrc.GST + "' placeholder='GST' disabled class='form-control svengst m-b-0' /></td > " +
+                        "</tr>");
+                    inc++;
+                    //});
+                    if (cstid !== "") {
+                        $.ajax({
+                            url: '/Admin/GetCustomerByName',
+                            data: { cstid: cstid },
+                            type: "GET",
+                            dataType: "JSON",
+                            success: function (res) {
+                                var relsn = res;
+                                $('#QuotationModels_CustomerBillingAddress').empty();
+                                if (relsn.length === 0) {
+                                    $("#QuotationModels_CustomerBillingAddress").attr("required", true);
+                                    $("#QuotationModels_CustomerBillingAddress").attr("disabled", true);
+                                }
+                                else if (relsn.length === 1) {
+                                    $("#QuotationModels_CustomerBillingAddress").attr("disabled", false);
+                                    var optionrel = '<option value="' + relsn[0].Id + '">' + relsn[0].Name + '</option>';
+                                    $('#QuotationModels_CustomerBillingAddress').append(optionrel);
+                                    $('#QuotationModels_CustomerBillingAddress').val(relsn[0].Id);
+                                }
+                                else if (relsn.length > 1) {
+                                    $('#QuotationModels_CustomerBillingAddress').val("");
+                                    $("#QuotationModels_CustomerBillingAddress").attr("disabled", false);
+                                    var optionrel = '<option value="">--Select Customer Billing Address--</option>';
+                                    $('#QuotationModels_CustomerBillingAddress').append(optionrel);
+                                    $("#QuotationModels_CustomerBillingAddress").attr("required", true);
+                                    for (var i = 0; i < relsn.length; i++) {
+                                        var optionrel = '<option value="' + relsn[i].Id + '">' + relsn[i].Name + '</option>';
+                                        $('#QuotationModels_CustomerBillingAddress').append(optionrel);
+                                    }
+                                }
+                            },
+                            error: function () {
+                                alert("Failed! Please try again.");
+                            }
+                        });
+                    }
+
+                    if (cstid !== "") {
+                        $.ajax({
+                            url: '/Admin/GetVendorPaymentTerms',
+                            data: { cstid: cstid },
+                            type: "GET",
+                            dataType: "JSON",
+                            success: function (res) {
+                                var relsn = res;
+                                $('.pterms').val();
+                                if (relsn.length !== 0) {
+                                    $(".pterms").val(relsn[0].PTerms);
+                                }
+                            },
+                            error: function () {
+                                alert("Failed! Please try again.");
+                            }
+                        });
+                    }
+                    else {
+                        $(".pterms").val("");
+                    }
+                    //Create Movie Object  
+                    $(".divsourced").hide();
+                    $(".divgen").show();
+                }
+            }
+        pIdNo = row.cells[4].innerText;
+    });
+}
+// Iterate over all selected checkboxes
+
+//Get Margin
+$(document).on('blur', '.sdisc', function () {
+    var curRow = $(this).closest("tr");
+    var sdisc = curRow.find(".sdisc").val();
+    var svunitprc = curRow.find(".svunitprc").val();
+    var sqty = curRow.find(".sqty").val();
+    //e.preventDefault();
+    if (sdisc !== "" && sdisc !== "0" && svunitprc !== "" && svunitprc !== "0") {
+        var mrg = parseFloat(svunitprc) - ((parseFloat(svunitprc) * parseFloat(sdisc)) / 100);
+        var tot = parseFloat(sqty) * parseFloat(mrg);
+        curRow.find("td:eq(6)").find(".svalue").val(mrg.toFixed(2));
+        curRow.find("td:eq(7)").find(".stotprc").val(tot.toFixed(2));
+    }
+});
+//Get Margin
+
+//Get Margin
+$(document).on('blur', '.svalue', function () {
+    var curRow = $(this).closest("tr");
+    var svalue = curRow.find(".svalue").val();
+    var svunitprc = curRow.find(".svunitprc").val();
+    var sqty = curRow.find(".sqty").val();
+    //e.preventDefault();
+    if (svalue !== "" && svalue !== "0" && svunitprc !== "" && svunitprc !== "0") {
+        var mrg = (parseFloat(svunitprc) - parseFloat(svalue)) * 100 / parseFloat(svunitprc);
+        var tot = parseFloat(sqty) * parseFloat(svalue);
+        curRow.find("td:eq(6)").find(".sdisc").val(mrg.toFixed(2));
+        curRow.find("td:eq(7)").find(".stotprc").val(tot.toFixed(2));
+    }
+});
+//Get Margin
+
+$(".quot").hide();
+$('#enqcalculate').on('click', function (e) {
+    e.preventDefault();
+    var vba = $('.vba option:selected').text();
+    var bba = $('.bba option:selected').text();
+    if (vba != "" && vba != '--Select Customer Billing Address--' && bba != "" && bba != '--Select Buyer Billing Address--') {
+        var vsts = vba.split('-').pop();
+        var bsts = bba.split('-').pop();
+
+        var pnfamnt = $('.pnfamnt').val();
+        var frghtamnt = $('.frghtamnt').val();
+
+        var pnfamnta = 0;
+        var frghtamnta = 0;
+
+        var tamountbeforetax = 0, totl_cgst = 0, totl_sgst = 0, totl_igst = 0;
+        var cgstPercentage = 0, sgstPercentage = 0, igstPercentage = 0, cgstAmt = 0, igstAmt = 0, sgstAmt = 0;
+        // Iterate over all selected checkboxes
+        var i = 0;
+        $("#tblquot tbody tr").each(function () {
+            var tds = $(this).find("td");
+            if (i == 0) {
+                pnfamnt = parseFloat(pnfamnt);
+                frghtamnt = parseFloat(frghtamnt);
+
+                pnfamnta = parseFloat(pnfamnt);
+                frghtamnta = parseFloat(frghtamnt);
+            }
+            else {
+                pnfamnt = 0;
+                frghtamnt = 0;
+            }
+            var amountBeforeTax = parseFloat($(tds[7]).find('.stotprc').val());
+            tamountbeforetax += parseFloat(amountBeforeTax);
+            var gstPercentage = parseFloat($(tds[8]).find('.svengst').val());
+            if (vsts.toLowerCase() == bsts.toLowerCase()) {
+                cgstPercentage = gstPercentage / 2;
+                sgstPercentage = gstPercentage / 2;
+                cgstAmt = (amountBeforeTax + pnfamnt + frghtamnt) * cgstPercentage / 100;
+                sgstAmt = (amountBeforeTax + pnfamnt + frghtamnt) * sgstPercentage / 100;
+            }
+            else {
+                igstPercentage = gstPercentage;
+                igstAmt = (amountBeforeTax + pnfamnt + frghtamnt) * igstPercentage / 100;
+            }
+            totl_cgst += cgstAmt;
+            totl_sgst += sgstAmt;
+            totl_igst += igstAmt;
+            i++;
+        });
+
+        $(".totamnt").val(ReplaceNumberWithCommas(tamountbeforetax.toFixed(2)));
+        $(".cgstamnt").val(ReplaceNumberWithCommas(totl_cgst.toFixed(2)));
+        $(".sgstamnt").val(ReplaceNumberWithCommas(totl_sgst.toFixed(2)));
+        $(".igstamnt").val(ReplaceNumberWithCommas(totl_igst.toFixed(2)));
+
+        $(".totamntgst").val(ReplaceNumberWithCommas((totl_cgst + totl_igst + totl_sgst).toFixed(2)));
+
+        $(".netamnt").val(ReplaceNumberWithCommas((tamountbeforetax + totl_cgst + totl_igst + totl_sgst + pnfamnta + frghtamnta).toFixed(2)));
+        $(".quot").show();
+    }
+});
+
+function ReplaceNumberWithCommas(yourNumber) {
+    //Seperates the components of the number
+    var components = yourNumber.toString().split(".");
+    //Comma-fies the first part
+    components[0] = components[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    //Combines the two sections
+    return components.join(".");
+}
+
+$('#chksameadd').change(function () {
+    if ($(this).is(":checked")) {
+        $("#QuotationModels_IsShippingAddressSame").val("1");
+        $(".shpname").val('');
+        $(".shpadd").val('');
+        $(".shpcty").val('');
+        $(".shpsts").val('');
+        $(".shppin").val('');
+        $(".shpcnt").val('');
+        $(".shpgst").val('');
+        $(".shppan").val('');
+        $(".shpname").prop('readonly', true);
+        $(".shpadd").prop('readonly', true);
+        $(".shpcty").prop('readonly', true);
+        $(".shpsts").prop('readonly', true);
+        $(".shppin").prop('readonly', true);
+        $(".shpcntct").prop('readonly', true);
+        $(".shpgst").prop('readonly', true);
+        $(".shppan").prop('readonly', true);
+    } else {
+        $("#QuotationModels_IsShippingAddressSame").val("0");
+        $(".shpname").val('');
+        $(".shpadd").val('');
+        $(".shpcty").val('');
+        $(".shpsts").val('');
+        $(".shppin").val('');
+        $(".shpcnt").val('');
+        $(".shpgst").val('');
+        $(".shppan").val('');
+        $(".shpname").prop('readonly', false);
+        $(".shpadd").prop('readonly', false);
+        $(".shpcty").prop('readonly', false);
+        $(".shpsts").prop('readonly', false);
+        $(".shppin").prop('readonly', false);
+        $(".shpcntct").prop('readonly', false);
+        $(".shpgst").prop('readonly', false);
+        $(".shppan").prop('readonly', false);
+    }
+});
+
+$('.quot').on('click', function (e) {
+    $(this).find(':submit').attr('disabled', 'disabled');
+    $(".quot").attr("disabled", true);
+    $(".quot").hide();
+    e.preventDefault();
+    var lnArr = new Array();
+    var enqtype = $('.enqtype').val();
+    var vbid = $('.vba').val();
+    var bbid = $('.bba').val();
+    var issame = $('#QuotationModels_IsShippingAddressSame').val();
+    var shpname = $('.shpname').val();
+    var shpadd = $('.shpadd').val();
+    var shpcty = $('.shpcty').val();
+    var shpsts = $('.shpsts').val();
+    var shppin = $('.shppin').val();
+    var shpcntct = $('.shpcntct').val();
+    var shpgst = $('.shpgst').val();
+    var shppan = $('.shppan').val();
+
+    var pnfamnt = $('.pnfamnt').val().replace(/,/g, "");
+    var frghtamnt = $('.frghtamnt').val().replace(/,/g, "");
+    var totamnt = $('.totamnt').val().replace(/,/g, "");
+    var cgstamnt = $('.cgstamnt').val().replace(/,/g, "");
+    var sgstamnt = $('.sgstamnt').val().replace(/,/g, "");
+    var igstamnt = $('.igstamnt').val().replace(/,/g, "");
+    var totamntgst = $('.totamntgst').val().replace(/,/g, "");
+    var netamnt = $('.netamnt').val().replace(/,/g, "");
+
+    var tcond = $('.tcond').val();
+    var ldtime = $('.ldtime').val();
+    var instk = $('.instk').val();
+    var pfchrg = $('.pfchrg').val();
+    var pterms = $('.pterms').val();
+    var frtrms = $('.frtrms').val();
+    var motrns = $('.motrns').val();
+    var wrnty = $('.wrnty').val();
+    var valofquot = $('.valofquot').val();
+    var misc = $('.misc').val();
+    var remark = $('.remark').val();
+    var lmremark = $('.lmremark').val();
+
+    if (vbid !== "" && bbid !== "") {
+        $(".tbl tbody tr").each(function () {
+            var tds = $(this).find("td");
+            //you could use the Find method to find the texbox or the dropdownlist and get the value.
+            var senqpid = $(tds[1]).find('.senqpid').val();
+            var svunitprc = $(tds[5]).find('.svunitprc').val();
+            var sdisc = $(tds[6]).find('.sdisc').val();
+            if (sdisc  === "") {
+                sdisc = 0;
+            }
+
+            if (senqpid !== "" && svunitprc !== "" && svunitprc !== "0") {
+                var lin = {
+                    EnqPId: senqpid,
+                    QuotePrice: svunitprc,
+                    Discount: sdisc,
+                    EnqType: enqtype,
+                    CustomerBillingAddress: vbid,
+                    BuyerBillingAddress: bbid,
+                    IsShippingAddressSame: issame,
+                    BuyerShippingName: shpname,
+                    BuyerShippingAddress: shpadd,
+                    BuyerShippingCity: shpcty,
+                    BuyerShippingState: shpsts,
+                    BuyerShippingPincode: shppin,
+                    BuyerShippingContact: shpcntct,
+                    BuyerShippingGST: shpgst,
+                    BuyerShippingPAN: shppan,
+                    PNFAmount: parseFloat(pnfamnt),
+                    FreightAmount: parseFloat(frghtamnt),
+                    TotalAmount: parseFloat(totamnt),
+                    CGSTAmount: parseFloat(cgstamnt),
+                    SGSTAmount: parseFloat(sgstamnt),
+                    IGSTAmount: parseFloat(igstamnt),
+                    TotalAmountGST: parseFloat(totamntgst),
+                    NetAmount: parseFloat(netamnt),
+                    TACondition: tcond,
+                    LeadTime: ldtime,
+                    InStock: instk,
+                    PackFwdCharges: pfchrg,
+                    PaymentTerms: pterms,
+                    FrieghtTerms: frtrms,
+                    ModeOfTransport: motrns,
+                    Warranty: wrnty,
+                    ValidityOfQuot: valofquot,
+                    Misc: misc,
+                    Remarks: remark,
+                    LMRemarks: lmremark,
+                };
+                lnArr.push(lin);
+            }
+        });
+
+        if (lnArr.length > 0) {
+            var enq = JSON.stringify(lnArr);
+
+            $.ajax({
+                url: "/Admin/UpdateQuotation",
+                dataType: "json",
+                data: "{'enq': '" + enq + "' }",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (result) {
+                    if (result.error === "") {
+                        location.reload();
+                    }
+                    else {
+                        alert(result.error);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert(err.Message);
+                }
+            });
+        }
+        else {
+            alert("Please add atleast 1 line item.");
+        }
+    }
+    else {
+        alert("Please fill the required fields.");
+    }
+    $(".quot").attr("disabled", false);
+});
+
+
+$('.quotapprove').on('click', function (e) {
+    $(this).find(':submit').attr('disabled', 'disabled');
+    $(".quotapprove").attr("disabled", true);
+    $(".quotapprove").hide();
+    e.preventDefault();
+    var rows_selected = $("#tblQuotationApprove tbody tr.selected");
+    var list = new Array();
+    // Iterate over all selected checkboxes
+    $.each(rows_selected, function (index, row) {
+        // Create a hidden element
+        list.push(row.cells[5].innerText);
+    });
+
+    if (list.length > 0) {
+        var enqIds = JSON.stringify(list);
+        $.ajax({
+            url: "/Admin/ApproveQuotation",
+            dataType: "json",
+            data: "{'enqIds': '" + enqIds + "'}",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                if (result.error === "") {
+                    location.reload();
+                }
+                else {
+                    alert(result.error);
+                }
+            },
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                alert(err.Message);
+            }
+        });
+    }
+    else {
+        alert("Please select atleast one po.");
+    }
+});
+
+
+$('.quotnotapprove').on('click', function (e) {
+    $(this).find(':submit').attr('disabled', 'disabled');
+    $(".quotnotapprove").attr("disabled", true);
+    $(".quotnotapprove").hide();
+    e.preventDefault();
+    var rows_selected = $("#tblQuotationApprove tbody tr.selected");
+    var list = new Array();
+    // Iterate over all selected checkboxes
+    $.each(rows_selected, function (index, row) {
+        // Create a hidden element
+        list.push(row.cells[6].innerText);
+    });
+    var napprmk = $(".napprmk").val();
+    if (list.length > 0) {
+        if (napprmk != "") {
+            var quotNos = JSON.stringify(list);
+            $.ajax({
+                url: "/Admin/QuotationNotApprovedList",
+                dataType: "json",
+                data: "{'quotNos': '" + quotNos + "','napprmk': '" + napprmk + "'}",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (result) {
+                    if (result.error === "") {
+                        location.reload();
+                    }
+                    else {
+                        alert(result.error);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert(err.Message);
+                }
+            });
+        } else {
+            alert("Please enter remarks");
+            $(this).find(':submit').attr('disabled', 'disabled');
+            $(".quotnotapprove").attr("disabled", true);
+            $(".quotnotapprove").show();
+        }
+    }
+    else {
+        alert("Please select atleast one po.");
+    }
+});
