@@ -4015,7 +4015,7 @@ $(document).on('focus', '.sven', function () {
     $('#' + id).autocomplete({
         source: function (request, response) {
             $.ajax({
-                url: '/Admin/GetVendorList',
+                url: '/Admin/GetAllVendorList',
                 type: "POST",
                 dataType: "json",
                 data: { Prefix: request.term },
