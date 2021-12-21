@@ -1624,6 +1624,30 @@ $(document).ready(function () {
         });
     }).draw();
 
+    var tblquotbackstage = $('#tblquotbackstage').DataTable({
+        "columnDefs": [
+            {
+                'targets': 0, 'checkboxes':
+                {
+                    'selectRow': true
+                }
+            }
+        ],
+        select: {
+            style: 'multi',
+        },
+        "scrollX": true,
+        "paging": false,
+        //"searching": false,
+        "info": false,
+    });
+    tblquotbackstage.on('order.dt search.dt', function () {
+        tblquotbackstage.column(1, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblquotbackstage.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
     var tblDispatched = $('#tblDispatched').DataTable({
         "paging": false,
         "info": false,
@@ -3603,6 +3627,46 @@ $('.pobackstage').on('click', function (e) {
     }
     else {
         alert("Please select atleast one po.");
+    }
+});
+
+$('.enqbackstage').on('click', function (e) {
+    $(this).find(':submit').attr('disabled', 'disabled');
+    $(".enqbackstage").attr("disabled", true);
+    e.preventDefault();
+    var stg = $(".quotbckstg").val();
+    var rows_selected = $("#tblquotbackstage tbody tr.selected");
+    var list = new Array();
+    // Iterate over all selected checkboxes
+    $.each(rows_selected, function (index, row) {
+        // Create a hidden element
+        list.push(row.cells[5].innerText);
+    });
+
+    if (list.length > 0) {
+        var enqIds = JSON.stringify(list);
+        $.ajax({
+            url: "/Admin/UpdateQuotationBackstage",
+            dataType: "json",
+            data: "{'enqIds': '" + enqIds + "', 'sts': '" + stg + "'}",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                if (result.error === "") {
+                    location.reload();
+                }
+                else {
+                    alert(result.error);
+                }
+            },
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                alert(err.Message);
+            }
+        });
+    }
+    else {
+        alert("Please select atleast one enq.");
     }
 });
 
