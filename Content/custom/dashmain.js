@@ -4413,7 +4413,7 @@ function AddTempQuotation() {
         var veneid = row.cells[10].innerText;
 
         if (ccstId !== "" && cvenid != "" && eIdNo != "") {
-            if (ccstId == cstId && cvenid == veneid) {
+            if (ccstId == cstId /*&& cvenid == veneid*/) {
                 list.push(row.cells[5].innerText);
                 venid = row.cells[10].innerText;
                 cstid = row.cells[3].innerText;
