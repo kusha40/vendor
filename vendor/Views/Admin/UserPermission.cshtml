@@ -1,0 +1,175 @@
+﻿@using Vendor_Indusuno.Extensions
+@model Vendor_Indusuno.ViewModels.UserPermissionViewModel
+@{
+    ViewBag.Title = "User Permission";
+    TempData["HRM"] = "active";
+    TempData["UserPermission"] = "active";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        @Html.Raw(Html.PageGTitle())
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index")"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        @Html.Raw(Html.BuildBreadcrumbNavigation())
+        @*<li class="active">Dashboard</li>*@
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    @using (Html.BeginForm("UserPermission", "Admin", FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off" }))
+    {
+        @Html.AntiForgeryToken()
+        <!-- Main row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Default box -->
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Add/Edit User Permission</h3>
+                        <div class="box-tools pull-right">
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="col-md-12">
+                            <div class="msgs">
+                                @if (ViewData?.ModelState[""]?.Errors?.Any() == true)
+                                {
+                                    <div class="alert alert-danger alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                                        @Html.ValidationSummary(true, "", new { @class = "float-left" })
+                                    </div>
+                                }
+                                @if (!String.IsNullOrEmpty(ViewBag.SucMsg))
+                                {
+                                    <div class="alert alert-success alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-check"></i> Success!</h4>
+                                        <strong>Well done!</strong> @ViewBag.SucMsg
+                                    </div>
+                                }
+                                @if (!String.IsNullOrEmpty(TempData["ErrMsg"] + ""))
+                                {
+                                    <div class="alert alert-danger alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                                        <strong>Oh snap!</strong> @TempData["ErrMsg"]
+                                    </div>
+                                }
+                                @if (!String.IsNullOrEmpty(TempData["SucMsg"] + ""))
+                                {
+                                    <div class="alert alert-success alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-check"></i> Success!</h4>
+                                        <strong>Well done!</strong> @TempData["SucMsg"]
+                                    </div>
+                                }
+                            </div>
+                            @Html.HiddenFor(model => model.AddUserModels.Id)
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p class="lead">Add User </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group m-b-0">
+                                        @Html.LabelFor(m => m.AddUserModels.UserCode, new { @class = "form-control-label" })
+                                        @Html.DropDownListFor(model => model.AddUserModels.UserCode, new SelectList(Model.KeysValuesModelList, "Key", "Value"),
+                                        "-- Select Employee --", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.AddUserModels.UserCode, "",
+                                        new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <button type="submit" name="search" class="btn bg-aqua" title="Search"
+                                            value="Search">
+                                        SEARCH
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="box-tools pull-left">
+                                    <button type="submit" id="upsubmit" name="submit" class="btn bg-aqua" title="Submit"
+                                            value="Submit">
+                                        SUBMIT
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        @foreach (var item in Model.PageModelList)
+                        {
+                            //string module = (item.GroupName + "").Replace(" ", "");
+
+                            string[] pages = item.PageName.Split(',');
+                            string[] access = item.PageAccess.Split(',');
+
+                            string[] gArr = item.GroupName.Split('#');
+                            string gName = gArr[0] + "";
+                            string gTitle = gArr[1] + "";
+
+                            <div class="col-md-4 m-t-20">
+                                <!-- Widget: user widget style 1 -->
+                                <div class="box box-widget widget-user-2">
+                                    <!-- Add the bg color to the header using any of the bg-* classes -->
+                                    <div class="widget-user-header bg-m-black">
+                                        <!-- /.widget-user-image -->
+                                        @*<h3 class="widget-user-username m-l-0">@item.GroupName</h3>*@
+                                        <h3 class="widget-user-username m-l-0">@gTitle</h3>
+                                    </div>
+                                    <div class="box-footer no-padding scrollstyle">
+                                        <ul class="nav nav-stacked">
+                                            @{
+                                                int row = 0;
+                                            }
+                                            @foreach (string page in pages)
+                                            {
+                                                string[] pArr = page.Split('#');
+                                                string pName = pArr[0] + "";
+                                                string pTitle = pArr[1] + "";
+
+                                                string pgn = (pName + "").Trim();
+                                                string pg = (pName + "").Replace(" ", "");
+
+                                                <li>
+                                                    <a>
+                                                        @*@page*@
+                                                        @pTitle
+                                                        <div class="checkbox chk float-right m-t-0 m-b-0">
+                                                            <label>
+                                                                @Html.CheckBox(pgn, (access[row].Trim() == "1" ? true : false), new { @class = "chk" })
+                                                            </label>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                row++;
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- /.widget-user -->
+                            </div>
+                        }
+
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+
+                    </div>
+                    <!-- /.box-footer-->
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+        <!-- danger with sound -->
+    }
+</section>
+<!-- /.content -->

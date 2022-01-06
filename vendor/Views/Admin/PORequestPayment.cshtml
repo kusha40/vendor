@@ -1,0 +1,556 @@
+﻿@using Vendor_Indusuno.Extensions
+@model Vendor_Indusuno.ViewModels.PORequestPaymentViewModel
+@{
+    ViewBag.Title = "PO Request Payment";
+    TempData["Payment"] = "active";
+    TempData["RequestPayment"] = "active";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    @{
+        string actType = "Add";
+        string actBtn = "Submit";
+        string pageTitle = Html.Raw(Html.PageGTitle()) + "";
+        if (!string.IsNullOrEmpty(Model.PORequestPaymentModels.Id))
+        {
+            actType = "Edit";
+            actBtn = "Update";
+        }
+    }
+    <h1>
+        @pageTitle
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index")"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        @Html.Raw(Html.BuildBreadcrumbNavigation())
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    @using (Html.BeginForm("PORequestPayment", "Admin", FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <!-- Main row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Default box -->
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">@actType @pageTitle</h3>
+                        <div class="box-tools pull-right">
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="col-md-12">
+                            <div class="msgs">
+                                @if (ViewData?.ModelState[""]?.Errors?.Any() == true)
+                                {
+                                    <div class="alert alert-danger alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                                        @Html.ValidationSummary(true, "", new { @class = "" })
+                                    </div>
+                                }
+                                @if (!String.IsNullOrEmpty(ViewBag.SucMsg))
+                                {
+                                    <div class="alert alert-success alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-check"></i> Success!</h4>
+                                        <strong>Well done!</strong> @ViewBag.SucMsg
+                                    </div>
+                                }
+                                @if (!String.IsNullOrEmpty(ViewBag.ErrMsg))
+                                {
+                                    <div class="alert alert-danger alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                                        <strong>Oh snap!</strong> @ViewBag.ErrMsg
+                                    </div>
+                                }
+                                @if (!String.IsNullOrEmpty(TempData["ErrMsg"] + ""))
+                                {
+                                    <div class="alert alert-danger alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                                        <strong>Oh snap!</strong> @TempData["ErrMsg"]
+                                    </div>
+                                }
+                                @if (!String.IsNullOrEmpty(TempData["SucMsg"] + ""))
+                                {
+                                    <div class="alert alert-success alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-check"></i> Success!</h4>
+                                        <strong>Well done!</strong> @TempData["SucMsg"]
+                                    </div>
+                                }
+                            </div>
+                            @Html.HiddenFor(model => model.PORequestPaymentModels.Id)
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.PORequestPaymentModels.VPONumber, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextBoxFor(m => m.PORequestPaymentModels.VPONumber,
+                                new
+                                {
+                                    @class = "form-control text-uppercase",
+                                    @readonly = true,
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.PORequestPaymentModels.VPONumber)
+                                })
+                                        @Html.ValidationMessageFor(m => m.PORequestPaymentModels.VPONumber, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.PORequestPaymentModels.Amount, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextBoxFor(m => m.PORequestPaymentModels.Amount,
+                                new
+                                {
+                                    @class = "form-control text-uppercase",
+                                    @readonly = true,
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.PORequestPaymentModels.Amount)
+                                })
+                                        @Html.ValidationMessageFor(m => m.PORequestPaymentModels.Amount, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.PORequestPaymentModels.PaymentType, new { @class = "form-control-label" })
+                                        @Html.DropDownListFor(m => m.PORequestPaymentModels.PaymentType,
+                                       new List<SelectListItem>
+                                          {
+                                            new SelectListItem{ Text="CREDIT", Value = "CREDIT" },
+                                            new SelectListItem{ Text="ADVANCE", Value = "ADVANCE" },
+                                            new SelectListItem{ Text="CREDIT+ADVANCE", Value = "CREDIT+ADVANCE" },
+                                          },
+                                        "--Select Payment Type--", new { @class = "form-control select2 rppmnttype" })
+                                        @Html.ValidationMessageFor(m => m.PORequestPaymentModels.PaymentType, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                @if (Model.PORequestPaymentModels.PaymentType == "CREDIT")
+                                {
+                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.PORequestPaymentModels.PaymentMode, new { @class = "form-control-label" })
+                                            @Html.DropDownListFor(m => m.PORequestPaymentModels.PaymentMode,
+                                        new List<SelectListItem>
+                                           {
+                                                new SelectListItem{ Text="PDC CHEQUE", Value = "PDC CHEQUE" },
+                                                new SelectListItem{ Text="OPEN CREDIT", Value = "OPEN CREDIT"  },
+                                                new SelectListItem{ Text="NEFT", Value = "NEFT", Disabled=true },
+                                                new SelectListItem{ Text="CD CHEQUE", Value = "CD CHEQUE", Disabled=true },
+                                                new SelectListItem{ Text="CASH", Value = "CASH", Disabled=true  },
+                                           },
+                                         "--Select Payment Mode--", new { @class = "form-control select2 rppmntmode" })
+                                            @Html.ValidationMessageFor(m => m.PORequestPaymentModels.PaymentMode, "",
+                                 new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                }
+                                else if (Model.PORequestPaymentModels.PaymentType == "ADVANCE")
+                                {
+                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.PORequestPaymentModels.PaymentMode, new { @class = "form-control-label" })
+                                            @Html.DropDownListFor(m => m.PORequestPaymentModels.PaymentMode,
+                                        new List<SelectListItem>
+                                           {
+                                                new SelectListItem{ Text="PDC CHEQUE", Value = "PDC CHEQUE", Disabled=true },
+                                                new SelectListItem{ Text="OPEN CREDIT", Value = "OPEN CREDIT", Disabled=true  },
+                                                new SelectListItem{ Text="NEFT", Value = "NEFT" },
+                                                new SelectListItem{ Text="CD CHEQUE", Value = "CD CHEQUE" },
+                                                new SelectListItem{ Text="CASH", Value = "CASH" },
+                                           },
+                                         "--Select Payment Mode--", new { @class = "form-control select2 rppmntmode" })
+                                            @Html.ValidationMessageFor(m => m.PORequestPaymentModels.PaymentMode, "",
+                                 new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.PORequestPaymentModels.PaymentMode, new { @class = "form-control-label" })
+                                            @Html.DropDownListFor(m => m.PORequestPaymentModels.PaymentMode,
+                                        new List<SelectListItem>
+                                           {
+                                                new SelectListItem{ Text="PDC CHEQUE", Value = "PDC CHEQUE" },
+                                                new SelectListItem{ Text="OPEN CREDIT", Value = "OPEN CREDIT" },
+                                                new SelectListItem{ Text="NEFT", Value = "NEFT" },
+                                                new SelectListItem{ Text="CD CHEQUE", Value = "CD CHEQUE" },
+                                                new SelectListItem{ Text="CASH", Value = "CASH" },
+                                           },
+                                         "--Select Payment Mode--", new { @class = "form-control select2 rppmntmode" })
+                                            @Html.ValidationMessageFor(m => m.PORequestPaymentModels.PaymentMode, "",
+                                 new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <div class="col-md-12">
+                                @if (Model.PORequestPaymentModels.PaymentType == "CREDIT" || Model.PORequestPaymentModels.PaymentType == "CREDIT+ADVANCE")
+                                {
+                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.PORequestPaymentModels.NoOfDays, new { @class = "form-control-label" }) <sup>*</sup>
+                                            @Html.TextBoxFor(m => m.PORequestPaymentModels.NoOfDays,
+                                       new
+                                       {
+                                           @class = "form-control text-uppercase noofdays",
+
+                                           placeholder = "Enter " + @Html.DisplayNameFor(m => m.PORequestPaymentModels.NoOfDays)
+                                       })
+                                            @Html.ValidationMessageFor(m => m.PORequestPaymentModels.NoOfDays, "",
+                                       new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.PORequestPaymentModels.NoOfDays, new { @class = "form-control-label" }) <sup>*</sup>
+                                            @Html.TextBoxFor(m => m.PORequestPaymentModels.NoOfDays,
+                                       new
+                                       {
+                                           @class = "form-control text-uppercase noofdays",
+                                           @readonly = true,
+                                           placeholder = "Enter " + @Html.DisplayNameFor(m => m.PORequestPaymentModels.NoOfDays)
+                                       })
+                                            @Html.ValidationMessageFor(m => m.PORequestPaymentModels.NoOfDays, "",
+                                       new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                }
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.PORequestPaymentModels.MaterialStatus, new { @class = "form-control-label" })
+                                        @Html.DropDownListFor(m => m.PORequestPaymentModels.MaterialStatus,
+                                       new List<SelectListItem>
+                                          {
+                                            new SelectListItem{ Text="MATERIAL READY FOR PICKUP", Value = "MATERIAL READY FOR PICKUP", Selected = true },
+                                            new SelectListItem{ Text="LEAD TIME", Value = "LEAD TIME" },
+                                          },
+                                        "--Select Material Status--", new { @class = "form-control select2 rpmtsts" })
+                                        @Html.ValidationMessageFor(m => m.PORequestPaymentModels.MaterialStatus, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                @if (Model.PORequestPaymentModels.MaterialStatus != "LEAD TIME")
+                                {
+                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.PORequestPaymentModels.LeadTime, new { @class = "form-control-label" }) <sup>*</sup>
+                                            @Html.TextBoxFor(m => m.PORequestPaymentModels.LeadTime,
+                                 new
+                                 {
+                                     @class = "form-control ldtime",
+                                     @readonly = true,
+                                     placeholder = "Enter " + @Html.DisplayNameFor(m => m.PORequestPaymentModels.LeadTime)
+                                 })
+                                            @Html.ValidationMessageFor(m => m.PORequestPaymentModels.LeadTime, "",
+                                 new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.PORequestPaymentModels.LeadTime, new { @class = "form-control-label" }) <sup>*</sup>
+                                            @Html.TextBoxFor(m => m.PORequestPaymentModels.LeadTime,
+                                 new
+                                 {
+                                     @class = "form-control ldtime",
+                                     placeholder = "Enter " + @Html.DisplayNameFor(m => m.PORequestPaymentModels.LeadTime)
+                                 })
+                                            @Html.ValidationMessageFor(m => m.PORequestPaymentModels.LeadTime, "",
+                                 new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                }
+                                @if (Model.PORequestPaymentModels.PaymentType != "CREDIT")
+                                {
+                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.PORequestPaymentModels.AdvanceValue, new { @class = "form-control-label" }) <sup>*</sup>
+                                            @Html.TextBoxFor(m => m.PORequestPaymentModels.AdvanceValue,
+                                    new
+                                    {
+                                        @class = "form-control advvalue",
+                                        placeholder = "Enter " + @Html.DisplayNameFor(m => m.PORequestPaymentModels.AdvanceValue)
+                                    })
+                                            @Html.ValidationMessageFor(m => m.PORequestPaymentModels.AdvanceValue, "",
+                                    new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.PORequestPaymentModels.AdvanceValue, new { @class = "form-control-label" }) <sup>*</sup>
+                                            @Html.TextBoxFor(m => m.PORequestPaymentModels.AdvanceValue,
+                                    new
+                                    {
+                                        @class = "form-control advvalue",
+                                        @readonly = true,
+                                        placeholder = "Enter " + @Html.DisplayNameFor(m => m.PORequestPaymentModels.AdvanceValue)
+                                    })
+                                            @Html.ValidationMessageFor(m => m.PORequestPaymentModels.AdvanceValue, "",
+                                    new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <div class="col-md-12">
+                                @if (Model.PORequestPaymentModels.PaymentType != "ADVANCE")
+                                {
+                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.PORequestPaymentModels.PDCChequeValue, new { @class = "form-control-label" }) <sup>*</sup>
+                                            @Html.TextBoxFor(m => m.PORequestPaymentModels.PDCChequeValue,
+                                 new
+                                 {
+                                     @class = "form-control pdcvalue",
+                                     placeholder = "Enter " + @Html.DisplayNameFor(m => m.PORequestPaymentModels.PDCChequeValue)
+                                 })
+                                            @Html.ValidationMessageFor(m => m.PORequestPaymentModels.PDCChequeValue, "",
+                                 new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.PORequestPaymentModels.PDCChequeValue, new { @class = "form-control-label" }) <sup>*</sup>
+                                            @Html.TextBoxFor(m => m.PORequestPaymentModels.PDCChequeValue,
+                                 new
+                                 {
+                                     @class = "form-control pdcvalue",
+                                     @readonly = true,
+                                     placeholder = "Enter " + @Html.DisplayNameFor(m => m.PORequestPaymentModels.PDCChequeValue)
+                                 })
+                                            @Html.ValidationMessageFor(m => m.PORequestPaymentModels.PDCChequeValue, "",
+                                 new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                }
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.PORequestPaymentModels.Priority, new { @class = "form-control-label" })
+                                        @Html.DropDownListFor(m => m.PORequestPaymentModels.Priority,
+                                    new List<SelectListItem>
+                                       {
+                                            new SelectListItem{ Text="LOW", Value = "LOW" },
+                                            new SelectListItem{ Text="MEDIUM", Value = "MEDIUM"  },
+                                            new SelectListItem{ Text="HIGH", Value = "HIGH" },
+                                       },
+                                     "--Select Priority--", new { @class = "form-control select2 priority" })
+                                        @Html.ValidationMessageFor(m => m.PORequestPaymentModels.Priority, "",
+                             new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.PORequestPaymentModels.Remark, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextAreaFor(m => m.PORequestPaymentModels.Remark,
+                             new
+                             {
+                                 @class = "form-control",
+                             })
+                                        @Html.ValidationMessageFor(m => m.PORequestPaymentModels.Remark, "",
+                             new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.PORequestPaymentModels.PIUpload, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextBoxFor(m => m.PORequestPaymentModels.PIUpload,
+                             new
+                             {
+                                 @class = "form-control",
+                                 @type = "file",
+                                 //@multiple = "multiple"
+                             })
+                                        @Html.ValidationMessageFor(m => m.PORequestPaymentModels.PIUpload, "",
+                             new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    @if (!string.IsNullOrEmpty(Model.PORequestPaymentModels.PIUpload))
+                                    {
+                                        string ccpdf = (@Model.PORequestPaymentModels.PIUpload + "").ToLower().Split('.')[1];
+                                        if (ccpdf == "pdf")
+                                        {
+                                            <object data="~/Content/upload/popayment/@Model.PORequestPaymentModels.PIUpload" type="application/pdf" width="400" height="400">
+                                            </object>
+                                        }
+                                        else
+                                        {
+                                            <img src="~/Content/upload/popayment/@Model.PORequestPaymentModels.PIUpload" height="400" width="400" />
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <div class="col-md-12">
+                            <div class="box-tools pull-left">
+                                <button type="submit" name="@actBtn.ToLower()" class="btn bg-aqua" title="@actBtn"
+                                        value="@actBtn">
+                                    @actBtn.ToUpper()
+                                </button>
+                            </div>
+                            <div class="box-tools pull-right">
+                                <button type="submit" name="reset" class="btn btn-clear cancel" title="Reset"
+                                        value="reset" formnovalidate="formnovalidate">
+                                    RESET
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-footer-->
+                </div>
+                <!-- /.box -->
+            </div>
+            <div class="col-lg-12">
+                <!-- Default box -->
+                <div class="box">
+                    @if (Model.PORequestPaymentModelList.Count > 0)
+                    {
+                        <div class="box-header with-border">
+                            <h3 class="box-title">@pageTitle List</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                        title="Collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <table id="tblPORequestPayment" class="table table-bordered display nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>SNo.</th>
+                                        @if (Model.UserProfileModels.EmpType != "User")
+                                        {
+                                            <th>Action</th>
+                                        }
+                                        @*<th>@Html.DisplayNameFor(model => model.PORequestPaymentModelList.FirstOrDefault().PmntReqNo)</th>*@
+                                        <th>@Html.DisplayNameFor(model => model.PORequestPaymentModelList.FirstOrDefault().PaymentType)</th>
+                                        <th>@Html.DisplayNameFor(model => model.PORequestPaymentModelList.FirstOrDefault().PaymentMode)</th>
+                                        <th>@Html.DisplayNameFor(model => model.PORequestPaymentModelList.FirstOrDefault().NoOfDays)</th>
+                                        <th>@Html.DisplayNameFor(model => model.PORequestPaymentModelList.FirstOrDefault().MaterialStatus)</th>
+                                        <th>@Html.DisplayNameFor(model => model.PORequestPaymentModelList.FirstOrDefault().LeadTime)</th>
+                                        <th>@Html.DisplayNameFor(model => model.PORequestPaymentModelList.FirstOrDefault().AdvanceValue)</th>
+                                        <th>@Html.DisplayNameFor(model => model.PORequestPaymentModelList.FirstOrDefault().PDCChequeValue)</th>
+                                        <th>@Html.DisplayNameFor(model => model.PORequestPaymentModelList.FirstOrDefault().Priority)</th>
+                                        <th>@Html.DisplayNameFor(model => model.PORequestPaymentModelList.FirstOrDefault().Remark)</th>
+                                        <th>@Html.DisplayNameFor(model => model.PORequestPaymentModelList.FirstOrDefault().PIUpload)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var u in Model.PORequestPaymentModelList)
+                                    {
+                                        <tr>
+                                            <td></td>
+                                            @if (Model.UserProfileModels.EmpType != "User")
+                                            {
+                                                <td>
+                                                    @if (u.Status != "RPC")
+                                                    {
+                                                        @*@Html.EncodedActionLink("<i class='fa fa-pencil-square-o'></i>", "EditPORequestPayment", "Admin", new { id = u.Id }, new { @class = "btn btn-edt btn-sm bg-aqua", title = "Edit" })*@
+                                                        @Html.EncodedActionLink("<i class='fa fa-times'></i>", "DeletePORequestPayment", "Admin", new { id = u.Id }, new { data_box = "#mb-act-cnfrm", @class = "btn btn-del btn-sm m-l-5 mb-act-confirm bg-m-red", title = "Delete" })
+                                                    }
+                                                </td>
+                                            }
+                                            @*<td>@Html.DisplayFor(modelSKU => u.PmntReqNo) </td>*@
+                                            <td>@Html.DisplayFor(modelSKU => u.PaymentType) </td>
+                                            <td>@Html.DisplayFor(modelSKU => u.PaymentMode) </td>
+                                            <td>@Html.DisplayFor(modelSKU => u.NoOfDays) </td>
+                                            <td>@Html.DisplayFor(modelSKU => u.MaterialStatus) </td>
+                                            <td>@Html.DisplayFor(modelSKU => u.LeadTime) </td>
+                                            <td>@Html.DisplayFor(modelSKU => u.AdvanceValue) </td>
+                                            <td>@Html.DisplayFor(modelSKU => u.PDCChequeValue) </td>
+                                            <td>@Html.DisplayFor(modelSKU => u.Priority) </td>
+                                            <td>@Html.DisplayFor(modelSKU => u.Remark) </td>
+                                            <td>
+                                                @if (!string.IsNullOrEmpty(u.PIUpload))
+                                                {
+                                                    <a href='~/Content/upload/popayment/@u.PIUpload' target="_blank">Download</a>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    }
+                    else
+                    {
+                        <div class="box-body">
+                            <div class="no-record">No record found.</div>
+                        </div>
+                    }
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+        <!-- danger with sound -->
+        <div class="message-box animated fadeIn" data-sound="alert" id="mb-act-cnfrm">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-warning"></span> Confirm <strong>Box</strong> ?</div>
+                    <div class="mb-content">
+                        <p>Are you sure you want to delete?</p>
+                        <p>Press No if you want to Cancel. Press Yes to Delete the record.</p>
+                    </div>
+                    <div class="mb-footer">
+                        <div class="pull-right">
+                            <a id="confirmhref" href="#" class="btn btn-confirm-yes btn-lg">Yes</a>
+                            <button class="btn btn-confirm-no btn-lg mb-control-close">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end danger with sound -->
+        <!-- /.row (main row) -->
+        <!-- Modal -->
+        @*<div class="modal fade" id="modalAddBranch" style="display: none;">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <h4 class="modal-title">Default Modal</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>One fine body…</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>*@
+    }
+</section>
+<!-- /.content -->

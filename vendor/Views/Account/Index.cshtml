@@ -1,0 +1,151 @@
+﻿@using Vendor_Indusuno.Extensions
+@{
+    ViewBag.Title = "Index";
+    TempData["Index"] = "active";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        @Html.Raw(Html.PageTitle())
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index")"><i class="fa fa-dashboard"></i> Home</a></li>
+        @Html.Raw(Html.BuildBreadcrumbNavigation())
+        @*<li class="active">Dashboard</li>*@
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    @using (Html.BeginForm("Index", "Account", FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <!-- Main row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="col-lg-2 col-xs-6">
+                    <!-- small box -->
+                    <a href='@Url.Action("Sales/Customer", "Dashboard")'>
+                        <div class="small-box bg-yellow w-120">
+                            <div class="inner pad-40">
+                                <h3 class="m-small-box"></h3>
+                            </div>
+                            <div class="icon icon-right">
+                                <i class="fa fa-file-text"></i>
+                            </div>
+                            <span href="#" class="small-box-footer">Sales <i class="fa fa-arrow-circle-right"></i></span>
+                        </div>
+                    </a>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-2 col-xs-6">
+                    <!-- small box -->
+                    <a href='@Url.Action("Purchase/Vendor", "Dashboard")'>
+                        <div class="small-box bg-green w-120">
+                            <div class="inner pad-40">
+                                <h3 class="m-small-box"></h3>
+                            </div>
+                            <div class="icon icon-right">
+                                <i class="fa fa-shopping-cart"></i>
+                            </div>
+                            <span href="#" class="small-box-footer">Purchase <i class="fa fa-arrow-circle-right"></i></span>
+                        </div>
+                    </a>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-2 col-xs-6">
+                    <!-- small box -->
+                    <a href='@Url.Action("Inventory/MaterialRequisition", "Dashboard")'>
+                        <div class="small-box bg-green w-120">
+                            <div class="inner pad-40">
+                                <h3 class="m-small-box"></h3>
+                            </div>
+                            <div class="icon icon-right">
+                                <i class="ion ion-stats-bars"></i>
+                            </div>
+                            <span href="#" class="small-box-footer">Inventory <i class="fa fa-arrow-circle-right"></i></span>
+                        </div>
+                    </a>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-2 col-xs-6">
+                    <!-- small box -->
+                    <a href='@Url.Action("JobCard/JobCard", "Dashboard")'>
+                        <div class="small-box bg-green w-120">
+                            <div class="inner pad-40">
+                                <h3 class="m-small-box"></h3>
+                            </div>
+                            <div class="icon icon-right">
+                                <i class="fa fa-id-badge"></i>
+                            </div>
+                            <span href="#" class="small-box-footer">Job Card <i class="fa fa-arrow-circle-right"></i></span>
+                        </div>
+                    </a>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-2 col-xs-6">
+                    <!-- small box -->
+                    <a href='#'>
+                        <div class="small-box bg-green w-120">
+                            <div class="inner pad-40">
+                                <h3 class="m-small-box"></h3>
+                            </div>
+                            <div class="icon icon-right">
+                                <i class="ion ion-stats-bars"></i>
+                            </div>
+                            <span href="#" class="small-box-footer">Assembly <i class="fa fa-arrow-circle-right"></i></span>
+                        </div>
+                    </a>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-2 col-xs-6">
+                    <!-- small box -->
+                    <a href='@Url.Action("Master/Index", "Dashboard")'>
+                        <div class="small-box bg-green w-120">
+                            <div class="inner pad-40">
+                                <h3 class="m-small-box"></h3>
+                            </div>
+                            <div class="icon icon-right">
+                                <i class="ion ion-stats-bars"></i>
+                            </div>
+                            <span href="#" class="small-box-footer">Master <i class="fa fa-arrow-circle-right"></i></span>
+                        </div>
+                    </a>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-2 col-xs-6">
+                    <!-- small box -->
+                    <a href='@Url.Action("HRM/Employee", "Dashboard")'>
+                        <div class="small-box bg-green w-120">
+                            <div class="inner pad-40">
+                                <h3 class="m-small-box"></h3>
+                            </div>
+                            <div class="icon icon-right">
+                                <i class="fa fa-file-text"></i>
+                            </div>
+                            <span href="#" class="small-box-footer">HRM <i class="fa fa-arrow-circle-right"></i></span>
+                        </div>
+                    </a>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-2 col-xs-6">
+                    <!-- small box -->
+                    <a href='@Url.Action("Report/Index", "Dashboard")'>
+                        <div class="small-box bg-green w-120">
+                            <div class="inner pad-40">
+                                <h3 class="m-small-box"></h3>
+                            </div>
+                            <div class="icon icon-right">
+                                <i class="fa fa-file-text"></i>
+                            </div>
+                            <span href="#" class="small-box-footer">Report <i class="fa fa-arrow-circle-right"></i></span>
+                        </div>
+                    </a>
+                </div>
+                <!-- ./col -->
+            </div>
+        </div>
+    }
+</section>
+<!-- /.content -->

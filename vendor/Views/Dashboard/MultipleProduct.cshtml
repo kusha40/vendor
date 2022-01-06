@@ -1,0 +1,174 @@
+﻿@using Vendor_Indusuno.Extensions
+@model Vendor_Indusuno.ViewModels.MultipleProductViewModel
+@{
+	ViewBag.Title = "Multiple Products";
+	TempData["Products"] = "active";
+	Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	@{
+        string actType = "Add";
+        string actBtn = "Submit";
+        string pageTitle = Html.Raw(Html.PageTitle()) + "";
+        //if (!String.IsNullOrEmpty(Model.MultipleProductModels.Id))
+        //{
+        //	actType = "Edit";
+        //	actBtn = "Update";
+        //}
+	}
+	<h1>
+		@pageTitle
+		<small></small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="@Url.Action("Index")"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+		@Html.Raw(Html.BuildBreadcrumbNavigation())
+		@*<li class="active">Dashboard</li>*@
+	</ol>
+</section>
+<!-- Main content -->
+<section class="content">
+	@using (Html.BeginForm("MultipleProduct", "Dashboard", FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off", enctype = "multipart/form-data" }))
+	{
+		@Html.AntiForgeryToken()
+		<!-- Main row -->
+		<div class="row">
+			<div class="col-lg-12">
+				<!-- Default box -->
+				<div class="box">
+					<div class="box-header with-border">
+						<h3 class="box-title">@actType @pageTitle</h3>
+						<div class="box-tools pull-right">
+						</div>
+					</div>
+					<div class="box-body">
+						<div class="col-md-12">
+							<div class="msgs">
+								@if (ViewData?.ModelState[""]?.Errors?.Any() == true)
+								{
+									<div class="alert alert-danger alert-dismissible">
+										<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+										<h4><i class="icon fa fa-ban"></i> Error!</h4>
+										@Html.ValidationSummary(true, "", new { @class = "float-left" })
+									</div>
+								}
+								@if (!String.IsNullOrEmpty(ViewBag.SucMsg))
+								{
+									<div class="alert alert-success alert-dismissible">
+										<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+										<h4><i class="icon fa fa-check"></i> Success!</h4>
+										<strong>Well done!</strong> @ViewBag.SucMsg
+									</div>
+								}
+								@if (!String.IsNullOrEmpty(ViewBag.ErrMsg))
+								{
+									<div class="alert alert-danger alert-dismissible">
+										<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+										<h4><i class="icon fa fa-ban"></i> Error!</h4>
+										<strong>Oh snap!</strong> @ViewBag.ErrMsg
+									</div>
+								}
+								@if (!String.IsNullOrEmpty(TempData["ErrMsg"] + ""))
+								{
+									<div class="alert alert-danger alert-dismissible">
+										<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+										<h4><i class="icon fa fa-ban"></i> Error!</h4>
+										<strong>Oh snap!</strong> @TempData["ErrMsg"]
+									</div>
+								}
+								@if (!String.IsNullOrEmpty(TempData["SucMsg"] + ""))
+								{
+									<div class="alert alert-success alert-dismissible">
+										<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+										<h4><i class="icon fa fa-check"></i> Success!</h4>
+										<strong>Well done!</strong> @TempData["SucMsg"]
+									</div>
+								}
+							</div>
+							@Html.HiddenFor(model => model.VendorModelExcels.Id)
+						</div>
+						<div class="row">
+                            <div class="col-md-12">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Firstly download excel format fill product details basis of excel format. Then Upload excel file.</label>
+                                        <a href='~/Content/upload/Excel/Format.xlsx' target="_blank">Download</a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.VendorModelExcels.PrdExcel, new { @class = "form-control-label" })
+                                        @Html.TextBoxFor(m => m.VendorModelExcels.PrdExcel,
+                                        new
+                                        {
+                                            @class = "form-control",
+                                            @type = "file",
+                                            placeholder = @Html.DisplayNameFor(m => m.VendorModelExcels.PrdExcel)
+                                        })
+                                        @Html.ValidationMessageFor(m => m.VendorModelExcels.PrdExcel, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+						</div>
+					</div>
+					<!-- /.box-body -->
+					<div class="box-footer">
+						<div class="col-md-12">
+							<div class="box-tools pull-left">
+								<button type="submit" name="@actBtn.ToLower()" class="btn bg-aqua" title="@actBtn"
+										value="@actBtn">
+									@actBtn.ToUpper()
+								</button>
+								@*@if (String.IsNullOrEmpty(Model.UOMModels.Id))
+									{
+
+										<button type="submit" name="submit" class="btn btn-primary" title="Submit"
+												value="Submit">
+											SUBMIT
+										</button>
+									}
+									else
+									{
+										<button type="submit" name="update" class="btn btn-primary" title="Update"
+												value="Update">
+											UPDATE
+										</button>
+									}*@
+							</div>
+							<div class="box-tools pull-right">
+								<button type="submit" name="reset" class="btn btn-clear cancel" title="Reset"
+										value="reset" formnovalidate="formnovalidate">
+									RESET
+								</button>
+							</div>
+						</div>
+					</div>
+					<!-- /.box-footer-->
+				</div>
+			</div>			
+		</div>
+		<!-- danger with sound -->
+		<div class="message-box animated fadeIn" data-sound="alert" id="mb-act-cnfrm">
+			<div class="mb-container">
+				<div class="mb-middle">
+					<div class="mb-title"><span class="fa fa-warning"></span> Confirm <strong>Box</strong> ?</div>
+					<div class="mb-content">
+						<p>Are you sure you want to delete?</p>
+						<p>Press No if you want to Cancel. Press Yes to Delete the record.</p>
+					</div>
+					<div class="mb-footer">
+						<div class="pull-right">
+							<a id="confirmhref" href="#" class="btn btn-confirm-yes btn-lg">Yes</a>
+							<button class="btn btn-confirm-no btn-lg mb-control-close">No</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- end danger with sound -->
+	}
+</section>
+<!-- /.content -->

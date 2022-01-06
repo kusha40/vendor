@@ -1,0 +1,304 @@
+﻿@using Vendor_Indusuno.Extensions
+@model Vendor_Indusuno.ViewModels.UserProfileViewModel
+@{
+    /**/
+
+    ViewBag.Title = "AddUser";
+    TempData["HRM"] = "active";
+    TempData["AddUser"] = "active";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    @{
+        string actType = "Add";
+        string actBtn = "Submit";
+        string pageTitle = Html.Raw(Html.PageGTitle()) + "";
+        if (!String.IsNullOrEmpty(Model.UserProfileModels.Id))
+        {
+            actType = "Edit";
+            actBtn = "Update";
+        }
+    }
+    <h1>
+        @pageTitle
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index")"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        @Html.Raw(Html.BuildBreadcrumbNavigation())
+        @*<li class="active">Dashboard</li>*@
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    @using (Html.BeginForm("AddUser", "Admin", FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <!-- Main row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Default box -->
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">@Html.ActionLink("Back", "Users", "Admin", null, new { @class = "btn btn-edt bg-aqua", title = "Back To Users" })</h3><br />
+                    </div>
+                    <div class="box-body">
+                        <div class="col-md-12">
+                            <div class="msgs">
+                                @if (ViewData?.ModelState[""]?.Errors?.Any() == true)
+                                {
+                                    <div class="alert alert-danger alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                                        @Html.ValidationSummary(true, "", new { @class = "float-left" })
+                                    </div>
+                                }
+                                @if (!String.IsNullOrEmpty(ViewBag.SucMsg))
+                                {
+                                    <div class="alert alert-success alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-check"></i> Success!</h4>
+                                        <strong>Well done!</strong> @ViewBag.SucMsg
+                                    </div>
+                                }
+                                @if (!String.IsNullOrEmpty(TempData["ErrMsg"] + ""))
+                                {
+                                    <div class="alert alert-danger alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                                        <strong>Oh snap!</strong> @TempData["ErrMsg"]
+                                    </div>
+                                }
+                                @if (!String.IsNullOrEmpty(TempData["SucMsg"] + ""))
+                                {
+                                    <div class="alert alert-success alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-check"></i> Success!</h4>
+                                        <strong>Well done!</strong> @TempData["SucMsg"]
+                                    </div>
+                                }
+                            </div>
+                            @Html.HiddenFor(model => model.UserProfileModels.Id)
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p class="lead">@actType @pageTitle</p>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.UserProfileModels.SVCode, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextBoxFor(m => m.UserProfileModels.SVCode,
+                                         new
+                                         {
+                                             @class = "form-control text-uppercase",
+                                             @readonly = true,
+                                             placeholder = "Enter " + @Html.DisplayNameFor(m => m.UserProfileModels.SVCode)
+                                         })
+                                        @Html.ValidationMessageFor(m => m.UserProfileModels.SVCode, "",
+                                        new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.UserProfileModels.Name, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextBoxFor(m => m.UserProfileModels.Name,
+                                         new
+                                         {
+                                             @class = "form-control text-capitalize",
+                                             placeholder = "Enter " + @Html.DisplayNameFor(m => m.UserProfileModels.Name)
+                                         })
+                                        @Html.ValidationMessageFor(m => m.UserProfileModels.Name, "",
+                     new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.UserProfileModels.Designation, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextBoxFor(m => m.UserProfileModels.Designation,
+                                         new
+                                         {
+                                             @class = "form-control text-capitalize",
+                                             placeholder = "Enter " + @Html.DisplayNameFor(m => m.UserProfileModels.Designation)
+                                         })
+                                        @Html.ValidationMessageFor(m => m.UserProfileModels.Designation, "",
+                     new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.UserProfileModels.EmpType, new { @class = "form-control-label" })
+                                        @Html.DropDownListFor(m => m.UserProfileModels.EmpType,
+                                       new List<SelectListItem>
+                                          {
+                                            new SelectListItem{ Text="Administrator", Value = "Administrator", Selected = true  },
+                                            new SelectListItem{ Text="User", Value = "User" }
+                                          },
+                                        "--Select Emp Type--", new { @class = "form-control select2" })
+                                        @Html.ValidationMessageFor(m => m.UserProfileModels.EmpType, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.UserProfileModels.MobileNo1, new { @class = "form-control-label" })
+                                        @Html.TextBoxFor(m => m.UserProfileModels.MobileNo1,
+                     new
+                     {
+                         @class = "form-control",
+                         placeholder = "Enter " + @Html.DisplayNameFor(m => m.UserProfileModels.MobileNo1)
+                     })
+                                        @Html.ValidationMessageFor(m => m.UserProfileModels.MobileNo1, "",
+                     new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.UserProfileModels.MobileNo2, new { @class = "form-control-label" })
+                                        @Html.TextBoxFor(m => m.UserProfileModels.MobileNo2,
+                     new
+                     {
+                         @class = "form-control",
+                         placeholder = "Enter " + @Html.DisplayNameFor(m => m.UserProfileModels.MobileNo2)
+                     })
+                                        @Html.ValidationMessageFor(m => m.UserProfileModels.MobileNo2, "",
+                     new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.UserProfileModels.Email, new { @class = "form-control-label" })
+                                        @Html.TextBoxFor(m => m.UserProfileModels.Email,
+                     new
+                     {
+                         @class = "form-control",
+                         placeholder = "Enter " + @Html.DisplayNameFor(m => m.UserProfileModels.Email)
+                     })
+                                        @Html.ValidationMessageFor(m => m.UserProfileModels.Email, "",
+                     new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.UserProfileModels.ProfileImage, new { @class = "form-control-label" })
+                                        @Html.TextBoxFor(m => m.UserProfileModels.ProfileImage,
+                 new
+                 {
+                     @class = "form-control-file",
+                     @type = "file",
+                     @onchange = "ShowImagePreview(this);"
+                 })
+                                        @Html.ValidationMessageFor(m => m.UserProfileModels.ProfileImage, "",
+                 new { @class = "text-danger" })
+                                    </div>
+                                    @if (!string.IsNullOrEmpty(Model.UserProfileModels.ProfileImage))
+                                    {
+                                        <img id="Img_Box" src="~/Content/upload/employee/@Model.UserProfileModels.ProfileImage" height="60" width="60" class="img_box" />
+                                    }
+                                    else
+                                    {
+                                        <img id="Img_Box" src="~/Content/upload/employee/avatar.png" height="60" width="60" class="img_box" />
+                                    }
+
+                                    <canvas id="canvas" height="2" width="2" style="display: none"></canvas>
+                                    <input type="hidden" name="imgCropped" id="imgCropped" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <div class="col-md-12">
+                            <div class="box-tools pull-left">
+                                <button type="submit" name="@actBtn.ToLower()" class="btn bg-aqua" title="@actBtn"
+                                        value="@actBtn">
+                                    @actBtn.ToUpper()
+                                </button>
+                            </div>
+                            <div class="box-tools pull-right">
+                                <button type="submit" name="reset" class="btn btn-clear cancel" title="Reset"
+                                        value="reset" formnovalidate="formnovalidate">
+                                    RESET
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-footer-->
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+        <!-- danger with sound -->
+        <div class="message-box animated fadeIn" data-sound="alert" id="mb-act-cnfrm">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-warning"></span> Confirm <strong>Box</strong> ?</div>
+                    <div class="mb-content">
+                        <p>Are you sure you want to delete?</p>
+                        <p>Press No if you want to Cancel. Press Yes to Delete the record.</p>
+                    </div>
+                    <div class="mb-footer">
+                        <div class="pull-right">
+                            <a id="confirmhref" href="#" class="btn btn-confirm-yes btn-lg">Yes</a>
+                            <button class="btn btn-confirm-no btn-lg mb-control-close">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end danger with sound -->
+        <!-- /.row (main row) -->
+        <!-- Modal -->
+        @*<div class="modal fade" id="modalAddBranch" style="display: none;">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <h4 class="modal-title">Default Modal</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>One fine body…</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>*@
+    }
+</section>
+<script type="text/javascript">
+    function ShowImagePreview(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imgCropped').val(e.target.result);
+                $('#Img_Box').attr('src', e.target.result)
+                    .width(60)
+                    .height(auto);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    function ShowImagePreview1(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imgCropped1').val(e.target.result);
+                $('#Img_Box1').attr('src', e.target.result)
+                    .width(60)
+                    .height(auto);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+<!-- /.content -->

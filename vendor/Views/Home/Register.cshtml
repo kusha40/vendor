@@ -1,0 +1,196 @@
+﻿@using Vendor_Indusuno.Extensions
+@model Vendor_Indusuno.ViewModels.RegisterVendorViewModel
+@{
+	ViewBag.Title = "Vendor Registration";
+	Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+@using (Html.BeginForm("Register", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+{
+	@Html.AntiForgeryToken()
+	<!-- Top Menu Bar -->
+	<header class="main-header">
+		<!-- Header Navbar: style can be found in header.less -->
+		<nav class="navbar navbar-static-top full-navbar">
+			<div class="container">
+				<div class="comp-logo">
+					<img src="~/Content/dist/img/Indusunologo.png" width="240" alt="Logo" />
+				</div>
+			</div>
+		</nav>
+	</header>
+	<!-- Top Menu Bar -->
+	<div class="register-box-right">
+		<!-- /.login-logo -->
+		<div class="login-box-body">
+			@*<div class="progress">
+			<div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+				<span class="sr-only">0% Complete</span>
+			</div>
+		</div>*@
+			<div class="form-horizontal msf">
+				<div class="msf-header">
+					<div class="msf-header-title">Vendor Registration</div>
+					@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+					@*<div class="row text-center">
+					<div class="msf-step col-md-4"><i class="fa fa-clipboard"></i> <span>Enter Request Details</span></div>
+					<div class="msf-step col-md-4"><i class="fa fa-credit-card"></i><span>Further Details</span></div>
+					<div class="msf-step col-md-4"><i class="fa fa-check"></i> <span>Review and Submit</span></div>
+				</div>*@
+				</div>
+				<div class="msf-content">
+					<div class="msf-view">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group m-t-10">
+									@Html.TextBoxFor(m => m.Email,
+								   new { @class = "form-control", @placeholder = @Html.DisplayNameFor(m => m.Email) + "*" })
+									@Html.ValidationMessageFor(m => m.Email, "",
+								new { @class = "text-danger" })
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group m-t-10">
+									@Html.TextBoxFor(m => m.MobileNo,
+								   new { @class = "form-control", @placeholder = "Mobile No*" })
+									@Html.ValidationMessageFor(m => m.MobileNo, "",
+								new { @class = "text-danger" })
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group m-t-10">
+									@Html.PasswordFor(m => m.Password,
+								   new { @class = "form-control", @placeholder = @Html.DisplayNameFor(m => m.Password) + "*" })
+									@Html.ValidationMessageFor(m => m.Password, "",
+								new { @class = "text-danger" })
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group m-t-10">
+									@Html.PasswordFor(m => m.ConfirmPassword,
+								   new { @class = "form-control", @placeholder = @Html.DisplayNameFor(m => m.ConfirmPassword) + "*" })
+									@Html.ValidationMessageFor(m => m.ConfirmPassword, "",
+								new { @class = "text-danger" })
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="msf-view">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group m-t-10">
+									@Html.TextBoxFor(m => m.FName,
+								   new { @class = "form-control text-capitalize", @placeholder = @Html.DisplayNameFor(m => m.FName) + "*" })
+									@Html.ValidationMessageFor(m => m.FName, "",
+								new { @class = "text-danger" })
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group m-t-10">
+									@Html.TextBoxFor(m => m.LName,
+								   new { @class = "form-control text-capitalize", @placeholder = @Html.DisplayNameFor(m => m.LName) + "*" })
+									@Html.ValidationMessageFor(m => m.LName, "",
+								new { @class = "text-danger" })
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group m-t-10">
+									@Html.TextBoxFor(m => m.CompanyName,
+								   new { @class = "form-control", @placeholder = @Html.DisplayNameFor(m => m.CompanyName) + "*" })
+									@Html.ValidationMessageFor(m => m.CompanyName, "",
+								new { @class = "text-danger" })
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group m-t-10">
+									@Html.TextBoxFor(m => m.WebsiteUrl,
+								   new { @class = "form-control", @placeholder = @Html.DisplayNameFor(m => m.WebsiteUrl) })
+									@Html.ValidationMessageFor(m => m.WebsiteUrl, "",
+								new { @class = "text-danger" })
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group m-t-10">
+									@Html.TextBoxFor(m => m.City,
+								   new { @class = "form-control text-capitalize", @placeholder = @Html.DisplayNameFor(m => m.City) + "*" })
+									@Html.ValidationMessageFor(m => m.City, "",
+								new { @class = "text-danger" })
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group m-t-10">
+									@Html.TextBoxFor(m => m.State,
+								   new { @class = "form-control text-capitalize", @placeholder = @Html.DisplayNameFor(m => m.State) + "*" })
+									@Html.ValidationMessageFor(m => m.State, "",
+								new { @class = "text-danger" })
+								</div>
+							</div>
+						</div>
+						@*<div class="row">
+							<div class="col-md-6">
+								<div class="form-group m-t-10">
+									@Html.TextBoxFor(m => m.Category,
+								   new { @class = "form-control text-uppercase", @placeholder = @Html.DisplayNameFor(m => m.Category) })
+									@Html.ValidationMessageFor(m => m.Category, "",
+								new { @class = "text-danger" })
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group m-t-10">
+									@Html.TextBoxFor(m => m.Brand,
+								   new { @class = "form-control text-uppercase", @placeholder = @Html.DisplayNameFor(m => m.Brand) })
+									@Html.ValidationMessageFor(m => m.Brand, "",
+								new { @class = "text-danger" })
+								</div>
+							</div>
+						</div>*@
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group m-t-10">
+									@Html.TextBoxFor(m => m.PAN,
+                                   new { @class = "form-control text-uppercase", @pattern= "^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$", @placeholder = @Html.DisplayNameFor(m => m.PAN) + "*" })
+									@Html.ValidationMessageFor(m => m.PAN, "",
+								new { @class = "text-danger" })
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group m-t-10">
+									@Html.TextBoxFor(m => m.GSTIN,
+                                   new { @class = "form-control text-uppercase", @pattern = "^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$", @placeholder = @Html.DisplayNameFor(m => m.GSTIN) + "*" })
+									@Html.ValidationMessageFor(m => m.GSTIN, "",
+								new { @class = "text-danger" })
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="msf-navigation">
+						<div class="row">
+							<div class="col-md-6">
+								<button type="button" data-type="back" class="btn btn-default"><i class="fa fa-chevron-left"></i> Back </button>
+							</div>
+							<div class="col-md-6">
+								<button type="button" name="Proceed" data-type="next" class="btn btn-default">Proceed <i class="fa fa-chevron-right"></i></button>
+								<button type="submit" name="Register" data-type="submit" class="btn btn-primary">Register</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<span class="log-reg">
+						Already Register? 
+						@Html.ActionLink("Login", "Index", "Home")
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+}

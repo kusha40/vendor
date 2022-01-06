@@ -1,0 +1,614 @@
+﻿@using Vendor_Indusuno.Extensions
+@model Vendor_Indusuno.ViewModels.QuotationViewModel
+@{
+    ViewBag.Title = "Quotation";
+    TempData["Enquiry"] = "active";
+    TempData["Quotation"] = "active";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    @{
+        string pageTitle = Html.Raw(Html.PageGTitle()) + "";
+    }
+    <h1>
+        @pageTitle
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index")"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        @Html.Raw(Html.BuildBreadcrumbNavigation())
+        @*<li class="active">Dashboard</li>*@
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    @using (Html.BeginForm("Quotation", "Admin", FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <!-- Main row -->
+        <div class="row">
+            <div class="col-lg-12 divgen">
+                <!-- Default box -->
+                <div class="box">
+                    <!-- /.box-body -->
+                    <div class="box-body">
+                        <table id="tblquot" class="tbl table table-bordered display nowrap">
+                            <thead>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().CustomerName)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqPId)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Product)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Quantity)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Unit)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().QuotePrice)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Discount)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().TotalPrice)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().GST)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                        <div class="col-md-12 p-t-20">
+                            <div class="col-lg-32 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.QuotationModels.EnqType, new { @class = "form-control-label" })
+                                    @Html.DropDownListFor(m => m.QuotationModels.EnqType,
+                                   new List<SelectListItem>
+                                      {
+                                        new SelectListItem{ Text="New", Value = "New", Selected = true  },
+                                        new SelectListItem{ Text="Revise", Value = "Revise" },
+                                      },
+                                    "--Select Enquiry Type--", new { @class = "form-control select2 enqtype" })
+                                    @Html.ValidationMessageFor(m => m.QuotationModels.EnqType, "",
+                            new { @class = "text-danger errenqtype" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.QuotationModels.CustomerBillingAddress, new { @class = "form-control-label" }) <sup>*</sup>
+                                    @Html.DropDownListFor(m => m.QuotationModels.CustomerBillingAddress, new SelectList(Model.CustomerBillingAddressList, "Key", "Value"),
+                                    "--Select Customer Billing Address--", new { @class = "form-control select2 vba" })
+                                    @Html.ValidationMessageFor(m => m.QuotationModels.CustomerBillingAddress, "",
+                                    new { @class = "text-danger errvba" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.QuotationModels.BuyerBillingAddress, new { @class = "form-control-label" }) <sup>*</sup>
+                                    @Html.DropDownListFor(m => m.QuotationModels.BuyerBillingAddress, new SelectList(Model.BuyerBillingAddressList, "Key", "Value"),
+                                    "--Select Consigner Address--", new { @class = "form-control select2 bba" })
+                                    @Html.ValidationMessageFor(m => m.QuotationModels.BuyerBillingAddress, "",
+                                    new { @class = "text-danger errbba" })
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-12 box-footer">
+                            <h4>Shipping Details</h4>
+                            <div class="col-md-12">
+                                @Html.HiddenFor(m => m.QuotationModels.IsShippingAddressSame)
+                                <br><br><input type="checkbox" id="chksameadd" name="chksameadd" class="chksameadd" value="" />
+                                <label for="chksameadd">Is Shipping Address Same</label>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.QuotationModels.BuyerShippingName, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.QuotationModels.BuyerShippingName,
+                            new
+                            {
+                                @class = "form-control text-capitalize shpname",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.QuotationModels.BuyerShippingName)
+                            })
+                                    @Html.ValidationMessageFor(m => m.QuotationModels.BuyerShippingName, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.QuotationModels.BuyerShippingAddress, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.QuotationModels.BuyerShippingAddress,
+                            new
+                            {
+                                @class = "form-control shpadd",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.QuotationModels.BuyerShippingAddress)
+                            })
+                                    @Html.ValidationMessageFor(m => m.QuotationModels.BuyerShippingAddress, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.QuotationModels.BuyerShippingCity, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.QuotationModels.BuyerShippingCity,
+                            new
+                            {
+                                @class = "form-control shpcty",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.QuotationModels.BuyerShippingCity)
+                            })
+                                    @Html.ValidationMessageFor(m => m.QuotationModels.BuyerShippingCity, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.QuotationModels.BuyerShippingState, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.QuotationModels.BuyerShippingState,
+                            new
+                            {
+                                @class = "form-control shpsts",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.QuotationModels.BuyerShippingState)
+                            })
+                                    @Html.ValidationMessageFor(m => m.QuotationModels.BuyerShippingState, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.QuotationModels.BuyerShippingPincode, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.QuotationModels.BuyerShippingPincode,
+                            new
+                            {
+                                @class = "form-control shppin",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.QuotationModels.BuyerShippingPincode)
+                            })
+                                    @Html.ValidationMessageFor(m => m.QuotationModels.BuyerShippingPincode, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.QuotationModels.BuyerShippingContact, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.QuotationModels.BuyerShippingContact,
+                            new
+                            {
+                                @class = "form-control shpcntct",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.QuotationModels.BuyerShippingContact)
+                            })
+                                    @Html.ValidationMessageFor(m => m.QuotationModels.BuyerShippingContact, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.QuotationModels.BuyerShippingGST, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.QuotationModels.BuyerShippingGST,
+                            new
+                            {
+                                @class = "form-control shpgst",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.QuotationModels.BuyerShippingGST)
+                            })
+                                    @Html.ValidationMessageFor(m => m.QuotationModels.BuyerShippingGST, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.QuotationModels.BuyerShippingPAN, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.QuotationModels.BuyerShippingPAN,
+                            new
+                            {
+                                @class = "form-control shppan",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.QuotationModels.BuyerShippingPAN)
+                            })
+                                    @Html.ValidationMessageFor(m => m.QuotationModels.BuyerShippingPAN, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 box-footer">
+                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.QuotationModels.PNFAmount, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.QuotationModels.PNFAmount,
+                            new
+                            {
+                                @class = "form-control pnfamnt onlynumdec",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.QuotationModels.PNFAmount)
+                            })
+                                    @Html.ValidationMessageFor(m => m.QuotationModels.PNFAmount, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.QuotationModels.FreightAmount, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.QuotationModels.FreightAmount,
+                            new
+                            {
+                                @class = "form-control frghtamnt onlynumdec",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.QuotationModels.FreightAmount)
+                            })
+                                    @Html.ValidationMessageFor(m => m.QuotationModels.FreightAmount, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <button name="submit" id="enqcalculate" class="btn bg-aqua m-t-20" title="Submit"
+                                        value="">
+                                    Calculate
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-12 box-footer">
+                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.QuotationModels.TotalAmount, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.QuotationModels.TotalAmount,
+                            new
+                            {
+                                @class = "form-control onlynumdec totamnt",
+                                @readonly = true,
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.QuotationModels.TotalAmount)
+                            })
+                                    @Html.ValidationMessageFor(m => m.QuotationModels.TotalAmount, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.QuotationModels.CGSTAmount, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.QuotationModels.CGSTAmount,
+                            new
+                            {
+                                @class = "form-control onlynumdec cgstamnt",
+                                @readonly = true,
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.QuotationModels.CGSTAmount)
+                            })
+                                    @Html.ValidationMessageFor(m => m.QuotationModels.CGSTAmount, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.QuotationModels.SGSTAmount, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.QuotationModels.SGSTAmount,
+                            new
+                            {
+                                @class = "form-control onlynumdec sgstamnt",
+                                @readonly = true,
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.QuotationModels.SGSTAmount)
+                            })
+                                    @Html.ValidationMessageFor(m => m.QuotationModels.SGSTAmount, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.QuotationModels.IGSTAmount, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.QuotationModels.IGSTAmount,
+                            new
+                            {
+                                @class = "form-control onlynumdec igstamnt",
+                                @readonly = true,
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.QuotationModels.IGSTAmount)
+                            })
+                                    @Html.ValidationMessageFor(m => m.QuotationModels.IGSTAmount, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.QuotationModels.TotalAmountGST, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.QuotationModels.TotalAmountGST,
+                                    new
+                                    {
+                                        @class = "form-control onlynumdec totamntgst",
+                                        @readonly = true,
+                                        placeholder = "Enter " + @Html.DisplayNameFor(m => m.QuotationModels.TotalAmountGST)
+                                    })
+                                    @Html.ValidationMessageFor(m => m.QuotationModels.TotalAmountGST, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.QuotationModels.NetAmount, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.QuotationModels.NetAmount,
+                            new
+                            {
+                                @class = "form-control onlynumdec netamnt",
+                                @readonly = true,
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.QuotationModels.NetAmount)
+                            })
+                                    @Html.ValidationMessageFor(m => m.QuotationModels.NetAmount, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 box-footer">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.QuotationModels.TACondition, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.QuotationModels.TACondition,
+                            new
+                            {
+                                @class = "form-control text-capitalize tcond",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.QuotationModels.TACondition)
+                            })
+                                    @Html.ValidationMessageFor(m => m.QuotationModels.TACondition, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.QuotationModels.LeadTime, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.QuotationModels.LeadTime,
+                            new
+                            {
+                                @class = "form-control ldtime",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.QuotationModels.LeadTime)
+                            })
+                                    @Html.ValidationMessageFor(m => m.QuotationModels.LeadTime, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-32 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.QuotationModels.InStock, new { @class = "form-control-label" })
+                                    @Html.DropDownListFor(m => m.QuotationModels.InStock,
+                                   new List<SelectListItem>
+                                      {
+                                        new SelectListItem{ Text="Yes", Value = "Yes", Selected = true  },
+                                        new SelectListItem{ Text="No", Value = "No" },
+                                      },
+                                    "--Select Stock--", new { @class = "form-control select2 instk" })
+                                    @Html.ValidationMessageFor(m => m.QuotationModels.InStock, "",
+                            new { @class = "text-danger errptype" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.QuotationModels.PackFwdCharges, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.QuotationModels.PackFwdCharges,
+                            new
+                            {
+                                @class = "form-control pfchrg",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.QuotationModels.PackFwdCharges)
+                            })
+                                    @Html.ValidationMessageFor(m => m.QuotationModels.PackFwdCharges, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.QuotationModels.PaymentTerms, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.QuotationModels.PaymentTerms,
+                            new
+                            {
+                                @class = "form-control pterms",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.QuotationModels.PaymentTerms)
+                            })
+                                    @Html.ValidationMessageFor(m => m.QuotationModels.PaymentTerms, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.QuotationModels.FrieghtTerms, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.QuotationModels.FrieghtTerms,
+                            new
+                            {
+                                @class = "form-control frtrms",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.QuotationModels.FrieghtTerms)
+                            })
+                                    @Html.ValidationMessageFor(m => m.QuotationModels.BuyerShippingContact, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.QuotationModels.ModeOfTransport, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.QuotationModels.ModeOfTransport,
+                            new
+                            {
+                                @class = "form-control motrns",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.QuotationModels.ModeOfTransport)
+                            })
+                                    @Html.ValidationMessageFor(m => m.QuotationModels.ModeOfTransport, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.QuotationModels.Warranty, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.QuotationModels.Warranty,
+                            new
+                            {
+                                @class = "form-control wrnty",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.QuotationModels.Warranty)
+                            })
+                                    @Html.ValidationMessageFor(m => m.QuotationModels.Warranty, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.QuotationModels.ValidityOfQuot, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.QuotationModels.ValidityOfQuot,
+                            new
+                            {
+                                @class = "form-control valofquot",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.QuotationModels.ValidityOfQuot)
+                            })
+                                    @Html.ValidationMessageFor(m => m.QuotationModels.ValidityOfQuot, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.QuotationModels.Remarks, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.QuotationModels.Remarks,
+                            new
+                            {
+                                @class = "form-control remark",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.QuotationModels.Remarks)
+                            })
+                                    @Html.ValidationMessageFor(m => m.QuotationModels.Remarks, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.QuotationModels.LMRemarks, new { @class = "form-control-label" })
+                                    @Html.TextAreaFor(m => m.QuotationModels.LMRemarks,
+                            new
+                            {
+                                @class = "form-control lmremark",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.QuotationModels.LMRemarks)
+                            })
+                                    @Html.ValidationMessageFor(m => m.QuotationModels.LMRemarks, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <button name="submit" id="quot" class="btn bg-aqua m-t-20 quot" title="Submit"
+                                value="quot">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box -->
+            <div class="col-lg-12 divgnt">
+                <!-- Default box -->
+                <div class="box">
+                    <div class="box-header with-border">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <a href="javascript:void(0)" class="btn bg-aqua" id="quotation">QUOTATION</a>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-body">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Search, new { @class = "form-control-label" }) <sup>*</sup>
+                                @Html.TextBoxFor(m => m.Search,
+                                                 new
+                                                 {
+                                                     @class = "form-control text-capitalize",
+                                                     placeholder = @Html.DisplayNameFor(m => m.Search)
+                                                 })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.StartDate, new { @class = "form-control-label" }) <sup>*</sup>
+                                @Html.TextBoxFor(m => m.StartDate,
+                                                 new
+                                                 {
+                                                     @class = "form-control datepicker",
+                                                     placeholder = @Html.DisplayNameFor(m => m.StartDate)
+                                                 })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.EndDate, new { @class = "form-control-label" }) <sup>*</sup>
+                                @Html.TextBoxFor(m => m.EndDate,
+                                                 new
+                                                 {
+                                                     @class = "form-control datepicker",
+                                                     placeholder = @Html.DisplayNameFor(m => m.EndDate)
+                                                 })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="box-tools pull-left">
+                                <button type="submit" name="search" class="btn bg-aqua" title="SEARCH"
+                                        value="search">
+                                    SEARCH
+                                </button>
+                            </div>
+                        </div>
+                        <table id="tblQuotation" class="table table-bordered display">
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" id="seallsrspo" /></th>
+                                    <th>SNo</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnquiryDate)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().CustomerName)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqId)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqPId)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Product)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Quantity)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Unit)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Price)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().VendorId)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().VendorPrice)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().QuotePrice)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().GST)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Status)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().NotAppRemark)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqCreatedBy)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqAssignTo)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqAssignBy)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqSourcedBy)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.EnquiriesModelList)
+                                {
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>@Html.DisplayFor(modelItem => item.EnquiryDate)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EnqId)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EnqPId)</td>
+                                    <td title="@item.SpcRemark">
+                                        @Html.DisplayFor(modelItem => item.Product)<br>
+                                        Brand : @item.Brand<br>
+                                        Model : @item.ModelNo
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Unit)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.VendorId)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.VendorPrice)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.QuotePrice)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.GST)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.NotAppRemark)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EnqCreatedBy)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EnqAssignTo)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EnqAssignBy)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EnqSourcedBy)</td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box -->
+                </div>
+            </div>
+        </div>
+        <!-- danger with sound -->
+        <div class="message-box animated fadeIn" data-sound="alert" id="mb-sub-confirm">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-warning"></span> Confirm <strong>Box</strong> ?</div>
+                    <div class="mb-content">
+                        <p>Are you sure you want to submit?</p>
+                        <p>Press No if you want to Cancel. Press Yes to Submit the record.</p>
+                    </div>
+                    <div class="mb-footer">
+                        <div class="pull-right">
+                            <button name="posubmit" class="btn btn-confirm-yes btn-lg" title="Yes">
+                                Yes
+                            </button>
+                            <button class="btn btn-confirm-no btn-lg mb-control-close">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end danger with sound -->
+    }
+</section>
+<!-- /.content -->

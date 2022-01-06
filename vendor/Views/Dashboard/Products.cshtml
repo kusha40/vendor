@@ -1,0 +1,185 @@
+﻿@using Vendor_Indusuno.Extensions
+@model Vendor_Indusuno.ViewModels.ProductsViewModel
+@{
+	ViewBag.Title = "Products";
+	TempData["Products"] = "active";
+	Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	@{
+		string pageTitle = Html.Raw(Html.PageTitle()) + "";
+	}
+	<h1>
+		@pageTitle
+		<small></small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="@Url.Action("Index")"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+		@Html.Raw(Html.BuildBreadcrumbNavigation())
+		@*<li class="active">Dashboard</li>*@
+	</ol>
+</section>
+<!-- Main content -->
+<section class="content">
+	@using (Html.BeginForm("Products", "Dashboard", FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off", enctype = "multipart/form-data" }))
+	{
+		@Html.AntiForgeryToken()
+		<!-- Main row -->
+		<div class="row">
+			<div class="col-lg-12">
+				<!-- Default box -->
+				<div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">@Html.ActionLink("New Single Product", "Product", "Dashboard", null, new { @class = "btn btn-edt bg-aqua", title = "New Product" })</h3>
+                        <h3 class="box-title">@Html.ActionLink("New Multiple Product", "MultipleProduct", "Dashboard", null, new { @class = "btn btn-edt bg-aqua", title = "New Multiple Product" })</h3>
+                    </div>
+					<div class="box-header with-border">
+						<h3 class="box-title">Filter By</h3>
+						<div class="box-tools pull-right">
+						</div>
+					</div>
+					<div class="box-header with-border">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+									<div class="form-group">
+										@Html.LabelFor(m => m.ProductModels.SKU, new { @class = "form-control-label" })
+										@Html.TextBoxFor(m => m.ProductModels.SKU,
+										new
+										{
+											@class = "form-control",
+											placeholder = @Html.DisplayNameFor(m => m.ProductModels.SKU)
+										})
+										@Html.ValidationMessageFor(m => m.ProductModels.SKU, "",
+								new { @class = "text-danger" })
+									</div>
+								</div>
+								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+									<div class="form-group m-b-0">
+										@Html.LabelFor(m => m.ProductModels.Category, new { @class = "form-control-label" })
+										@Html.DropDownListFor(model => model.ProductModels.Category, new SelectList(Model.CategoryModelList, "Key", "Value"),
+										"--Select Category--", new { @class = "form-control" })
+										@Html.ValidationMessageFor(m => m.ProductModels.Category, "",
+										new { @class = "text-danger" })
+									</div>
+								</div>
+								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+									<div class="form-group m-b-0">
+										@Html.LabelFor(m => m.ProductModels.Brand, new { @class = "form-control-label" })
+										@Html.DropDownListFor(model => model.ProductModels.Brand, new SelectList(Model.BrandModelList, "Key", "Value"),
+										"--Select Brand--", new { @class = "form-control" })
+										@Html.ValidationMessageFor(m => m.ProductModels.Brand, "",
+										new { @class = "text-danger" })
+									</div>
+								</div>
+								<div class="box-tools m-t-10">
+									<button type="submit" name="search" class="btn bg-aqua" title="Search"
+											value="search" formnovalidate="formnovalidate">
+										Search
+									</button>
+									<button type="submit" name="clear" class="btn btn-clear cancel" title="Reset"
+											value="clear" formnovalidate="formnovalidate">
+										Clear
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12">
+				<!-- Default box -->
+				<div class="box">
+					@if (Model.ProductModelList.Count > 0)
+					{
+						<div class="box-header with-border">
+							<h3 class="box-title">@pageTitle List</h3>
+							<div class="box-tools pull-right">
+								<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+										title="Collapse">
+									<i class="fa fa-minus"></i>
+								</button>
+							</div>
+						</div>
+						<div class="box-body">
+							<table id="tblproduct" class="table table-bordered display nowrap">
+								<thead>
+                                    <tr>
+                                        <th>SNo.</th>
+                                        <th>Action</th>
+                                        <th>@Html.DisplayNameFor(model => model.ProductModelList.FirstOrDefault().SKU)</th>
+                                        <th>@Html.DisplayNameFor(model => model.ProductModelList.FirstOrDefault().Name)</th>
+                                        <th>@Html.DisplayNameFor(model => model.ProductModelList.FirstOrDefault().Description)</th>
+                                        <th>@Html.DisplayNameFor(model => model.ProductModelList.FirstOrDefault().Category)</th>
+                                        <th>@Html.DisplayNameFor(model => model.ProductModelList.FirstOrDefault().Brand)</th>
+                                        <th>@Html.DisplayNameFor(model => model.ProductModelList.FirstOrDefault().UOM)</th>
+                                        <th>@Html.DisplayNameFor(model => model.ProductModelList.FirstOrDefault().MRP)</th>
+                                        <th>@Html.DisplayNameFor(model => model.ProductModelList.FirstOrDefault().TransferPrice)</th>
+                                        <th>@Html.DisplayNameFor(model => model.ProductModelList.FirstOrDefault().GST)</th>
+                                        <th>@Html.DisplayNameFor(model => model.ProductModelList.FirstOrDefault().HSN)</th>
+                                        <th>@Html.DisplayNameFor(model => model.ProductModelList.FirstOrDefault().LeadTime)</th>
+                                        <th>@Html.DisplayNameFor(model => model.ProductModelList.FirstOrDefault().Inventory)</th>
+                                    </tr>
+								</thead>
+								<tbody>
+									@foreach (var item in Model.ProductModelList)
+									{
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            @Html.EncodedActionLink("<i class='fa fa-pencil-square-o'></i>", "Product", "Dashboard", new { id = item.Id }, new { @class = "btn btn-edt bg-aqua", title = "Edit" })
+                                            @Html.EncodedActionLink("<i class='fa fa-times'></i>", "DeleteProduct", "Dashboard", new { id = item.Id }, new { data_box = "#mb-act-cnfrm", @class = "btn btn-del m-l-5 mb-act-confirm bg-m-red", title = "Delete" })
+                                        </td>
+                                        <td>@Html.DisplayFor(modelItem => item.SKU)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Category)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Brand)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.UOM)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.MRP)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.TransferPrice)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.GST)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.HSN)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.LeadTime)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Inventory)</td>
+                                    </tr>
+									}
+								</tbody>
+							</table>
+						</div>
+						<!-- /.box-body -->
+					}
+					else
+					{
+						<div class="box-body">
+							<div class="no-record">No record found.</div>
+						</div>
+					}
+				</div>
+				<!-- /.box -->
+			</div>
+		</div>
+		<!-- danger with sound -->
+		<div class="message-box animated fadeIn" data-sound="alert" id="mb-act-cnfrm">
+			<div class="mb-container">
+				<div class="mb-middle">
+					<div class="mb-title"><span class="fa fa-warning"></span> Confirm <strong>Box</strong> ?</div>
+					<div class="mb-content">
+						<p>Are you sure you want to delete?</p>
+						<p>Press No if you want to Cancel. Press Yes to Delete the record.</p>
+					</div>
+					<div class="mb-footer">
+						<div class="pull-right">
+							<a id="confirmhref" href="#" class="btn btn-confirm-yes btn-lg">Yes</a>
+							<button class="btn btn-confirm-no btn-lg mb-control-close">No</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- end danger with sound -->
+	}
+</section>
+<!-- /.content -->
