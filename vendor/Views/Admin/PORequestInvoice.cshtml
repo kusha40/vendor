@@ -1,0 +1,364 @@
+﻿@using Vendor_Indusuno.Extensions
+@model Vendor_Indusuno.ViewModels.RequestInvoiceViewModel
+@{
+    ViewBag.Title = "PO Request Invoice";
+    TempData["Stocks"] = "active";
+    TempData["RequestInvoice"] = "active";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    @{
+        string pageTitle = Html.Raw(Html.PageGTitle()) + "";
+    }
+    <h1>
+        @pageTitle
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index")"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        @Html.Raw(Html.BuildBreadcrumbNavigation())
+        @*<li class="active">Dashboard</li>*@
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    @using (Html.BeginForm("PORequestInvoice", "Admin", FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off", enctype = "multipart/form-data" }))
+    {
+
+        @Html.AntiForgeryToken()
+        <!-- Main row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Default box -->
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">@pageTitle</h3>
+                        <div class="box-tools pull-right">
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="col-md-12">
+                            <div class="msgs">
+                                @if (ViewData?.ModelState[""]?.Errors?.Any() == true)
+                                {
+                                    <div class="alert alert-danger alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                                        @Html.ValidationSummary(true, "", new { @class = "" })
+                                    </div>
+                                }
+                                @if (!String.IsNullOrEmpty(ViewBag.SucMsg))
+                                {
+                                    <div class="alert alert-success alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-check"></i> Success!</h4>
+                                        <strong>Well done!</strong> @ViewBag.SucMsg
+                                    </div>
+                                }
+                                @if (!String.IsNullOrEmpty(ViewBag.ErrMsg))
+                                {
+                                    <div class="alert alert-danger alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                                        <strong>Oh snap!</strong> @ViewBag.ErrMsg
+                                    </div>
+                                }
+                                @if (!String.IsNullOrEmpty(TempData["ErrMsg"] + ""))
+                                {
+                                    <div class="alert alert-danger alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                                        <strong>Oh snap!</strong> @TempData["ErrMsg"]
+                                    </div>
+                                }
+                                @if (!String.IsNullOrEmpty(TempData["SucMsg"] + ""))
+                                {
+                                    <div class="alert alert-success alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-check"></i> Success!</h4>
+                                        <strong>Well done!</strong> @TempData["SucMsg"]
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.PurOrdModels.CustomerId, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextAreaFor(m => m.PurOrdModels.CustomerId,
+                                new
+                                {
+                                    @class = "form-control text-capitalize cstid",
+                                    @readonly = true,
+                                    placeholder = @Html.DisplayNameFor(m => m.PurOrdModels.CustomerId)
+                                })
+                                        @Html.ValidationMessageFor(m => m.PurOrdModels.CustomerId, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.PurOrdModels.CustomerBillAdd, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextAreaFor(m => m.PurOrdModels.CustomerBillAdd,
+                                new
+                                {
+                                    @class = "form-control text-capitalize cstbadd",
+                                    @readonly = true,
+                                    placeholder = @Html.DisplayNameFor(m => m.PurOrdModels.CustomerBillAdd)
+                                })
+                                        @Html.ValidationMessageFor(m => m.PurOrdModels.CustomerBillAdd, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.PurOrdModels.CustomerShipAdd, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextAreaFor(m => m.PurOrdModels.CustomerShipAdd,
+                                new
+                                {
+                                    @class = "form-control text-capitalize cstsadd",
+                                    @readonly = true,
+                                    placeholder = @Html.DisplayNameFor(m => m.PurOrdModels.CustomerShipAdd)
+                                })
+                                        @Html.ValidationMessageFor(m => m.PurOrdModels.CustomerShipAdd, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                @*<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.PurOrdModels.CustomerBillAdd, new { @class = "form-control-label" }) <sup>*</sup>
+                                            @Html.DropDownListFor(m => m.PurOrdModels.CustomerBillAdd, new SelectList(Model.CustomerBilAddModelList, "Key", "Value"),
+                                            "--Customer Billing Address--", new { @class = "form-control select2 cstbadd" })
+                                            @Html.ValidationMessageFor(m => m.PurOrdModels.CustomerBillAdd, "",
+                                    new { @class = "text-danger errcstbadd" })
+                                        </div>
+                                    </div>*@
+                                @*<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.PurOrdModels.CustomerShipAdd, new { @class = "form-control-label" }) <sup>*</sup>
+                                            @Html.DropDownListFor(m => m.PurOrdModels.CustomerShipAdd, new SelectList(Model.CustomerShipAddModelList, "Key", "Value"),
+                                            "--Customer Shipping Address--", new { @class = "form-control select2 cstsadd" })
+                                            @Html.ValidationMessageFor(m => m.PurOrdModels.CustomerShipAdd, "",
+                                    new { @class = "text-danger errcstsadd" })
+                                        </div>
+                                    </div>*@
+                                <div class="col-md-12 row">
+                                    <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.PurOrdModels.POType, new { @class = "form-control-label" })
+                                            @Html.DropDownListFor(m => m.PurOrdModels.POType,
+                                           new List<SelectListItem>
+                                              {
+                                                new SelectListItem{ Text="Regular", Value = "Regular", Selected = true  },
+                                                new SelectListItem{ Text="Open PO", Value = "Open PO" },
+                                                new SelectListItem{ Text="ARC", Value = "ARC" },
+                                              },
+                                            "--Select PO Type--", new { @class = "form-control select2 potype", @disabled = true })
+                                            @Html.ValidationMessageFor(m => m.PurOrdModels.POType, "",
+                                    new { @class = "text-danger errpotype" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.PurOrdModels.POId, new { @class = "form-control-label" }) <sup>*</sup>
+                                            @Html.TextBoxFor(m => m.PurOrdModels.POId,
+                                    new
+                                    {
+                                        @class = "form-control text-capitalize poid",
+                                        @readonly = true,
+                                        placeholder = @Html.DisplayNameFor(m => m.PurOrdModels.POId)
+                                    })
+                                            @Html.ValidationMessageFor(m => m.PurOrdModels.POId, "",
+                                    new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.PurOrdModels.PONumber, new { @class = "form-control-label" }) <sup>*</sup>
+                                            @Html.TextBoxFor(m => m.PurOrdModels.PONumber,
+                                    new
+                                    {
+                                        @readonly = true,
+                                        @class = "form-control text-capitalize pono",
+                                        placeholder = @Html.DisplayNameFor(m => m.PurOrdModels.PONumber)
+                                    })
+                                            @Html.ValidationMessageFor(m => m.PurOrdModels.PONumber, "",
+                                    new { @class = "text-danger errpono" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.PurOrdModels.LineItems, new { @class = "form-control-label" }) <sup>*</sup>
+                                            @Html.TextBoxFor(m => m.PurOrdModels.LineItems,
+                                    new
+                                    {
+                                        @class = "form-control polneitm",
+                                        @type = "number",
+                                        @readonly = true,
+                                        placeholder = @Html.DisplayNameFor(m => m.PurOrdModels.LineItems)
+                                    })
+                                            @Html.ValidationMessageFor(m => m.PurOrdModels.LineItems, "",
+                                    new { @class = "text-danger errpolneitm" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.PurOrdModels.OrderDate, new { @class = "form-control-label" }) <sup>*</sup>
+                                            @Html.TextBoxFor(m => m.PurOrdModels.OrderDate,
+                                    new
+                                    {
+                                        @class = "form-control poorddate datepicker",
+                                        @readonly = true,
+                                        placeholder = @Html.DisplayNameFor(m => m.PurOrdModels.OrderDate)
+                                    })
+                                            @Html.ValidationMessageFor(m => m.PurOrdModels.OrderDate, "",
+                                    new { @class = "text-danger errpoorddate" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.PurOrdModels.ExpDlvDate, new { @class = "form-control-label" }) <sup>*</sup>
+                                            @Html.TextBoxFor(m => m.PurOrdModels.ExpDlvDate,
+                                    new
+                                    {
+                                        @class = "form-control poedlvdate datepicker",
+                                        @readonly = true,
+                                        placeholder = @Html.DisplayNameFor(m => m.PurOrdModels.ExpDlvDate)
+                                    })
+                                            @Html.ValidationMessageFor(m => m.PurOrdModels.ExpDlvDate, "",
+                                    new { @class = "text-danger errpoedlvdate" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <div class="col-lg-12">
+                <!-- Default box -->
+                <div class="box">
+                    <div class="box-body">
+                        <table id="tblMaterialReceive" class="tbl table table-bordered display">
+                            <thead>
+                                <tr>
+                                    <th>SNo</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POPId)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Product)</th>
+                                    <th>PO Qty</th>
+                                    <th>Stock Qty</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().RemainingQuantity)</th>
+                                    <th width="10%">@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().RequestQuantity)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    int i = 1;
+                                }
+                                @foreach (var item in Model.PurchaseOrdersModelList)
+                                {
+                                    <tr>
+                                        <td>@i</td>
+                                        <td>@Html.DisplayFor(modelItem => item.POPId)</td>
+                                        <td title="@item.SpcRemark">
+                                            @Html.DisplayFor(modelItem => item.Product)<br>
+                                            Brand : @item.Brand<br>
+                                            Model : @item.ModelNo
+                                        </td>
+                                        <td class="qty">@Html.DisplayFor(modelItem => item.Quantity)</td>
+                                        <td class="stkqty">@Html.DisplayFor(modelItem => item.StockQty)</td>
+                                        <td class="remqty">@Html.DisplayFor(modelItem => item.RemainingQuantity)</td>
+                                        <td>
+                                            @if (item.RemainingQuantity != 0)
+                                            {
+                                                @Html.TextBox("PurchaseOrdersModelList_RequestQuantity" + i, "0", new { @class = "form-control ireqqty onlynumdec", @data_required = true })
+                                            }
+                                        </td>
+                                    </tr>
+                                    i++;
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box-footer">
+                        <div class="col-md-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.RequestInvoiceModels.Remarks, new { @class = "form-control-label" }) <sup>*</sup>
+                                    @Html.TextAreaFor(m => m.RequestInvoiceModels.Remarks,
+                            new
+                            {
+                                @class = "form-control",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.RequestInvoiceModels.Remarks)
+                            })
+                                    @Html.ValidationMessageFor(m => m.RequestInvoiceModels.Remarks, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.RequestInvoiceModels.ContactNo, new { @class = "form-control-label" }) <sup>*</sup>
+                                    @Html.TextBoxFor(m => m.RequestInvoiceModels.ContactNo,
+                            new
+                            {
+                                @class = "form-control",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.RequestInvoiceModels.ContactNo)
+                            })
+                                    @Html.ValidationMessageFor(m => m.RequestInvoiceModels.ContactNo, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.RequestInvoiceModels.ContactPerson, new { @class = "form-control-label" }) <sup>*</sup>
+                                    @Html.TextBoxFor(m => m.RequestInvoiceModels.ContactPerson,
+                            new
+                            {
+                                @class = "form-control",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.RequestInvoiceModels.ContactPerson)
+                            })
+                                    @Html.ValidationMessageFor(m => m.RequestInvoiceModels.ContactPerson, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="box-tools pull-right">
+                                <button name="porisubmit" id="porisubmit" class="btn bg-aqua" title="SUBMIT"
+                                        value="submit">
+                                    SUBMIT
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box -->
+                </div>
+            </div>
+        </div>
+        <!-- danger with sound -->
+        <div class="message-box animated fadeIn" data-sound="alert" id="mb-sub-confirm">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-warning"></span> Confirm <strong>Box</strong> ?</div>
+                    <div class="mb-content">
+                        <p>Are you sure you want to submit?</p>
+                        <p>Press No if you want to Cancel. Press Yes to Submit the record.</p>
+                    </div>
+                    <div class="mb-footer">
+                        <div class="pull-right">
+                            <button name="posubmit" class="btn btn-confirm-yes btn-lg" title="Yes">
+                                Yes
+                            </button>
+                            <button class="btn btn-confirm-no btn-lg mb-control-close">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end danger with sound -->
+    }
+</section>
+<!-- /.content -->

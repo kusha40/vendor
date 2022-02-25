@@ -1,0 +1,643 @@
+﻿@using Vendor_Indusuno.Extensions
+@model Vendor_Indusuno.ViewModels.POGenerateViewModel
+@{
+    ViewBag.Title = "PO Generate";
+    TempData["Purchase"] = "active";
+    TempData["POGenerate"] = "active";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    @{
+        string pageTitle = Html.Raw(Html.PageGTitle()) + "";
+    }
+    <h1>
+        @pageTitle
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index")"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        @Html.Raw(Html.BuildBreadcrumbNavigation())
+        @*<li class="active">Dashboard</li>*@
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    @using (Html.BeginForm("POGenerate", "Admin", FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <!-- Main row -->
+        <div class="row">
+            <div class="col-lg-12 divgen">
+                <!-- Default box -->
+                <div class="box">
+                    <!-- /.box-body -->
+                    <div class="box-body">
+                        <table id="tblpogen" class="tbl table table-bordered display nowrap">
+                            <thead>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().CustomerName)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().PONumber)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POPId)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Product)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Quantity)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Unit)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().EnqId)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().VendorId)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().VendorPrice)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().GST)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                        <div class="col-md-12 p-t-20">
+                            <div class="col-lg-32 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POGenerateModels.POType, new { @class = "form-control-label" })
+                                    @Html.DropDownListFor(m => m.POGenerateModels.POType,
+                                   new List<SelectListItem>
+                                      {
+                                        new SelectListItem{ Text="New", Value = "New", Selected = true  },
+                                        new SelectListItem{ Text="Revise", Value = "Revise" },
+                                      },
+                                    "--Select PO Type--", new { @class = "form-control select2 ptype" })
+                                    @Html.ValidationMessageFor(m => m.POGenerateModels.POType, "",
+                            new { @class = "text-danger errptype" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POGenerateModels.VendorBillingAddress, new { @class = "form-control-label" }) <sup>*</sup>
+                                    @Html.DropDownListFor(m => m.POGenerateModels.VendorBillingAddress, new SelectList(Model.VendorBillingAddressList, "Key", "Value"),
+                                    "--Select Vendor Billing Address--", new { @class = "form-control select2 vba" })
+                                    @Html.ValidationMessageFor(m => m.POGenerateModels.VendorBillingAddress, "",
+                                    new { @class = "text-danger errvba" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POGenerateModels.BuyerBillingAddress, new { @class = "form-control-label" }) <sup>*</sup>
+                                    @Html.DropDownListFor(m => m.POGenerateModels.BuyerBillingAddress, new SelectList(Model.BuyerBillingAddressList, "Key", "Value"),
+                                    "--Select Buyer Billing Address--", new { @class = "form-control select2 bba" })
+                                    @Html.ValidationMessageFor(m => m.PurOrdModels.UnitId, "",
+                                    new { @class = "text-danger errbba" })
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-12 box-footer">
+                            <h4>Shipping Details</h4>
+                            <div class="col-md-12">
+                                @Html.HiddenFor(m => m.POGenerateModels.IsShippingAddressSame)
+                                <br><br><input type="checkbox" id="chksameadd" name="chksameadd" class="chksameadd" value="" />
+                                <label for="chksameadd">Is Shipping Address Same</label>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POGenerateModels.BuyerShippingName, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.POGenerateModels.BuyerShippingName,
+                            new
+                            {
+                                @class = "form-control text-capitalize shpname",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.BuyerShippingName)
+                            })
+                                    @Html.ValidationMessageFor(m => m.POGenerateModels.BuyerShippingName, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POGenerateModels.BuyerShippingAddress, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.POGenerateModels.BuyerShippingAddress,
+                            new
+                            {
+                                @class = "form-control shpadd",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.BuyerShippingAddress)
+                            })
+                                    @Html.ValidationMessageFor(m => m.POGenerateModels.BuyerShippingAddress, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POGenerateModels.BuyerShippingCity, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.POGenerateModels.BuyerShippingCity,
+                            new
+                            {
+                                @class = "form-control shpcty",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.BuyerShippingCity)
+                            })
+                                    @Html.ValidationMessageFor(m => m.POGenerateModels.BuyerShippingCity, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POGenerateModels.BuyerShippingState, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.POGenerateModels.BuyerShippingState,
+                            new
+                            {
+                                @class = "form-control shpsts",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.BuyerShippingState)
+                            })
+                                    @Html.ValidationMessageFor(m => m.POGenerateModels.BuyerShippingState, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POGenerateModels.BuyerShippingPincode, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.POGenerateModels.BuyerShippingPincode,
+                            new
+                            {
+                                @class = "form-control shppin",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.BuyerShippingPincode)
+                            })
+                                    @Html.ValidationMessageFor(m => m.POGenerateModels.BuyerShippingPincode, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POGenerateModels.BuyerShippingContact, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.POGenerateModels.BuyerShippingContact,
+                            new
+                            {
+                                @class = "form-control shpcntct",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.BuyerShippingContact)
+                            })
+                                    @Html.ValidationMessageFor(m => m.POGenerateModels.BuyerShippingContact, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POGenerateModels.BuyerShippingGST, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.POGenerateModels.BuyerShippingGST,
+                            new
+                            {
+                                @class = "form-control shpgst",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.BuyerShippingGST)
+                            })
+                                    @Html.ValidationMessageFor(m => m.POGenerateModels.BuyerShippingGST, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POGenerateModels.BuyerShippingPAN, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.POGenerateModels.BuyerShippingPAN,
+                            new
+                            {
+                                @class = "form-control shppan",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.BuyerShippingPAN)
+                            })
+                                    @Html.ValidationMessageFor(m => m.POGenerateModels.BuyerShippingPAN, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 box-footer">
+                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POGenerateModels.PNFAmount, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.POGenerateModels.PNFAmount,
+                            new
+                            {
+                                @class = "form-control pnfamnt onlynumdec",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.PNFAmount)
+                            })
+                                    @Html.ValidationMessageFor(m => m.POGenerateModels.PNFAmount, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POGenerateModels.FreightAmount, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.POGenerateModels.FreightAmount,
+                            new
+                            {
+                                @class = "form-control frghtamnt onlynumdec",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.FreightAmount)
+                            })
+                                    @Html.ValidationMessageFor(m => m.POGenerateModels.FreightAmount, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            @*<div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.POGenerateModels.FreightPNFGST, new { @class = "form-control-label" })
+                                        @Html.TextBoxFor(m => m.POGenerateModels.FreightPNFGST,
+                                new
+                                {
+                                    @class = "form-control fpnfgst onlynumdec",
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.FreightPNFGST)
+                                })
+                                        @Html.ValidationMessageFor(m => m.POGenerateModels.FreightPNFGST, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>*@
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <button name="submit" id="pocalculate" class="btn bg-aqua m-t-20" title="Submit"
+                                        value="">
+                                    Calculate
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-12 box-footer">
+                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POGenerateModels.TotalAmount, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.POGenerateModels.TotalAmount,
+                            new
+                            {
+                                @class = "form-control onlynumdec totamnt",
+                                @readonly = true,
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.TotalAmount)
+                            })
+                                    @Html.ValidationMessageFor(m => m.POGenerateModels.TotalAmount, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POGenerateModels.CGSTAmount, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.POGenerateModels.CGSTAmount,
+                            new
+                            {
+                                @class = "form-control onlynumdec cgstamnt",
+                                @readonly = true,
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.CGSTAmount)
+                            })
+                                    @Html.ValidationMessageFor(m => m.POGenerateModels.CGSTAmount, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POGenerateModels.SGSTAmount, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.POGenerateModels.SGSTAmount,
+                            new
+                            {
+                                @class = "form-control onlynumdec sgstamnt",
+                                @readonly = true,
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.SGSTAmount)
+                            })
+                                    @Html.ValidationMessageFor(m => m.POGenerateModels.SGSTAmount, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POGenerateModels.IGSTAmount, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.POGenerateModels.IGSTAmount,
+                            new
+                            {
+                                @class = "form-control onlynumdec igstamnt",
+                                @readonly = true,
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.IGSTAmount)
+                            })
+                                    @Html.ValidationMessageFor(m => m.POGenerateModels.IGSTAmount, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POGenerateModels.TotalAmountGST, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.POGenerateModels.TotalAmountGST,
+                            new
+                            {
+                                @class = "form-control onlynumdec totamntgst",
+                                @readonly = true,
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.TotalAmountGST)
+                            })
+                                    @Html.ValidationMessageFor(m => m.POGenerateModels.TotalAmountGST, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POGenerateModels.NetAmount, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.POGenerateModels.NetAmount,
+                            new
+                            {
+                                @class = "form-control onlynumdec netamnt",
+                                @readonly = true,
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.NetAmount)
+                            })
+                                    @Html.ValidationMessageFor(m => m.POGenerateModels.NetAmount, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 box-footer">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POGenerateModels.TACondition, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.POGenerateModels.TACondition,
+                            new
+                            {
+                                @class = "form-control text-capitalize tcond",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.TACondition)
+                            })
+                                    @Html.ValidationMessageFor(m => m.POGenerateModels.TACondition, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POGenerateModels.LeadTime, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.POGenerateModels.LeadTime,
+                            new
+                            {
+                                @class = "form-control ldtime",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.LeadTime)
+                            })
+                                    @Html.ValidationMessageFor(m => m.POGenerateModels.LeadTime, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-32 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POGenerateModels.InStock, new { @class = "form-control-label" })
+                                    @Html.DropDownListFor(m => m.POGenerateModels.InStock,
+                                   new List<SelectListItem>
+                                      {
+                                        new SelectListItem{ Text="Yes", Value = "Yes", Selected = true  },
+                                        new SelectListItem{ Text="No", Value = "No" },
+                                      },
+                                    "--Select Stock--", new { @class = "form-control select2 instk" })
+                                    @Html.ValidationMessageFor(m => m.POGenerateModels.InStock, "",
+                            new { @class = "text-danger errptype" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POGenerateModels.PackFwdCharges, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.POGenerateModels.PackFwdCharges,
+                            new
+                            {
+                                @class = "form-control pfchrg",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.PackFwdCharges)
+                            })
+                                    @Html.ValidationMessageFor(m => m.POGenerateModels.PackFwdCharges, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POGenerateModels.PaymentTerms, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.POGenerateModels.PaymentTerms,
+                            new
+                            {
+                                @class = "form-control pterms",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.PaymentTerms)
+                            })
+                                    @Html.ValidationMessageFor(m => m.POGenerateModels.PaymentTerms, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POGenerateModels.FrieghtTerms, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.POGenerateModels.FrieghtTerms,
+                            new
+                            {
+                                @class = "form-control frtrms",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.FrieghtTerms)
+                            })
+                                    @Html.ValidationMessageFor(m => m.POGenerateModels.BuyerShippingContact, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POGenerateModels.ModeOfTransport, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.POGenerateModels.ModeOfTransport,
+                            new
+                            {
+                                @class = "form-control motrns",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.ModeOfTransport)
+                            })
+                                    @Html.ValidationMessageFor(m => m.POGenerateModels.ModeOfTransport, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POGenerateModels.Warranty, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.POGenerateModels.Warranty,
+                            new
+                            {
+                                @class = "form-control wrnty",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.Warranty)
+                            })
+                                    @Html.ValidationMessageFor(m => m.POGenerateModels.Warranty, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POGenerateModels.ValidityOfPO, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.POGenerateModels.ValidityOfPO,
+                            new
+                            {
+                                @class = "form-control valofpo",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.ValidityOfPO)
+                            })
+                                    @Html.ValidationMessageFor(m => m.POGenerateModels.ValidityOfPO, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            @*<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.POGenerateModels.Misc, new { @class = "form-control-label" })
+                                        @Html.TextBoxFor(m => m.POGenerateModels.Misc,
+                                new
+                                {
+                                    @class = "form-control misc",
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.Misc)
+                                })
+                                        @Html.ValidationMessageFor(m => m.POGenerateModels.Misc, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>*@
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POGenerateModels.Remarks, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.POGenerateModels.Remarks,
+                            new
+                            {
+                                @class = "form-control remark",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.Remarks)
+                            })
+                                    @Html.ValidationMessageFor(m => m.POGenerateModels.Remarks, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.POGenerateModels.LMRemarks, new { @class = "form-control-label" })
+                                    @Html.TextAreaFor(m => m.POGenerateModels.LMRemarks,
+                            new
+                            {
+                                @class = "form-control lmremark",
+                                placeholder = "Enter " + @Html.DisplayNameFor(m => m.POGenerateModels.LMRemarks)
+                            })
+                                    @Html.ValidationMessageFor(m => m.POGenerateModels.LMRemarks, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <button name="submit" id="pogen" class="btn bg-aqua m-t-20 pogen" title="Submit"
+                                value="pogen">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box -->
+            <div class="col-lg-12 divgnt">
+                <!-- Default box -->
+                <div class="box">
+                    <div class="box-header with-border">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <a href="javascript:void(0)" class="btn bg-aqua" id="POGenerate">GENERATE</a>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-body">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Search, new { @class = "form-control-label" }) <sup>*</sup>
+                                @Html.TextBoxFor(m => m.Search,
+                                                 new
+                                                 {
+                                                     @class = "form-control text-capitalize",
+                                                     placeholder = @Html.DisplayNameFor(m => m.Search)
+                                                 })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.StartDate, new { @class = "form-control-label" }) <sup>*</sup>
+                                @Html.TextBoxFor(m => m.StartDate,
+                                                 new
+                                                 {
+                                                     @class = "form-control datepicker",
+                                                     placeholder = @Html.DisplayNameFor(m => m.StartDate)
+                                                 })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.EndDate, new { @class = "form-control-label" }) <sup>*</sup>
+                                @Html.TextBoxFor(m => m.EndDate,
+                                                 new
+                                                 {
+                                                     @class = "form-control datepicker",
+                                                     placeholder = @Html.DisplayNameFor(m => m.EndDate)
+                                                 })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="box-tools pull-left">
+                                <button type="submit" name="search" class="btn bg-aqua" title="SEARCH"
+                                        value="search">
+                                    SEARCH
+                                </button>
+                            </div>
+                        </div>
+                        <table id="tblPOGenerate" class="table table-bordered display">
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" id="seallsrspo" /></th>
+                                    <th>SNo</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().OrderDate)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().CustomerName)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POId)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().PONumber)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POPId)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Product)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Quantity)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Unit)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Price)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().EnqId)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().VendorId)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().VendorPrice)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().GST)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Status)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().NotAppRemark)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POCreatedBy)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POAssignTo)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POAssignBy)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POSourcedBy)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.PurchaseOrdersModelList)
+                                {
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.POId)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.PONumber)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.POPId)</td>
+                                    <td title="@item.SpcRemark">
+                                        @Html.DisplayFor(modelItem => item.Product)<br>
+                                        Brand : @item.Brand<br>
+                                        Model : @item.ModelNo
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Unit)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EnqId)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.VendorId)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.VendorPrice)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.GST)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.NotAppRemark)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.POCreatedBy)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.POAssignTo)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.POAssignBy)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.POSourcedBy)</td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box -->
+                </div>
+            </div>
+        </div>
+        <!-- danger with sound -->
+        <div class="message-box animated fadeIn" data-sound="alert" id="mb-sub-confirm">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-warning"></span> Confirm <strong>Box</strong> ?</div>
+                    <div class="mb-content">
+                        <p>Are you sure you want to submit?</p>
+                        <p>Press No if you want to Cancel. Press Yes to Submit the record.</p>
+                    </div>
+                    <div class="mb-footer">
+                        <div class="pull-right">
+                            <button name="posubmit" class="btn btn-confirm-yes btn-lg" title="Yes">
+                                Yes
+                            </button>
+                            <button class="btn btn-confirm-no btn-lg mb-control-close">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end danger with sound -->
+    }
+</section>
+<!-- /.content -->

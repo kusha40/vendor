@@ -1,0 +1,184 @@
+﻿@using Vendor_Indusuno.Extensions
+@model Vendor_Indusuno.ViewModels.QuotationBackstageViewModel
+@{
+    ViewBag.Title = "Quotation Backstage";
+    TempData["HRM"] = "active";
+    TempData["QuotationBackstage"] = "active";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    @{
+        string pageTitle = Html.Raw(Html.PageGTitle()) + "";
+    }
+    <h1>
+        @pageTitle
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index")"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        @Html.Raw(Html.BuildBreadcrumbNavigation())
+        @*<li class="active">Dashboard</li>*@
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    @using (Html.BeginForm("QuotationBackstage", "Admin", FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <!-- Main row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Default box -->
+                <div class="box">
+                    <div class="box-header with-border">
+                        @if (Model.UserProfileModels.EmpType != "User")
+                        {
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.EnquiryModels.BackStage, new { @class = "form-control-label" })
+                                    @Html.DropDownListFor(m => m.EnquiryModels.BackStage,
+                                new List<SelectListItem>
+                                   {
+                                        new SelectListItem{ Text="ASSIGN", Value = "A" },
+                                        new SelectListItem{ Text="SOURCED", Value = "S"  },
+                                        new SelectListItem{ Text="QUOTED", Value = "Q" },
+                                        new SelectListItem{ Text="QUOTATION", Value = "G" },
+                                        new SelectListItem{ Text="QUOTE APPROVE", Value = "AP" }
+                                   },
+                                 "--Select Backstage--", new { @class = "form-control select2 quotbckstg" })
+                                    @Html.ValidationMessageFor(m => m.EnquiryModels.BackStage, "",
+                         new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <a href="javascript:void(0)" class="btn bg-aqua m-t-20 enqbackstage">Backstage</a>
+                            </div>
+                        }
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-body">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Search, new { @class = "form-control-label" }) <sup>*</sup>
+                                @Html.TextBoxFor(m => m.Search,
+                                new
+                                {
+                                    @class = "form-control text-capitalize",
+                                    placeholder = @Html.DisplayNameFor(m => m.Search)
+                                })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.StartDate, new { @class = "form-control-label" }) <sup>*</sup>
+                                @Html.TextBoxFor(m => m.StartDate,
+                                new
+                                {
+                                    @class = "form-control datepicker",
+                                    placeholder = @Html.DisplayNameFor(m => m.StartDate)
+                                })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.EndDate, new { @class = "form-control-label" }) <sup>*</sup>
+                                @Html.TextBoxFor(m => m.EndDate,
+                                new
+                                {
+                                    @class = "form-control datepicker",
+                                    placeholder = @Html.DisplayNameFor(m => m.EndDate)
+                                })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="box-tools pull-left">
+                                <button type="submit" name="search" class="btn bg-aqua" title="SEARCH"
+                                        value="search">
+                                    SEARCH
+                                </button>
+                            </div>
+                        </div>
+                        <table id="tblquotbackstage" class="table table-bordered display">
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" id="seallasnpo" /></th>
+                                    <th>SNo</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnquiryDate)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().CustomerName)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqId)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqPId)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().QuotationNumber)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Product)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Quantity)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Unit)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Price)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Discount)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().TotalPrice)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().GST)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().CurrentStage)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqCreatedBy)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqAssignTo)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.EnquiriesModelList)
+                                {
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>@Html.DisplayFor(modelItem => item.EnquiryDate)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
+                                        <td>
+                                            <a href='~/Content/upload/poupload/@item.EnqId' target="_blank">@item.EnqId</a>
+                                        </td>
+                                        <td>@Html.DisplayFor(modelItem => item.EnqPId)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.QuotationNumber)</td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Product)<br>
+                                            Brand : @item.Brand<br>
+                                            Model : @item.ModelNo
+                                        </td>
+                                        <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Unit)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Discount)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.GST)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.CurrentStage)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.EnqCreatedBy)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.EnqAssignTo)</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box -->
+                </div>
+            </div>
+        </div>
+        <!-- danger with sound -->
+        <div class="message-box animated fadeIn" data-sound="alert" id="mb-sub-confirm">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-warning"></span> Confirm <strong>Box</strong> ?</div>
+                    <div class="mb-content">
+                        <p>Are you sure you want to submit?</p>
+                        <p>Press No if you want to Cancel. Press Yes to Submit the record.</p>
+                    </div>
+                    <div class="mb-footer">
+                        <div class="pull-right">
+                            <button name="posubmit" class="btn btn-confirm-yes btn-lg" title="Yes">
+                                Yes
+                            </button>
+                            <button class="btn btn-confirm-no btn-lg mb-control-close">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end danger with sound -->
+    }
+</section>
+<!-- /.content -->

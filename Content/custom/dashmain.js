@@ -4963,3 +4963,47 @@ $('.quotnotapprove').on('click', function (e) {
         alert("Please select atleast one po.");
     }
 });
+
+$('.enqregret').on('click', function (e) {
+    $(this).find(':submit').attr('disabled', 'disabled');
+    $(".enqregret").attr("disabled", true);
+    $(".enqregret").hide();
+    e.preventDefault();
+    var rows_selected = $("#tblsourced tbody tr.selected");
+    var list = new Array();
+    // Iterate over all selected checkboxes
+    $.each(rows_selected, function (index, row) {
+        // Create a hidden element
+        list.push(row.cells[5].innerText);
+    });
+    var regrmk = $(".regrmk").val();
+    if (list.length > 0) {
+        if (regrmk != "") {
+            var enqNos = JSON.stringify(list);
+            $.ajax({
+                url: "/Admin/EnquiryRegretList",
+                dataType: "json",
+                data: "{'enqNos': '" + enqNos + "','regrmk': '" + regrmk + "'}",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (result) {
+                    if (result.error === "") {
+                        location.reload();
+                    }
+                    else {
+                        alert(result.error);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert(err.Message);
+                }
+            });
+        } else {
+            alert("Please enter remarks");
+        }
+    }
+    else {
+        alert("Please select atleast one enq.");
+    }
+});

@@ -1,0 +1,199 @@
+﻿@using Vendor_Indusuno.Extensions
+@model Vendor_Indusuno.ViewModels.QuotationApproveViewModel
+@{
+    ViewBag.Title = "Approve Quotation";
+    TempData["Enquiry"] = "active";
+    TempData["QuotationApprove"] = "active";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    @{
+        string pageTitle = Html.Raw(Html.PageGTitle()) + "";
+    }
+    <h1>
+        @pageTitle
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index")"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        @Html.Raw(Html.BuildBreadcrumbNavigation())
+        @*<li class="active">Dashboard</li>*@
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    @using (Html.BeginForm("QuotationApprove", "Admin", FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <!-- Main row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Default box -->
+                <div class="box">
+                    <!-- /.box-body -->
+                    <div class="box-body">
+                        <div class="col-md-12">
+                            @if (Model.UserProfileModels.EmpType != "User")
+                            {
+                                @*<a href="javascript:void(0)" class="btn bg-aqua poapprove" id="poapprove">Approve</a>
+                                <a href="javascript:void(0)" class="btn bg-red float-right ponotapprove" id="ponotapprove">Not Approve</a>*@
+                                <div class="col-md-4">
+                                    <a href="javascript:void(0)" class="btn bg-aqua quotapprove" id="quotapprove">Approve</a>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="col-md-8">
+                                        <textarea class="float-right form-control napprmk" placeholder = "Enter Not Approval Remarks"></textarea>
+                                    </div>
+                                    <div class="col-md-4 float-right">
+                                    <a href="javascript:void(0)" class="btn bg-red btn-edt float-right quotnotapprove" id="quotnotapprove">Not Approve</a>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Search, new { @class = "form-control-label" }) <sup>*</sup>
+                                @Html.TextBoxFor(m => m.Search,
+                                new
+                                {
+                                    @class = "form-control text-capitalize",
+                                    placeholder = @Html.DisplayNameFor(m => m.Search)
+                                })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.StartDate, new { @class = "form-control-label" }) <sup>*</sup>
+                                @Html.TextBoxFor(m => m.StartDate,
+                                new
+                                {
+                                    @class = "form-control datepicker",
+                                    placeholder = @Html.DisplayNameFor(m => m.StartDate)
+                                })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.EndDate, new { @class = "form-control-label" }) <sup>*</sup>
+                                @Html.TextBoxFor(m => m.EndDate,
+                                new
+                                {
+                                    @class = "form-control datepicker",
+                                    placeholder = @Html.DisplayNameFor(m => m.EndDate)
+                                })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="box-tools pull-left">
+                                <button type="submit" name="search" class="btn bg-aqua" title="SEARCH"
+                                        value="search">
+                                    SEARCH
+                                </button>
+                            </div>
+                        </div>
+                        <table id="tblQuotationApprove" class="table table-bordered display">
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" id="seallasnpo" /></th>
+                                    <th>SNo</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqGDate)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnquiryDate)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().CustomerName)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqId)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().QuotationNumber)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().VendorId)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().VendorPrice)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().QuotePrice)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Margin)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().LMRemarks)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqAssignTo)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqAssignBy)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqSourcedBy)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqGenerateBy)</th>
+                                    @*@if (Model.UserProfileModels.EmpType != "User")
+                                    {
+                                        <th>Not Approved</th>
+                                    }*@
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.EnquiriesModelList)
+                                {
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            @if (item.EnqGDate == "01/01/1900")
+                                            {
+
+                                            }
+                                            else
+                                            {
+                                                @Html.DisplayFor(modelItem => item.EnqGDate)
+                                            }
+                                        </td>
+                                        <td>@Html.DisplayFor(modelItem => item.EnquiryDate)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
+                                        <td>
+                                            @Html.EncodedActionLink(item.EnqId, "EnquiryDetails", "Admin", new { id = item.QuotationNumber }, new { @class = "", title = "Edit", @target = "_blank" })
+                                        </td>
+                                        <td>@Html.DisplayFor(modelItem => item.QuotationNumber)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.VendorId)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.VendorPrice)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.QuotePrice)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Margin)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.LMRemarks)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.EnqAssignTo)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.EnqAssignBy)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.EnqSourcedBy)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.EnqGenerateBy)</td>
+                                        @*@if (Model.UserProfileModels.EmpType != "User")
+                                        {
+                                            <td>
+                                                @Html.EncodedActionLink("<i class='fa fa-times'></i>", "PONotApproved", "Admin",
+                                                    new { id = item.VPONumber }, new { @class = "btn btn-edt bg-red btn-sm", title = "PO Not Approved" })
+                                            </td>
+                                        }*@
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box -->
+                </div>
+            </div>
+        </div>
+        <!-- danger with sound -->
+        <div class="message-box animated fadeIn" data-sound="alert" id="mb-act-cnfrm">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-warning"></span> Confirm <strong>Box</strong> ?</div>
+                    <div class="mb-content">
+                        <p>Are you sure you want to not approve?</p>
+                        <p>Press No if you want to Cancel. Press Yes to not Approve the record.</p>
+                        <div class="col-md-12 m-t-20">
+                            <div class="form-group">
+                                <label class="control-label">Remark</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-id-badge"></span></span>
+                                    @Html.TextAreaFor(model => model.EnquiryModels.SpcRemark, new { @class = "form-control", type = "text" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.EnquiryModels.SpcRemark, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-footer">
+                        <div class="pull-right">
+                            <a id="confirmhref" href="#" class="btn btn-confirm-yes btn-lg">Yes</a>
+                            <button class="btn btn-confirm-no btn-lg mb-control-close">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end danger with sound -->
+    }
+</section>
+<!-- /.content -->

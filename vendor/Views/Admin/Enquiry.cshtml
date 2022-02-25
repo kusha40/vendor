@@ -1,0 +1,462 @@
+﻿@using Vendor_Indusuno.Extensions
+@model Vendor_Indusuno.ViewModels.EnquiryViewModel
+@{
+    ViewBag.Title = "Enquiry";
+    TempData["Enquiries"] = "active";
+    TempData["Enquiry"] = "active";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    @{
+        string actType = "Add";
+        string actBtn = "Submit";
+        string pageTitle = Html.Raw(Html.PageGTitle()) + "";
+        if (!String.IsNullOrEmpty(Model.EnquiryModels.Id))
+        {
+            actType = "Edit";
+            actBtn = "Update";
+        }
+    }
+    <h1>
+        @pageTitle
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index")"><i class="fa fa-dashboard"></i> Home</a></li>
+        @Html.Raw(Html.BuildBreadcrumbNavigation())
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    @using (Html.BeginForm("Enquiry", "Admin", FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <!-- Main row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Default box -->
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">@actType @pageTitle</h3>
+                        <div class="box-tools pull-right">
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="col-md-12">
+                            <div class="msgs">
+                                @if (ViewData?.ModelState[""]?.Errors?.Any() == true)
+                                {
+                                    <div class="alert alert-danger alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                                        @Html.ValidationSummary(true, "", new { @class = "" })
+                                    </div>
+                                }
+                                @if (!String.IsNullOrEmpty(ViewBag.SucMsg))
+                                {
+                                    <div class="alert alert-success alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-check"></i> Success!</h4>
+                                        <strong>Well done!</strong> @ViewBag.SucMsg
+                                    </div>
+                                }
+                                @if (!String.IsNullOrEmpty(ViewBag.ErrMsg))
+                                {
+                                    <div class="alert alert-danger alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                                        <strong>Oh snap!</strong> @ViewBag.ErrMsg
+                                    </div>
+                                }
+                                @if (!String.IsNullOrEmpty(TempData["ErrMsg"] + ""))
+                                {
+                                    <div class="alert alert-danger alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                                        <strong>Oh snap!</strong> @TempData["ErrMsg"]
+                                    </div>
+                                }
+                                @if (!String.IsNullOrEmpty(TempData["SucMsg"] + ""))
+                                {
+                                    <div class="alert alert-success alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-check"></i> Success!</h4>
+                                        <strong>Well done!</strong> @TempData["SucMsg"]
+                                    </div>
+                                }
+                            </div>
+                            @Html.HiddenFor(model => model.EnquiryModels.Id)
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.EnquiryModels.CustomerId, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.DropDownListFor(m => m.EnquiryModels.CustomerId, new SelectList(Model.CustomerModelList, "Key", "Value"),
+                                        "--Select Customer--", new { @class = "form-control select2 cstid" })
+                                        @Html.ValidationMessageFor(m => m.EnquiryModels.CustomerId, "",
+                                new { @class = "text-danger errcstid" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.EnquiryModels.CustomerBillAdd, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.DropDownListFor(m => m.EnquiryModels.CustomerBillAdd, new SelectList(Model.CustomerBilAddModelList, "Key", "Value"),
+                                        "--Customer Billing Address--", new { @class = "form-control select2 cstbadd" })
+                                        @Html.ValidationMessageFor(m => m.EnquiryModels.CustomerBillAdd, "",
+                                new { @class = "text-danger errcstbadd" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.EnquiryModels.CustomerShipAdd, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.DropDownListFor(m => m.EnquiryModels.CustomerShipAdd, new SelectList(Model.CustomerShipAddModelList, "Key", "Value"),
+                                        "--Customer Shipping Address--", new { @class = "form-control select2 cstsadd" })
+                                        @Html.ValidationMessageFor(m => m.EnquiryModels.CustomerShipAdd, "",
+                                new { @class = "text-danger errcstsadd" })
+                                    </div>
+                                </div>
+                                <div class="col-md-12 row">
+                                    <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.EnquiryModels.EnqType, new { @class = "form-control-label" })
+                                            @Html.DropDownListFor(m => m.EnquiryModels.EnqType,
+                                           new List<SelectListItem>
+                                              {
+                                                new SelectListItem{ Text="Regular", Value = "Regular", Selected = true  },
+                                                new SelectListItem{ Text="Urgent", Value = "Urgent" },
+                                              },
+                                            "--Select Enq Type--", new { @class = "form-control select2 enqtype" })
+                                            @Html.ValidationMessageFor(m => m.EnquiryModels.EnqType, "",
+                                    new { @class = "text-danger errenqtype" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.EnquiryModels.EnqId, new { @class = "form-control-label" }) <sup>*</sup>
+                                            @Html.TextBoxFor(m => m.EnquiryModels.EnqId,
+                                    new
+                                    {
+                                        @class = "form-control text-capitalize enqid",
+                                        @readonly = true,
+                                        placeholder = @Html.DisplayNameFor(m => m.EnquiryModels.EnqId)
+                                    })
+                                            @Html.ValidationMessageFor(m => m.EnquiryModels.EnqId, "",
+                                    new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.EnquiryModels.LineItems, new { @class = "form-control-label" }) <sup>*</sup>
+                                            @Html.TextBoxFor(m => m.EnquiryModels.LineItems,
+                                    new
+                                    {
+                                        @class = "form-control enqlneitm",
+                                        @type = "number",
+                                        placeholder = @Html.DisplayNameFor(m => m.EnquiryModels.LineItems)
+                                    })
+                                            @Html.ValidationMessageFor(m => m.EnquiryModels.LineItems, "",
+                                    new { @class = "text-danger errenqlneitm" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.EnquiryModels.EnquiryDate, new { @class = "form-control-label" }) <sup>*</sup>
+                                            @Html.TextBoxFor(m => m.EnquiryModels.EnquiryDate,
+                                    new
+                                    {
+                                        @class = "form-control enqdate datepicker",
+                                        placeholder = @Html.DisplayNameFor(m => m.EnquiryModels.EnquiryDate)
+                                    })
+                                            @Html.ValidationMessageFor(m => m.EnquiryModels.EnquiryDate, "",
+                                    new { @class = "text-danger errenqdate" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.EnquiryModels.EndDate, new { @class = "form-control-label" }) <sup>*</sup>
+                                            @Html.TextBoxFor(m => m.EnquiryModels.EndDate,
+                                    new
+                                    {
+                                        @class = "form-control enddate datepicker",
+                                        placeholder = @Html.DisplayNameFor(m => m.EnquiryModels.EndDate)
+                                    })
+                                            @Html.ValidationMessageFor(m => m.EnquiryModels.EndDate, "",
+                                    new { @class = "text-danger errenddate" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <div class="col-lg-12">
+                <!-- Default box -->
+                <div class="box">
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.EnquiryModels.CstMtrlCode, new { @class = "form-control-label" })
+                                        @Html.TextBoxFor(m => m.EnquiryModels.CstMtrlCode,
+                                new
+                                {
+                                    @class = "form-control cstmtrcd",
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.EnquiryModels.CstMtrlCode)
+                                })
+                                        @Html.ValidationMessageFor(m => m.EnquiryModels.CstMtrlCode, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.EnquiryModels.SKUNo, new { @class = "form-control-label" })
+                                        @Html.DropDownListFor(m => m.EnquiryModels.SKUNo, new SelectList(Model.SKUModelList, "Key", "Value"),
+                                        "--Select SKU No--", new { @class = "form-control select2 skuno" })
+                                        @Html.ValidationMessageFor(m => m.EnquiryModels.SKUNo, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.EnquiryModels.ProductId, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextBoxFor(m => m.EnquiryModels.ProductId,
+                                new
+                                {
+                                    @class = "form-control text-capitalize prdid",
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.EnquiryModels.ProductId)
+                                })
+                                        @Html.ValidationMessageFor(m => m.EnquiryModels.ProductId, "",
+                                new { @class = "text-danger errprdid" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.EnquiryModels.ModelNo, new { @class = "form-control-label" })
+                                        @Html.TextBoxFor(m => m.EnquiryModels.ModelNo,
+                                new
+                                {
+                                    @class = "form-control text-capitalize modelno",
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.EnquiryModels.ModelNo)
+                                })
+                                        @Html.ValidationMessageFor(m => m.EnquiryModels.ModelNo, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.EnquiryModels.PrdCtgryId, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.DropDownListFor(m => m.EnquiryModels.PrdCtgryId, new SelectList(Model.ProductCategoryModelList, "Key", "Value"),
+                                        "--Select Product Category--", new { @class = "form-control select2 prdctgid" })
+                                        @Html.ValidationMessageFor(m => m.EnquiryModels.PrdCtgryId, "",
+                                new { @class = "text-danger errprdctgid" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.EnquiryModels.BrandId, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.DropDownListFor(m => m.EnquiryModels.BrandId, new SelectList(Model.BrandModelList, "Key", "Value"),
+                                        "--Select Brand--", new { @class = "form-control select2 brndid" })
+                                        @Html.ValidationMessageFor(m => m.EnquiryModels.BrandId, "",
+                                new { @class = "text-danger errbrndid" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.EnquiryModels.HSNCode, new { @class = "form-control-label" })
+                                        @Html.TextBoxFor(m => m.EnquiryModels.HSNCode,
+                                new
+                                {
+                                    @class = "form-control text-capitalize hsncode",
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.EnquiryModels.HSNCode)
+                                })
+                                        @Html.ValidationMessageFor(m => m.EnquiryModels.HSNCode, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.EnquiryModels.UnitId, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.DropDownListFor(m => m.EnquiryModels.UnitId, new SelectList(Model.UnitModelList, "Key", "Value"),
+                                        "--Select Unit--", new { @class = "form-control select2 untid" })
+                                        @Html.ValidationMessageFor(m => m.EnquiryModels.UnitId, "",
+                                new { @class = "text-danger erruntid" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.EnquiryModels.SpcRemark, new { @class = "form-control-label" })
+                                        @Html.TextAreaFor(m => m.EnquiryModels.SpcRemark,
+                                new
+                                {
+                                    @class = "form-control text-capitalize spcrmk",
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.EnquiryModels.SpcRemark)
+                                })
+                                        @Html.ValidationMessageFor(m => m.EnquiryModels.SpcRemark, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.EnquiryModels.Quantity, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextBoxFor(m => m.EnquiryModels.Quantity,
+                                new
+                                {
+                                    @class = "form-control text-capitalize qty",
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.EnquiryModels.Quantity)
+                                })
+                                        @Html.ValidationMessageFor(m => m.EnquiryModels.Quantity, "",
+                                new { @class = "text-danger errqty" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.EnquiryModels.Price, new { @class = "form-control-label" })
+                                        @Html.TextBoxFor(m => m.EnquiryModels.Price,
+                                new
+                                {
+                                    @class = "form-control text-capitalize price",
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.EnquiryModels.Price)
+                                })
+                                        @Html.ValidationMessageFor(m => m.EnquiryModels.Price, "",
+                                new { @class = "text-danger errprice" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <div class="col-md-12">
+                            <div class="box-tools pull-left">
+                                <a href="javascript:void(0)" class="btn bg-aqua" id="addtempenqline">ADD</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-footer-->
+                </div>
+                <!-- /.box -->
+            </div>
+
+            <div class="col-lg-12">
+                <!-- Default box -->
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">@pageTitle List</h3>
+                        <div class="box-tools pull-right">
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <table id="tblTempEnqLine" class="tbl table table-bordered display nowrap">
+                            <thead>
+                                <tr>
+                                    @*<th>SNo.</th>*@
+                                    <th>@Html.DisplayNameFor(model => model.EnquiryModelList.FirstOrDefault().CstMtrlCode)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiryModelList.FirstOrDefault().SKUNo)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiryModelList.FirstOrDefault().ProductId)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiryModelList.FirstOrDefault().ModelNo)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiryModelList.FirstOrDefault().PrdCtgryId)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiryModelList.FirstOrDefault().BrandId)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiryModelList.FirstOrDefault().HSNCode)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiryModelList.FirstOrDefault().UnitId)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiryModelList.FirstOrDefault().SpcRemark)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiryModelList.FirstOrDefault().Quantity)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiryModelList.FirstOrDefault().Price)</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-body">
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-body">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.EnquiryModels.EnqSentBy, new { @class = "form-control-label" }) <sup>*</sup>
+                                @Html.DropDownListFor(m => m.EnquiryModels.EnqSentBy, new SelectList(Model.UserModelList, "Key", "Value"),
+                                "--Select Send By--", new { @class = "form-control select2 enqsentby" })
+                                @Html.ValidationMessageFor(m => m.EnquiryModels.EnqSentBy, "",
+                        new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <button name="@actBtn.ToLower()" id="enqsubmit" class="btn bg-aqua enqsubmit" title="@actBtn"
+                                    value="@actBtn">
+                                @actBtn.ToUpper()
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+        <!-- danger with sound -->
+        <div class="message-box animated fadeIn" data-sound="alert" id="mb-act-cnfrm">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-warning"></span> Confirm <strong>Box</strong> ?</div>
+                    <div class="mb-content">
+                        <p>Are you sure you want to delete?</p>
+                        <p>Press No if you want to Cancel. Press Yes to Delete the record.</p>
+                    </div>
+                    <div class="mb-footer">
+                        <div class="pull-right">
+                            <a id="confirmhref" href="#" class="btn btn-confirm-yes btn-lg">Yes</a>
+                            <button class="btn btn-confirm-no btn-lg mb-control-close">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end danger with sound -->
+        <!-- /.row (main row) -->
+        <!-- Modal -->
+        @*<div class="modal fade" id="modalAddBranch" style="display: none;">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <h4 class="modal-title">Default Modal</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>One fine body…</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>*@
+    }
+</section>
+@*<script type="text/javascript">
+        function ShowImagePreview(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgCropped').val(e.target.result);
+                    $('#Img_Box').attr('src', e.target.result)
+                        .width(40)
+                        .height(auto);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>*@
+<!-- /.content -->

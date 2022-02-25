@@ -1,0 +1,365 @@
+﻿@using Vendor_Indusuno.Extensions
+@model Vendor_Indusuno.ViewModels.TopLeftNavBarViewModel
+
+<!-- Top Menu Bar -->
+<header class="main-header">
+    <!-- Logo -->
+    <a href='@Url.Action("Index", "Admin")' class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini">
+            <b>
+                <img src="~/Content/dist/img/logo-mini.png" />
+            </b>
+        </span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg"><b></b></span>
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+            <span class="sr-only">Toggle navigation</span>
+        </a>
+        <div class="navbar-custom-menu">
+            <!--<ul class="nav navbar-nav">
+                <li class="dropdown notifications-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                        <i class="fa fa-bell-o"></i>
+                        <span class="label label-warning">10</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="header">You have 10 notifications</li>
+                        <li>-->
+                            <!-- inner menu: contains the actual data -->
+                            <!--<ul class="menu">
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
+                                        page and may cause design problems
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-users text-red"></i> 5 new members joined
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-shopping-cart text-green"></i> 25 sales made
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-user text-red"></i> You changed your username
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="footer"><a href="#">View all</a></li>
+                    </ul>
+                </li>
+            </ul>-->
+            <ul class="nav navbar-nav">
+                <!-- User Account: style can be found in dropdown.less -->
+                <li class="dropdown user user-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img src="~/Content/upload/employee/@Model.UserProfileModels.ProfileImage" class="user-image">
+                        <span class="hidden-xs">@Model.UserProfileModels.Name</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <!-- User image -->
+                        <li class="user-header">
+                            <img src="~/Content/upload/employee/@Model.UserProfileModels.ProfileImage" class="img-circle">
+                            <p>
+                                @Model.UserProfileModels.Name - @Model.UserProfileModels.Designation
+                            </p>
+                        </li>
+                        <!-- Menu Body -->
+                        <li class="user-body">
+                            @*<div class="row">
+                                    <div class="col-xs-4 text-center">
+                                        <a href="#">Followers</a>
+                                    </div>
+                                    <div class="col-xs-4 text-center">
+                                        <a href="#">Sales</a>
+                                    </div>
+                                    <div class="col-xs-4 text-center">
+                                        <a href="#">Friends</a>
+                                    </div>
+                                </div>*@
+                            <!-- /.row -->
+                        </li>
+                        <!-- Menu Footer-->
+                        <li class="user-footer">
+                            <div class="pull-left">
+                                @if (!String.IsNullOrWhiteSpace(Model.UserProfileModels.SVCode) && Model.UserProfileModels.SVCode != "Admin")
+                                {
+                                    @Html.EncodedActionLink("Profile", "Profile", "Admin", new { ecode = Model.UserProfileModels.SVCode }, new { @class = "btn btn-default btn-flat", title = "Profile" })
+                                }
+                            </div>
+                            <div class="pull-right">
+                                @*<a href="#" class="btn btn-default btn-flat">Sign out</a>*@
+                                <a href="#" class="btn btn-default btn-flat mb-control" data-box="#mb-signout"><span class="fa fa-sign-out"></span> Sign out</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <!-- Control Sidebar Toggle Button -->
+                @*<li>
+                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                    </li>*@
+            </ul>
+        </div>
+    </nav>
+</header>
+<!-- Top Menu Bar -->
+<!-- Left side column. contains the logo and sidebar -->
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar user panel -->
+        @*<!-- search form -->
+            <form action="#" method="get" class="sidebar-form">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="Search...">
+                    <span class="input-group-btn">
+                        <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </form>
+            <!-- /.search form -->*@
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu" data-widget="tree">
+            @Html.Action("Menu", "Admin")
+            <!--<li class='@TempData["Index"]'>
+                <a href='@Url.Action("Index", "Admin")'><i class="fa fa-file-text"></i>  Dashboard</a>
+            </li>
+            <li class='@TempData["HRM"] treeview'>
+                <a href="#">
+                    <i class="fa fa-code-fork"></i> <span>HRM</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class='@TempData["Users"]'>
+                        <a href='@Url.Action("Users", "Admin")'><i class="fa fa-code-fork"></i>  Users</a>
+                    </li>
+                    <li class='@TempData["UserLogin"]'>
+                        <a href='@Url.Action("UserLogin", "Admin")'><i class="fa fa-code-fork"></i>  User Login</a>
+                    </li>
+                    <li class='@TempData["UserPermission"]'>
+                        <a href='@Url.Action("UserPermission", "Admin")'><i class="fa fa-code-fork"></i>  User Permission</a>
+                    </li>
+                </ul>
+            </li>
+            <li class='@TempData["Vendor"] treeview'>
+                <a href="#">
+                    <i class="fa fa-code-fork"></i> <span>Vendor</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class='@TempData["ApprovedVendor"]'>
+                        <a href='@Url.Action("ApprovedVendor", "Admin")'><i class="fa fa-code-fork"></i>  Approved Vendor</a>
+                    </li>
+                    <li class='@TempData["RegisteredVendor"]'>
+                        <a href='@Url.Action("RegisteredVendor", "Admin")'><i class="fa fa-code-fork"></i>  Registered Vendor</a>
+                    </li>
+                    <li class='@TempData["VendorStocks"]'>
+                        <a href='@Url.Action("VendorStocks", "Admin")'><i class="fa fa-code-fork"></i>  Vendor Stock</a>
+                    </li>
+                </ul>
+            </li>
+            <li class='@TempData["Products"] treeview'>
+                <a href="#">
+                    <i class="fa fa-code-fork"></i> <span>Products</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class='@TempData["ApprovedProducts"]'>
+                        <a href='@Url.Action("ApprovedProducts", "Admin")'><i class="fa fa-code-fork"></i>  Approved Products</a>
+                    </li>
+                    <li class='@TempData["ApproveProducts"]'>
+                        <a href='@Url.Action("ApproveProducts", "Admin")'><i class="fa fa-code-fork"></i>  Approve Products</a>
+                    </li>
+                    <li class='@TempData["PProducts"]'>
+                        <a href='@Url.Action("Products", "Admin")'><i class="fa fa-code-fork"></i>  Products</a>
+                    </li>
+                    <li class='@TempData["ProductExcels"]'>
+                        <a href='@Url.Action("ProductExcels", "Admin")'><i class="fa fa-code-fork"></i>  Product Excels</a>
+                    </li>
+                </ul>
+            </li>
+            <li class='@TempData["Master"] treeview'>
+                <a href="#">
+                    <i class="fa fa-code-fork"></i> <span>Master</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class='@TempData["ProductCategory"]'>
+                        <a href='@Url.Action("ProductCategory", "Admin")'><i class="fa fa-code-fork"></i>  Product Category</a>
+                    </li>
+                    <li class='@TempData["ProductBrand"]'>
+                        <a href='@Url.Action("ProductBrand", "Admin")'><i class="fa fa-code-fork"></i>  Product Brand</a>
+                    </li>
+                    <li class='@TempData["SKU"]'>
+                        <a href='@Url.Action("SKU", "Admin")'><i class="fa fa-code-fork"></i>  SKU</a>
+                    </li>
+                    <li class='@TempData["Uom"]'>
+                        <a href='@Url.Action("Uom", "Admin")'><i class="fa fa-code-fork"></i>  Unit of Measure</a>
+                    </li>
+                    <li class='@TempData["Warehouse"]'>
+                        <a href='@Url.Action("Warehouse", "Admin")'><i class="fa fa-code-fork"></i>  Warehouse</a>
+                    </li>
+                    <li class='@TempData["Operation"]'>
+                        <a href='@Url.Action("Operation", "Admin")'><i class="fa fa-code-fork"></i>  Operation</a>
+                    </li>
+                    <li class='@TempData["TradeType"]'>
+                        <a href='@Url.Action("TradeType", "Admin")'><i class="fa fa-code-fork"></i>  Trade Type</a>
+                    </li>
+                    <li class='@TempData["DeliveryMode"]'>
+                        <a href='@Url.Action("DeliveryMode", "Admin")'><i class="fa fa-code-fork"></i>  Delivery Mode</a>
+                    </li>
+                    <li class='@TempData["LegalStatus"]'>
+                        <a href='@Url.Action("LegalStatus", "Admin")'><i class="fa fa-code-fork"></i>  Legal Status</a>
+                    </li>
+                    <li class='@TempData["PackagingTerm"]'>
+                        <a href='@Url.Action("PackagingTerm", "Admin")'><i class="fa fa-code-fork"></i>  Packaging Term</a>
+                    </li>
+                    <li class='@TempData["PaymentTerm"]'>
+                        <a href='@Url.Action("PaymentTerm", "Admin")'><i class="fa fa-code-fork"></i>  Payment Term</a>
+                    </li>
+                    <li class='@TempData["InvoicingTerm"]'>
+                        <a href='@Url.Action("InvoicingTerm", "Admin")'><i class="fa fa-code-fork"></i>  Invoicing Term</a>
+                    </li>
+                    <li class='@TempData["SellerPanelUsage"]'>
+                        <a href='@Url.Action("SellerPanelUsage", "Admin")'><i class="fa fa-code-fork"></i>  Seller Panel Usage</a>
+                    </li>
+                    <li class='@TempData["VendorSource"]'>
+                        <a href='@Url.Action("VendorSource", "Admin")'><i class="fa fa-code-fork"></i>  Vendor Source</a>
+                    </li>
+                    <li class='@TempData["CreditNoteTerm"]'>
+                        <a href='@Url.Action("CreditNoteTerm", "Admin")'><i class="fa fa-code-fork"></i>  Credit Note Term</a>
+                    </li>
+                    <li class='@TempData["CreditType"]'>
+                        <a href='@Url.Action("CreditType", "Admin")'><i class="fa fa-code-fork"></i>  Credit Type</a>
+                    </li>
+                    <li class='@TempData["PaymentInitationForm"]'>
+                        <a href='@Url.Action("PaymentInitationForm", "Admin")'><i class="fa fa-code-fork"></i>  Payment Initation Form</a>
+                    </li>
+                    <li class='@TempData["Bank"]'>
+                        <a href='@Url.Action("Bank", "Admin")'><i class="fa fa-code-fork"></i>  Bank Name</a>
+                    </li>
+                    <li class='@TempData["State"]'>
+                        <a href='@Url.Action("State", "Admin")'><i class="fa fa-code-fork"></i>  State Name</a>
+                    </li>
+                    <li class='@TempData["Country"]'>
+                        <a href='@Url.Action("Country", "Admin")'><i class="fa fa-code-fork"></i>  Country</a>
+                    </li>-->
+            @*<li class='@TempData["Operation"]'>
+                    <a href='@Url.Action("Operation", "Admin")'><i class="fa fa-code-fork"></i>  Operation</a>
+                </li>
+                <li class='@TempData["Operation"]'>
+                    <a href='@Url.Action("Operation", "Admin")'><i class="fa fa-code-fork"></i>  Operation</a>
+                </li>*@
+            <!--</ul>
+            </li>
+            <li class='@TempData["Purchase"] treeview'>
+                <a href="#">
+                    <i class="fa fa-code-fork"></i> <span>Purchase</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class='@TempData["PurchaseOrders"]'>
+                        <a href='@Url.Action("PurchaseOrders", "Admin")'><i class="fa fa-code-fork"></i>  Purchase Orders</a>
+                    </li>
+                    <li class='@TempData["POAssign"]'>
+                        <a href='@Url.Action("POAssign", "Admin")'><i class="fa fa-code-fork"></i>  PO Assign</a>
+                    </li>
+                    <li class='@TempData["POSourced"]'>
+                        <a href='@Url.Action("POSourced", "Admin")'><i class="fa fa-code-fork"></i>  PO Sourced</a>
+                    </li>
+                    <li class='@TempData["POGenerate"]'>
+                        <a href='@Url.Action("POGenerate", "Admin")'><i class="fa fa-code-fork"></i>  PO Generate</a>
+                    </li>
+                    <li class='@TempData["POApprove"]'>
+                        <a href='@Url.Action("POApprove", "Admin")'><i class="fa fa-code-fork"></i>  PO for Approval</a>
+                    </li>
+                    <li class='@TempData["POApproved"]'>
+                        <a href='@Url.Action("POApproved", "Admin")'><i class="fa fa-code-fork"></i> Approved PO</a>
+                    </li>
+                </ul>
+            </li>
+            <li class='@TempData["Payment"] treeview'>
+                <a href="#">
+                    <i class="fa fa-code-fork"></i> <span>Payment</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class='@TempData["RequestPayment"]'>
+                        <a href='@Url.Action("RequestPayment", "Admin")'><i class="fa fa-code-fork"></i> Request  for Payment</a>
+                    </li>
+                    <li class='@TempData["PRApproval"]'>
+                        <a href='@Url.Action("PRApproval", "Admin")'><i class="fa fa-code-fork"></i> Payment Req for Approval </a>
+                    </li>
+                    <li class='@TempData["PaymentProcessing"]'>
+                        <a href='@Url.Action("PaymentProcessing", "Admin")'><i class="fa fa-code-fork"></i>  Payment Processing</a>
+                    </li>
+                </ul>
+            </li>
+            <li class='@TempData["Operations"] treeview'>
+                <a href="#">
+                    <i class="fa fa-code-fork"></i> <span>Operations</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class='@TempData["MaterialPickup"]'>
+                        <a href='@Url.Action("MaterialPickup", "Admin")'><i class="fa fa-code-fork"></i>  Material Pickup</a>
+                    </li>
+                </ul>
+            </li>
+            <li class='@TempData["Stocks"] treeview'>
+                <a href="#">
+                    <i class="fa fa-code-fork"></i> <span>Stocks</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class='@TempData["Stock"]'>
+                        <a href='@Url.Action("Stock", "Admin")'><i class="fa fa-code-fork"></i>  Stock</a>
+                    </li>
+                </ul>
+            </li>-->
+            @*<li class='@TempData["Payments"]'>
+                    <a href='@Url.Action("Payments", "Dashboard")'><i class="fa fa-file-text"></i> Payments</a>
+                </li>
+                <li class='@TempData["PurchaseOrders"]'>
+                    <a href='@Url.Action("PurchaseOrders", "Dashboard")'><i class="fa fa-file-text"></i> Purchase Orders</a>
+                </li>
+                <li class='@TempData["Invoices"]'>
+                    <a href='@Url.Action("Invoices", "Dashboard")'><i class="fa fa-file-text"></i> Invoices</a>
+                </li>*@
+        </ul>
+    </section>
+</aside>
+<!-- Left side column. contains the logo and sidebar -->

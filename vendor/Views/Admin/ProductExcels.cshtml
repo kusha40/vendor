@@ -1,0 +1,223 @@
+﻿@using Vendor_Indusuno.Extensions
+@model Vendor_Indusuno.ViewModels.ProductsViewModel
+@{
+    ViewBag.Title = "Approved Products";
+    TempData["Products"] = "active";
+    TempData["ProductExcels"] = "active";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    @{
+        string actType = "Add";
+        string actBtn = "Submit";
+        string pageTitle = Html.Raw(Html.PageGTitle()) + "";
+    }
+    <h1>
+        @pageTitle
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index")"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        @Html.Raw(Html.BuildBreadcrumbNavigation())
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    @using (Html.BeginForm("ProductExcels", "Admin", FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <!-- Main row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Default box -->
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">@pageTitle</h3>
+                        <div class="box-tools pull-right">
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="col-md-12">
+                            <div class="msgs">
+                                @if (ViewData?.ModelState[""]?.Errors?.Any() == true)
+                                {
+                                    <div class="alert alert-danger alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                                        @Html.ValidationSummary(true, "", new { @class = "float-left" })
+                                    </div>
+                                }
+                                @if (!String.IsNullOrEmpty(ViewBag.SucMsg))
+                                {
+                                    <div class="alert alert-success alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-check"></i> Success!</h4>
+                                        <strong>Well done!</strong> @ViewBag.SucMsg
+                                    </div>
+                                }
+                                @if (!String.IsNullOrEmpty(ViewBag.ErrMsg))
+                                {
+                                    <div class="alert alert-danger alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                                        <strong>Oh snap!</strong> @ViewBag.ErrMsg
+                                    </div>
+                                }
+                                @if (!String.IsNullOrEmpty(TempData["ErrMsg"] + ""))
+                                {
+                                    <div class="alert alert-danger alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                                        <strong>Oh snap!</strong> @TempData["ErrMsg"]
+                                    </div>
+                                }
+                                @if (!String.IsNullOrEmpty(TempData["SucMsg"] + ""))
+                                {
+                                    <div class="alert alert-success alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-check"></i> Success!</h4>
+                                        <strong>Well done!</strong> @TempData["SucMsg"]
+                                    </div>
+                                }
+                            </div>
+                            @Html.HiddenFor(model => model.ProductExcelModels.Id)
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group m-b-0">
+                                        @Html.LabelFor(m => m.ProductExcelModels.VendorCode, new { @class = "form-control-label" })
+                                        @Html.DropDownListFor(model => model.ProductExcelModels.VendorCode, new SelectList(Model.VendorModelList, "Key", "Value"),
+                                        "--Select Vendor--", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.ProductExcelModels.VendorCode, "",
+                                        new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.ProductExcelModels.PrdExcel, new { @class = "form-control-label" })
+                                        @Html.TextBoxFor(m => m.ProductExcelModels.PrdExcel,
+                                        new
+                                        {
+                                            @class = "form-control",
+                                            @type = "file",
+                                            placeholder = @Html.DisplayNameFor(m => m.ProductExcelModels.PrdExcel)
+                                        })
+                                        @Html.ValidationMessageFor(m => m.ProductExcelModels.PrdExcel, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <button type="submit" name="@actBtn.ToLower()" class="btn bg-aqua" title="@actBtn"
+                                            value="@actBtn">
+                                        UPLOAD
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        @if (Model.ProductExcelModelList.Count > 0)
+                        {
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table id="tblProductExcel" class="table table-bordered display nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th>SNo.</th>
+                                                <th>Download</th>
+                                                <th>Reject</th>
+                                                <th>@Html.DisplayNameFor(model => model.ProductExcelModelList.FirstOrDefault().VendorCode)</th>
+                                                <th>@Html.DisplayNameFor(model => model.ProductExcelModelList.FirstOrDefault().VendorName)</th>
+                                                <th>@Html.DisplayNameFor(model => model.ProductExcelModelList.FirstOrDefault().Company)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var u in Model.ProductExcelModelList)
+                                            {
+                                                <tr>
+                                                    <td></td>
+                                                    <td>
+                                                        <a href='~/Content/upload/Excel/@u.PrdExcel' class="btn btn-edt bg-aqua" target="_blank">Download</a>
+                                                    </td>
+                                                    <td>
+                                                        @Html.EncodedActionLink("Reject", "RejectProductExcel", "Admin",
+                                                    new { id = u.Id }, new { @class = "btn btn-edt bg-aqua mb-act-cnfrm-rej", @data_box= "#mb-act-cnfrm-rej", title = "Edit" })
+                                                    </td>
+                                                    <td>@Html.DisplayFor(model => u.VendorCode)</td>
+                                                    <td>@Html.DisplayFor(model => u.VendorName)</td>
+                                                    <td>@Html.DisplayFor(model => u.Company)</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="box-body">
+                                <div class="no-record">No record found.</div>
+                            </div>
+                        }
+
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+        <!-- danger with sound -->
+        <div class="message-box animated fadeIn" data-sound="alert" id="mb-act-cnfrm-rej">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-warning"></span> Confirm <strong>Box</strong> ?</div>
+                    <div class="mb-content">
+                        <p>Are you sure you want to reject?</p>
+                        <p>Press No if you want to Cancel. Press Yes to Reject the record.</p>
+                        @Html.LabelFor(m => m.ProductExcelModels.Remark, new { @class = "form-control-label" })
+                        @Html.TextAreaFor(m => m.ProductExcelModels.Remark,
+                        new
+                        {
+                            @class = "form-control c-w",
+                            placeholder = @Html.DisplayNameFor(m => m.ProductExcelModels.Remark)
+                        })
+                        @Html.ValidationMessageFor(m => m.ProductExcelModels.Remark, "",
+                        new { @class = "text-danger" })
+                    </div>
+                    <div class="mb-footer">
+                        <div class="pull-right">
+                            <a id="confirmhrefrej" href="#" class="btn btn-confirm-yes btn-lg">Yes</a>
+                            <button class="btn btn-confirm-no btn-lg mb-control-close">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end danger with sound -->
+        <!-- /.row (main row) -->
+        <!-- Modal -->
+        @*<div class="modal fade" id="modalAddBranch" style="display: none;">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <h4 class="modal-title">Default Modal</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>One fine body…</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>*@
+    }
+</section>
+<!-- /.content -->

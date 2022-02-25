@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="body-full-height">
+<head>
+    <!-- META SECTION -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>@ViewBag.Title - Indusuno</title>
+    <!-- END META SECTION -->
+    <!-- CSS INCLUDE -->
+    @Styles.Render("~/Content/CommonCss")
+    @*@Styles.Render("~/Content/datatablecss")*@
+    <!-- DataTables -->
+    <link rel="stylesheet" href="~/Content/plugins/datatables.net-bs/css/dataTables.bootstrap.min.css">
+    @Styles.Render("~/Content/DashboardCss")
+    @Styles.Render("~/Content/CustomCss")
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <!-- EOF CSS INCLUDE -->
+</head>
+<body class="skin-red error-screen">
+    <div class="container m-t-20">
+        @RenderBody()
+    </div>
+    @Scripts.Render("~/bundles/CommonScripts")
+    @*<script type="text/javascript" src="~/Content/Scripts/jquery.validate.min.js"></script>
+        <script type="text/javascript" src="~/Content/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
+    @Scripts.Render("~/bundles/jqueryval")
+</body>
+</html>
