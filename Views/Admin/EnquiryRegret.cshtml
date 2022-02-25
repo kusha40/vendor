@@ -82,10 +82,7 @@
                             <thead>
                                 <tr>
                                     <th>SNo</th>
-<<<<<<< HEAD
-=======
-                                    <th>SOURCED</th>
->>>>>>> 2ad70d06553a0879192f3df93966a008ea97b917
+                                    <th>SOURCE</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnquiryDate)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().CustomerName)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqId)</th>
@@ -105,29 +102,6 @@
                             <tbody>
                                 @foreach (var item in Model.EnquiriesModelList)
                                 {
-<<<<<<< HEAD
-                                    <tr>
-                                        <td></td>
-                                        <td>@Html.DisplayFor(modelItem => item.EnquiryDate)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.EnqId)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.EnqPId)</td>
-                                        <td title="@item.SpcRemark">
-                                            @Html.DisplayFor(modelItem => item.Product)<br>
-                                            Brand : @item.Brand<br>
-                                            Model : @item.ModelNo
-                                        </td>
-                                        <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Unit)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Price)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Status)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.EnqCreatedBy)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.EnqAssignTo)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.EnqAssignBy)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.RegretRemark)</td>
-                                    </tr>
-=======
                                 <tr>
                                     <td></td>
                                     <td>@Html.EncodedActionLink("SOURCED", "RegretSourced", "Admin", new { id = item.EnqPId }, new { data_box = "#mb-act-cnfrm", @class = "btn btn-del m-l-5 mb-act-confirm bg-m-red", title = "SOURCED" })</td>
@@ -150,7 +124,6 @@
                                     <td>@Html.DisplayFor(modelItem => item.EnqAssignBy)</td>
                                     <td>@Html.DisplayFor(modelItem => item.RegretRemark)</td>
                                 </tr>
->>>>>>> 2ad70d06553a0879192f3df93966a008ea97b917
                                 }
                             </tbody>
                         </table>
