@@ -1,9 +1,9 @@
 ﻿@using Vendor_Indusuno.Extensions
-@model Vendor_Indusuno.ViewModels.EnquiryRegretViewModel
+@model Vendor_Indusuno.ViewModels.EnquiryReportViewModel
 @{
-    ViewBag.Title = "Sourced";
-    TempData["Enquiry"] = "active";
-    TempData["EnquiryRegret"] = "active";
+    ViewBag.Title = "Enquiry Report";
+    TempData["Reports"] = "active";
+    TempData["EnquiryReport"] = "active";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -24,19 +24,15 @@
 </section>
 <!-- Main content -->
 <section class="content">
-    @using (Html.BeginForm("EnquiryRegret", "Admin", FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off", enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("EnquiryReport", "Admin", FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off", enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         <!-- Main row -->
         <div class="row">
-            <!-- /.box -->
             <div class="col-lg-12">
                 <!-- Default box -->
                 <div class="box">
                     <div class="box-header with-border">
-                    </div>
-                    <!-- /.box-body -->
-                    <div class="box-body">
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <div class="form-group">
                                 @Html.LabelFor(m => m.Search, new { @class = "form-control-label" }) <sup>*</sup>
@@ -71,6 +67,24 @@
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Customer, new { @class = "form-control-label" }) <sup>*</sup>
+                                @Html.DropDownListFor(m => m.Customer, new SelectList(Model.CustomerModelList, "Key", "Value"),
+                                "--Select Customer--", new { @class = "form-control select2 cstid" })
+                                @Html.ValidationMessageFor(m => m.Customer, "",
+                        new { @class = "text-danger errcstid" })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.User, new { @class = "form-control-label" }) <sup>*</sup>
+                                @Html.DropDownListFor(m => m.User, new SelectList(Model.UserModelList, "Key", "Value"),
+                                "--Select User--", new { @class = "form-control select2 posentby" })
+                                @Html.ValidationMessageFor(m => m.User, "",
+                        new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <div class="box-tools pull-left">
                                 <button type="submit" name="search" class="btn bg-aqua" title="SEARCH"
                                         value="search">
@@ -78,85 +92,55 @@
                                 </button>
                             </div>
                         </div>
-                        <table id="tblenqregret" class="table table-bordered display">
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-body">
+                        <table id="tblEnquiry" class="table table-bordered display">
                             <thead>
                                 <tr>
                                     <th>SNo</th>
-<<<<<<< HEAD
-=======
-                                    <th>SOURCED</th>
->>>>>>> 2ad70d06553a0879192f3df93966a008ea97b917
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnquiryDate)</th>
+                                    <th hidden></th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().CustomerName)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqId)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqPId)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Product)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Brand)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().ModelNo)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Quantity)</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Unit)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Price)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().TotalPrice)</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Status)</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqCreatedBy)</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqAssignTo)</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqAssignBy)</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().RegretRemark)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnquiryDate)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EndDate)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().CurrentStage)</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var item in Model.EnquiriesModelList)
                                 {
-<<<<<<< HEAD
                                     <tr>
                                         <td></td>
-                                        <td>@Html.DisplayFor(modelItem => item.EnquiryDate)</td>
+                                        <td hidden></td>
                                         <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
                                         <td>@Html.DisplayFor(modelItem => item.EnqId)</td>
                                         <td>@Html.DisplayFor(modelItem => item.EnqPId)</td>
                                         <td title="@item.SpcRemark">
                                             @Html.DisplayFor(modelItem => item.Product)<br>
-                                            Brand : @item.Brand<br>
-                                            Model : @item.ModelNo
                                         </td>
+                                        <td>@Html.DisplayFor(modelItem => item.Brand)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.ModelNo)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Unit)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Price)</td>
                                         <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Status)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.EnqCreatedBy)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.EnqAssignTo)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.EnqAssignBy)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.RegretRemark)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.EnquiryDate)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.CurrentStage)</td>
                                     </tr>
-=======
-                                <tr>
-                                    <td></td>
-                                    <td>@Html.EncodedActionLink("SOURCED", "RegretSourced", "Admin", new { id = item.EnqPId }, new { data_box = "#mb-act-cnfrm", @class = "btn btn-del m-l-5 mb-act-confirm bg-m-red", title = "SOURCED" })</td>
-                                    <td>@Html.DisplayFor(modelItem => item.EnquiryDate)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.EnqId)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.EnqPId)</td>
-                                    <td title="@item.SpcRemark">
-                                        @Html.DisplayFor(modelItem => item.Product)<br>
-                                        Brand : @item.Brand<br>
-                                        Model : @item.ModelNo
-                                    </td>
-                                    <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Unit)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Price)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Status)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.EnqCreatedBy)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.EnqAssignTo)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.EnqAssignBy)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.RegretRemark)</td>
-                                </tr>
->>>>>>> 2ad70d06553a0879192f3df93966a008ea97b917
                                 }
                             </tbody>
                         </table>
                     </div>
-                    <!-- /.box -->
                 </div>
+                <!-- /.box -->
             </div>
         </div>
         <!-- danger with sound -->
