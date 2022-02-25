@@ -1,0 +1,331 @@
+Delivered-To: sandeep.singh@indusuno.com
+Received: by 2002:ab3:1383:0:0:0:0:0 with SMTP id 3csp19048ltz;
+        Wed, 29 Sep 2021 02:11:25 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJyFVsJaj6gydL1McqPcp+2fvoPFHnVSRoCXRPkCTAUayJv/KGyGaXa82B5/rGgkl35ESG8n
+X-Received: by 2002:aa7:9dc6:0:b0:440:b629:6e57 with SMTP id g6-20020aa79dc6000000b00440b6296e57mr2257055pfq.69.1632906685233;
+        Wed, 29 Sep 2021 02:11:25 -0700 (PDT)
+ARC-Seal: i=2; a=rsa-sha256; t=1632906685; cv=pass;
+        d=google.com; s=arc-20160816;
+        b=Br5XEQ21rWfB4wlGyZgAMw0jzE3s/HzDD0tLl2MCxyHwDa+YtZtLePAYjLlX2IojCC
+         8JZrxW1wUgfC8RdZCczERQKfE4twUptQahy6jXxnJji4zDVBkLgEcc3mawypvm5Je1AZ
+         OOv1yrp0HQxU7pSVrxz25q7kiq8atvCaJB5B0hCeZ1Rdgf9t4nRaWx8kgIEcEDSfmr1R
+         Yy5pkiZonigSkr1bEBj9EkNs4ZHi6nCywQ35aEn5lvh2JZz/xeQR7lgZGwedeZBjZP/b
+         IGRjIYDLHkd4yyPP5NyP+lZQVV4KZFcicY+gDXrAkBRDLcNuIVp7PWgNMl6wW/TcsiHd
+         fPlQ==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=mime-version:dlp-reaction:dlp-version:dlp-product:content-language
+         :accept-language:message-id:date:thread-index:thread-topic:subject
+         :cc:to:from:dkim-signature;
+        bh=EoRgMqEDka1X3rtj/NB1nOTIMa97SS+XfBzHbVpy/7M=;
+        b=CqsqDD5TK6zmFy0Qipfl347DNN2/TPw94b0vaZeJJLnshDTnfDMzYAY8BMUzpi8X2/
+         t/kKMHtQZExND+vE7Zrw5SMZN/oBdcx9vDZ3b1yxmMOBxhLBTjgyEEZW3WeBXLTO/ZHO
+         mf6XPP0ortGOhu9DgUEPN3ImzSv/jDrnLy/B2QLFHx073MC6IKzfs5HbPQ0b394Ky4iN
+         gL1OSFI9gu1RzcTzo8wImlmXdK11rVl1FxD9zjYs9tEjPSKHg/Qo1dnmSjdWQXT4K2fk
+         wzjECr0jBMweW222AbYhRydsdGFL6kbdciSaozXsDBtAC6IVMud2fGXH3QAV33oa9wDe
+         AOZQ==
+ARC-Authentication-Results: i=2; mx.google.com;
+       dkim=pass header.i=@mahindra.com header.s=selector2 header.b=Cozs0fGe;
+       arc=pass (i=1 spf=pass spfdomain=mahindra.com dkim=pass dkdomain=mahindra.com dmarc=pass fromdomain=mahindra.com);
+       spf=pass (google.com: domain of deshmukh.ashish@mahindra.com designates 40.107.138.54 as permitted sender) smtp.mailfrom=DESHMUKH.ASHISH@mahindra.com;
+       dmarc=pass (p=QUARANTINE sp=QUARANTINE dis=NONE) header.from=mahindra.com
+Return-Path: <DESHMUKH.ASHISH@mahindra.com>
+Received: from IND01-MA1-obe.outbound.protection.outlook.com (mail-eopbgr1380054.outbound.protection.outlook.com. [40.107.138.54])
+        by mx.google.com with ESMTPS id m13si2383643pgq.429.2021.09.29.02.11.24
+        for <sandeep.singh@indusuno.com>
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Wed, 29 Sep 2021 02:11:25 -0700 (PDT)
+Received-SPF: pass (google.com: domain of deshmukh.ashish@mahindra.com designates 40.107.138.54 as permitted sender) client-ip=40.107.138.54;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@mahindra.com header.s=selector2 header.b=Cozs0fGe;
+       arc=pass (i=1 spf=pass spfdomain=mahindra.com dkim=pass dkdomain=mahindra.com dmarc=pass fromdomain=mahindra.com);
+       spf=pass (google.com: domain of deshmukh.ashish@mahindra.com designates 40.107.138.54 as permitted sender) smtp.mailfrom=DESHMUKH.ASHISH@mahindra.com;
+       dmarc=pass (p=QUARANTINE sp=QUARANTINE dis=NONE) header.from=mahindra.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=RV63TGVTR9RU815MHuyHplzgN9JuayCwrub6WUFvTNqopy43QphQ6COR8mqfA2jXcrIXTwB4pYO9fnc8Isx7YJIUz+tbnVYsjb63fgU0DOrm0O/rMxx21Wxblfd3CtvY0VcqObB+EvP8zkri6m1jk2JlPYYDsbOJGfzrdgC/IaZLNKp/yWZtG7lamfhORiTgtD8pAYLaDhfVSeS3f7FpFCIU2ax+IXcy3yQzLTr7LI/j6ydLot4a5zGF12H8ZrwwcXnRydQOFK0AcPIWB8tCXcLsTy7nEIlj/4hFJ9EMNU8uaC46EngV31cPL2URGCaiUI7anquWcpocOO1vOBKE2g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901; h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
+ bh=EoRgMqEDka1X3rtj/NB1nOTIMa97SS+XfBzHbVpy/7M=;
+ b=L8BXLhYriEm7THpxu3/+whfLOx2chddcudo2Rwlzi+7tHftS7NCKILM/8Z+YxBG6GiDf6hVaEdA6UpQ39YJiaTW1NtW2FZlvEWaSQx/XA+rQi0C/RTYhDn4lhnC7u5NffTem2+L7gvvj36ZgvZUuFLRYqnLY27saGzCOvl7u2xVu72xUNuUpPYghllzdQFe0F3qBAFY72Rvwhlw07xtHMVMMb/Sx+Z4tqFyhKzjkaFVwwa7ibJ9SVfIjRrW00nG4mBMDunjrggVcKHGWPNLiH7S729kbF55ZPPan92GayM6I8j9vXOflAUXVSLFRVqEpS349KWX5WXHM/uIfEWe7JA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=mahindra.com; dmarc=pass action=none header.from=mahindra.com;
+ dkim=pass header.d=mahindra.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mahindra.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=EoRgMqEDka1X3rtj/NB1nOTIMa97SS+XfBzHbVpy/7M=;
+ b=Cozs0fGevGa7R8O5CmzwccQap3Lq5sQbcdtBISFbqqzHCgGcuVJPpCYByx8T70twlVr7HAXt9Pu3oLhzL8l7EqOKBkvJjg5rJxz2gFhDU2Gb19gZ07iQwXob5pFFb7voIosIwVqiYOhPUhE1/eoEY/q1SRZSNLLgP9itcTlnfEc=
+Received: from BMXPR01MB3959.INDPRD01.PROD.OUTLOOK.COM (2603:1096:b00:62::14)
+ by BMXPR01MB3335.INDPRD01.PROD.OUTLOOK.COM (2603:1096:b00:55::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4566.14; Wed, 29 Sep
+ 2021 09:11:21 +0000
+Received: from BMXPR01MB3959.INDPRD01.PROD.OUTLOOK.COM
+ ([fe80::bccd:b931:cf93:42f]) by BMXPR01MB3959.INDPRD01.PROD.OUTLOOK.COM
+ ([fe80::bccd:b931:cf93:42f%3]) with mapi id 15.20.4566.015; Wed, 29 Sep 2021
+ 09:11:21 +0000
+From: DESHMUKH ASHISH <DESHMUKH.ASHISH@mahindra.com>
+To: "sandeep.singh@indusuno.com" <sandeep.singh@indusuno.com>
+CC: JOSHI PRASHANT R <JOSHI.PRASHANT2@mahindra.com>, PAWAR MANJARI
+	<PAWAR.MANJARI@mahindra.com>
+Subject: E-bidding- Diwali Gifting-Mohali Plant
+Thread-Topic: E-bidding- Diwali Gifting-Mohali Plant
+Thread-Index: Ade1Efc8DGXH6SQNRlC34kWg8QGx0w==
+Date: Wed, 29 Sep 2021 09:11:21 +0000
+Message-ID:
+ <BMXPR01MB3959A12A20314633A278CD8C86A99@BMXPR01MB3959.INDPRD01.PROD.OUTLOOK.COM>
+Accept-Language: en-IN, en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+dlp-product: dlpe-windows
+dlp-version: 11.5.0.60
+dlp-reaction: no-action
+authentication-results: indusuno.com; dkim=none (message not signed)
+ header.d=none;indusuno.com; dmarc=none action=none header.from=mahindra.com;
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 1ad4e27f-d9fa-41f4-f20d-08d983291add
+x-ms-traffictypediagnostic: BMXPR01MB3335:
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs:
+ <BMXPR01MB3335144ADF31841554D1C29686A99@BMXPR01MB3335.INDPRD01.PROD.OUTLOOK.COM>
+x-ms-oob-tlc-oobclassifiers: OLM:3826;
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info:
+ U4JPFus5ukCKZaBHAOTLPdsyaAHKwIL1uifIXSHcTB4WHjfp9LHz/pJU3zG23zIu/PkoxxS3MUjt8hCF+evvLkFOTYl6QhSuOZRiKvFLZCSE4hol7OouSQwUXVz+592LJuk9CaBgo+ho6FcOMFx2dZ101XBAZ/RVYOOV6ChQH1SQgjtdkdshfZuYGHGNcq7zUNCATzAq2EtlWzjAEvsSc99WiL3Tx4tiJ6EhPm1ujQ8kGPBEtgRA/lrbEwuVnl3XHG4nqIhtAX042K/H2YtXmpgA76vUI2VnDC2U2uYn2pej1BX7j0qhnb4miIgcm7YAw+qiyRILuVzz15UmMxBHg7M3AYk0muVZ+FdEveXIUfc1rWiPUThSvCIuWPPmaHQ1nxlpoLMEij7zwzDMeE89dwBDU+KOSXfCTt7yiHqeD3n96l2/cOYqpIMu2d7uINGcRf1FC5shPNZUgnyA5gb4x1oWRn15/YwV5+YNHFtc8028TQBvcPlr2/vUvAdWZkmZacrkQwtmQWIOiupxNBTel/1SHwJv3rYHXJOBfeIexdHqmuyH4KV8GTWvjdmh/Hv1Gslv9WxCRsi23uIUVH3cdABNOmnOMy76QMh8TS+Q9vkvq/fQaoyuYCUvexYw1hku
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BMXPR01MB3959.INDPRD01.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(4636009)(366004)(38070700005)(8936002)(33656002)(6916009)(54906003)(316002)(8676002)(186003)(508600001)(76116006)(6506007)(107886003)(66476007)(66946007)(26005)(83380400001)(66556008)(86362001)(9686003)(7696005)(64756008)(66446008)(5660300002)(55016002)(52536014)(4326008)(38100700002)(122000001)(71200400001)(2906002);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ yI0U+DyHHsk2ogIdyNHpD49JE83sULEDMyh3DJ37BTNF3BsvYQISlkaXOb9N/4N+x1d8fvNHPK9vi1B+NLZpFeDu0k0Tzh5OczPu5EHauP8YoeHlAZuA6qLB69fKzi3y9/RP8pLqruWipxlg43JlB35eKLC+h0IPOR+uNm0MEl0nCkjtgFwkRfz6mBrDjgy7/7csfVfUFI3yokhMuH4KVkoR0GPocksnFOsRzFk3zvrGiN5YuO69cbyQ/h+jFgkGfUw3eu0TD8AjWZAbyDP/JUL3L1ez/ohGjuKD1wLi+xwxyuaPmgxapbRzO1MLeql8r9/riFyxAbWAwsNUvl/ENOZMcCwEoiKBF/BKKQ4GcNYH0UxGZ73YMBSqwBwgu6niamWK2lGAh0Y4mQD8Yt7P5oPboyRgI+g5QYC+vTgXqDnk/jDEg2gGKurHpOIyus+44jWOouyK900566Tq+hWDixihm4DPc5NrZUOpyI9hEr2YEM5+/41tc/I+t+lm4Htp0rDNPXLfMSzNjjYmHUKz+PJaWM8/rHSYP5xX32pJfy/aRC+tkqLCmXcwZIiNcRwV5ZWlH0t62LPDv3h/EvTx5PmRmkDcha1CZi4z48xDTtuUiFeB9VCIsfrkDsWEJU+mNHC8amEJ3Cwh5ZoJqU4umSX+9hF6U31dmyS7uL7Rartj7oimK0fhe0glBnczoKXAccrfdaks/8g69xa096JF8g==
+Content-Type: multipart/alternative;
+	boundary="_000_BMXPR01MB3959A12A20314633A278CD8C86A99BMXPR01MB3959INDP_"
+MIME-Version: 1.0
+X-OriginatorOrg: mahindra.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BMXPR01MB3959.INDPRD01.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1ad4e27f-d9fa-41f4-f20d-08d983291add
+X-MS-Exchange-CrossTenant-originalarrivaltime: 29 Sep 2021 09:11:21.3588
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 8c4858b5-f020-483a-b7ef-71ded6e81767
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: M8N4BRl4DXyuUThxOyOL4Hixp93IQG+mExIOjmVxQnY75yThZUhAbkKfFCypPb+aOkd/BdJ6zpD3acCaDH+4UQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BMXPR01MB3335
+X-MS-Exchange-CrossPremises-AuthAs: Internal
+X-MS-Exchange-CrossPremises-AuthMechanism: 04
+X-MS-Exchange-CrossPremises-AuthSource: BMXPR01MB3959.INDPRD01.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossPremises-TransportTrafficType: Email
+X-MS-Exchange-CrossPremises-SCL: 1
+X-MS-Exchange-CrossPremises-messagesource: StoreDriver
+X-MS-Exchange-CrossPremises-BCC:
+X-MS-Exchange-CrossPremises-originalclientipaddress: 49.36.103.52
+X-MS-Exchange-CrossPremises-transporttraffictype: Email
+X-MS-Exchange-CrossPremises-disclaimer-hash: a402b06153f966dc56a7c6ebb96776f7df18bf5de828cddd91d5f32643947248
+X-MS-Exchange-CrossPremises-antispam-scancontext: DIR:Originating;SFV:NSPM;SKIP:0;
+X-MS-Exchange-CrossPremises-processed-by-journaling: Journal Agent
+X-OrganizationHeadersPreserved: BMXPR01MB3335.INDPRD01.PROD.OUTLOOK.COM
+
+--_000_BMXPR01MB3959A12A20314633A278CD8C86A99BMXPR01MB3959INDP_
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+Dear Sandeep,
+You are L1 for below part, you are requested to confirm lead time for suppl=
+y of the same to our Mohali plant (delivery at all 4 plants).
+
+Make
+Part Description
+Qty.
+Final price
+Philips & Westinghouse
+Steam Iron + Electric Kettle
+Open (will be confirm later)
+1130.00
+
+
+
+
+
+Thanks,
+
+Ashish Deshmukh
+Mahindra & Mahindra Ltd,- AFS
+Service Contract Cell (SCC)
+M- 7738894576
+
+
+________________________________
+
+---DISCLAIMER--------------------------------------------------------------=
+-------------- The contents of this E-mail (including the contents of the e=
+nclosure/(s) or attachment/(s) if any) are privileged and confidential mate=
+rial of Mahindra and Mahindra Limited (M&M) and should not be disclosed to,=
+ used by or copied in any manner by anyone other than the intended addresse=
+e/(s). If this E-mail (including the enclosure/(s) or attachment/(s) if any=
+ ) has been received in error, please advise the sender immediately and del=
+ete it from your system. The views expressed in this E-mail message (includ=
+ing the enclosure/(s) or attachment/(s) if any) are those of the individual=
+ sender. ------------------------------------------------------------------=
+------------------------
+
+--_000_BMXPR01MB3959A12A20314633A278CD8C86A99BMXPR01MB3959INDP_
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+>
+<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
+<style><!--
+/* Font Definitions */
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:Verdana;
+	panose-1:2 11 6 4 3 5 4 4 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;
+	mso-fareast-language:EN-US;}
+span.EmailStyle17
+	{mso-style-type:personal-compose;
+	font-family:"Calibri",sans-serif;
+	color:windowtext;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-family:"Calibri",sans-serif;
+	mso-fareast-language:EN-US;}
+@page WordSection1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 72.0pt 72.0pt 72.0pt;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang=3D"EN-IN" link=3D"#0563C1" vlink=3D"#954F72" style=3D"word-wrap:=
+break-word">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal">Dear Sandeep,<o:p></o:p></p>
+<p class=3D"MsoNormal">You are L1 for below part, you are requested to conf=
+irm lead time for supply of the same to our Mohali plant (delivery at all 4=
+ plants).<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<table class=3D"MsoNormalTable" border=3D"0" cellspacing=3D"0" cellpadding=
+=3D"0" width=3D"703" style=3D"width:527.2pt;border-collapse:collapse">
+<tbody>
+<tr style=3D"height:11.75pt">
+<td width=3D"178" style=3D"width:133.15pt;border:solid windowtext 1.0pt;pad=
+ding:0cm 5.4pt 0cm 5.4pt;height:11.75pt">
+<p class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><span s=
+tyle=3D"font-family:&quot;Verdana&quot;,sans-serif">Make<o:p></o:p></span><=
+/p>
+</td>
+<td width=3D"209" nowrap=3D"" style=3D"width:156.95pt;border:solid windowte=
+xt 1.0pt;border-left:none;padding:0cm 5.4pt 0cm 5.4pt;height:11.75pt">
+<p class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><span s=
+tyle=3D"font-family:&quot;Verdana&quot;,sans-serif;color:black">Part Descri=
+ption<o:p></o:p></span></p>
+</td>
+<td width=3D"199" style=3D"width:149.35pt;border:solid windowtext 1.0pt;bor=
+der-left:none;padding:0cm 5.4pt 0cm 5.4pt;height:11.75pt">
+<p class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><span s=
+tyle=3D"font-family:&quot;Verdana&quot;,sans-serif">Qty.<o:p></o:p></span><=
+/p>
+</td>
+<td width=3D"117" nowrap=3D"" style=3D"width:87.75pt;border:solid windowtex=
+t 1.0pt;border-left:none;padding:0cm 5.4pt 0cm 5.4pt;height:11.75pt">
+<p class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><span s=
+tyle=3D"font-family:&quot;Verdana&quot;,sans-serif">Final price<o:p></o:p><=
+/span></p>
+</td>
+</tr>
+<tr style=3D"height:11.75pt">
+<td width=3D"178" nowrap=3D"" style=3D"width:133.15pt;border:solid windowte=
+xt 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:11.75pt">
+<p class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><span s=
+tyle=3D"font-family:&quot;Verdana&quot;,sans-serif;color:black">Philips &am=
+p; Westinghouse<o:p></o:p></span></p>
+</td>
+<td width=3D"209" nowrap=3D"" style=3D"width:156.95pt;border-top:none;borde=
+r-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowt=
+ext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:11.75pt">
+<p class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><span s=
+tyle=3D"font-family:&quot;Verdana&quot;,sans-serif;color:black">Steam Iron =
++ Electric Kettle<o:p></o:p></span></p>
+</td>
+<td width=3D"199" nowrap=3D"" style=3D"width:149.35pt;border-top:none;borde=
+r-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowt=
+ext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:11.75pt">
+<p class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><span s=
+tyle=3D"font-family:&quot;Verdana&quot;,sans-serif;color:black">Open (will =
+be confirm later)<o:p></o:p></span></p>
+</td>
+<td width=3D"117" nowrap=3D"" style=3D"width:87.75pt;border-top:none;border=
+-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowte=
+xt 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;height:11.75pt">
+<p class=3D"MsoNormal" align=3D"center" style=3D"text-align:center"><span s=
+tyle=3D"font-family:&quot;Verdana&quot;,sans-serif">1130.00<o:p></o:p></spa=
+n></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><span style=3D"mso-fareast-language:EN-IN"><o:p>&nbs=
+p;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"mso-fareast-language:EN-IN"><o:p>&nbs=
+p;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"mso-fareast-language:EN-IN"><o:p>&nbs=
+p;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"mso-fareast-language:EN-IN">Thanks,<o=
+:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"mso-fareast-language:EN-IN"><o:p>&nbs=
+p;</o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"mso-fareast-language:EN-IN">Ashish De=
+shmukh<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"mso-fareast-language:EN-IN">Mahindra =
+&amp; Mahindra Ltd,- AFS<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"mso-fareast-language:EN-IN">Service C=
+ontract Cell (SCC)<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><span style=3D"mso-fareast-language:EN-IN">M- 773889=
+4576<o:p></o:p></span></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+<br>
+<hr>
+<font face=3D"Arial" color=3D"Black" size=3D"3"><br>
+---DISCLAIMER--------------------------------------------------------------=
+-------------- The contents of this E-mail (including the contents of the e=
+nclosure/(s) or attachment/(s) if any) are privileged and confidential mate=
+rial of Mahindra and Mahindra Limited
+ (M&amp;M) and should not be disclosed to, used by or copied in any manner =
+by anyone other than the intended addressee/(s). If this E-mail (including =
+the enclosure/(s) or attachment/(s) if any ) has been received in error, pl=
+ease advise the sender immediately and
+ delete it from your system. The views expressed in this E-mail message (in=
+cluding the enclosure/(s) or attachment/(s) if any) are those of the indivi=
+dual sender. --------------------------------------------------------------=
+----------------------------<br>
+</font>
+</body>
+</html>
+
+--_000_BMXPR01MB3959A12A20314633A278CD8C86A99BMXPR01MB3959INDP_--
