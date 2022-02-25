@@ -579,12 +579,20 @@ td.isrcbtn button {
     float: right;
 }
 
+.p-10{
+    padding:10px !important;
+}
+
 .p-r-20 {
     padding-right: 20px;
 }
 
 .m-l-0 {
     margin-left: 0px !important;
+}
+
+.m-l-10 {
+    margin-left: 10px !important;
 }
 
 .m-t-60 {

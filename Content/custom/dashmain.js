@@ -2012,6 +2012,49 @@ $(document).ready(function () {
         });
     }).draw();
 
+    var tblenqregret = $('#tblenqregret').DataTable({
+        "columnDefs": [
+            { 'targets': 0, 'width': '20', 'orderable': false },       //SNo
+            { 'targets': 1, 'width': '30', 'orderable': false },       //OrderDate
+            { 'targets': 2, 'width': '80', 'orderable': false },       //CustomerName
+            { 'targets': 3, 'width': '30', 'orderable': false },       //POId
+            { 'targets': 4, 'width': '30', 'orderable': false },       //POPId
+            { 'targets': 5, 'width': '200', 'orderable': false },      //Product
+            { 'targets': 6, 'width': '20', 'orderable': false },       //Quantity
+            { 'targets': 7, 'width': '20', 'orderable': false },       //Unit
+            { 'targets': 8, 'width': '20', 'orderable': false },      //Price
+            { 'targets': 9, 'width': '30', 'orderable': false },      //TotalPrice
+            { 'targets': 10, 'width': '20', 'orderable': false },      //Status
+            { 'targets': 11, 'width': '40', 'orderable': false },      //POCreatedBy
+            { 'targets': 12, 'width': '40', 'orderable': false },       //POAssingTo
+            { 'targets': 13, 'width': '40', 'orderable': false },       //POAssingTo
+            { 'targets': 14, 'width': '100', 'orderable': false }       //POAssingTo
+        ],
+        "scrollX": true,
+        "paging": false,
+        //"searching": false,
+        "info": false,
+        "dom": 'Bfrtip',
+        "buttons": [
+            'pageLength',
+            {
+                extend: 'excel',
+                text: '<i class="far fa-file-excel"></i> Excel',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                footer: true
+            },
+            'colvis'
+        ]
+    });
+    tblenqregret.on('order.dt search.dt', function () {
+        tblenqregret.column(1, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblenqregret.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
     var tblquoted = $('#tblquoted').DataTable({
         "columnDefs": [
             {

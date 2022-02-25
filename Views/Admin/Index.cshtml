@@ -33,53 +33,85 @@
             <div class="col-lg-12">
                 <!-- Default box -->
                 <div class="box">
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <div class="info-box">
-                            <span class="info-box-icon bg-aqua"><i class="fa fa-users"></i></span>
-
-                            <div class="info-box-content">
-                                <span class="info-box-text">Today</span>
-                                <span class="info-box-number">@Model.VendorCountModels.Today</span>
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="box box-widget widget-user-2">
+                            <div class="widget-user-header bg-yellow p-10">
+                                <h3 class="widget-user-username m-l-0">Enquiry</h3>
+                                <h5 class="widget-user-desc m-l-0">Total</h5>
                             </div>
-                            <!-- /.info-box-content -->
+                            <div class="box-footer no-padding">
+                                <ul class="nav nav-stacked">
+                                    @*<li><a href="#">Last Year <span class="pull-right badge bg-blue">@Model.EnqCountModels.OLastYear</span></a></li>*@
+                                    <li><a href="#">Last Month <span class="pull-right badge bg-blue">@Model.EnqCountModels.OLastMonth</span></a></li>
+                                    @* <li><a href="#">Last 7 Days <span class="pull-right badge bg-aqua">@Model.EnqCountModels.OLast7Days</span></a></li>*@
+                                    <li><a href="#">Yesterday <span class="pull-right badge bg-blue">@Model.EnqCountModels.OYesterday</span></a></li>
+                                    <li><a href="#">Today <span class="pull-right badge bg-green">@Model.EnqCountModels.OToday</span></a></li>
+                                    <li><a href="#">Current Month <span class="pull-right badge bg-red">@Model.EnqCountModels.OCMonth</span></a></li>
+                                    <li><a href="#">Current Year <span class="pull-right badge bg-red">@Model.EnqCountModels.OCYear</span></a></li>
+                                    <li><a href="#">Total <span class="pull-right badge bg-red">@Model.EnqCountModels.OTotal</span></a></li>
+                                </ul>
+                            </div>
                         </div>
-                        <!-- /.info-box -->
                     </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <div class="info-box">
-                            <span class="info-box-icon bg-red"><i class="fa fa-users"></i></span>
-
-                            <div class="info-box-content">
-                                <span class="info-box-text">Yesterday</span>
-                                <span class="info-box-number">@Model.VendorCountModels.Yesterday</span>
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="box box-widget widget-user-2">
+                            <div class="widget-user-header bg-green p-10">
+                                <h3 class="widget-user-username m-l-0">Enquiry</h3>
+                                <h5 class="widget-user-desc m-l-0">Pending</h5>
                             </div>
-                            <!-- /.info-box-content -->
+                            <div class="box-footer no-padding">
+                                <ul class="nav nav-stacked">
+                                    @*<li><a href="#">Last Year <span class="pull-right badge bg-blue">@Model.EnqCountModels.PLastYear</span></a></li>*@
+                                    <li><a href="#">Last Month <span class="pull-right badge bg-blue">@Model.EnqCountModels.PLastMonth</span></a></li>
+                                    @*<li><a href="#">Last 7 Days <span class="pull-right badge bg-aqua">@Model.EnqCountModels.PLast7Days</span></a></li>*@
+                                    <li><a href="#">Yesterday <span class="pull-right badge bg-blue">@Model.EnqCountModels.PYesterday</span></a></li>
+                                    <li><a href="#">Today <span class="pull-right badge bg-green">@Model.EnqCountModels.PToday</span></a></li>
+                                    <li><a href="#">Current Month <span class="pull-right badge bg-red">@Model.EnqCountModels.PCMonth</span></a></li>
+                                    <li><a href="#">Current Year <span class="pull-right badge bg-red">@Model.EnqCountModels.PCYear</span></a></li>
+                                    <li><a href="#">Total <span class="pull-right badge bg-red">@Model.EnqCountModels.PTotal</span></a></li>
+                                </ul>
+                            </div>
                         </div>
-                        <!-- /.info-box -->
                     </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <div class="info-box">
-                            <span class="info-box-icon bg-green"><i class="fa fa-users"></i></span>
-
-                            <div class="info-box-content">
-                                <span class="info-box-text">Current Month</span>
-                                <span class="info-box-number">@Model.VendorCountModels.CMonth</span>
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="box box-widget widget-user-2">
+                            <div class="widget-user-header bg-aqua-active p-10">
+                                <h3 class="widget-user-username m-l-0">Purchase Order</h3>
+                                <h5 class="widget-user-desc m-l-0">Total</h5>
                             </div>
-                            <!-- /.info-box-content -->
+                            <div class="box-footer no-padding">
+                                <ul class="nav nav-stacked">
+                                    @*<li><a href="#">Last Year <span class="badge bg-blue">@Model.POCountModels.OLastYear</span><span class="pull-right badge bg-blue">@Model.POCountModels.OLastYearValue</span></a></li>*@
+                                    <li><a href="#">Last Month <span class="badge bg-blue">@Model.POCountModels.OLastMonth</span><span class="pull-right badge bg-blue">@Model.POCountModels.OLastMonthValue</span></a></li>
+                                    @*<li><a href="#">Last 7 Days <span class="pull-right badge bg-aqua">@Model.POCountModels.OLast7Days</span></a></li>*@
+                                    <li><a href="#">Yesterday <span class="badge bg-blue">@Model.POCountModels.OYesterday</span><span class="pull-right badge bg-blue">@Model.POCountModels.OYesterdayValue</span></a></li>
+                                    <li><a href="#">Today <span class="badge bg-green">@Model.POCountModels.OToday</span><span class="pull-right badge bg-green">@Model.POCountModels.OTodayValue</span></a></li>
+                                    <li><a href="#">Current Month <span class="badge bg-red">@Model.POCountModels.OCMonth</span><span class="pull-right badge bg-red">@Model.POCountModels.OCMonthValue</span></a></li>
+                                    <li><a href="#">Current Year <span class="badge bg-red">@Model.POCountModels.OCYear</span><span class="pull-right badge bg-red">@Model.POCountModels.OCYearValue</span></a></li>
+                                    <li><a href="#">Total <span class="badge bg-red">@Model.POCountModels.OTotal</span><span class="pull-right badge bg-red">@Model.POCountModels.OTotalValue</span></a></li>
+                                </ul>
+                            </div>
                         </div>
-                        <!-- /.info-box -->
                     </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <div class="info-box">
-                            <span class="info-box-icon bg-yellow"><i class="fa fa-users"></i></span>
-
-                            <div class="info-box-content">
-                                <span class="info-box-text">Current Year</span>
-                                <span class="info-box-number">@Model.VendorCountModels.CYear</span>
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="box box-widget widget-user-2">
+                            <div class="widget-user-header bg-m-red p-10">
+                                <h3 class="widget-user-username m-l-0">Quotation</h3>
+                                <h5 class="widget-user-desc m-l-0">Total</h5>
                             </div>
-                            <!-- /.info-box-content -->
+                            <div class="box-footer no-padding">
+                                <ul class="nav nav-stacked">
+                                    @*<li><a href="#">Last Year <span class="badge bg-blue">@Model.QuotCountModels.OLastYear</span><span class="pull-right badge bg-blue">@Model.QuotCountModels.OLastYearValue</span></a></li>*@
+                                    <li><a href="#">Last Month <span class="badge bg-blue">@Model.QuotCountModels.OLastMonth</span><span class="pull-right badge bg-blue">@Model.QuotCountModels.OLastMonthValue</span></a></li>
+                                    @*<li><a href="#">Last 7 Days <span class="pull-right badge bg-aqua">@Model.POCountModels.OLast7Days</span></a></li>*@
+                                    <li><a href="#">Yesterday <span class="badge bg-blue">@Model.QuotCountModels.OYesterday</span><span class="pull-right badge bg-blue">@Model.QuotCountModels.OYesterdayValue</span></a></li>
+                                    <li><a href="#">Today <span class="badge bg-green">@Model.QuotCountModels.OToday</span><span class="pull-right badge bg-green">@Model.QuotCountModels.OTodayValue</span></a></li>
+                                    <li><a href="#">Current Month <span class="badge bg-red">@Model.QuotCountModels.OCMonth</span><span class="pull-right badge bg-red">@Model.QuotCountModels.OCMonthValue</span></a></li>
+                                    <li><a href="#">Current Year <span class="badge bg-red">@Model.QuotCountModels.OCYear</span><span class="pull-right badge bg-red">@Model.QuotCountModels.OCYearValue</span></a></li>
+                                    <li><a href="#">Total <span class="badge bg-red">@Model.QuotCountModels.OTotal</span><span class="pull-right badge bg-red">@Model.QuotCountModels.OTotalValue</span></a></li>
+                                </ul>
+                            </div>
                         </div>
-                        <!-- /.info-box -->
                     </div>
                 </div>
                 <!-- /.box -->
