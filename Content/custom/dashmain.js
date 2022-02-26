@@ -2049,7 +2049,7 @@ $(document).ready(function () {
         ]
     });
     tblenqregret.on('order.dt search.dt', function () {
-        tblenqregret.column(1, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+        tblenqregret.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
             cell.innerHTML = i + 1;
             tblenqregret.cell(cell).invalidate('dom');
         });
