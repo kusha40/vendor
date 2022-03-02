@@ -1786,6 +1786,34 @@ $(document).ready(function () {
     $(".divgen").hide();
     $('#POGenerate').click(function () { AddTempPOGenerate(); });
 
+    var tblEnquiryReport = $('#tblEnquiryReport').DataTable({
+        "columnDefs": [
+        ],
+        "scrollX": true,
+        "paging": false,
+        "info": false,
+        "dom": 'Bfrtip',
+        "buttons": [
+            'pageLength',
+            {
+                extend: 'excel',
+                text: '<i class="far fa-file-excel"></i> Excel',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                footer: true
+            },
+            'colvis'
+        ]
+    });
+
+    tblEnquiryReport.on('order.dt search.dt', function () {
+        tblEnquiryReport.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblEnquiryReport.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
 
     var tblEnquiry = $('#tblEnquiry').DataTable({
         "columnDefs": [

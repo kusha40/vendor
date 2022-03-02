@@ -33,99 +33,89 @@
                 <!-- Default box -->
                 <div class="box">
                     <div class="box-header with-border">
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.Search, new { @class = "form-control-label" }) <sup>*</sup>
-                                @Html.TextBoxFor(m => m.Search,
-                                new
-                                {
-                                    @class = "form-control text-capitalize",
-                                    placeholder = @Html.DisplayNameFor(m => m.Search)
-                                })
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.StartDate, new { @class = "form-control-label" }) <sup>*</sup>
-                                @Html.TextBoxFor(m => m.StartDate,
-                                new
-                                {
-                                    @class = "form-control datepicker",
-                                    placeholder = @Html.DisplayNameFor(m => m.StartDate)
-                                })
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.EndDate, new { @class = "form-control-label" }) <sup>*</sup>
-                                @Html.TextBoxFor(m => m.EndDate,
-                                new
-                                {
-                                    @class = "form-control datepicker",
-                                    placeholder = @Html.DisplayNameFor(m => m.EndDate)
-                                })
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.EnquiryModels.QuotePrice, new { @class = "form-control-label" }) <sup>*</sup>
-                                @Html.TextBoxFor(m => m.EnquiryModels.QuotePrice,
-                                new
-                                {
-                                    @class = "form-control",
-                                    placeholder = @Html.DisplayNameFor(m => m.EnquiryModels.QuotePrice)
-                                })
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.Customer, new { @class = "form-control-label" }) <sup>*</sup>
-                                @Html.DropDownListFor(m => m.Customer, new SelectList(Model.CustomerModelList, "Key", "Value"),
-                                "--Select Customer--", new { @class = "form-control select2 cstid" })
-                                @Html.ValidationMessageFor(m => m.Customer, "",
-                        new { @class = "text-danger errcstid" })
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.User, new { @class = "form-control-label" }) <sup>*</sup>
-                                @Html.DropDownListFor(m => m.User, new SelectList(Model.UserModelList, "Key", "Value"),
-                                "--Select User--", new { @class = "form-control select2 posentby" })
-                                @Html.ValidationMessageFor(m => m.User, "",
-                        new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.EnquiryType, new { @class = "form-control-label" })
-                                @Html.DropDownListFor(m => m.EnquiryType,
-                               new List<SelectListItem>
-                                  {
-                                    new SelectListItem{ Text="PENDING", Value = "PENDING", Selected = true },
-                                    new SelectListItem{ Text="QUOTED", Value = "AP" },
-                                  },
-                                "--Select Enquiry Type--", new { @class = "form-control select2" })
-                                @Html.ValidationMessageFor(m => m.EnquiryType, "", new { @class = "text-danger errpotype" })
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 p-l-0">
+                        <div class="col-md-8">
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                 <div class="form-group">
-                                    @Html.LabelFor(m => m.EnquiryModels.QuotePrice, new { @class = "form-control-label" }) <sup>*</sup>
-                                    @Html.TextBoxFor(m => m.EnquiryModels.QuotePrice,
+                                    @Html.LabelFor(m => m.Search, new { @class = "form-control-label" })
+                                    @Html.TextBoxFor(m => m.Search,
                                     new
                                     {
-                                        @class = "form-control",
-                                        placeholder = @Html.DisplayNameFor(m => m.EnquiryModels.QuotePrice)
+                                        @class = "form-control text-capitalize",
+                                        placeholder = @Html.DisplayNameFor(m => m.Search)
                                     })
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <div class="box-tools pull-left">
-                                    <button type="submit" name="search" class="btn bg-aqua" title="SEARCH"
-                                            value="search">
-                                        SEARCH
-                                    </button>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.StartDate, new { @class = "form-control-label" }) <sup>*</sup>
+                                    @Html.TextBoxFor(m => m.StartDate,
+                                    new
+                                    {
+                                        @class = "form-control datepicker",
+                                        placeholder = @Html.DisplayNameFor(m => m.StartDate)
+                                    })
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.EndDate, new { @class = "form-control-label" }) <sup>*</sup>
+                                    @Html.TextBoxFor(m => m.EndDate,
+                                    new
+                                    {
+                                        @class = "form-control datepicker",
+                                        placeholder = @Html.DisplayNameFor(m => m.EndDate)
+                                    })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="box-tools pull-left">
+                                <button type="submit" name="search" class="btn bg-aqua" title="SEARCH"
+                                        value="search">
+                                    SEARCH
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Customer, new { @class = "form-control-label" })
+                                    @Html.DropDownListFor(m => m.Customer, new SelectList(Model.CustomerModelList, "Key", "Value"),
+                                    "--Select Customer--", new { @class = "form-control select2 cstid" })
+                                    @Html.ValidationMessageFor(m => m.Customer, "",
+                            new { @class = "text-danger errcstid" })
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.User, new { @class = "form-control-label" })
+                                    @Html.DropDownListFor(m => m.User, new SelectList(Model.UserModelList, "Key", "Value"),
+                                    "--Select User--", new { @class = "form-control select2 posentby" })
+                                    @Html.ValidationMessageFor(m => m.User, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.EnquiryType, new { @class = "form-control-label" })
+                                    @Html.DropDownListFor(m => m.EnquiryType,
+                                   new List<SelectListItem>
+                                      {
+                                        new SelectListItem{ Text="PENDING", Value = "PENDING" },
+                                        new SelectListItem{ Text="QUOTED", Value = "QUOTED", Selected = true },
+                                      },
+                                    "--Select Enquiry Type--", new { @class = "form-control select2" })
+                                    @Html.ValidationMessageFor(m => m.EnquiryType, "", new { @class = "text-danger errpotype" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="box box-widget widget-user-2">
+                                <div class="box-footer no-padding">
+                                    <ul class="nav nav-stacked">
+                                        <li><a href="#">Total Price <span class="pull-right badge bg-blue">@Model.QuotePrice</span></a></li>
+                                        <li><a href="#">TAT <span class="pull-right badge bg-blue">@Model.TAT</span></a></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -133,7 +123,7 @@
 
                     <!-- /.box-body -->
                     <div class="box-body">
-                        <table id="tblEnquiry" class="table table-bordered display">
+                        <table id="tblEnquiryReport" class="table table-bordered display">
                             <thead>
                                 <tr>
                                     <th>SNo</th>
@@ -149,6 +139,9 @@
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().TotalPrice)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnquiryDate)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EndDate)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqADate)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().TAT)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqAssignTo)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().CurrentStage)</th>
                                 </tr>
                             </thead>
@@ -171,6 +164,9 @@
                                         <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
                                         <td>@Html.DisplayFor(modelItem => item.EnquiryDate)</td>
                                         <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.EnqADate)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.TAT)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.EnqAssignTo)</td>
                                         <td>@Html.DisplayFor(modelItem => item.CurrentStage)</td>
                                     </tr>
                                 }
