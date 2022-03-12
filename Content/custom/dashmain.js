@@ -97,6 +97,112 @@ function isAlphabet(evt) {
 
 $(document).ready(function () {
 
+    Morris.Bar({
+        element: 'enqbar-chart',
+        data: GetEnqiryChart(),
+        xkey: 'Month',
+        ykeys: ['Count'],
+        labels: [''],
+        barColors: ['#f39c12'],
+    });
+
+    function GetEnqiryChart() {
+        var data = "";
+        $.ajax({
+            type: 'GET',
+            url: '/Admin/GetEnquiryChart',
+            dataType: 'json',
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            data: { 'bar_chart': 'bar' },
+            success: function (result) {
+                data = result;
+            },
+            error: function (xhr, status, error) {
+                alert(error);
+            }
+        });
+
+        return data;
+    }
+
+    Morris.Bar({
+        element: 'pobar-chart',
+        data: GetPOChart(),
+        xkey: 'Month',
+        ykeys: ['Count'],
+        labels: [''],
+        barColors: ['#00a65a'],
+    });
+
+    function GetPOChart() {
+        var data = "";
+        $.ajax({
+            type: 'GET',
+            url: '/Admin/GetPOChart',
+            dataType: 'json',
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            data: { 'bar_chart': 'bar' },
+            success: function (result) {
+                data = result;
+            },
+            error: function (xhr, status, error) {
+                alert(error);
+            }
+        });
+
+        return data;
+    }
+
+    Morris.Bar({
+        element: 'quotbar-chart',
+        data: GetQuotedChart(),
+        xkey: 'Month',
+        ykeys: ['Count'],
+        labels: [''],
+        barColors: ['#00a7d0'],
+    });
+
+    function GetQuotedChart() {
+        var data = "";
+        $.ajax({
+            type: 'GET',
+            url: '/Admin/GetQuotedChart',
+            dataType: 'json',
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            data: { 'bar_chart': 'bar' },
+            success: function (result) {
+                data = result;
+            },
+            error: function (xhr, status, error) {
+                alert(error);
+            }
+        });
+
+        return data;
+    }
+
+    //var bar = new Morris.Bar({
+    //    element: 'bar-chart',
+    //    resize: true,
+    //    data: [
+    //        { y: '2006', a: 100, b: 90 },
+    //        { y: '2007', a: 75, b: 65 },
+    //        { y: '2008', a: 50, b: 40 },
+    //        { y: '2009', a: 75, b: 65 },
+    //        { y: '2010', a: 50, b: 40 },
+    //        { y: '2011', a: 75, b: 65 },
+    //        { y: '2012', a: 100, b: 90 }
+    //    ],
+    //    barColors: ['#00a65a', '#f56954'],
+    //    xkey: 'y',
+    //    ykeys: ['a'],
+    //    labels: ['CPU', 'DISK'],
+    //    hideHover: 'auto'
+    //});
+
     $(".mb-act-confirm-del").on("click", function (e) {
         e.preventDefault();
         var box = $($(this).data("box"));
