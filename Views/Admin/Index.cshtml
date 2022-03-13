@@ -33,7 +33,7 @@
             <div class="col-lg-12">
                 <!-- Default box -->
                 <div class="box">
-                    <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="col-md-3 col-sm-6 col-xs-12">
                         <div class="box box-widget widget-user-2">
                             <div class="widget-user-header bg-yellow p-10">
                                 <h3 class="widget-user-username m-l-0">Enquiry</h3>
@@ -53,7 +53,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="col-md-3 col-sm-6 col-xs-12">
                         <div class="box box-widget widget-user-2">
                             <div class="widget-user-header bg-green p-10">
                                 <h3 class="widget-user-username m-l-0">Enquiry</h3>
@@ -73,7 +73,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="col-md-3 col-sm-6 col-xs-12">
                         <div class="box box-widget widget-user-2">
                             <div class="widget-user-header bg-aqua-active p-10">
                                 <h3 class="widget-user-username m-l-0">Purchase Order</h3>
@@ -93,7 +93,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="col-md-3 col-sm-6 col-xs-12">
                         <div class="box box-widget widget-user-2">
                             <div class="widget-user-header bg-m-red p-10">
                                 <h3 class="widget-user-username m-l-0">Quotation</h3>
@@ -114,85 +114,90 @@
                         </div>
                     </div>
                 </div>
-                <!-- /.box -->
+                @*<div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="box-body chart-responsive">
+                <div class="chart" id="bar-chart" style="height: 300px;"></div>
             </div>
-            <div class="col-lg-12">
-                <!-- Default box -->
-                <div class="col-lg-6">
-                    <div class="box">
-                        <div class="box box-info h-400">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">Registerd Vendor List</h3>
+        </div>*@
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="box box-success">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Enquiry</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
                             </div>
-                            <!-- /.box-header -->
-                            <div class="box-body" style="">
-                                <table id="tblIndexRegVen" class="table no-margin">
-                                    <thead>
-                                        <tr>
-                                            <th>SNo</th>
-                                            <th>@Html.DisplayNameFor(model => model.RegisterVendorInfoModelList.FirstOrDefault().CompanyName)</th>
-                                            <th>@Html.DisplayNameFor(model => model.RegisterVendorInfoModelList.FirstOrDefault().ContactPerson)</th>
-                                            <th>@Html.DisplayNameFor(model => model.RegisterVendorInfoModelList.FirstOrDefault().Contact1)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var u in Model.RegisterVendorInfoModelList)
-                                        {
-                                            <tr>
-                                                <td></td>
-                                                <td>@Html.DisplayFor(model => u.CompanyName)</td>
-                                                <td>@Html.DisplayFor(model => u.ContactPerson)</td>
-                                                <td>@Html.DisplayFor(model => u.Contact1)</td>
-                                            </tr>
-                                        }
-                                    </tbody>
-                                </table>
-                                <!-- /.table-responsive -->
-                            </div>
-                            <!-- /.box-body -->
+                        </div>
+                        <div class="box-body chart-responsive">
+                            <div class="chart" id="enqbar-chart" style="height: 300px;"></div>
                         </div>
                     </div>
-                    <!-- /.box -->
                 </div>
-                <div class="col-lg-6">
-                    <div class="box">
-                        <div class="box box-info h-400">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">Approved Vendor List</h3>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="box box-success">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Quote</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
                             </div>
-                            <!-- /.box-header -->
-                            <div class="box-body" style="">
-                                <table id="tblIndexApprvVen" class="table no-margin">
-                                    <thead>
-                                        <tr>
-                                            <th>SNo</th>
-                                            <th>@Html.DisplayNameFor(model => model.ApprovedVendorInfoModelList.FirstOrDefault().CompanyName)</th>
-                                            <th>@Html.DisplayNameFor(model => model.ApprovedVendorInfoModelList.FirstOrDefault().ContactPerson)</th>
-                                            <th>@Html.DisplayNameFor(model => model.ApprovedVendorInfoModelList.FirstOrDefault().Contact1)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var u in Model.ApprovedVendorInfoModelList)
-                                        {
-                                            <tr>
-                                                <td></td>
-                                                <td>@Html.DisplayFor(model => u.CompanyName)</td>
-                                                <td>@Html.DisplayFor(model => u.ContactPerson)</td>
-                                                <td>@Html.DisplayFor(model => u.Contact1)</td>
-                                            </tr>
-                                        }
-                                    </tbody>
-                                </table>
-                                <!-- /.table-responsive -->
-                            </div>
-                            <!-- /.box-body -->
+                        </div>
+                        <div class="box-body chart-responsive">
+                            <div class="chart" id="quotbar-chart" style="height: 300px;"></div>
                         </div>
                     </div>
-                    <!-- /.box -->
                 </div>
-                <!-- /.box -->
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="box box-success">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Purchase Order</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body chart-responsive">
+                            <div class="chart" id="pobar-chart" style="height: 300px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="box box-success">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Purchase Order (Excluded Vedanta)</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body chart-responsive">
+                            <div class="chart" id="poevbar-chart" style="height: 300px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="box box-success">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Conversion % (Excluded Vedanta)</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body chart-responsive">
+                            <div class="chart" id="conbar-chart" style="height: 300px;"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <!-- /.box -->
         </div>
+
         <!-- danger with sound -->
         <div class="message-box animated fadeIn" data-sound="alert" id="mb-act-cnfrm">
             <div class="mb-container">
