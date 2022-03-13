@@ -96,8 +96,13 @@ function isAlphabet(evt) {
 /* General Start */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 $(document).ready(function () {
 
+=======
+
+$(document).ready(function () {
+>>>>>>> 4d0be52db1c0f89a856d35440df61c0e725474bc
 =======
 
 $(document).ready(function () {
