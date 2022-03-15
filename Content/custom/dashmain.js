@@ -3920,13 +3920,14 @@ $('.enqsubmit').on('click', function (e) {
         var cstbadd = $('.cstbadd').val();
         var cstsadd = $('.cstsadd').val();
         var enqtype = $('.enqtype').val();
+        var type = $('.type').val();
         var enqid = $('.enqid').val();
         var enqdate = $('.enqdate').val();
         var enddate = $('.enddate').val();
         var enqlneitm = $('.enqlneitm').val();
         var enqsentby = $('.enqsentby').val();
 
-        if (cstId !== "" && cstbadd !== "" && cstsadd !== "" && enqid !== "" && enqtype !== "" && enqlneitm !== "0" && enqlneitm !== "" && enqsentby !== "") {
+        if (cstId !== "" && cstbadd !== "" && cstsadd !== "" && enqid !== "" && enqtype !== "" && type !== "" && enqlneitm !== "0" && enqlneitm !== "" && enqsentby !== "") {
 
             $(".tbl tbody tr").each(function () {
                 var tds = $(this).find("td");
@@ -3951,6 +3952,7 @@ $('.enqsubmit').on('click', function (e) {
                         CustomerBillAdd: cstbadd,
                         CustomerShipAdd: cstsadd,
                         EnqType: enqtype,
+                        Type: type,
                         EnqId: enqid,
                         EnquiryDate: enqdate,
                         EndDate: enddate,
@@ -4128,9 +4130,14 @@ function AddTempSourced() {
 
         $('#tblsource').find('tbody').append(
             "<tr>" +
-            "<td class='w-10'> <input type='text' id='EnquiriesModelList_CustomerName_" + inc + "' name='EnquiriesModelList_CustomerName_" + inc + "' data-toggle='tooltip' title='" + tmpsrc.CustomerName + "' value='" + tmpsrc.CustomerName + "' disabled required='True' class='form-control scstname m-b-0 bg-gray' type='text'></td>" +
-            "<td class='w-10'> <input type='text' id='EnquiriesModelList_EnqPId_" + inc + "' name='EnquiriesModelList_EnqPId_" + inc + "' data-toggle='tooltip' title='" + tmpsrc.EnqPId + "' value='" + tmpsrc.EnqPId + "' disabled class='form-control spid m-b-0 bg-gray'  type='text' /></td>" +
-            "<td class='w-15'> <input type='text' id='EnquiriesModelList_Product_" + inc + "' name='EnquiriesModelList_Product_" + inc + "' data-toggle='tooltip' title='" + tmpsrc.Product + "' disabled value='" + tmpsrc.Product + "' class='form-control sprdid m-b-0 bg-gray'  type='text' /></td>" +
+            /* "<td class='w-10'> <input type='text' id='EnquiriesModelList_CustomerName_" + inc + "' name='EnquiriesModelList_CustomerName_" + inc + "' data-toggle='tooltip' title='" + tmpsrc.CustomerName + "' value='" + tmpsrc.CustomerName + "' disabled required='True' class='form-control scstname m-b-0 bg-gray' type='text'></td>" +*/
+            "<td class='w-10'> <span class='scstname'>" + tmpsrc.CustomerName + "</span></td>" +
+            "<td class='w-10'> <input type='text' id='EnquiriesModelList_EnqPId_" + inc + "' name='EnquiriesModelList_EnqPId_" + inc + "' data-toggle='tooltip' title='" + tmpsrc.EnqPId + "' value='" + tmpsrc.EnqPId + "' disabled class='form-control spid m-b-0'  type='text' /></td>" +
+
+            //"<td class='w-15'> <input type='text' id='EnquiriesModelList_Product_" + inc + "' name='EnquiriesModelList_Product_" + inc + "' data-toggle='tooltip' title='" + tmpsrc.Product + "' disabled value='" + tmpsrc.Product + "' class='form-control sprdid m-b-0 bg-gray'  type='text' /></td>" +
+
+            "<td class='w-15'> <span class='sprdid m-b-0 bg-gray'  />" + tmpsrc.Product + "</span></td>" +
+
             "<td class='w-6'>  <input type='text' id='EnquiriesModelList_Price_" + inc + "' name='EnquiriesModelList_Price_" + inc + "' value='" + tmpsrc.Price + "' disabled class='form-control svenprc m-b-0 bg-gray'  type='text' /></td>" +
             "<td class='w-6'>  <input type='text' id='EnquiriesModelList_Quantity_" + inc + "' name='EnquiriesModelList_Quantity_" + inc + "' value='" + tmpsrc.Quantity + "' disabled class='form-control sqty m-b-0 bg-gray'  type='text' /></td>" +
             "<td class='w-10'> <input type='text' id='EnquiriesModelList_Vendor1Id_" + inc + "' name='EnquiriesModelList_Vendor1Id_" + inc + "' placeholder='Vendor1 Name' value='' class='form-control sven1id sven m-b-0'  type='text' /></br><input type='text' id='EnquiriesModelList_Vendor1Price_" + inc + "' name='EnquiriesModelList_Vendor1Price_" + inc + "' value='' placeholder='Vendor1 Price' class='form-control sven1prc onlynumdec m-b-0 float-left' /></td>" +
@@ -4507,7 +4514,7 @@ function AddTempQuotation() {
                     "<td class='w-10'> <input type='text' id='EnquiriesModelList_Unit_" + inc + "' name='EnquiriesModelList_Unit_" + inc + "' value='" + tmpquotsrc.Unit + "' disabled class='form-control sunit m-b-0'  type='text' /></td>" +
                     "<td class='w-8'>  <input type='text' id='EnquiriesModelList_UnitPrice_" + inc + "' name='EnquiriesModelList_UnitPrice_" + inc + "' value='" + tmpquotsrc.QuotePrice + "' placeholder='Unit Price' disabled class='form-control svunitprc m-b-0' /></td>" +
                     "<td class='w-8'> <input type='text' id='EnquiriesModelList_Discount_" + inc + "' name='EnquiriesModelList_Discount_" + inc + "' value='' placeholder='Discount' class='form-control sdisc m-b-0' /></br><input type='text' id='EnquiriesModelList_Value_" + inc + "' name='EnquiriesModelList_Value_" + inc + "' value='' placeholder='Value' class='form-control svalue m-b-0' /></td>" +
-                    "<td class='w-8'> <input type='text' id='EnquiriesModelList_TotalPrice_" + inc + "' name='EnquiriesModelList_TotalPrice_" + inc + "' value='" + amnt+"' placeholder='TotalPrice' disabled class='form-control stotprc m-b-0' />" +
+                    "<td class='w-8'> <input type='text' id='EnquiriesModelList_TotalPrice_" + inc + "' name='EnquiriesModelList_TotalPrice_" + inc + "' value='" + amnt + "' placeholder='TotalPrice' disabled class='form-control stotprc m-b-0' />" +
                     "<td class='w-10'> <input type='text' id='EnquiriesModelList_GST_" + inc + "' name='EnquiriesModelList_GST_" + inc + "' value='" + tmpquotsrc.GST + "' placeholder='GST' disabled class='form-control svengst m-b-0' /></td > " +
                     "</tr>");
                 inc++;
@@ -4602,7 +4609,7 @@ function AddTempQuotation() {
                         "<td class='w-10'> <input type='text' id='EnquiriesModelList_Unit_" + inc + "' name='EnquiriesModelList_Unit_" + inc + "' value='" + tmpquotsrc.Unit + "' disabled class='form-control sunit m-b-0'  type='text' /></td>" +
                         "<td class='w-8'>  <input type='text' id='EnquiriesModelList_UnitPrice_" + inc + "' name='EnquiriesModelList_UnitPrice_" + inc + "' value='" + tmpquotsrc.QuotePrice + "' placeholder='Unit Price' disabled class='form-control svunitprc m-b-0' /></td>" +
                         "<td class='w-8'> <input type='text' id='EnquiriesModelList_Discount_" + inc + "' name='EnquiriesModelList_Discount_" + inc + "' value='' placeholder='Discount' class='form-control sdisc m-b-0' /></br><input type='text' id='EnquiriesModelList_Value_" + inc + "' name='EnquiriesModelList_Value_" + inc + "' value='' placeholder='Value' class='form-control svalue m-b-0' /></td>" +
-                        "<td class='w-8'> <input type='text' id='EnquiriesModelList_TotalPrice_" + inc + "' name='EnquiriesModelList_TotalPrice_" + inc + "' value='' placeholder='TotalPrice' disabled class='form-control stotprc m-b-0' />"+
+                        "<td class='w-8'> <input type='text' id='EnquiriesModelList_TotalPrice_" + inc + "' name='EnquiriesModelList_TotalPrice_" + inc + "' value='' placeholder='TotalPrice' disabled class='form-control stotprc m-b-0' />" +
                         "<td class='w-10'> <input type='text' id='EnquiriesModelList_GST_" + inc + "' name='EnquiriesModelList_GST_" + inc + "' value='" + tmpquotsrc.GST + "' placeholder='GST' disabled class='form-control svengst m-b-0' /></td > " +
                         "</tr>");
                     inc++;
@@ -4867,7 +4874,7 @@ $('.quot').on('click', function (e) {
             var senqpid = $(tds[1]).find('.senqpid').val();
             var svunitprc = $(tds[5]).find('.svunitprc').val();
             var sdisc = $(tds[6]).find('.sdisc').val();
-            if (sdisc  === "") {
+            if (sdisc === "") {
                 sdisc = 0;
             }
 

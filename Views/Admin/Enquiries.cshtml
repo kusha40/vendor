@@ -33,7 +33,8 @@
                 <!-- Default box -->
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">@Html.ActionLink("New Enquiry", "Enquiry", "Admin", null, new { @class = "btn btn-edt bg-aqua", title = "New Enquiry" })</h3>
+                        <h3 class="box-title f-left">@Html.ActionLink("New Enquiry", "Enquiry", "Admin", null, new { @target = "_blank", @class = "btn btn-edt bg-aqua", title = "New Enquiry" })</h3>
+                       @*<h3 class="box-title f-left">@Html.ActionLink("Import Enquiry", "ImportEnquiry", "Admin", null, new { @class = "btn btn-edt bg-green", title = "Import Enquiry" })</h3>*@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-body">
@@ -105,45 +106,45 @@
                             <tbody>
                                 @foreach (var item in Model.EnquiriesModelList)
                                 {
-                                <tr>
-                                    <td></td>
-                                    <td>
-                                        @*@if (item.Status == "I" || item.Status == "A" || item.Status == "S")
-            {*@
-                                        @Html.EncodedActionLink("<i class='fa fa-pencil-square-o'></i>", "EditEnquiry", "Admin", new { id = item.Id }, new { @class = "btn btn-edt bg-aqua btn-sm", title = "Edit", @target = "_blank" })
-                                        @*}*@
-                                        @if (item.Status == "I" || item.Status == "A")
-                                        {
-                                            @Html.EncodedActionLink("<i class='fa fa-times'></i>", "DeleteEnquiry", "Admin", new { id = item.Id }, new
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            @*@if (item.Status == "I" || item.Status == "A" || item.Status == "S")
+                                                {*@
+                                            @Html.EncodedActionLink("<i class='fa fa-pencil-square-o'></i>", "EditEnquiry", "Admin", new { id = item.Id }, new { @class = "btn btn-edt bg-aqua btn-sm", title = "Edit", @target = "_blank" })
+                                            @*}*@
+                                            @if (item.Status == "I" || item.Status == "A")
                                             {
-                                                @class = "btn btn-del m-l-5 bg-m-red btn-sm",
-                                                title = "Delete"
-                                       })
-                                        }
+                                                @Html.EncodedActionLink("<i class='fa fa-times'></i>", "DeleteEnquiry", "Admin", new { id = item.Id }, new
+                                                {
+                                                    @class = "btn btn-del m-l-5 bg-m-red btn-sm",
+                                                    title = "Delete"
+                                           })
+                                            }
 
-                                    </td>
-                                    <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.EnqId)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.EnqPId)</td>
-                                    <td title="@item.SpcRemark">
-                                        @Html.DisplayFor(modelItem => item.Product)<br>
-                                    </td>
-                                    <td>@Html.DisplayFor(modelItem => item.Brand)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.ModelNo)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Price)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.EnquiryDate)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.CurrentStage)</td>
-                                    @*@if (Model.UserProfileModels.EmpType == "SupAdmin" && item.Status!="MR")
-        {
-            <td>
-                @Html.EncodedActionLink("<i class='fa fa-times'></i>", "POCancel", "Admin",
-                    new { id = item.POPId }, new { @class = "btn btn-edt bg-red btn-sm mb-act-confirm", @data_box = "#mb-act-cnfrm", title = "PO Not Approved" })
-            </td>
-        }*@
-                                </tr>
+                                        </td>
+                                        <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.EnqId)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.EnqPId)</td>
+                                        <td title="@item.SpcRemark">
+                                            @Html.DisplayFor(modelItem => item.Product)<br>
+                                        </td>
+                                        <td>@Html.DisplayFor(modelItem => item.Brand)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.ModelNo)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.EnquiryDate)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.CurrentStage)</td>
+                                        @*@if (Model.UserProfileModels.EmpType == "SupAdmin" && item.Status!="MR")
+                                            {
+                                                <td>
+                                                    @Html.EncodedActionLink("<i class='fa fa-times'></i>", "POCancel", "Admin",
+                                                        new { id = item.POPId }, new { @class = "btn btn-edt bg-red btn-sm mb-act-confirm", @data_box = "#mb-act-cnfrm", title = "PO Not Approved" })
+                                                </td>
+                                            }*@
+                                    </tr>
                                 }
                             </tbody>
                         </table>

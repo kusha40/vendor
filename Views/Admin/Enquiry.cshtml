@@ -135,6 +135,20 @@
                                     </div>
                                     <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
                                         <div class="form-group">
+                                            @Html.LabelFor(m => m.EnquiryModels.Type, new { @class = "form-control-label" })
+                                            @Html.DropDownListFor(m => m.EnquiryModels.Type,
+                                           new List<SelectListItem>
+                                              {
+                                                new SelectListItem{ Text="Standard", Value = "Standard", Selected = true  },
+                                                new SelectListItem{ Text="Non Standard", Value = "Non Standard" },
+                                              },
+                                            "--Select Enq Type--", new { @class = "form-control select2 type" })
+                                            @Html.ValidationMessageFor(m => m.EnquiryModels.Type, "",
+                                    new { @class = "text-danger errtype" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                        <div class="form-group">
                                             @Html.LabelFor(m => m.EnquiryModels.EnqId, new { @class = "form-control-label" }) <sup>*</sup>
                                             @Html.TextBoxFor(m => m.EnquiryModels.EnqId,
                                     new
