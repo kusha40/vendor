@@ -168,6 +168,20 @@
                                 new { @class = "text-danger errpoedlvdate" })
                                     </div>
                                 </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.PurOrdModels.POFileU, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextBoxFor(m => m.PurOrdModels.POFileU,
+                                new
+                                {
+                                    @class = "form-control pofile",
+                                    @type = "file",
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.PurOrdModels.POFileU)
+                                })
+                                        @Html.ValidationMessageFor(m => m.PurOrdModels.POFileU, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
