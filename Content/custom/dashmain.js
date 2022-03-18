@@ -2083,6 +2083,30 @@ $(document).ready(function () {
         });
     }).draw();
 
+    var tblImportPO = $('#tblImportPO').DataTable({
+        "paging": false,
+        //"searching": false,
+        "info": false,
+    });
+    tblImportPO.on('order.dt search.dt', function () {
+        tblImportPO.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblImportPO.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
+    var tblImportenq = $('#tblImportenq').DataTable({
+        "paging": false,
+        //"searching": false,
+        "info": false,
+    });
+    tblImportenq.on('order.dt search.dt', function () {
+        tblImportenq.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblImportenq.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
     var tblquoted = $('#tblquoted').DataTable({
         "columnDefs": [
             {
