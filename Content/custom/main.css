@@ -1,5 +1,11 @@
 ﻿
 /* Common CSS*/
+
+.modal-body .select2
+{
+    width:200px !important;
+}
+
 .f-left {
     float: left !important;
 }

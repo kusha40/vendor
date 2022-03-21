@@ -4156,14 +4156,14 @@ function AddTempSourced() {
             "<tr>" +
             /* "<td class='w-10'> <input type='text' id='EnquiriesModelList_CustomerName_" + inc + "' name='EnquiriesModelList_CustomerName_" + inc + "' data-toggle='tooltip' title='" + tmpsrc.CustomerName + "' value='" + tmpsrc.CustomerName + "' disabled required='True' class='form-control scstname m-b-0 bg-gray' type='text'></td>" +*/
             "<td class='w-10'> <span class='scstname'>" + tmpsrc.CustomerName + "</span></td>" +
-            "<td class='w-10'> <input type='text' id='EnquiriesModelList_EnqPId_" + inc + "' name='EnquiriesModelList_EnqPId_" + inc + "' data-toggle='tooltip' title='" + tmpsrc.EnqPId + "' value='" + tmpsrc.EnqPId + "' disabled class='form-control spid m-b-0'  type='text' /></td>" +
+            "<td class='w-10'> <input type='text' id='EnquiriesModelList_EnqPId_" + inc + "' name='EnquiriesModelList_EnqPId_" + inc + "' data-toggle='tooltip' title='" + tmpsrc.EnqPId + "' value='" + tmpsrc.EnqPId + "' disabled class='form-control spid m-b-0'  type='text' /><a class='btn btn-sm bg-aqua pedtbtn'>Edit Product</a></td>" +
 
             //"<td class='w-15'> <input type='text' id='EnquiriesModelList_Product_" + inc + "' name='EnquiriesModelList_Product_" + inc + "' data-toggle='tooltip' title='" + tmpsrc.Product + "' disabled value='" + tmpsrc.Product + "' class='form-control sprdid m-b-0 bg-gray'  type='text' /></td>" +
 
-            "<td class='w-15'> <span class='sprdid m-b-0 bg-gray'  />" + tmpsrc.Product + "</span></td>" +
+            "<td class='w-15 tdsprdid'>" + tmpsrc.Product + "</td>" +
 
             "<td class='w-6'>  <input type='text' id='EnquiriesModelList_Price_" + inc + "' name='EnquiriesModelList_Price_" + inc + "' value='" + tmpsrc.Price + "' disabled class='form-control svenprc m-b-0 bg-gray'  type='text' /></td>" +
-            "<td class='w-6'>  <input type='text' id='EnquiriesModelList_Quantity_" + inc + "' name='EnquiriesModelList_Quantity_" + inc + "' value='" + tmpsrc.Quantity + "' disabled class='form-control sqty m-b-0 bg-gray'  type='text' /></td>" +
+            "<td class='w-6'>  <input type='text' id='EnquiriesModelList_Quantity_" + inc + "' name='EnquiriesModelList_Quantity_" + inc + "' value='" + tmpsrc.Quantity + "' class='form-control sqty m-b-0'  type='text' /></td>" +
             "<td class='w-10'> <input type='text' id='EnquiriesModelList_Vendor1Id_" + inc + "' name='EnquiriesModelList_Vendor1Id_" + inc + "' placeholder='Vendor1 Name' value='' class='form-control sven1id sven m-b-0'  type='text' /></br><input type='text' id='EnquiriesModelList_Vendor1Price_" + inc + "' name='EnquiriesModelList_Vendor1Price_" + inc + "' value='' placeholder='Vendor1 Price' class='form-control sven1prc onlynumdec m-b-0 float-left' /></td>" +
             "<td class='w-10'> <input type='text' id='EnquiriesModelList_Vendor2Id_" + inc + "' name='EnquiriesModelList_Vendor2Id_" + inc + "' placeholder='Vendor2 Name' value='' class='form-control sven2id sven m-b-0'  type='text' /></br><input type='text' id='EnquiriesModelList_Vendor2Price_" + inc + "' name='EnquiriesModelList_Vendor2Price_" + inc + "' value='' placeholder='Vendor2 Price' class='form-control sven2prc onlynumdec m-b-0 float-left' /></td > " +
             "<td class='w-10'> <input type='text' id='EnquiriesModelList_Vendor3Id_" + inc + "' name='EnquiriesModelList_Vendor3Id_" + inc + "' placeholder='Vendor3 Name' value='' class='form-control sven3id sven m-b-0'  type='text' /></br><input type='text' id='EnquiriesModelList_Vendor3Price_" + inc + "' name='EnquiriesModelList_Vendor3Price_" + inc + "' value='' placeholder='Vendor3 Price' class='form-control sven3prc onlynumdec m-b-0 float-left' /></td > " +
@@ -4175,6 +4175,61 @@ function AddTempSourced() {
     $(".divsourced").hide();
     $(".divsource").show();
 }
+
+
+$(document).on('click', '.pedtbtn', function () {
+    var curRow = $(this).closest("tr");
+    $('#tblsource tbody tr').removeClass("selected");
+    $(this).closest("tr").toggleClass('selected');
+    var enqpid = curRow.find(".spid").val();
+    $('#EnquiryModels_EnqPId').val(enqpid);
+    var prd = curRow.find(".tdsprdid").text();
+    var product = (prd.split('\nBrand :')[0]).trim();
+    var brand = (prd.split('\nBrand :')[1].split('\nModel :')[0]).trim();
+    var model = (prd.split('\nBrand :')[1].split('\nModel :')[1]).trim();
+    $('.mprod').val(product);
+    $('.mmodel').val(model);
+    $("#BrandId option:contains('" + brand + "')").attr("selected", true).change();
+    $('#updateModel').modal('show');
+});
+
+$('.updpmb').on('click', function (e) {
+    $(this).find(':submit').attr('disabled', 'disabled');
+    $(".updpmb").attr("disabled", true);
+    $(".updpmb").hide();
+    var enqpid = $('#EnquiryModels_EnqPId').val();
+    var prod = $(".mprod").val();
+    var mdl = $(".mmodel").val();
+    var brand = $("#BrandId").val();
+    var brandtext = $("#BrandId option:selected");
+
+    e.preventDefault();
+
+    $.ajax({
+        url: "/Admin/UpdateProductBrandModal",
+        dataType: "json",
+        data: "{'enqpid': '" + enqpid + "','prod': '" + prod + "','mdl': '" + mdl + "','brand': '" + brand + "'}",
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        success: function (result) {
+            if (result.error === "") {
+                var product = prod + "\nBrand :" + brandtext.text() + "\nModel :" + mdl ;
+                $('#tblsource tbody tr.selected').find('.tdsprdid').text(product);
+                $(".updpmb").attr("disabled", false);
+                $(".updpmb").show();
+                $('#updateModel').modal('hide');
+            }
+            else {
+                alert(result.error);
+            }
+        },
+        error: function (xhr, status, error) {
+            var err = eval("(" + xhr.responseText + ")");
+            alert(err.Message);
+        }
+    });
+    $(".updpmb").attr("disabled", false);
+});
 
 $(document).on('focus', '.sven', function () {
     var id = this.id;
