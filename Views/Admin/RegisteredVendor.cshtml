@@ -119,9 +119,9 @@
                                         <td></td>
                                         <td>
                                             @Html.EncodedActionLink("<i class='fa fa-pencil-square-o'></i>", "EditVendorInfo", "Admin",
-                                           new { id = u.Id }, new { @class = "btn btn-edt btn-sm bg-aqua", title = "Edit" })
+                                           new { id = u.Id }, new { @class = "btn btn-edt btn-sm bg-aqua", @target = "_blank", @title = "Edit" })
                                             @Html.EncodedActionLink("<i class='fa fa-user'></i>", "VendorProfile", "Admin",
-                                      new { id = u.Id }, new { @class = "btn btn-edt  btn-sm bg-aqua", title = "Profile" })
+                                      new { id = u.Id }, new { @class = "btn btn-edt  btn-sm bg-aqua", @target = "_blank", title = "Profile" })
                                             @if (Model.UserProfileModels.EmpType != "User")
                                             {
                                                 @Html.EncodedActionLink("<i class='fa fa-check'></i>", "ApproveVendor", "Admin",
