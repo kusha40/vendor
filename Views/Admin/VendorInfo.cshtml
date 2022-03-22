@@ -313,25 +313,25 @@
                                 new { @class = "text-danger" })
                                     </div>
                                 </div>
+                                @*<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.VendorInfoModels.Brand, new { @class = "form-control-label" }) <sup>*</sup>
+                                            @Html.TextBoxFor(m => m.VendorInfoModels.Brand,
+                                    new
+                                    {
+                                        @class = "form-control",
+                                        placeholder = "Enter " + @Html.DisplayNameFor(m => m.VendorInfoModels.Brand)
+                                    })
+                                            @Html.ValidationMessageFor(m => m.VendorInfoModels.Brand, "",
+                                    new { @class = "text-danger" })
+                                        </div>
+                                    </div>*@
                                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                     <div class="form-group">
-                                        @Html.LabelFor(m => m.VendorInfoModels.Brand, new { @class = "form-control-label" }) <sup>*</sup>
-                                        @Html.TextBoxFor(m => m.VendorInfoModels.Brand,
-                                new
-                                {
-                                    @class = "form-control",
-                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.VendorInfoModels.Brand)
-                                })
-                                        @Html.ValidationMessageFor(m => m.VendorInfoModels.Brand, "",
-                                new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                    <div class="form-group">
-                                        @Html.LabelFor(m => m.VendorInfoModels.Category, new { @class = "form-control-label" }) <sup>*</sup>
-                                        @Html.DropDownListFor(m => m.VendorInfoModels.Category, new SelectList(Model.CategoryModelList, "Key", "Value"),
-                    "--Select Category--", new { @class = "form-control select2" })
-                                        @Html.ValidationMessageFor(m => m.VendorInfoModels.Category, "",
+                                        @Html.LabelFor(m => m.VendorInfoModels.BrandIds, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.DropDownListFor(m => m.VendorInfoModels.BrandIds, new SelectList(Model.BrandModelList, "Key", "Value"),
+                                        new { @class = "form-control select2", @multiple = "multiple", @data_placeholder = "-- Select Brand --" })
+                                        @Html.ValidationMessageFor(m => m.VendorInfoModels.BrandIds, "",
                                 new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -339,11 +339,20 @@
                                                     <div class="form-group">
                                                         @Html.LabelFor(m => m.VendorInfoModels.Category, new { @class = "form-control-label" }) <sup>*</sup>
                                                         @Html.DropDownListFor(m => m.VendorInfoModels.Category, new SelectList(Model.CategoryModelList, "Key", "Value"),
-                                    "--Select Category--", new { @class = "form-control select2", @multiple = "multiple" })
+                                    "--Select Category--", new { @class = "form-control select2" })
                                                         @Html.ValidationMessageFor(m => m.VendorInfoModels.Category, "",
                                                 new { @class = "text-danger" })
                                                     </div>
                                                 </div>*@
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.VendorInfoModels.CategoryIds, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.DropDownListFor(m => m.VendorInfoModels.CategoryIds, new SelectList(Model.CategoryModelList, "Key", "Value"),
+                                        new { @class = "form-control select2", @multiple = "multiple", @data_placeholder = "-- Select Category --" })
+                                        @Html.ValidationMessageFor(m => m.VendorInfoModels.CategoryIds, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
                                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                     <div class="form-group">
                                         @Html.LabelFor(m => m.VendorInfoModels.OperationsModel, new { @class = "form-control-label" }) <sup>*</sup>

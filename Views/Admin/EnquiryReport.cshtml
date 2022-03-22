@@ -70,8 +70,8 @@
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                @Html.LabelFor(m => m.EnquiryType, new { @class = "form-control-label" })
-                                @Html.DropDownListFor(m => m.EnquiryType,
+                                @Html.LabelFor(m => m.Type, new { @class = "form-control-label" })
+                                @Html.DropDownListFor(m => m.Type,
                                new List<SelectListItem>
                                   {
                                     new SelectListItem{ Text="STANDARD", Value = "STANDARD" },
@@ -146,6 +146,7 @@
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Product)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Brand)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().ModelNo)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Type)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Quantity)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Price)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().TotalPrice)</th>
@@ -160,27 +161,28 @@
                             <tbody>
                                 @foreach (var item in Model.EnquiriesModelList)
                                 {
-                                    <tr>
-                                        <td></td>
-                                        <td hidden></td>
-                                        <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.EnqId)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.EnqPId)</td>
-                                        <td title="@item.SpcRemark">
-                                            @Html.DisplayFor(modelItem => item.Product)<br>
-                                        </td>
-                                        <td>@Html.DisplayFor(modelItem => item.Brand)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.ModelNo)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Price)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.EnquiryDate)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.EnqADate)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.TAT)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.EnqAssignTo)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.CurrentStage)</td>
-                                    </tr>
+                                <tr>
+                                    <td></td>
+                                    <td hidden></td>
+                                    <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EnqId)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EnqPId)</td>
+                                    <td title="@item.SpcRemark">
+                                        @Html.DisplayFor(modelItem => item.Product)<br>
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.Brand)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.ModelNo)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Type)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EnquiryDate)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EnqADate)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.TAT)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EnqAssignTo)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.CurrentStage)</td>
+                                </tr>
                                 }
                             </tbody>
                         </table>
