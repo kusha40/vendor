@@ -1,0 +1,581 @@
+﻿@using Vendor_Indusuno.Extensions
+@model Vendor_Indusuno.ViewModels.CustomerViewModel
+@{
+    ViewBag.Title = "Add Customer";
+    TempData["Customer"] = "active";
+    TempData["AddCustomer"] = "active";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    @{
+        string actType = "Add";
+        string actBtn = "Submit";
+        string pageTitle = Html.Raw(Html.PageGTitle()) + "";
+        if (!String.IsNullOrEmpty(Model.CustomerModels.Id))
+        {
+            actType = "Edit";
+            actBtn = "Update";
+        }
+        string q = "";
+        if (TempData.ContainsKey("q"))
+        {
+            q = TempData["q"].ToString();
+        }
+    }
+    <h1>
+        @pageTitle
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index")"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        @Html.Raw(Html.BuildBreadcrumbNavigation())
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    @using (Html.BeginForm("AddCustomer", "Admin", new { q }, FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <!-- Main row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Default box -->
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">@pageTitle</h3>
+                        <div class="box-tools pull-right">
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="col-md-12">
+                            <div class="msgs">
+                                @if (ViewData?.ModelState[""]?.Errors?.Any() == true)
+                                {
+                                    <div class="alert alert-danger alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                                        @Html.ValidationSummary(true, "", new { @class = "" })
+                                    </div>
+                                }
+                                @if (!String.IsNullOrEmpty(ViewBag.SucMsg))
+                                {
+                                    <div class="alert alert-success alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-check"></i> Success!</h4>
+                                        <strong>Well done!</strong> @ViewBag.SucMsg
+                                    </div>
+                                }
+                                @if (!String.IsNullOrEmpty(ViewBag.ErrMsg))
+                                {
+                                    <div class="alert alert-danger alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                                        <strong>Oh snap!</strong> @ViewBag.ErrMsg
+                                    </div>
+                                }
+                                @if (!String.IsNullOrEmpty(TempData["ErrMsg"] + ""))
+                                {
+                                    <div class="alert alert-danger alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                                        <strong>Oh snap!</strong> @TempData["ErrMsg"]
+                                    </div>
+                                }
+                                @if (!String.IsNullOrEmpty(TempData["SucMsg"] + ""))
+                                {
+                                    <div class="alert alert-success alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-check"></i> Success!</h4>
+                                        <strong>Well done!</strong> @TempData["SucMsg"]
+                                    </div>
+                                }
+                            </div>
+                            @Html.HiddenFor(model => model.CustomerModels.Id)
+                            @Html.HiddenFor(model => model.CustomerShippingAddressModels.IsSame)
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerModels.CountryId, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.DropDownListFor(m => m.CustomerModels.CountryId, new SelectList(Model.CountryModelList, "Key", "Value"),
+                                        "-- Select Country --", new { @class = "form-control select2 cnt" })
+                                        @Html.ValidationMessageFor(m => m.CustomerModels.CountryId, "",
+                                new { @class = "text-danger errcnt" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerModels.Region, new { @class = "form-control-label" })
+                                        @Html.DropDownListFor(m => m.CustomerModels.Region,
+                                       new List<SelectListItem>
+                                          {
+                                            new SelectListItem{ Text="North", Value = "North", Selected = true  },
+                                            new SelectListItem{ Text="East", Value = "East" },
+                                            new SelectListItem{ Text="North East", Value = "North East" },
+                                            new SelectListItem{ Text="South", Value = "South" },
+                                            new SelectListItem{ Text="West", Value = "West" },
+                                            new SelectListItem{ Text="Other", Value = "Other" },
+                                          },
+                                        "-- Select Region --", new { @class = "form-control select2 region" })
+                                        @Html.ValidationMessageFor(m => m.CustomerModels.Region, "",
+                                new { @class = "text-danger errregion" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerModels.State, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.DropDownListFor(m => m.CustomerModels.State, new SelectList(Model.StateModelList, "Key", "Value"),
+                                        "-- Select State --", new { @class = "form-control select2 cnt" })
+                                        @Html.ValidationMessageFor(m => m.CustomerModels.State, "",
+                                new { @class = "text-danger errcnt" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerModels.CustomerId, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextBoxFor(m => m.CustomerModels.CustomerId,
+                                new
+                                {
+                                    @class = "form-control",
+                                    @readonly = true,
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.CustomerModels.CustomerId)
+                                })
+                                        @Html.ValidationMessageFor(m => m.CustomerModels.CustomerId, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerModels.CompanyName, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextBoxFor(m => m.CustomerModels.CompanyName,
+                                new
+                                {
+                                    @class = "form-control",
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.CustomerModels.CompanyName)
+                                })
+                                        @Html.ValidationMessageFor(m => m.CustomerModels.CompanyName, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerModels.GroupName, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.DropDownListFor(m => m.CustomerModels.GroupName, new SelectList(Model.GroupNameModelList, "Key", "Value"),
+                                        "-- Select Group --", new { @class = "form-control select2 m-b-7 grpname" })
+                                        @Html.ValidationMessageFor(m => m.CustomerModels.GroupName, "",
+                                new { @class = "text-danger errgrpname" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerModels.IndType, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.DropDownListFor(m => m.CustomerModels.IndType, new SelectList(Model.IndTypeModelList, "Key", "Value"),
+                                        "-- Select Industry Type --", new { @class = "form-control select2 m-b-7 indtype" })
+                                        @Html.ValidationMessageFor(m => m.CustomerModels.IndType, "",
+                                new { @class = "text-danger errindtype" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerModels.IndNature, new { @class = "form-control-label" })
+                                        @Html.DropDownListFor(m => m.CustomerModels.IndNature,
+                                       new List<SelectListItem>
+                                          {
+                                            new SelectListItem{ Text="SE", Value = "SE", Selected = true  },
+                                            new SelectListItem{ Text="ME", Value = "ME" },
+                                            new SelectListItem{ Text="LE", Value = "LE" }
+                                          },
+                                        "-- Select Industry Nature --", new { @class = "form-control select2 indnature" })
+                                        @Html.ValidationMessageFor(m => m.CustomerModels.IndNature, "",
+                                new { @class = "text-danger errindnature" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerModels.Turnover, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextBoxFor(m => m.CustomerModels.Turnover,
+                                new
+                                {
+                                    @class = "form-control",
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.CustomerModels.Turnover)
+                                })
+                                        @Html.ValidationMessageFor(m => m.CustomerModels.Turnover, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerModels.CINNo, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextBoxFor(m => m.CustomerModels.CINNo,
+                                new
+                                {
+                                    @class = "form-control text-uppercase",
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.CustomerModels.CINNo)
+                                })
+                                        @Html.ValidationMessageFor(m => m.CustomerModels.CINNo, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerModels.AssignUser, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.DropDownListFor(m => m.CustomerModels.AssignUser, new SelectList(Model.UserModelList, "Key", "Value"),
+                                        "--Select User--", new { @class = "form-control select2 assignuser" })
+                                        @Html.ValidationMessageFor(m => m.CustomerModels.AssignUser, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <div class="col-lg-6">
+                <!-- Default box -->
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Billing Address</h3>
+                        <div class="box-tools pull-right">
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerBillingAddressModels.Address, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextAreaFor(m => m.CustomerBillingAddressModels.Address,
+                                        new
+                                        {
+                                            @class = "form-control",
+                                            placeholder = "Enter " + @Html.DisplayNameFor(m => m.CustomerBillingAddressModels.Address)
+                                        })
+                                        @Html.ValidationMessageFor(m => m.CustomerBillingAddressModels.Address, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerBillingAddressModels.Region, new { @class = "form-control-label" })
+                                        @Html.DropDownListFor(m => m.CustomerBillingAddressModels.Region,
+                                       new List<SelectListItem>
+                                          {
+                                            new SelectListItem{ Text="North", Value = "North", Selected = true  },
+                                            new SelectListItem{ Text="East", Value = "East" },
+                                            new SelectListItem{ Text="North East", Value = "North East" },
+                                            new SelectListItem{ Text="South", Value = "South" },
+                                            new SelectListItem{ Text="West", Value = "West" },
+                                            new SelectListItem{ Text="Other", Value = "Other" },
+                                          },
+                                        "-- Select Region --", new { @class = "form-control select2 cbregion" })
+                                        @Html.ValidationMessageFor(m => m.CustomerBillingAddressModels.Region, "",
+                                new { @class = "text-danger errregion" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerBillingAddressModels.State, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.DropDownListFor(m => m.CustomerBillingAddressModels.State, new SelectList(Model.StateModelList, "Key", "Value"),
+                                        "-- Select State --", new { @class = "form-control select2 cnt" })
+                                        @Html.ValidationMessageFor(m => m.CustomerBillingAddressModels.State, "",
+                                new { @class = "text-danger errcnt" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerBillingAddressModels.District, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.DropDownListFor(m => m.CustomerBillingAddressModels.District, new SelectList(Model.DistrictModelList, "Key", "Value"),
+                                        "-- Select District --", new { @class = "form-control select2 cnt" })
+                                        @Html.ValidationMessageFor(m => m.CustomerBillingAddressModels.District, "",
+                                new { @class = "text-danger errcnt" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerBillingAddressModels.City, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextBoxFor(m => m.CustomerBillingAddressModels.City,
+                                new
+                                {
+                                    @class = "form-control text-capitalize",
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.CustomerBillingAddressModels.City)
+                                })
+                                        @Html.ValidationMessageFor(m => m.CustomerBillingAddressModels.City, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerBillingAddressModels.Pincode, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextBoxFor(m => m.CustomerBillingAddressModels.Pincode,
+                                new
+                                {
+                                    @class = "form-control",
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.CustomerBillingAddressModels.Pincode)
+                                })
+                                        @Html.ValidationMessageFor(m => m.CustomerBillingAddressModels.Pincode, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerBillingAddressModels.GSTNo, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextBoxFor(m => m.CustomerBillingAddressModels.GSTNo,
+                                new
+                                {
+                                    @class = "form-control text-uppercase",
+                                    @pattern = "^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$",
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.CustomerBillingAddressModels.GSTNo)
+                                })
+                                        @Html.ValidationMessageFor(m => m.CustomerBillingAddressModels.GSTNo, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerBillingAddressModels.PANNo, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextBoxFor(m => m.CustomerBillingAddressModels.PANNo,
+                                new
+                                {
+                                    @class = "form-control text-uppercase",
+                                    @pattern = "^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$",
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.CustomerBillingAddressModels.PANNo)
+                                })
+                                        @Html.ValidationMessageFor(m => m.CustomerBillingAddressModels.PANNo, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <div class="col-lg-6">
+                <!-- Default box -->
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Shipping Address</h3>
+                        <div class="box-tools pull-right">
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" class="minimal isshpsame">
+                                    Is Shipping Same?
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerShippingAddressModels.Address, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextAreaFor(m => m.CustomerShippingAddressModels.Address,
+                                        new
+                                        {
+                                            @class = "form-control",
+                                            placeholder = "Enter " + @Html.DisplayNameFor(m => m.CustomerShippingAddressModels.Address)
+                                        })
+                                        @Html.ValidationMessageFor(m => m.CustomerShippingAddressModels.Address, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerShippingAddressModels.Region, new { @class = "form-control-label" })
+                                        @Html.DropDownListFor(m => m.CustomerShippingAddressModels.Region,
+                                       new List<SelectListItem>
+                                          {
+                                            new SelectListItem{ Text="North", Value = "North", Selected = true  },
+                                            new SelectListItem{ Text="East", Value = "East" },
+                                            new SelectListItem{ Text="North East", Value = "North East" },
+                                            new SelectListItem{ Text="South", Value = "South" },
+                                            new SelectListItem{ Text="West", Value = "West" },
+                                            new SelectListItem{ Text="Other", Value = "Other" },
+                                          },
+                                        "-- Select Region --", new { @class = "form-control select2 cbregion" })
+                                        @Html.ValidationMessageFor(m => m.CustomerShippingAddressModels.Region, "",
+                                new { @class = "text-danger errregion" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerShippingAddressModels.State, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.DropDownListFor(m => m.CustomerShippingAddressModels.State, new SelectList(Model.StateModelList, "Key", "Value"),
+                                        "-- Select State --", new { @class = "form-control select2 cnt" })
+                                        @Html.ValidationMessageFor(m => m.CustomerShippingAddressModels.State, "",
+                                new { @class = "text-danger errcnt" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerShippingAddressModels.District, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.DropDownListFor(m => m.CustomerShippingAddressModels.District, new SelectList(Model.DistrictModelList, "Key", "Value"),
+                                        "-- Select District --", new { @class = "form-control select2 cnt" })
+                                        @Html.ValidationMessageFor(m => m.CustomerShippingAddressModels.District, "",
+                                new { @class = "text-danger errcnt" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerShippingAddressModels.City, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextBoxFor(m => m.CustomerShippingAddressModels.City,
+                                new
+                                {
+                                    @class = "form-control text-capitalize",
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.CustomerShippingAddressModels.City)
+                                })
+                                        @Html.ValidationMessageFor(m => m.CustomerShippingAddressModels.City, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerShippingAddressModels.Pincode, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextBoxFor(m => m.CustomerShippingAddressModels.Pincode,
+                                new
+                                {
+                                    @class = "form-control",
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.CustomerShippingAddressModels.Pincode)
+                                })
+                                        @Html.ValidationMessageFor(m => m.CustomerShippingAddressModels.Pincode, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <div class="col-lg-12">
+                <!-- Default box -->
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Contact Details</h3>
+                        <div class="box-tools pull-right">
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerContactDetailModels.Name, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextBoxFor(m => m.CustomerContactDetailModels.Name,
+                                new
+                                {
+                                    @class = "form-control text-capitalize",
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.CustomerContactDetailModels.Name)
+                                })
+                                        @Html.ValidationMessageFor(m => m.CustomerContactDetailModels.Name, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerContactDetailModels.Email, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextBoxFor(m => m.CustomerContactDetailModels.Email,
+                                new
+                                {
+                                    @class = "form-control",
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.CustomerContactDetailModels.Email)
+                                })
+                                        @Html.ValidationMessageFor(m => m.CustomerContactDetailModels.Email, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerContactDetailModels.MobileNo, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextBoxFor(m => m.CustomerContactDetailModels.MobileNo,
+                                new
+                                {
+                                    @class = "form-control",
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.CustomerContactDetailModels.MobileNo)
+                                })
+                                        @Html.ValidationMessageFor(m => m.CustomerContactDetailModels.MobileNo, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerContactDetailModels.Department, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextBoxFor(m => m.CustomerContactDetailModels.Department,
+                                new
+                                {
+                                    @class = "form-control",
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.CustomerContactDetailModels.Department)
+                                })
+                                        @Html.ValidationMessageFor(m => m.CustomerContactDetailModels.Department, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerContactDetailModels.Designation, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextBoxFor(m => m.CustomerContactDetailModels.Designation,
+                                new
+                                {
+                                    @class = "form-control",
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.CustomerContactDetailModels.Designation)
+                                })
+                                        @Html.ValidationMessageFor(m => m.CustomerContactDetailModels.Designation, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <div class="col-md-12">
+                            <div class="box-tools pull-left">
+                                <button type="submit" name="@actBtn.ToLower()" class="btn bg-aqua" title="@actBtn"
+                                        value="@actBtn">
+                                    @actBtn.ToUpper()
+                                </button>
+                            </div>
+                            <div class="box-tools pull-right">
+                                <button type="submit" name="reset" class="btn btn-clear cancel" title="Reset"
+                                        value="reset" formnovalidate="formnovalidate">
+                                    RESET
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-footer-->
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+        <!-- danger with sound -->
+        <div class="message-box animated fadeIn" data-sound="alert" id="mb-act-cnfrm">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-warning"></span> Confirm <strong>Box</strong> ?</div>
+                    <div class="mb-content">
+                        <p>Are you sure you want to delete?</p>
+                        <p>Press No if you want to Cancel. Press Yes to Delete the record.</p>
+                    </div>
+                    <div class="mb-footer">
+                        <div class="pull-right">
+                            <a id="confirmhref" href="#" class="btn btn-confirm-yes btn-lg">Yes</a>
+                            <button class="btn btn-confirm-no btn-lg mb-control-close">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end danger with sound -->
+        <!-- /.row (main row) -->
+    }
+</section>
+<!-- /.content -->

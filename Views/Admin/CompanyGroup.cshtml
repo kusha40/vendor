@@ -1,9 +1,9 @@
 ﻿@using Vendor_Indusuno.Extensions
-@model Vendor_Indusuno.ViewModels.CountryViewModel
+@model Vendor_Indusuno.ViewModels.CompanyGroupViewModel
 @{
-	ViewBag.Title = "Country";
+	ViewBag.Title = "Industry Type";
 	TempData["Master"] = "active";
-	TempData["Country"] = "active";
+	TempData["CompanyGroup"] = "active";
 	Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -13,7 +13,7 @@
 		string actType = "Add";
 		string actBtn = "Submit";
 		string pageTitle = Html.Raw(Html.PageGTitle()) + "";
-		if (!String.IsNullOrEmpty(Model.CountryModels.Id))
+		if (!String.IsNullOrEmpty(Model.CompanyGroupModels.Id))
 		{
 			actType = "Edit";
 			actBtn = "Update";
@@ -30,7 +30,7 @@
 </section>
 <!-- Main content -->
 <section class="content">
-	@using (Html.BeginForm("Country", "Admin", FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off", enctype = "multipart/form-data" }))
+	@using (Html.BeginForm("CompanyGroup", "Admin", FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off", enctype = "multipart/form-data" }))
 	{
 		@Html.AntiForgeryToken()
 		<!-- Main row -->
@@ -87,20 +87,20 @@
 									</div>
 								}
 							</div>
-							@Html.HiddenFor(model => model.CountryModels.Id)
+							@Html.HiddenFor(model => model.CompanyGroupModels.Id)
 						</div>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 									<div class="form-group">
-										@Html.LabelFor(m => m.CountryModels.Name, new { @class = "form-control-label" }) <sup>*</sup>
-										@Html.TextBoxFor(m => m.CountryModels.Name,
+										@Html.LabelFor(m => m.CompanyGroupModels.GroupName, new { @class = "form-control-label" }) <sup>*</sup>
+										@Html.TextBoxFor(m => m.CompanyGroupModels.GroupName,
 								new
 								{
 									@class = "form-control text-uppercase",
-									placeholder = "Enter " + @Html.DisplayNameFor(m => m.CountryModels.Name)
+									placeholder = "Enter " + @Html.DisplayNameFor(m => m.CompanyGroupModels.GroupName)
 								})
-										@Html.ValidationMessageFor(m => m.CountryModels.Name, "",
+										@Html.ValidationMessageFor(m => m.CompanyGroupModels.GroupName, "",
 								new { @class = "text-danger" })
 									</div>
 								</div>
@@ -131,7 +131,7 @@
 			<div class="col-lg-12">
 				<!-- Default box -->
 				<div class="box">
-					@if (Model.CountryModelList.Count > 0)
+					@if (Model.CompanyGroupModelList.Count > 0)
 					{
 						<div class="box-header with-border">
 							<h3 class="box-title">@pageTitle List</h3>
@@ -146,25 +146,25 @@
 							</div>
 						</div>
 						<div class="box-body">
-							<table id="tblCountry" class="table table-bordered display nowrap">
+							<table id="tblCompanyGroup" class="table table-bordered display nowrap">
 								<thead>
 									<tr>
 										<th>SNo.</th>
 										<th>Action</th>
-										<th>@Html.DisplayNameFor(model => model.CountryModelList.FirstOrDefault().Name)</th>
-										@*<th>@Html.DisplayNameFor(model => model.CountryModelList.FirstOrDefault().Status)</th>*@
+										<th>@Html.DisplayNameFor(model => model.CompanyGroupModelList.FirstOrDefault().GroupName)</th>
+										@*<th>@Html.DisplayNameFor(model => model.CompanyGroupModelList.FirstOrDefault().Status)</th>*@
 									</tr>
 								</thead>
 								<tbody>
-									@foreach (var u in Model.CountryModelList)
+									@foreach (var u in Model.CompanyGroupModelList)
 									{
 									<tr>
 										<td></td>
 										<td>
-											@Html.EncodedActionLink("<i class='fa fa-pencil-square-o'></i>", "EditCountry", "Admin", new { id = u.Id }, new { @class = "btn btn-edt bg-aqua", title = "Edit" })
-											@Html.EncodedActionLink("<i class='fa fa-times'></i>", "DeleteCountry", "Admin", new { id = u.Id }, new { data_box = "#mb-act-cnfrm", @class = "btn btn-del m-l-5 mb-act-confirm bg-m-red", title = "Delete" })
+											@Html.EncodedActionLink("<i class='fa fa-pencil-square-o'></i>", "EditCompanyGroup", "Admin", new { id = u.Id }, new { @class = "btn btn-edt bg-aqua", title = "Edit" })
+											@Html.EncodedActionLink("<i class='fa fa-times'></i>", "DeleteCompanyGroup", "Admin", new { id = u.Id }, new { data_box = "#mb-act-cnfrm", @class = "btn btn-del m-l-5 mb-act-confirm bg-m-red", title = "Delete" })
 										</td>
-										<td>@Html.DisplayFor(model => u.Name) </td>
+										<td>@Html.DisplayFor(model => u.GroupName) </td>
 										@*<td>@Html.DisplayFor(model => u.Status) </td>*@
 									</tr>
 									}

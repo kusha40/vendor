@@ -333,6 +333,122 @@ $(document).ready(function () {
     }).draw();
     //Product Category table
 
+    //Industry Type table
+    var tblIndustryType = $('#tblIndustryType').DataTable({
+        "columnDefs": [
+            { 'targets': 0, 'width': '50', 'searchable': false, 'orderable': false },   //SNo.
+            { 'targets': 1, 'width': '100', 'searchable': false, 'orderable': false },  //Action
+            { 'targets': 2, 'width': '100' },   //Name
+        ],
+        //"scrollX": true,
+        "order": [2, 'asc'],
+        "paging": true
+    });
+
+    tblIndustryType.on('order.dt search.dt', function () {
+        tblIndustryType.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblIndustryType.cell(cell).invalidate('dom');
+        });
+    }).draw();
+    //Industry Type table
+
+    //CompanyGroup table
+    var tblCompanyGroup = $('#tblCompanyGroup').DataTable({
+        "columnDefs": [
+            { 'targets': 0, 'width': '50', 'searchable': false, 'orderable': false },   //SNo.
+            { 'targets': 1, 'width': '100', 'searchable': false, 'orderable': false },  //Action
+            { 'targets': 2, 'width': '100' },   //Name
+        ],
+        //"scrollX": true,
+        "order": [2, 'asc'],
+        "paging": true
+    });
+
+    tblCompanyGroup.on('order.dt search.dt', function () {
+        tblCompanyGroup.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblCompanyGroup.cell(cell).invalidate('dom');
+        });
+    }).draw();
+    //CompanyGroup table
+
+    //tblCustomers table
+    var tblCustomers = $('#tblCustomers').DataTable({
+        "columnDefs": [
+            { 'targets': 0, 'width': '50', 'searchable': false, 'orderable': false },   //SNo.
+            { 'targets': 1, 'width': '50', 'searchable': false, 'orderable': false },  //Action
+        ],
+        "scrollX": true,
+        "order": [2, 'asc'],
+        "paging": true
+    });
+
+    tblCustomers.on('order.dt search.dt', function () {
+        tblCustomers.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblCustomers.cell(cell).invalidate('dom');
+        });
+    }).draw();
+    //CompanyGroup table
+
+    //tblCustomers table
+    var tblBillingAddress = $('#tblBillingAddress').DataTable({
+        "columnDefs": [
+            { 'targets': 0, 'width': '50', 'searchable': false, 'orderable': false },   //SNo.
+            { 'targets': 1, 'width': '50', 'searchable': false, 'orderable': false },  //Action
+        ],
+        //"scrollX": true,
+        "order": [2, 'asc'],
+        "paging": true
+    });
+
+    tblBillingAddress.on('order.dt search.dt', function () {
+        tblBillingAddress.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblBillingAddress.cell(cell).invalidate('dom');
+        });
+    }).draw();
+    //CompanyGroup table
+
+    //tblCustomers table
+    var tblShippingAddress = $('#tblShippingAddress').DataTable({
+        "columnDefs": [
+            { 'targets': 0, 'width': '50', 'searchable': false, 'orderable': false },   //SNo.
+            { 'targets': 1, 'width': '50', 'searchable': false, 'orderable': false },  //Action
+        ],
+        //"scrollX": true,
+        "order": [2, 'asc'],
+        "paging": true
+    });
+
+    tblShippingAddress.on('order.dt search.dt', function () {
+        tblShippingAddress.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblShippingAddress.cell(cell).invalidate('dom');
+        });
+    }).draw();
+    //CompanyGroup table
+
+    //tblCustomers table
+    var tblContactDet = $('#tblContactDet').DataTable({
+        "columnDefs": [
+            { 'targets': 0, 'width': '50', 'searchable': false, 'orderable': false },   //SNo.
+            { 'targets': 1, 'width': '50', 'searchable': false, 'orderable': false },  //Action
+        ],
+        //"scrollX": true,
+        "order": [2, 'asc'],
+        "paging": true
+    });
+
+    tblContactDet.on('order.dt search.dt', function () {
+        tblContactDet.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblContactDet.cell(cell).invalidate('dom');
+        });
+    }).draw();
+    //CompanyGroup table
+
     //Product Brand table
     var tblProductBrand = $('#tblProductBrand').DataTable({
         "columnDefs": [
@@ -1006,6 +1122,263 @@ $(document).ready(function () {
     //        $("#PurOrdModels_POSentBy").attr("disabled", true);
     //    }
     //});
+
+    $("#CustomerModels_Region").change(function () {
+        var rgnid = $('#CustomerModels_Region').val();
+        if (rgnid !== "") {
+            $.ajax({
+                url: '/Admin/GetJsonState',
+                data: { rgnid: rgnid },
+                type: "GET",
+                dataType: "JSON",
+                success: function (res) {
+                    var relsn = res;
+                    $('#CustomerModels_State').empty();
+                    if (relsn.length === 0) {
+                        $("#CustomerModels_State").attr("required", true);
+                        $("#CustomerModels_State").attr("disabled", true);
+                    }
+                    else if (relsn.length === 1) {
+                        $("#CustomerModels_State").attr("disabled", false);
+                        var optionrel = '<option value="' + relsn[0].Id + '">' + relsn[0].Value + '</option>';
+                        $('#CustomerModels_State').append(optionrel);
+                        $('#CustomerModels_State').val(relsn[0].Id);
+                    }
+                    else if (relsn.length > 1) {
+                        $('#CustomerModels_State').val("");
+                        $("#CustomerModels_State").attr("disabled", false);
+                        var optionrel = '<option value="">-- Select State --</option>';
+                        $('#CustomerModels_State').append(optionrel);
+                        $("#CustomerModels_State").attr("required", true);
+                        for (var i = 0; i < relsn.length; i++) {
+                            var optionrel = '<option value="' + relsn[i].Id + '">' + relsn[i].Value + '</option>';
+                            $('#CustomerModels_State').append(optionrel);
+                        }
+                    }
+                },
+                error: function () {
+                    alert("Failed! Please try again.");
+                }
+            });
+        }
+        else {
+            $('#CustomerModels_State').empty();
+            $("#CustomerModels_State").attr("required", true);
+            $("#CustomerModels_State").attr("disabled", true);
+        }
+    });
+
+    $("#CustomerBillingAddressModels_Region").change(function () {
+        var rgnid = $('#CustomerBillingAddressModels_Region').val();
+        $('#CustomerShippingAddressModels_Region').val(rgnid).trigger('change.select2').change();
+        if (rgnid !== "") {
+            $.ajax({
+                url: '/Admin/GetJsonState',
+                data: { rgnid: rgnid },
+                type: "GET",
+                dataType: "JSON",
+                success: function (res) {
+                    var relsn = res;
+                    $('#CustomerBillingAddressModels_State').empty();
+                    if (relsn.length === 0) {
+                        $("#CustomerBillingAddressModels_State").attr("required", true);
+                        $("#CustomerBillingAddressModels_State").attr("disabled", true);
+                    }
+                    else if (relsn.length === 1) {
+                        $("#CustomerBillingAddressModels_State").attr("disabled", false);
+                        var optionrel = '<option value="' + relsn[0].Id + '">' + relsn[0].Value + '</option>';
+                        $('#CustomerBillingAddressModels_State').append(optionrel);
+                        $('#CustomerBillingAddressModels_State').val(relsn[0].Id);
+
+                    }
+                    else if (relsn.length > 1) {
+                        $('#CustomerBillingAddressModels_State').val("");
+                        $("#CustomerBillingAddressModels_State").attr("disabled", false);
+                        var optionrel = '<option value="">-- Select State --</option>';
+                        $('#CustomerBillingAddressModels_State').append(optionrel);
+                        $("#CustomerBillingAddressModels_State").attr("required", true);
+                        for (var i = 0; i < relsn.length; i++) {
+                            var optionrel = '<option value="' + relsn[i].Id + '">' + relsn[i].Value + '</option>';
+                            $('#CustomerBillingAddressModels_State').append(optionrel);
+                        }
+
+                    }
+                },
+                error: function () {
+                    alert("Failed! Please try again.");
+                }
+            });
+        }
+        else {
+            $('#CustomerBillingAddressModels_State').empty();
+            $("#CustomerBillingAddressModels_State").attr("required", true);
+            $("#CustomerBillingAddressModels_State").attr("disabled", true);
+        }
+    });
+
+
+    $("#CustomerBillingAddressModels_State").change(function () {
+        var stsid = $('#CustomerBillingAddressModels_State').val();
+        $('#CustomerShippingAddressModels_State').val(stsid).trigger('change.select2').change();
+        if (stsid !== "") {
+            $.ajax({
+                url: '/Admin/GetJsonDistrict',
+                data: { stsid: stsid },
+                type: "GET",
+                dataType: "JSON",
+                success: function (res) {
+                    var relsn = res;
+                    $('#CustomerBillingAddressModels_District').empty();
+                    if (relsn.length === 0) {
+                        $("#CustomerBillingAddressModels_District").attr("required", true);
+                        $("#CustomerBillingAddressModels_District").attr("disabled", true);
+                    }
+                    else if (relsn.length === 1) {
+                        $("#CustomerBillingAddressModels_District").attr("disabled", false);
+                        var optionrel = '<option value="' + relsn[0].Id + '">' + relsn[0].Value + '</option>';
+                        $('#CustomerBillingAddressModels_District').append(optionrel);
+                        $('#CustomerBillingAddressModels_District').val(relsn[0].Id);
+                    }
+                    else if (relsn.length > 1) {
+                        $('#CustomerBillingAddressModels_District').val("");
+                        $("#CustomerBillingAddressModels_District").attr("disabled", false);
+                        var optionrel = '<option value="">-- Select District --</option>';
+                        $('#CustomerBillingAddressModels_District').append(optionrel);
+                        $("#CustomerBillingAddressModels_District").attr("required", true);
+                        for (var i = 0; i < relsn.length; i++) {
+                            var optionrel = '<option value="' + relsn[i].Id + '">' + relsn[i].Value + '</option>';
+                            $('#CustomerBillingAddressModels_District').append(optionrel);
+                        }
+                    }
+                },
+                error: function () {
+                    alert("Failed! Please try again.");
+                }
+            });
+        }
+        else {
+            $('#CustomerBillingAddressModels_District').empty();
+            $("#CustomerBillingAddressModels_District").attr("required", true);
+            $("#CustomerBillingAddressModels_District").attr("disabled", true);
+        }
+    });
+
+
+    $("#CustomerShippingAddressModels_Region").change(function () {
+        var rgnid = $('#CustomerShippingAddressModels_Region').val();
+        if (rgnid !== "") {
+            $.ajax({
+                url: '/Admin/GetJsonState',
+                data: { rgnid: rgnid },
+                type: "GET",
+                dataType: "JSON",
+                success: function (res) {
+                    var relsn = res;
+                    $('#CustomerShippingAddressModels_State').empty();
+                    if (relsn.length === 0) {
+                        $("#CustomerShippingAddressModels_State").attr("required", true);
+                        $("#CustomerShippingAddressModels_State").attr("disabled", true);
+                    }
+                    else if (relsn.length === 1) {
+                        $("#CustomerShippingAddressModels_State").attr("disabled", false);
+                        var optionrel = '<option value="' + relsn[0].Id + '">' + relsn[0].Value + '</option>';
+                        $('#CustomerShippingAddressModels_State').append(optionrel);
+                        $('#CustomerShippingAddressModels_State').val(relsn[0].Id);
+                    }
+                    else if (relsn.length > 1) {
+                        $('#CustomerShippingAddressModels_State').val("");
+                        $("#CustomerShippingAddressModels_State").attr("disabled", false);
+                        var optionrel = '<option value="">-- Select State --</option>';
+                        $('#CustomerShippingAddressModels_State').append(optionrel);
+                        $("#CustomerShippingAddressModels_State").attr("required", true);
+                        for (var i = 0; i < relsn.length; i++) {
+                            var optionrel = '<option value="' + relsn[i].Id + '">' + relsn[i].Value + '</option>';
+                            $('#CustomerShippingAddressModels_State').append(optionrel);
+                        }
+                    }
+                },
+                error: function () {
+                    alert("Failed! Please try again.");
+                }
+            });
+        }
+        else {
+            $('#CustomerShippingAddressModels_State').empty();
+            $("#CustomerShippingAddressModels_State").attr("required", true);
+            $("#CustomerShippingAddressModels_State").attr("disabled", true);
+        }
+    });
+
+    $("#CustomerShippingAddressModels_State").change(function () {
+        var stsid = $('#CustomerShippingAddressModels_State').val();
+        if (stsid !== "") {
+            $.ajax({
+                url: '/Admin/GetJsonDistrict',
+                data: { stsid: stsid },
+                type: "GET",
+                dataType: "JSON",
+                success: function (res) {
+                    var relsn = res;
+                    $('#CustomerShippingAddressModels_District').empty();
+                    if (relsn.length === 0) {
+                        $("#CustomerShippingAddressModels_District").attr("required", true);
+                        $("#CustomerShippingAddressModels_District").attr("disabled", true);
+                    }
+                    else if (relsn.length === 1) {
+                        $("#CustomerShippingAddressModels_District").attr("disabled", false);
+                        var optionrel = '<option value="' + relsn[0].Id + '">' + relsn[0].Value + '</option>';
+                        $('#CustomerShippingAddressModels_District').append(optionrel);
+                        $('#CustomerShippingAddressModels_District').val(relsn[0].Id);
+                    }
+                    else if (relsn.length > 1) {
+                        $('#CustomerShippingAddressModels_District').val("");
+                        $("#CustomerShippingAddressModels_District").attr("disabled", false);
+                        var optionrel = '<option value="">-- Select District --</option>';
+                        $('#CustomerShippingAddressModels_District').append(optionrel);
+                        $("#CustomerShippingAddressModels_District").attr("required", true);
+                        for (var i = 0; i < relsn.length; i++) {
+                            var optionrel = '<option value="' + relsn[i].Id + '">' + relsn[i].Value + '</option>';
+                            $('#CustomerShippingAddressModels_District').append(optionrel);
+                        }
+                    }
+                },
+                error: function () {
+                    alert("Failed! Please try again.");
+                }
+            });
+        }
+        else {
+            $('#CustomerShippingAddressModels_District').empty();
+            $("#CustomerShippingAddressModels_District").attr("required", true);
+            $("#CustomerShippingAddressModels_District").attr("disabled", true);
+        }
+    });
+
+    $(".isshpsame").click(function () {
+        if ($(this).is(":checked")) {
+            $("#CustomerShippingAddressModels_IsSame").val(true);
+            $("#CustomerShippingAddressModels_Address").val($("#CustomerBillingAddressModels_Address").val());
+            //$('#CustomerShippingAddressModels_Address').prop('readonly', true);
+            //$('#CustomerShippingAddressModels_Region').prop('disabled', 'disabled');
+            //$('#CustomerShippingAddressModels_State').prop('disabled', 'disabled');
+            $("#CustomerShippingAddressModels_District").val($("#CustomerBillingAddressModels_District").val()).trigger('change.select2');
+            //$('#CustomerShippingAddressModels_District').prop('disabled', 'disabled');
+            $("#CustomerShippingAddressModels_City").val($("#CustomerBillingAddressModels_City").val());
+            //$('#CustomerShippingAddressModels_City').prop('readonly', true);
+            $("#CustomerShippingAddressModels_Pincode").val($("#CustomerBillingAddressModels_Pincode").val());
+            //$('#CustomerShippingAddressModels_Pincode').prop('readonly', true);
+
+            
+        } else {
+            $("#CustomerShippingAddressModels_IsSame").val(false);
+            //$('#CustomerShippingAddressModels_Address').prop('readonly', false);
+            //$('#CustomerShippingAddressModels_Region').prop('disabled', false);
+            //$('#CustomerShippingAddressModels_State').prop('disabled', false);
+            //$('#CustomerShippingAddressModels_District').prop('disabled', false);
+            //$('#CustomerShippingAddressModels_City').prop('readonly', false);
+            //$('#CustomerShippingAddressModels_Pincode').prop('readonly', false);
+        }
+    });
 
     $("#PurOrdModels_CustomerId").change(function () {
         var cstid = $('#PurOrdModels_CustomerId').val();

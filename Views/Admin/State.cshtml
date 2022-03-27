@@ -10,14 +10,19 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
 	@{
-		string actType = "Add";
-		string actBtn = "Submit";
-		string pageTitle = Html.Raw(Html.PageGTitle()) + "";
-		if (!String.IsNullOrEmpty(Model.StateModels.Id))
-		{
-			actType = "Edit";
-			actBtn = "Update";
-		}
+        string actType = "Add";
+        string actBtn = "Submit";
+        string pageTitle = Html.Raw(Html.PageGTitle()) + "";
+        if (!String.IsNullOrEmpty(Model.StateModels.Id))
+        {
+            actType = "Edit";
+            actBtn = "Update";
+        }
+        string q = "";
+        if (TempData.ContainsKey("q"))
+        {
+            q = TempData["q"].ToString();
+        }
 	}
 	<h1>
 		@pageTitle
@@ -30,7 +35,7 @@
 </section>
 <!-- Main content -->
 <section class="content">
-	@using (Html.BeginForm("State", "Admin", FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off", enctype = "multipart/form-data" }))
+	@using (Html.BeginForm("State", "Admin", new { q }, FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off", enctype = "multipart/form-data" }))
 	{
 		@Html.AntiForgeryToken()
 		<!-- Main row -->
@@ -90,21 +95,48 @@
 							@Html.HiddenFor(model => model.StateModels.Id)
 						</div>
 						<div class="row">
-							<div class="col-md-12">
-								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-									<div class="form-group">
-										@Html.LabelFor(m => m.StateModels.Name, new { @class = "form-control-label" }) <sup>*</sup>
-										@Html.TextBoxFor(m => m.StateModels.Name,
-								new
-								{
-									@class = "form-control text-uppercase",
-									placeholder = "Enter " + @Html.DisplayNameFor(m => m.StateModels.Name)
-								})
-										@Html.ValidationMessageFor(m => m.StateModels.Name, "",
-								new { @class = "text-danger" })
-									</div>
-								</div>
-							</div>
+                            <div class="col-md-12">
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.StateModels.CountryId, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.DropDownListFor(m => m.StateModels.CountryId, new SelectList(Model.CountryModelList, "Key", "Value"),
+                                        "-- Select Country --", new { @class = "form-control select2 cnt" })
+                                        @Html.ValidationMessageFor(m => m.StateModels.CountryId, "",
+                                new { @class = "text-danger errcnt" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.StateModels.Region, new { @class = "form-control-label" })
+                                        @Html.DropDownListFor(m => m.StateModels.Region,
+                                       new List<SelectListItem>
+                                          {
+                                            new SelectListItem{ Text="North", Value = "North", Selected = true  },
+                                            new SelectListItem{ Text="East", Value = "East" },
+                                            new SelectListItem{ Text="North East", Value = "North East" },
+                                            new SelectListItem{ Text="South", Value = "South" },
+                                            new SelectListItem{ Text="West", Value = "West" },
+                                            new SelectListItem{ Text="Other", Value = "Other" },
+                                          },
+                                        "-- Select Region --", new { @class = "form-control select2 region" })
+                                        @Html.ValidationMessageFor(m => m.StateModels.Region, "",
+                                new { @class = "text-danger errregion" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.StateModels.Name, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextBoxFor(m => m.StateModels.Name,
+                                new
+                                {
+                                    @class = "form-control text-uppercase",
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.StateModels.Name)
+                                })
+                                        @Html.ValidationMessageFor(m => m.StateModels.Name, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
 						</div>
 					</div>
 					<!-- /.box-body -->
@@ -148,25 +180,29 @@
 						<div class="box-body">
 							<table id="tblState" class="table table-bordered display nowrap">
 								<thead>
-									<tr>
-										<th>SNo.</th>
-										<th>Action</th>
-										<th>@Html.DisplayNameFor(model => model.StateModelList.FirstOrDefault().Name)</th>
-										<th>@Html.DisplayNameFor(model => model.StateModelList.FirstOrDefault().Status)</th>
-									</tr>
+                                    <tr>
+                                        <th>SNo.</th>
+                                        <th>Action</th>
+                                        <th>@Html.DisplayNameFor(model => model.StateModelList.FirstOrDefault().CountryId)</th>
+                                        <th>@Html.DisplayNameFor(model => model.StateModelList.FirstOrDefault().Region)</th>
+                                        <th>@Html.DisplayNameFor(model => model.StateModelList.FirstOrDefault().Name)</th>
+                                        @*<th>@Html.DisplayNameFor(model => model.StateModelList.FirstOrDefault().Status)</th>*@
+                                    </tr>
 								</thead>
 								<tbody>
 									@foreach (var u in Model.StateModelList)
 									{
-									<tr>
-										<td></td>
-										<td>
-											@Html.EncodedActionLink("<i class='fa fa-pencil-square-o'></i>", "EditState", "Admin", new { id = u.Id }, new { @class = "btn btn-edt bg-aqua", title = "Edit" })
-											@Html.EncodedActionLink("<i class='fa fa-times'></i>", "DeleteState", "Admin", new { id = u.Id }, new { data_box = "#mb-act-cnfrm", @class = "btn btn-del m-l-5 mb-act-confirm bg-m-red", title = "Delete" })
-										</td>
-										<td>@Html.DisplayFor(model => u.Name) </td>
-										<td>@Html.DisplayFor(model => u.Status) </td>
-									</tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            @Html.EncodedActionLink("<i class='fa fa-pencil-square-o'></i>", "EditState", "Admin", new { id = u.Id }, new { @class = "btn btn-edt bg-aqua", title = "Edit" })
+                                            @Html.EncodedActionLink("<i class='fa fa-times'></i>", "DeleteState", "Admin", new { id = u.Id }, new { data_box = "#mb-act-cnfrm", @class = "btn btn-del m-l-5 mb-act-confirm bg-m-red", title = "Delete" })
+                                        </td>
+                                        <td>@Html.DisplayFor(model => u.CountryId) </td>
+                                        <td>@Html.DisplayFor(model => u.Region) </td>
+                                        <td>@Html.DisplayFor(model => u.Name) </td>
+                                        @*<td>@Html.DisplayFor(model => u.Status) </td>*@
+                                    </tr>
 									}
 								</tbody>
 							</table>
