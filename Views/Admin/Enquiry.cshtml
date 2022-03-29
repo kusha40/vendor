@@ -125,9 +125,9 @@
                                             @Html.DropDownListFor(m => m.EnquiryModels.EnqType,
                                            new List<SelectListItem>
                                               {
-                                                new SelectListItem{ Text="Regular", Value = "Regular", Selected = true  },
-                                                new SelectListItem{ Text="Urgent", Value = "Urgent" },
-                                                new SelectListItem{ Text="Portal", Value = "Portal" }
+                                                new SelectListItem{ Text="REGULAR", Value = "REGULAR", Selected = true  },
+                                                new SelectListItem{ Text="URGENT", Value = "URGENT" },
+                                                new SelectListItem{ Text="PORTAL", Value = "PORTAL" }
                                               },
                                             "--Select Enq Type--", new { @class = "form-control select2 enqtype" })
                                             @Html.ValidationMessageFor(m => m.EnquiryModels.EnqType, "",
@@ -140,8 +140,8 @@
                                             @Html.DropDownListFor(m => m.EnquiryModels.Type,
                                            new List<SelectListItem>
                                               {
-                                                new SelectListItem{ Text="Standard", Value = "Standard", Selected = true  },
-                                                new SelectListItem{ Text="Non Standard", Value = "Non Standard" },
+                                                new SelectListItem{ Text="STANDARD", Value = "STANDARD", Selected = true  },
+                                                new SelectListItem{ Text="NON STANDARD", Value = "NON STANDARD" },
                                               },
                                             "--Select Enq Type--", new { @class = "form-control select2 type" })
                                             @Html.ValidationMessageFor(m => m.EnquiryModels.Type, "",
