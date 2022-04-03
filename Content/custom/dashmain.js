@@ -398,7 +398,7 @@ $(document).ready(function () {
             { 'targets': 0, 'width': '50', 'searchable': false, 'orderable': false },   //SNo.
             { 'targets': 1, 'width': '50', 'searchable': false, 'orderable': false },  //Action
         ],
-        //"scrollX": true,
+        "scrollX": true,
         "order": [2, 'asc'],
         "paging": true
     });
@@ -417,7 +417,7 @@ $(document).ready(function () {
             { 'targets': 0, 'width': '50', 'searchable': false, 'orderable': false },   //SNo.
             { 'targets': 1, 'width': '50', 'searchable': false, 'orderable': false },  //Action
         ],
-        //"scrollX": true,
+        "scrollX": true,
         "order": [2, 'asc'],
         "paging": true
     });
@@ -1217,51 +1217,51 @@ $(document).ready(function () {
     });
 
 
-    $("#CustomerBillingAddressModels_State").change(function () {
-        var stsid = $('#CustomerBillingAddressModels_State').val();
-        $('#CustomerShippingAddressModels_State').val(stsid).trigger('change.select2').change();
-        if (stsid !== "") {
-            $.ajax({
-                url: '/Admin/GetJsonDistrict',
-                data: { stsid: stsid },
-                type: "GET",
-                dataType: "JSON",
-                success: function (res) {
-                    var relsn = res;
-                    $('#CustomerBillingAddressModels_District').empty();
-                    if (relsn.length === 0) {
-                        $("#CustomerBillingAddressModels_District").attr("required", true);
-                        $("#CustomerBillingAddressModels_District").attr("disabled", true);
-                    }
-                    else if (relsn.length === 1) {
-                        $("#CustomerBillingAddressModels_District").attr("disabled", false);
-                        var optionrel = '<option value="' + relsn[0].Id + '">' + relsn[0].Value + '</option>';
-                        $('#CustomerBillingAddressModels_District').append(optionrel);
-                        $('#CustomerBillingAddressModels_District').val(relsn[0].Id);
-                    }
-                    else if (relsn.length > 1) {
-                        $('#CustomerBillingAddressModels_District').val("");
-                        $("#CustomerBillingAddressModels_District").attr("disabled", false);
-                        var optionrel = '<option value="">-- Select District --</option>';
-                        $('#CustomerBillingAddressModels_District').append(optionrel);
-                        $("#CustomerBillingAddressModels_District").attr("required", true);
-                        for (var i = 0; i < relsn.length; i++) {
-                            var optionrel = '<option value="' + relsn[i].Id + '">' + relsn[i].Value + '</option>';
-                            $('#CustomerBillingAddressModels_District').append(optionrel);
-                        }
-                    }
-                },
-                error: function () {
-                    alert("Failed! Please try again.");
-                }
-            });
-        }
-        else {
-            $('#CustomerBillingAddressModels_District').empty();
-            $("#CustomerBillingAddressModels_District").attr("required", true);
-            $("#CustomerBillingAddressModels_District").attr("disabled", true);
-        }
-    });
+    //$("#CustomerBillingAddressModels_State").change(function () {
+    //    var stsid = $('#CustomerBillingAddressModels_State').val();
+    //    $('#CustomerShippingAddressModels_State').val(stsid).trigger('change.select2').change();
+    //    if (stsid !== "") {
+    //        $.ajax({
+    //            url: '/Admin/GetJsonDistrict',
+    //            data: { stsid: stsid },
+    //            type: "GET",
+    //            dataType: "JSON",
+    //            success: function (res) {
+    //                var relsn = res;
+    //                $('#CustomerBillingAddressModels_District').empty();
+    //                if (relsn.length === 0) {
+    //                    $("#CustomerBillingAddressModels_District").attr("required", true);
+    //                    $("#CustomerBillingAddressModels_District").attr("disabled", true);
+    //                }
+    //                else if (relsn.length === 1) {
+    //                    $("#CustomerBillingAddressModels_District").attr("disabled", false);
+    //                    var optionrel = '<option value="' + relsn[0].Id + '">' + relsn[0].Value + '</option>';
+    //                    $('#CustomerBillingAddressModels_District').append(optionrel);
+    //                    $('#CustomerBillingAddressModels_District').val(relsn[0].Id);
+    //                }
+    //                else if (relsn.length > 1) {
+    //                    $('#CustomerBillingAddressModels_District').val("");
+    //                    $("#CustomerBillingAddressModels_District").attr("disabled", false);
+    //                    var optionrel = '<option value="">-- Select District --</option>';
+    //                    $('#CustomerBillingAddressModels_District').append(optionrel);
+    //                    $("#CustomerBillingAddressModels_District").attr("required", true);
+    //                    for (var i = 0; i < relsn.length; i++) {
+    //                        var optionrel = '<option value="' + relsn[i].Id + '">' + relsn[i].Value + '</option>';
+    //                        $('#CustomerBillingAddressModels_District').append(optionrel);
+    //                    }
+    //                }
+    //            },
+    //            error: function () {
+    //                alert("Failed! Please try again.");
+    //            }
+    //        });
+    //    }
+    //    else {
+    //        $('#CustomerBillingAddressModels_District').empty();
+    //        $("#CustomerBillingAddressModels_District").attr("required", true);
+    //        $("#CustomerBillingAddressModels_District").attr("disabled", true);
+    //    }
+    //});
 
 
     $("#CustomerShippingAddressModels_Region").change(function () {
@@ -1309,50 +1309,50 @@ $(document).ready(function () {
         }
     });
 
-    $("#CustomerShippingAddressModels_State").change(function () {
-        var stsid = $('#CustomerShippingAddressModels_State').val();
-        if (stsid !== "") {
-            $.ajax({
-                url: '/Admin/GetJsonDistrict',
-                data: { stsid: stsid },
-                type: "GET",
-                dataType: "JSON",
-                success: function (res) {
-                    var relsn = res;
-                    $('#CustomerShippingAddressModels_District').empty();
-                    if (relsn.length === 0) {
-                        $("#CustomerShippingAddressModels_District").attr("required", true);
-                        $("#CustomerShippingAddressModels_District").attr("disabled", true);
-                    }
-                    else if (relsn.length === 1) {
-                        $("#CustomerShippingAddressModels_District").attr("disabled", false);
-                        var optionrel = '<option value="' + relsn[0].Id + '">' + relsn[0].Value + '</option>';
-                        $('#CustomerShippingAddressModels_District').append(optionrel);
-                        $('#CustomerShippingAddressModels_District').val(relsn[0].Id);
-                    }
-                    else if (relsn.length > 1) {
-                        $('#CustomerShippingAddressModels_District').val("");
-                        $("#CustomerShippingAddressModels_District").attr("disabled", false);
-                        var optionrel = '<option value="">-- Select District --</option>';
-                        $('#CustomerShippingAddressModels_District').append(optionrel);
-                        $("#CustomerShippingAddressModels_District").attr("required", true);
-                        for (var i = 0; i < relsn.length; i++) {
-                            var optionrel = '<option value="' + relsn[i].Id + '">' + relsn[i].Value + '</option>';
-                            $('#CustomerShippingAddressModels_District').append(optionrel);
-                        }
-                    }
-                },
-                error: function () {
-                    alert("Failed! Please try again.");
-                }
-            });
-        }
-        else {
-            $('#CustomerShippingAddressModels_District').empty();
-            $("#CustomerShippingAddressModels_District").attr("required", true);
-            $("#CustomerShippingAddressModels_District").attr("disabled", true);
-        }
-    });
+    //$("#CustomerShippingAddressModels_State").change(function () {
+    //    var stsid = $('#CustomerShippingAddressModels_State').val();
+    //    if (stsid !== "") {
+    //        $.ajax({
+    //            url: '/Admin/GetJsonDistrict',
+    //            data: { stsid: stsid },
+    //            type: "GET",
+    //            dataType: "JSON",
+    //            success: function (res) {
+    //                var relsn = res;
+    //                $('#CustomerShippingAddressModels_District').empty();
+    //                if (relsn.length === 0) {
+    //                    $("#CustomerShippingAddressModels_District").attr("required", true);
+    //                    $("#CustomerShippingAddressModels_District").attr("disabled", true);
+    //                }
+    //                else if (relsn.length === 1) {
+    //                    $("#CustomerShippingAddressModels_District").attr("disabled", false);
+    //                    var optionrel = '<option value="' + relsn[0].Id + '">' + relsn[0].Value + '</option>';
+    //                    $('#CustomerShippingAddressModels_District').append(optionrel);
+    //                    $('#CustomerShippingAddressModels_District').val(relsn[0].Id);
+    //                }
+    //                else if (relsn.length > 1) {
+    //                    $('#CustomerShippingAddressModels_District').val("");
+    //                    $("#CustomerShippingAddressModels_District").attr("disabled", false);
+    //                    var optionrel = '<option value="">-- Select District --</option>';
+    //                    $('#CustomerShippingAddressModels_District').append(optionrel);
+    //                    $("#CustomerShippingAddressModels_District").attr("required", true);
+    //                    for (var i = 0; i < relsn.length; i++) {
+    //                        var optionrel = '<option value="' + relsn[i].Id + '">' + relsn[i].Value + '</option>';
+    //                        $('#CustomerShippingAddressModels_District').append(optionrel);
+    //                    }
+    //                }
+    //            },
+    //            error: function () {
+    //                alert("Failed! Please try again.");
+    //            }
+    //        });
+    //    }
+    //    else {
+    //        $('#CustomerShippingAddressModels_District').empty();
+    //        $("#CustomerShippingAddressModels_District").attr("required", true);
+    //        $("#CustomerShippingAddressModels_District").attr("disabled", true);
+    //    }
+    //});
 
     $(".isshpsame").click(function () {
         if ($(this).is(":checked")) {
@@ -1361,7 +1361,7 @@ $(document).ready(function () {
             //$('#CustomerShippingAddressModels_Address').prop('readonly', true);
             //$('#CustomerShippingAddressModels_Region').prop('disabled', 'disabled');
             //$('#CustomerShippingAddressModels_State').prop('disabled', 'disabled');
-            $("#CustomerShippingAddressModels_District").val($("#CustomerBillingAddressModels_District").val()).trigger('change.select2');
+            $("#CustomerShippingAddressModels_District").val($("#CustomerBillingAddressModels_District").val());
             //$('#CustomerShippingAddressModels_District').prop('disabled', 'disabled');
             $("#CustomerShippingAddressModels_City").val($("#CustomerBillingAddressModels_City").val());
             //$('#CustomerShippingAddressModels_City').prop('readonly', true);

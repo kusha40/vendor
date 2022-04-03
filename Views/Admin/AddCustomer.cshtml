@@ -286,13 +286,26 @@
                                 new { @class = "text-danger errcnt" })
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                @*<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <div class="form-group">
                                         @Html.LabelFor(m => m.CustomerBillingAddressModels.District, new { @class = "form-control-label" }) <sup>*</sup>
                                         @Html.DropDownListFor(m => m.CustomerBillingAddressModels.District, new SelectList(Model.DistrictModelList, "Key", "Value"),
                                         "-- Select District --", new { @class = "form-control select2 cnt" })
                                         @Html.ValidationMessageFor(m => m.CustomerBillingAddressModels.District, "",
                                 new { @class = "text-danger errcnt" })
+                                    </div>
+                                </div>*@
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.CustomerBillingAddressModels.District, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextBoxFor(m => m.CustomerBillingAddressModels.District,
+                                new
+                                {
+                                    @class = "form-control text-capitalize",
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.CustomerBillingAddressModels.District)
+                                })
+                                        @Html.ValidationMessageFor(m => m.CustomerBillingAddressModels.District, "",
+                                new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -416,10 +429,14 @@
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <div class="form-group">
                                         @Html.LabelFor(m => m.CustomerShippingAddressModels.District, new { @class = "form-control-label" }) <sup>*</sup>
-                                        @Html.DropDownListFor(m => m.CustomerShippingAddressModels.District, new SelectList(Model.DistrictModelList, "Key", "Value"),
-                                        "-- Select District --", new { @class = "form-control select2 cnt" })
+                                        @Html.TextBoxFor(m => m.CustomerShippingAddressModels.District,
+                                new
+                                {
+                                    @class = "form-control text-capitalize",
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.CustomerShippingAddressModels.District)
+                                })
                                         @Html.ValidationMessageFor(m => m.CustomerShippingAddressModels.District, "",
-                                new { @class = "text-danger errcnt" })
+                                new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
