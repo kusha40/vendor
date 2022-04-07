@@ -5531,9 +5531,61 @@ $('.enqregret').on('click', function (e) {
             });
         } else {
             alert("Please enter remarks");
+            $(".enqregret").attr("disabled", false);
+            $(".enqregret").show();
         }
     }
     else {
         alert("Please select atleast one enq.");
+        $(".enqregret").attr("disabled", false);
+        $(".enqregret").show();
+    }
+});
+
+$('.enqhold').on('click', function (e) {
+    $(this).find(':submit').attr('disabled', 'disabled');
+    $(".enqhold").attr("disabled", true);
+    $(".enqhold").hide();
+    e.preventDefault();
+    var rows_selected = $("#tblsourced tbody tr.selected");
+    var list = new Array();
+    // Iterate over all selected checkboxes
+    $.each(rows_selected, function (index, row) {
+        // Create a hidden element
+        list.push(row.cells[5].innerText);
+    });
+    var regrmk = $(".regrmk").val();
+    if (list.length > 0) {
+        if (regrmk != "") {
+            var enqNos = JSON.stringify(list);
+            $.ajax({
+                url: "/Admin/EnquiryHoldList",
+                dataType: "json",
+                data: "{'enqNos': '" + enqNos + "','regrmk': '" + regrmk + "'}",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (result) {
+                    if (result.error === "") {
+                        location.reload();
+                    }
+                    else {
+                        alert(result.error);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert(err.Message);
+                }
+            });
+        } else {
+            alert("Please enter remarks");
+            $(".enqhold").attr("disabled", false);
+            $(".enqhold").show();
+        }
+    }
+    else {
+        alert("Please select atleast one enq.");
+        $(".enqhold").attr("disabled", false);
+        $(".enqhold").show();
     }
 });

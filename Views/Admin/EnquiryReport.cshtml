@@ -115,6 +115,8 @@
                                       {
                                         new SelectListItem{ Text="PENDING", Value = "PENDING" },
                                         new SelectListItem{ Text="QUOTED", Value = "QUOTED", Selected = true },
+                                        new SelectListItem{ Text="REGRET", Value = "REGRET" },
+                                        new SelectListItem{ Text="HOLD", Value = "HOLD" },
                                       },
                                     "--Select Enquiry Type--", new { @class = "form-control select2" })
                                     @Html.ValidationMessageFor(m => m.EnquiryType, "", new { @class = "text-danger errpotype" })

@@ -1,9 +1,9 @@
 ﻿@using Vendor_Indusuno.Extensions
-@model Vendor_Indusuno.ViewModels.EnquiriesViewModel
+@model Vendor_Indusuno.ViewModels.EnquiryHoldViewModel
 @{
-    ViewBag.Title = "Enquiries";
-    TempData["Enquiry"] = "active";
-    TempData["Enquiries"] = "active";
+    ViewBag.Title = "Sourced";
+    TempData["Reposts"] = "active";
+    TempData["EnquiryHold"] = "active";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -24,17 +24,16 @@
 </section>
 <!-- Main content -->
 <section class="content">
-    @using (Html.BeginForm("Enquiries", "Admin", FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off", enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("EnquiryHold", "Admin", FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off", enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         <!-- Main row -->
         <div class="row">
+            <!-- /.box -->
             <div class="col-lg-12">
                 <!-- Default box -->
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title f-left">@Html.ActionLink("New Enquiry", "Enquiry", "Admin", null, new { @target = "_blank", @class = "btn btn-edt bg-aqua", title = "New Enquiry" })</h3>
-                        <h3 class="box-title f-left">@Html.ActionLink("Import Enquiry", "ImportEnquiry", "Admin", null, new { @target = "_blank", @class = "btn btn-edt bg-green", title = "Import Enquiry" })</h3>
                     </div>
                     <!-- /.box-body -->
                     <div class="box-body">
@@ -79,29 +78,25 @@
                                 </button>
                             </div>
                         </div>
-
-                        <table id="tblEnquiry" class="table table-bordered display">
+                        <table id="tblenqhold" class="table table-bordered display">
                             <thead>
                                 <tr>
                                     <th>SNo</th>
-                                    <th>Action</th>
+                                    <th>SOURCE</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnquiryDate)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().CustomerName)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqId)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqPId)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Product)</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Brand)</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().ModelNo)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Quantity)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Unit)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Price)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().TotalPrice)</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnquiryDate)</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EndDate)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Status)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqCreatedBy)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqAssignTo)</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().CurrentStage)</th>
-                                    @*@if (Model.UserProfileModels.EmpType == "SupAdmin")
-                                        {
-                                            <th>Cancel</th>
-                                        }*@
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqAssignBy)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().HoldRemark)</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -109,43 +104,25 @@
                                 {
                                     <tr>
                                         <td></td>
-                                        <td>
-                                            @*@if (item.Status == "I" || item.Status == "A" || item.Status == "S")
-                                                {*@
-                                            @Html.EncodedActionLink("<i class='fa fa-pencil-square-o'></i>", "EditEnquiry", "Admin", new { id = item.Id }, new { @class = "btn btn-edt bg-aqua btn-sm", title = "Edit", @target = "_blank" })
-                                            @*}*@
-                                            @if (item.Status == "I" || item.Status == "A")
-                                            {
-                                                @Html.EncodedActionLink("<i class='fa fa-times'></i>", "DeleteEnquiry", "Admin", new { id = item.Id }, new
-                                                {
-                                                    @class = "btn btn-del m-l-5 bg-m-red btn-sm",
-                                                    title = "Delete"
-                                           })
-                                            }
-
-                                        </td>
+                                        <td>@Html.EncodedActionLink("SOURCED", "HoldSourced", "Admin", new { id = item.EnqPId }, new { @class = "btn btn-del m-l-5 bg-m-red", title = "SOURCED" })</td>
+                                        <td>@Html.DisplayFor(modelItem => item.EnquiryDate)</td>
                                         <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
                                         <td>@Html.DisplayFor(modelItem => item.EnqId)</td>
                                         <td>@Html.DisplayFor(modelItem => item.EnqPId)</td>
                                         <td title="@item.SpcRemark">
                                             @Html.DisplayFor(modelItem => item.Product)<br>
+                                            Brand : @item.Brand<br>
+                                            Model : @item.ModelNo
                                         </td>
-                                        <td>@Html.DisplayFor(modelItem => item.Brand)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.ModelNo)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Unit)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Price)</td>
                                         <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.EnquiryDate)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.EnqCreatedBy)</td>
                                         <td>@Html.DisplayFor(modelItem => item.EnqAssignTo)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.CurrentStage)</td>
-                                        @*@if (Model.UserProfileModels.EmpType == "SupAdmin" && item.Status!="MR")
-                                            {
-                                                <td>
-                                                    @Html.EncodedActionLink("<i class='fa fa-times'></i>", "POCancel", "Admin",
-                                                        new { id = item.POPId }, new { @class = "btn btn-edt bg-red btn-sm mb-act-confirm", @data_box = "#mb-act-cnfrm", title = "PO Not Approved" })
-                                                </td>
-                                            }*@
+                                        <td>@Html.DisplayFor(modelItem => item.EnqAssignBy)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.HoldRemark)</td>
                                     </tr>
                                 }
                             </tbody>
