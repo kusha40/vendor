@@ -1078,6 +1078,24 @@ $(document).ready(function () {
     }).draw();
     //Registered Vendor Index Info Table
 
+    //VendorSourced Table
+    var tblvensourced = $('#tblvensourced').DataTable({
+        "columnDefs": [
+            { 'targets': 0, 'searchable': false, 'orderable': false },   //SNo.
+        ],
+        "paging": false,
+        //"searching": false,
+        "info": false
+    });
+
+    tblvensourced.on('order.dt search.dt', function () {
+        tblvensourced.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblvensourced.cell(cell).invalidate('dom');
+        });
+    }).draw();
+    //Vendor Info Table
+
     //$("#PurOrdModels_CustomerId").change(function () {
     //    var cstid = $('#PurOrdModels_CustomerId').val();
     //    if (cstid !== "") {
@@ -1368,7 +1386,7 @@ $(document).ready(function () {
             $("#CustomerShippingAddressModels_Pincode").val($("#CustomerBillingAddressModels_Pincode").val());
             //$('#CustomerShippingAddressModels_Pincode').prop('readonly', true);
 
-            
+
         } else {
             $("#CustomerShippingAddressModels_IsSame").val(false);
             //$('#CustomerShippingAddressModels_Address').prop('readonly', false);
@@ -2363,6 +2381,56 @@ $(document).ready(function () {
         });
     }).draw();
 
+    var tblvensrc = $('#tblvensrc').DataTable({
+        "columnDefs": [
+            {
+                'targets': 0, 'checkboxes':
+                {
+                    'selectRow': true
+                }
+            },                      //Select
+            { 'targets': 1, 'width': '20', 'orderable': false },       //SNo
+            { 'targets': 2, 'width': '30', 'orderable': false },       //OrderDate
+            { 'targets': 3, 'width': '80', 'orderable': false },       //CustomerName
+            { 'targets': 4, 'width': '30', 'orderable': false },       //POId
+            { 'targets': 5, 'width': '30', 'orderable': false },       //POPId
+            { 'targets': 6, 'width': '200', 'orderable': false },      //Product
+            { 'targets': 7, 'width': '20', 'orderable': false },       //Quantity
+            { 'targets': 8, 'width': '20', 'orderable': false },       //Unit
+            { 'targets': 9, 'width': '20', 'orderable': false },      //Price
+            { 'targets': 10, 'width': '30', 'orderable': false },      //TotalPrice
+            { 'targets': 11, 'width': '20', 'orderable': false },      //Status
+            { 'targets': 12, 'width': '40', 'orderable': false },      //POCreatedBy
+            { 'targets': 13, 'width': '40', 'orderable': false }       //POAssingTo
+        ],
+        select: {
+            style: 'multi',
+        },
+        "scrollX": true,
+        "paging": false,
+        //"searching": false,
+        "info": false,
+        "dom": 'Bfrtip',
+        "buttons": [
+            'pageLength',
+            {
+                extend: 'excel',
+                text: '<i class="far fa-file-excel"></i> Excel',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                footer: true
+            },
+            'colvis'
+        ]
+    });
+    tblvensrc.on('order.dt search.dt', function () {
+        tblvensrc.column(1, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblvensrc.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
     var tblsourced = $('#tblsourced').DataTable({
         "columnDefs": [
             {
@@ -2453,6 +2521,32 @@ $(document).ready(function () {
         tblenqregret.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
             cell.innerHTML = i + 1;
             tblenqregret.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
+    var tblenqhold = $('#tblenqhold').DataTable({
+        "scrollX": true,
+        "paging": false,
+        //"searching": false,
+        "info": false,
+        "dom": 'Bfrtip',
+        "buttons": [
+            'pageLength',
+            {
+                extend: 'excel',
+                text: '<i class="far fa-file-excel"></i> Excel',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                footer: true
+            },
+            'colvis'
+        ]
+    });
+    tblenqhold.on('order.dt search.dt', function () {
+        tblenqhold.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblenqhold.cell(cell).invalidate('dom');
         });
     }).draw();
 
@@ -2594,6 +2688,8 @@ $(document).ready(function () {
     }).draw();
 
     $('#addtempenqline').click(function () { AddTempEnqLine(); });
+    $(".divvensource").hide();
+    $('.vensourced').click(function () { AddTempVenSourced(); });
     $(".divsource").hide();
     $('.sourced').click(function () { AddTempSourced(); });
     $(".divquote").hide();
@@ -4509,6 +4605,172 @@ $('.enqassign').on('click', function (e) {
 //    $(".sousubmit").attr("disabled", false);
 //});
 
+function AddTempVenSourced() {
+    var rows_selected = $("#tblvensrc tbody tr.selected");
+    var list = new Array();
+    var inc = 1;
+    // Iterate over all selected checkboxes
+    $.each(rows_selected, function (index, row) {
+        // Create a hidden element
+        list.push(row.cells[5].innerText);
+        var tmpvensrc = {};
+        tmpvensrc.CustomerName = row.cells[3].innerText;
+        tmpvensrc.EnqPId = row.cells[5].innerText;
+        tmpvensrc.Product = row.cells[6].innerText;
+        tmpvensrc.Quantity = row.cells[7].innerText;
+        tmpvensrc.Price = row.cells[9].innerText;
+
+        var optionrel = '';
+        $.ajax({
+            url: '/Admin/GetVendorbyPBM',
+            data: { enqpid: tmpvensrc.EnqPId },
+            type: "GET",
+            dataType: "JSON",
+            success: function (res) {
+                var relsn = res;
+                if (relsn.length > 1) {
+                    $('.selven1').append(optionrel);
+                    $('.selven2').append(optionrel);
+                    $('.selven3').append(optionrel);
+                    for (var i = 0; i < relsn.length; i++) {
+                        optionrel = '<option value="' + relsn[i].Name + '">' + relsn[i].Name + '</option>';
+                        $('.selven1').append(optionrel);
+                        $('.selven2').append(optionrel);
+                        $('.selven3').append(optionrel);
+                    }
+                }
+            },
+            error: function () {
+                alert("Failed! Please try again.");
+            }
+        });
+
+        $('#tblvensource').find('tbody').append(
+            "<tr>" +
+            "<td class='w-10'> <span class='scstname'>" + tmpvensrc.CustomerName + "</span></td>" +
+            "<td class='w-10'> <input type='text' id='EnquiriesModelList_EnqPId_" + inc + "' name='EnquiriesModelList_EnqPId_" + inc + "' data-toggle='tooltip' title='" + tmpvensrc.EnqPId + "' value='" + tmpvensrc.EnqPId + "' disabled class='form-control spid m-b-0'  type='text' /><a class='btn btn-sm bg-aqua pedtbtn'>Edit Product</a></td>" +
+
+            "<td class='w-15 tdsprdid'>" + tmpvensrc.Product + "</td>" +
+
+            "<td class='w-6'>  <input type='text' id='EnquiriesModelList_Price_" + inc + "' name='EnquiriesModelList_Price_" + inc + "' value='" + tmpvensrc.Price + "' disabled class='form-control svenprc m-b-0 bg-gray'  type='text' /></td>" +
+            "<td class='w-6'>  <input type='text' id='EnquiriesModelList_Quantity_" + inc + "' name='EnquiriesModelList_Quantity_" + inc + "' value='" + tmpvensrc.Quantity + "' class='form-control sqty m-b-0'  type='text' /></td>" +
+            "<td class='w-10'> <input type='text' id='EnquiriesModelList_Vendor1Id_" + inc + "' name='EnquiriesModelList_Vendor1Id_" + inc + "' placeholder='Vendor1 Name' value='' class='form-control sven1id sven m-b-0'  type='text' /></br><select multiple class='form-control selven1'></select></td>" +
+            "<td class='w-10'> <input type='text' id='EnquiriesModelList_Vendor2Id_" + inc + "' name='EnquiriesModelList_Vendor2Id_" + inc + "' placeholder='Vendor2 Name' value='' class='form-control sven2id sven m-b-0'  type='text' /></br><select multiple class='form-control selven2'></select></td> " +
+            "<td class='w-10'> <input type='text' id='EnquiriesModelList_Vendor3Id_" + inc + "' name='EnquiriesModelList_Vendor3Id_" + inc + "' placeholder='Vendor3 Name' value='' class='form-control sven3id sven m-b-0'  type='text' /></br><select multiple class='form-control selven3'></select></td> " +
+            "</tr>");
+        inc++;
+    });
+
+    $(".divvensourced").hide();
+    $(".divvensource").show();
+}
+
+$(document).on('click', '.selven1', function () {
+    var curRow = $(this).closest("tr");
+    var ven = curRow.find(".selven1").val();
+    var ven1 = curRow.find(".sven1id").val();
+    var ven2 = curRow.find(".sven2id").val();
+    var ven3 = curRow.find(".sven3id").val();
+    curRow.find(".sven1id").val(ven);
+    ven1 = curRow.find(".sven1id").val();
+    if (ven1 === ven2 || ven1 === ven3) {
+        curRow.find(".sven1id").val('');
+        alert("This vendor already selected");
+    }
+    else {
+        curRow.find(".sven1id").val(ven);
+    }
+});
+
+$(document).on('click', '.selven2', function () {
+    var curRow = $(this).closest("tr");
+    var ven = curRow.find(".selven2").val();
+    var ven1 = curRow.find(".sven1id").val();
+    var ven2 = curRow.find(".sven2id").val();
+    var ven3 = curRow.find(".sven3id").val();
+    curRow.find(".sven2id").val(ven);
+    ven2 = curRow.find(".sven2id").val();
+    if (ven2 === ven1 || ven2 === ven3) {
+        curRow.find(".sven2id").val('');
+        alert("This vendor already selected");
+    }
+    else {
+        curRow.find(".sven2id").val(ven);
+    }
+});
+
+$(document).on('click', '.selven3', function () {
+    var curRow = $(this).closest("tr");
+    var ven = curRow.find(".selven3").val();
+    var ven1 = curRow.find(".sven1id").val();
+    var ven2 = curRow.find(".sven2id").val();
+    var ven3 = curRow.find(".sven3id").val();
+    curRow.find(".sven3id").val(ven);
+    ven3 = curRow.find(".sven3id").val();
+    if (ven3 === ven1 || ven3 === ven2) {
+        curRow.find(".sven3id").val('');
+        alert("This vendor already selected");
+    }
+    else {
+        curRow.find(".sven3id").val(ven);
+    }
+});
+
+$('.vensosubmit').on('click', function (e) {
+    $(this).find(':submit').attr('disabled', 'disabled');
+    $(".vensosubmit").attr("disabled", true);
+    $(".vensosubmit").hide();
+    e.preventDefault();
+    var lnArr = new Array();
+    $(".tbl tbody tr").each(function () {
+        var tds = $(this).find("td");
+        //you could use the Find method to find the texbox or the dropdownlist and get the value.
+        var spid = $(tds[1]).find('.spid').val();
+        var sqty = $(tds[4]).find('.sqty').val();
+        var sven1id = $(tds[5]).find('.sven1id').val();
+        var sven2id = $(tds[6]).find('.sven2id').val();
+        var sven3id = $(tds[7]).find('.sven3id').val();
+
+        if (spid !== "" && sven1id !== "" && sqty !== "" && sqty !== "0") {
+            var lin = {
+                EnqPId: spid,
+                Quantity: parseFloat(sqty),
+                Vendor1Id: sven1id,
+                Vendor2Id: sven2id,
+                Vendor3Id: sven3id
+            };
+            lnArr.push(lin);
+        }
+    });
+
+    if (lnArr.length > 0) {
+        var enqs = JSON.stringify(lnArr);
+
+        $.ajax({
+            url: "/Admin/UpdateVenSource",
+            dataType: "json",
+            data: "{'enqs': '" + enqs + "'}",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                if (result.error === "") {
+                    location.reload();
+                }
+                else {
+                    alert(result.error);
+                }
+            },
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                alert(err.Message);
+            }
+        });
+    }
+    else {
+        alert("Please add atleast 1 line item.");
+    }
+    $(".vensosubmit").attr("disabled", false);
+});
 
 function AddTempSourced() {
     var rows_selected = $("#tblsourced tbody tr.selected");
@@ -4586,7 +4848,7 @@ $('.updpmb').on('click', function (e) {
         contentType: "application/json; charset=utf-8",
         success: function (result) {
             if (result.error === "") {
-                var product = prod + "\nBrand :" + brandtext.text() + "\nModel :" + mdl ;
+                var product = prod + "\nBrand :" + brandtext.text() + "\nModel :" + mdl;
                 $('#tblsource tbody tr.selected').find('.tdsprdid').text(product);
                 $(".updpmb").attr("disabled", false);
                 $(".updpmb").show();

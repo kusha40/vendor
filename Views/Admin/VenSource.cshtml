@@ -1,9 +1,9 @@
 ﻿@using Vendor_Indusuno.Extensions
-@model Vendor_Indusuno.ViewModels.EnquiryHoldViewModel
+@model Vendor_Indusuno.ViewModels.VenSourceViewModel
 @{
-    ViewBag.Title = "Enquiry Hold";
-    TempData["Reposts"] = "active";
-    TempData["EnquiryHold"] = "active";
+    ViewBag.Title = "Vendor Source";
+    TempData["Enquiry"] = "active";
+    TempData["VenSource"] = "active";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -24,16 +24,44 @@
 </section>
 <!-- Main content -->
 <section class="content">
-    @using (Html.BeginForm("EnquiryHold", "Admin", FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off", enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("VenSource", "Admin", FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off", enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         <!-- Main row -->
         <div class="row">
+            <div class="col-lg-12 divvensource">
+                <!-- Default box -->
+                <div class="box">
+                    <!-- /.box-body -->
+                    <div class="box-body">
+                        <table id="tblvensource" class="tbl table table-bordered display">
+                            <thead>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().CustomerName)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqPId)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Product)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Price)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Quantity)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Vendor1Id)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Vendor2Id)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Vendor3Id)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                        <a href="javascript:void(0)" class="btn bg-aqua vensosubmit">Submit</a>
+                    </div>
+                </div>
+            </div>
             <!-- /.box -->
-            <div class="col-lg-12">
+            <div class="col-lg-12 divvensourced">
                 <!-- Default box -->
                 <div class="box">
                     <div class="box-header with-border">
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                            <a href="javascript:void(0)" class="btn bg-aqua vensourced">SOURCED</a>
+                        </div>
                     </div>
                     <!-- /.box-body -->
                     <div class="box-body">
@@ -41,33 +69,33 @@
                             <div class="form-group">
                                 @Html.LabelFor(m => m.Search, new { @class = "form-control-label" }) <sup>*</sup>
                                 @Html.TextBoxFor(m => m.Search,
-                                new
-                                {
-                                    @class = "form-control text-capitalize",
-                                    placeholder = @Html.DisplayNameFor(m => m.Search)
-                                })
+             new
+             {
+                 @class = "form-control text-capitalize",
+                 placeholder = @Html.DisplayNameFor(m => m.Search)
+             })
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <div class="form-group">
                                 @Html.LabelFor(m => m.StartDate, new { @class = "form-control-label" }) <sup>*</sup>
                                 @Html.TextBoxFor(m => m.StartDate,
-                                new
-                                {
-                                    @class = "form-control datepicker",
-                                    placeholder = @Html.DisplayNameFor(m => m.StartDate)
-                                })
+             new
+             {
+                 @class = "form-control datepicker",
+                 placeholder = @Html.DisplayNameFor(m => m.StartDate)
+             })
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <div class="form-group">
                                 @Html.LabelFor(m => m.EndDate, new { @class = "form-control-label" }) <sup>*</sup>
                                 @Html.TextBoxFor(m => m.EndDate,
-                                new
-                                {
-                                    @class = "form-control datepicker",
-                                    placeholder = @Html.DisplayNameFor(m => m.EndDate)
-                                })
+             new
+             {
+                 @class = "form-control datepicker",
+                 placeholder = @Html.DisplayNameFor(m => m.EndDate)
+             })
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -78,11 +106,11 @@
                                 </button>
                             </div>
                         </div>
-                        <table id="tblenqhold" class="table table-bordered display">
+                        <table id="tblvensrc" class="table table-bordered display">
                             <thead>
                                 <tr>
+                                    <th><input type="checkbox" id="seallasnpo" /></th>
                                     <th>SNo</th>
-                                    <th>SOURCE</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnquiryDate)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().CustomerName)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqId)</th>
@@ -96,7 +124,8 @@
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqCreatedBy)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqAssignTo)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqAssignBy)</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().HoldRemark)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Notes)</th>
+                                    <th>Edit</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -104,7 +133,7 @@
                                 {
                                     <tr>
                                         <td></td>
-                                        <td>@Html.EncodedActionLink("SOURCED", "HoldSourced", "Admin", new { id = item.EnqPId }, new { @class = "btn btn-del m-l-5 bg-m-red", title = "SOURCED" })</td>
+                                        <td></td>
                                         <td>@Html.DisplayFor(modelItem => item.EnquiryDate)</td>
                                         <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
                                         <td>@Html.DisplayFor(modelItem => item.EnqId)</td>
@@ -122,7 +151,13 @@
                                         <td>@Html.DisplayFor(modelItem => item.EnqCreatedBy)</td>
                                         <td>@Html.DisplayFor(modelItem => item.EnqAssignTo)</td>
                                         <td>@Html.DisplayFor(modelItem => item.EnqAssignBy)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.HoldRemark)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Notes)</td>
+                                        <td>
+                                            @*@if (item.Status != "G" && item.Status != "AP")
+                                                {
+                                                    @Html.EncodedActionLink("Edit", "EditEnquiry", "Admin", new { id = item.Id }, new { @class = "", title = "Edit", @target = "_blank" })
+                                                }*@
+                                        </td>
                                     </tr>
                                 }
                             </tbody>
@@ -153,6 +188,55 @@
             </div>
         </div>
         <!-- end danger with sound -->
+        <div class="row">
+            <div class="modal fade" id="updateModel">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <h4 class="modal-title">Update</h4>
+                        </div>
+                        <div class="modal-body m-t-20">
+                            @Html.HiddenFor(model => model.EnquiryModels.EnqPId)
+                            <div class="col-md-12">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Product</label>
+                                        <textarea id="product" name="product" placeholder="Enter Product name" rows="5" cols="50" class="form-control mprod"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Model No.</label>
+                                        <textarea id="modelno" name="modelno" placeholder="Enter model no." rows="5" cols="50" class="form-control mmodel"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                @*<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label>Specification</label>
+                                            <textarea id="specification" name="specification" placeholder="Enter Specification" rows="5" cols="50" class="form-control mspec"></textarea>
+                                        </div>
+                                    </div>*@
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Brand</label><br />
+                                        @Html.DropDownListFor(m => m.BrandId, new SelectList(Model.BrandModelList, "Key", "Value"),
+                                        "--Select Brand--", new { @class = "form-control select2 mbrndid" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="javascript:void(0)" class="btn btn-primary updpmb">Save changes</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     }
 </section>
 <!-- /.content -->
