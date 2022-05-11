@@ -176,10 +176,12 @@
                                 <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqPId)</th>
                                 <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Product)</th>
                                 <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Quantity)</th>
+                                <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().ListPrice)</th>
                                 <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().QuotePrice)</th>
-                                <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Discount)</th>
+                                <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().QuoteDiscount)</th>
                                 <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().TotalPrice)</th>
                                 <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().VendorPrice)</th>
+                                <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().VendorDiscount)</th>
                                 <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Margin)</th>
                                 <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().GST)</th>
                             </tr>
@@ -187,23 +189,25 @@
                         <tbody>
                             @foreach (var item in Model.EnquiriesModelList)
                             {
-                                <tr>
-                                    <td></td>
-                                    <td>@Html.DisplayFor(modelItem => item.EnqId)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.EnqPId)</td>
-                                    <td title="@item.SpcRemark">
-                                        @Html.DisplayFor(modelItem => item.Product)<br>
-                                        Brand : @item.Brand<br>
-                                        Model : @item.ModelNo
-                                    </td>
-                                    <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.QuotePrice)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Discount)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.VendorPrice)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Margin)%</td>
-                                    <td>@Html.DisplayFor(modelItem => item.GST)%</td>
-                                </tr>
+                            <tr>
+                                <td></td>
+                                <td>@Html.DisplayFor(modelItem => item.EnqId)</td>
+                                <td>@Html.DisplayFor(modelItem => item.EnqPId)</td>
+                                <td title="@item.SpcRemark">
+                                    @Html.DisplayFor(modelItem => item.Product)<br>
+                                    Brand : @item.Brand<br>
+                                    Model : @item.ModelNo
+                                </td>
+                                <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                                <td>@Html.DisplayFor(modelItem => item.ListPrice)</td>
+                                <td>@Html.DisplayFor(modelItem => item.QuotePrice)</td>
+                                <td>@Html.DisplayFor(modelItem => item.QuoteDiscount)</td>
+                                <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
+                                <td>@Html.DisplayFor(modelItem => item.VendorPrice)</td>
+                                <td>@Html.DisplayFor(modelItem => item.VendorDiscount)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Margin)%</td>
+                                <td>@Html.DisplayFor(modelItem => item.GST)%</td>
+                            </tr>
                             }
                         </tbody>
                     </table>

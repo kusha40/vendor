@@ -42,6 +42,7 @@
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Product)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Price)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Quantity)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().ListPrice)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Vendor1Price)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().QuotePrice)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().GST)</th>
@@ -119,6 +120,7 @@
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Quantity)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Unit)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Price)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().ListPrice)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().GST)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Vendor1Id)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Vendor2Id)</th>
@@ -148,10 +150,11 @@
                                     <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Unit)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.ListPrice)</td>
                                     <td>@Html.DisplayFor(modelItem => item.GST)</td>
-                                    <td>Name - <b>@Html.DisplayFor(modelItem => item.Vendor1Id)</b> <br />Price - <b>@Html.DisplayFor(modelItem => item.Vendor1Price)</b></td>
-                                    <td>Name - <b>@Html.DisplayFor(modelItem => item.Vendor2Id)</b> <br />Price - <b>@Html.DisplayFor(modelItem => item.Vendor2Price)</b></td>
-                                    <td>Name - <b>@Html.DisplayFor(modelItem => item.Vendor3Id)</b> <br />Price - <b>@Html.DisplayFor(modelItem => item.Vendor3Price)</b></td>
+                                    <td>Name - <b>@Html.DisplayFor(modelItem => item.Vendor1Id)</b> <br />Price - <b>@Html.DisplayFor(modelItem => item.Vendor1Price)</b><br />Discount - <b>@Html.DisplayFor(modelItem => item.Vendor1Discount)</b></td>
+                                    <td>Name - <b>@Html.DisplayFor(modelItem => item.Vendor2Id)</b> <br />Price - <b>@Html.DisplayFor(modelItem => item.Vendor2Price)</b><br />Discount - <b>@Html.DisplayFor(modelItem => item.Vendor2Discount)</b></td>
+                                    <td>Name - <b>@Html.DisplayFor(modelItem => item.Vendor3Id)</b> <br />Price - <b>@Html.DisplayFor(modelItem => item.Vendor3Price)</b><br />Discount - <b>@Html.DisplayFor(modelItem => item.Vendor3Discount)</b></td>
                                     <td>@Html.DisplayFor(modelItem => item.EnqCreatedBy)</td>
                                     <td>@Html.DisplayFor(modelItem => item.EnqAssignTo)</td>
                                     <td>@Html.DisplayFor(modelItem => item.EnqAssignBy)</td>

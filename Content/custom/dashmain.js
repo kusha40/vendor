@@ -4799,9 +4799,10 @@ function AddTempSourced() {
 
             "<td class='w-6'>  <input type='text' id='EnquiriesModelList_Price_" + inc + "' name='EnquiriesModelList_Price_" + inc + "' value='" + tmpsrc.Price + "' disabled class='form-control svenprc m-b-0 bg-gray'  type='text' /></td>" +
             "<td class='w-6'>  <input type='text' id='EnquiriesModelList_Quantity_" + inc + "' name='EnquiriesModelList_Quantity_" + inc + "' value='" + tmpsrc.Quantity + "' class='form-control sqty m-b-0'  type='text' /></td>" +
-            "<td class='w-10'> <input type='text' id='EnquiriesModelList_Vendor1Id_" + inc + "' name='EnquiriesModelList_Vendor1Id_" + inc + "' placeholder='Vendor1 Name' value='' class='form-control sven1id sven m-b-0'  type='text' /></br><input type='text' id='EnquiriesModelList_Vendor1Price_" + inc + "' name='EnquiriesModelList_Vendor1Price_" + inc + "' value='' placeholder='Vendor1 Price' class='form-control sven1prc onlynumdec m-b-0 float-left' /></td>" +
-            "<td class='w-10'> <input type='text' id='EnquiriesModelList_Vendor2Id_" + inc + "' name='EnquiriesModelList_Vendor2Id_" + inc + "' placeholder='Vendor2 Name' value='' class='form-control sven2id sven m-b-0'  type='text' /></br><input type='text' id='EnquiriesModelList_Vendor2Price_" + inc + "' name='EnquiriesModelList_Vendor2Price_" + inc + "' value='' placeholder='Vendor2 Price' class='form-control sven2prc onlynumdec m-b-0 float-left' /></td > " +
-            "<td class='w-10'> <input type='text' id='EnquiriesModelList_Vendor3Id_" + inc + "' name='EnquiriesModelList_Vendor3Id_" + inc + "' placeholder='Vendor3 Name' value='' class='form-control sven3id sven m-b-0'  type='text' /></br><input type='text' id='EnquiriesModelList_Vendor3Price_" + inc + "' name='EnquiriesModelList_Vendor3Price_" + inc + "' value='' placeholder='Vendor3 Price' class='form-control sven3prc onlynumdec m-b-0 float-left' /></td > " +
+            "<td class='w-6'>  <input type='text' id='EnquiriesModelList_ListPrice_" + inc + "' name='EnquiriesModelList_ListPrice_" + inc + "' value='' class='form-control slprc m-b-0'  type='text' /></td>" +
+            "<td class='w-10'> <input type='text' id='EnquiriesModelList_Vendor1Id_" + inc + "' name='EnquiriesModelList_Vendor1Id_" + inc + "' placeholder='Vendor1 Name' value='' class='form-control sven1id sven m-b-0'  type='text' /></br><input type='text' id='EnquiriesModelList_Vendor1Price_" + inc + "' name='EnquiriesModelList_Vendor1Price_" + inc + "' value='' placeholder='Price' class='form-control sven1prc onlynumdec m-b-0 float-left w-70' /><input type='text' id='EnquiriesModelList_Vendor1Discount_" + inc + "' name='EnquiriesModelList_Vendor1Discount_" + inc + "' value='' disabled placeholder='Discount' class='form-control onlynumdec v1dsc m-b-0 w-30' /></td>" +
+            "<td class='w-10'> <input type='text' id='EnquiriesModelList_Vendor2Id_" + inc + "' name='EnquiriesModelList_Vendor2Id_" + inc + "' placeholder='Vendor2 Name' value='' class='form-control sven2id sven m-b-0'  type='text' /></br><input type='text' id='EnquiriesModelList_Vendor2Price_" + inc + "' name='EnquiriesModelList_Vendor2Price_" + inc + "' value='' placeholder='Price' class='form-control sven2prc onlynumdec m-b-0 float-left w-70' /><input type='text' id='EnquiriesModelList_Vendor2Discount_" + inc + "' name='EnquiriesModelList_Vendor2Discount_" + inc + "' value='' disabled placeholder='Discount' class='form-control onlynumdec v2dsc m-b-0 w-30' /></td>" +
+            "<td class='w-10'> <input type='text' id='EnquiriesModelList_Vendor3Id_" + inc + "' name='EnquiriesModelList_Vendor3Id_" + inc + "' placeholder='Vendor3 Name' value='' class='form-control sven3id sven m-b-0'  type='text' /></br><input type='text' id='EnquiriesModelList_Vendor3Price_" + inc + "' name='EnquiriesModelList_Vendor3Price_" + inc + "' value='' placeholder='Price' class='form-control sven3prc onlynumdec m-b-0 float-left w-70' /><input type='text' id='EnquiriesModelList_Vendor3Discount_" + inc + "' name='EnquiriesModelList_Vendor3Discount_" + inc + "' value='' disabled placeholder='Discount' class='form-control onlynumdec v3dsc m-b-0 w-30' /></td>" +
             "<td class='w-6'> <select name='gst' class='form-control select2 sgst' id='gst'><option value = '0'> 0 %</option><option value='5'>5 %</option><option value='12'>12 %</option><option value='18' selected>18 %</option><option value='28'>28 %</option></select ></td>" +
             "</tr>");
         inc++;
@@ -4886,6 +4887,94 @@ $(document).on('focus', '.sven', function () {
     });
 });
 
+//Enable Discount
+$(document).on('blur', '.slprc', function () {
+    var curRow = $(this).closest("tr");
+    var slprc = curRow.find(".slprc").val();
+    if (slprc !== "" && slprc !== "0") {
+        curRow.find(".v1dsc").attr("disabled", false);
+        curRow.find(".v2dsc").attr("disabled", false);
+        curRow.find(".v3dsc").attr("disabled", false);
+        curRow.find(".v1dsc").val("");
+        curRow.find(".v2dsc").val("");
+        curRow.find(".v3dsc").val("");
+        curRow.find(".sven1prc").attr("disabled", true);
+        curRow.find(".sven2prc").attr("disabled", true);
+        curRow.find(".sven3prc").attr("disabled", true);
+        curRow.find(".sven1prc").val("");
+        curRow.find(".sven2prc").val("");
+        curRow.find(".sven3prc").val("");
+    }
+    else {
+        curRow.find(".v1dsc").attr("disabled", true);
+        curRow.find(".v2dsc").attr("disabled", true);
+        curRow.find(".v3dsc").attr("disabled", true);
+        curRow.find(".v1dsc").val("");
+        curRow.find(".v2dsc").val("");
+        curRow.find(".v3dsc").val("");
+        curRow.find(".sven1prc").attr("disabled", false);
+        curRow.find(".sven2prc").attr("disabled", false);
+        curRow.find(".sven3prc").attr("disabled", false);
+        curRow.find(".sven1prc").val("");
+        curRow.find(".sven2prc").val("");
+        curRow.find(".sven3prc").val("");
+    }
+});
+//Enable Discount
+
+//Get Vendor 1 Price
+$(document).on('blur', '.v1dsc', function () {
+    var curRow = $(this).closest("tr");
+    var slprc = curRow.find(".slprc").val();
+    var v1dsc = curRow.find(".v1dsc").val();
+
+    if (slprc !== "" && slprc !== "0" && v1dsc !== "" && v1dsc !== "0") {
+        var prc = (parseFloat(slprc) * parseFloat(v1dsc)) / 100;
+        var venprc = slprc - prc;
+        /*curRow.find("td:eq(6)").find(".sven1prc").val(venprc.toFixed(2));*/
+        curRow.find(".sven1prc").val(venprc.toFixed(2));
+    }
+    else {
+        /*curRow.find("td:eq(5)").find(".sven1prc").val("");*/
+        curRow.find(".sven1prc").val("");
+    }
+});
+//Get Vendor 1 Price
+
+//Get Vendor 2 Price
+$(document).on('blur', '.v2dsc', function () {
+    var curRow = $(this).closest("tr");
+    var slprc = curRow.find(".slprc").val();
+    var v2dsc = curRow.find(".v2dsc").val();
+
+    if (slprc !== "" && slprc !== "0" && v2dsc !== "" && v2dsc !== "0") {
+        var prc = (parseFloat(slprc) * parseFloat(v2dsc)) / 100;
+        var venprc = slprc - prc;
+        curRow.find(".sven2prc").val(venprc.toFixed(2));
+    }
+    else {
+        curRow.find(".sven2prc").val("");
+    }
+});
+//Get Vendor 2 Price
+
+//Get Vendor 3 Price
+$(document).on('blur', '.v3dsc', function () {
+    var curRow = $(this).closest("tr");
+    var slprc = curRow.find(".slprc").val();
+    var v3dsc = curRow.find(".v3dsc").val();
+
+    if (slprc !== "" && slprc !== "0" && v3dsc !== "" && v3dsc !== "0") {
+        var prc = (parseFloat(slprc) * parseFloat(v3dsc)) / 100;
+        var venprc = slprc - prc;
+        curRow.find(".sven3prc").val(venprc.toFixed(2));
+    }
+    else {
+        curRow.find(".sven3prc").val("");
+    }
+});
+//Get Vendor 2 Price
+
 //Get Margin
 $(document).on('blur', '.senqvenprcmrg', function () {
     var curRow = $(this).closest("tr");
@@ -4913,14 +5002,21 @@ $('.sosubmit').on('click', function (e) {
         //you could use the Find method to find the texbox or the dropdownlist and get the value.
         var spid = $(tds[1]).find('.spid').val();
         var sqty = $(tds[4]).find('.sqty').val();
-        var sven1id = $(tds[5]).find('.sven1id').val();
-        var sven1prc = $(tds[5]).find('.sven1prc').val();
-        var sven2id = $(tds[6]).find('.sven2id').val();
-        var sven2prc = $(tds[6]).find('.sven2prc').val();
-        var sven3id = $(tds[7]).find('.sven3id').val();
-        var sven3prc = $(tds[7]).find('.sven3prc').val();
-        var sgst = $(tds[8]).find('.sgst').val();
+        var slprc = $(tds[5]).find('.slprc').val();
+        var sven1id = $(tds[6]).find('.sven1id').val();
+        var sven1prc = $(tds[6]).find('.sven1prc').val();
+        var v1dsc = $(tds[6]).find('.v1dsc').val();
+        var sven2id = $(tds[7]).find('.sven2id').val();
+        var sven2prc = $(tds[7]).find('.sven2prc').val();
+        var v2dsc = $(tds[7]).find('.v2dsc').val();
+        var sven3id = $(tds[8]).find('.sven3id').val();
+        var sven3prc = $(tds[8]).find('.sven3prc').val();
+        var v3dsc = $(tds[8]).find('.v3dsc').val();
+        var sgst = $(tds[9]).find('.sgst').val();
 
+        if (slprc === "") {
+            slprc = 0;
+        }
         if (sven2prc === "") {
             sven2prc = 0;
         }
@@ -4928,17 +5024,31 @@ $('.sosubmit').on('click', function (e) {
             sven3prc = 0;
         }
 
+        if (v1dsc === "") {
+            v1dsc = 0;
+        }
+        if (v2dsc === "") {
+            v2dsc = 0;
+        }
+        if (v3dsc === "") {
+            v3dsc = 0;
+        }
+
         if (spid !== "" && sven1id !== "" && sven1prc !== "" && sven1prc !== "0" &&
             sqty !== "" && sqty !== "0" && sgst !== "") {
             var lin = {
                 EnqPId: spid,
+                ListPrice: parseFloat(slprc),
                 OrderedQuantity: parseFloat(sqty),
                 Vendor1Id: sven1id,
                 Vendor1Price: parseFloat(sven1prc),
+                Vendor1Discount: parseFloat(v1dsc),
                 Vendor2Id: sven2id,
                 Vendor2Price: parseFloat(sven2prc),
+                Vendor2Discount: parseFloat(v2dsc),
                 Vendor3Id: sven3id,
                 Vendor3Price: parseFloat(sven3prc),
+                Vendor3Discount: parseFloat(v3dsc),
                 GST: sgst
                 //LastVendorId: slvenid,
                 //LastVendorPrice: parseFloat(slvenprc)
@@ -4990,40 +5100,44 @@ function AddTempQuoted() {
         tmpquoted.Product = row.cells[6].innerText;
         tmpquoted.Quantity = row.cells[7].innerText;
         tmpquoted.Price = row.cells[9].innerText;
-        tmpquoted.GST = row.cells[10].innerText;
-        tmpquoted.Vendor1 = row.cells[11].innerText;
-        tmpquoted.Vendor2 = row.cells[12].innerText;
-        tmpquoted.Vendor3 = row.cells[13].innerText;
+        tmpquoted.ListPrice = row.cells[10].innerText;
+        tmpquoted.GST = row.cells[11].innerText;
+        tmpquoted.Vendor1 = row.cells[12].innerText;
+        tmpquoted.Vendor2 = row.cells[13].innerText;
+        tmpquoted.Vendor3 = row.cells[14].innerText;
 
         var ven1 = tmpquoted.Vendor1.split(' - ');
-        if (tmpquoted.Vendor2 != "Name -\nPrice - 0") {
+        if (tmpquoted.Vendor2 != "Name -\nPrice - 0\nDiscount - 0") {
             var ven2 = tmpquoted.Vendor2.split(' - ');
-            tmpquoted.Vendor2 = ven2[1].split('\nPrice')[0] + " - " + ven2[2];
+            tmpquoted.Vendor2 = ven2[1].split('\nPrice')[0] + " - " + ven2[2].split('\nDiscount')[0] + " - " + ven2[3];
         }
         else {
             tmpquoted.Vendor2 = "";
             ven2 = 0;
         }
-        if (tmpquoted.Vendor3 != "Name -\nPrice - 0") {
+        if (tmpquoted.Vendor3 != "Name -\nPrice - 0\nDiscount - 0") {
             var ven3 = tmpquoted.Vendor3.split(' - ');
-            tmpquoted.Vendor3 = ven3[1].split('\nPrice')[0] + " - " + ven3[2];
+            tmpquoted.Vendor3 = ven3[1].split('\nPrice')[0] + " - " + ven3[2].split('\nDiscount')[0] + " - " + ven3[3];
         }
         else {
             tmpquoted.Vendor3 = "";
             ven3 = 0;
         }
         var vexist = 0;
-        tmpquoted.Vendor1 = ven1[1].split('\nPrice')[0] + " - " + ven1[2];
+        tmpquoted.Vendor1 = ven1[1].split('\nPrice')[0] + " - " + ven1[2].split('\nDiscount')[0] + " - " + ven1[3];
         if (ven1 !== 0 && ven2 !== 0 && ven3 !== 0) {
             tmpquoted.Vendor1Price = Math.min(parseFloat(ven1[2]), parseFloat(ven2[2]), parseFloat(ven3[2]));
+            tmpquoted.Vendor1Discount = Math.max(parseFloat(ven1[3]), parseFloat(ven2[3]), parseFloat(ven3[3])) + " %";
             vexist = 3;
         }
         if (ven1 !== 0 && ven2 !== 0 && ven3 === 0) {
             tmpquoted.Vendor1Price = Math.min(parseFloat(ven1[2]), parseFloat(ven2[2]));
+            tmpquoted.Vendor1Discount = Math.max(parseFloat(ven1[3]), parseFloat(ven2[3])) + " %";
             vexist = 2;
         }
         if (ven1 !== 0 && ven2 === 0 && ven3 === 0) {
             tmpquoted.Vendor1Price = parseFloat(ven1[2]);
+            tmpquoted.Vendor1Discount = parseFloat(ven1[3]) + " %";
             vexist = 1;
         }
 
@@ -5063,18 +5177,37 @@ function AddTempQuoted() {
                 "</select>";
         }
 
-        $('#tblquote').find('tbody').append(
-            "<tr>" +
-            "<td class='w-10'> <input type='text' id='EnquiriesModelList_CustomerName_" + inc + "' name='EnquiriesModelList_CustomerName_" + inc + "' data-toggle='tooltip' title='" + tmpquoted.CustomerName + "' value='" + tmpquoted.CustomerName + "' disabled required='True' class='form-control scstname m-b-0 bg-gray' type='text'></td>" +
-            "<td class='w-10'> <input type='text' id='EnquiriesModelList_EnqPId_" + inc + "' name='EnquiriesModelList_EnqPId_" + inc + "' data-toggle='tooltip' title='" + tmpquoted.EnqPId + "' value='" + tmpquoted.EnqPId + "' disabled class='form-control spid m-b-0 bg-gray'  type='text' /></td>" +
-            "<td class='w-15'> <input type='text' id='EnquiriesModelList_Product_" + inc + "' name='EnquiriesModelList_Product_" + inc + "' data-toggle='tooltip' title='" + tmpquoted.Product + "' disabled value='" + tmpquoted.Product + "' class='form-control sprdid m-b-0 bg-gray'  type='text' /></td>" +
-            "<td class='w-6'>  <input type='text' id='EnquiriesModelList_Price_" + inc + "' name='EnquiriesModelList_Price_" + inc + "' value='" + tmpquoted.Price + "' disabled class='form-control svenprc m-b-0 bg-gray'  type='text' /></td>" +
-            "<td class='w-6'>  <input type='text' id='EnquiriesModelList_Quantity_" + inc + "' name='EnquiriesModelList_Quantity_" + inc + "' value='" + tmpquoted.Quantity + "' disabled class='form-control sqty m-b-0 bg-gray'  type='text' /></td>" +
-            "<td class='w-10'> " + rt + "</br > " +
-            "<input type='text' id='EnquiriesModelList_Vendor1Price_" + inc + "' name='EnquiriesModelList_Vendor1Price_" + inc + "' value='" + tmpquoted.Vendor1Price + "' placeholder='Vendor1 Price' class='form-control sven1prc onlynumdec m-b-0 float-left' /></td > " +
-            "<td class='w-10'> <input type='text' id='EnquiriesModelList_QuotePrice_" + inc + "' name='EnquiriesModelList_QuotePrice_" + inc + "' placeholder='Quote Price' value='' class='form-control squotprc m-b-0'  type='text' /></br><input type='text' id='EnquiriesModelList_Margin_" + inc + "' name='EnquiriesModelList_Margin_" + inc + "' value='' placeholder='Margin' class='form-control smarg onlynumdec m-b-0 float-left' /></td > " +
-            "<td class='w-6'>  <input type='text' id='EnquiriesModelList_GST_" + inc + "' name='EnquiriesModelList_GST_" + inc + "' value='" + tmpquoted.GST + "' disabled class='form-control sgst m-b-0 bg-gray'  type='text' /></td>" +
-            "</tr>");
+        if (tmpquoted.ListPrice !== "0") {
+            $('#tblquote').find('tbody').append(
+                "<tr>" +
+                "<td class='w-10'><input type='text' id='EnquiriesModelList_CustomerName_" + inc + "' name='EnquiriesModelList_CustomerName_" + inc + "' data-toggle='tooltip' title='" + tmpquoted.CustomerName + "' value='" + tmpquoted.CustomerName + "' disabled required='True' class='form-control scstname m-b-0 bg-gray' type='text'></td>" +
+                "<td class='w-10'><input type='text' id='EnquiriesModelList_EnqPId_" + inc + "' name='EnquiriesModelList_EnqPId_" + inc + "' data-toggle='tooltip' title='" + tmpquoted.EnqPId + "' value='" + tmpquoted.EnqPId + "' disabled class='form-control spid m-b-0 bg-gray'  type='text' /></td>" +
+                "<td class='w-15'><input type='text' id='EnquiriesModelList_Product_" + inc + "' name='EnquiriesModelList_Product_" + inc + "' data-toggle='tooltip' title='" + tmpquoted.Product + "' disabled value='" + tmpquoted.Product + "' class='form-control sprdid m-b-0 bg-gray'  type='text' /></td>" +
+                "<td class='w-6'><input type='text' id='EnquiriesModelList_Price_" + inc + "' name='EnquiriesModelList_Price_" + inc + "' value='" + tmpquoted.Price + "' disabled class='form-control svenprc m-b-0 bg-gray'  type='text' /></td>" +
+                "<td class='w-6'><input type='text' id='EnquiriesModelList_Quantity_" + inc + "' name='EnquiriesModelList_Quantity_" + inc + "' value='" + tmpquoted.Quantity + "' disabled class='form-control sqty m-b-0 bg-gray'  type='text' /></td>" +
+                "<td class='w-6'><input type='text' id='EnquiriesModelList_ListPrice_" + inc + "' name='EnquiriesModelList_ListPrice_" + inc + "' value='" + tmpquoted.ListPrice + "' disabled class='form-control lsprc m-b-0 bg-gray' disabled type='text' /></td>" +
+                "<td class='w-10'>" + rt + "</br > " +
+                "<input type='text' id='EnquiriesModelList_Vendor1Price_" + inc + "' name='EnquiriesModelList_Vendor1Price_" + inc + "' value='" + tmpquoted.Vendor1Price + "' placeholder='Vendor1 Price' class='form-control sven1prc onlynumdec m-b-0 float-left w-70' disabled/><input type='text' id='EnquiriesModelList_Vendor1Discount_" + inc + "' name='EnquiriesModelList_Vendor1Discount_" + inc + "' value='" + tmpquoted.Vendor1Discount + "' placeholder='Discount' class='form-control sven1dsc onlynumdec m-b-0 float-left w-30' disabled/></td > " +
+                "<td class='w-10'><input type='text' id='EnquiriesModelList_QuotePrice_" + inc + "' name='EnquiriesModelList_QuotePrice_" + inc + "' placeholder='Quote Price' value='' class='form-control squotprc m-b-0'  type='text' /></br><input type='text' id='EnquiriesModelList_Margin_" + inc + "' name='EnquiriesModelList_Margin_" + inc + "' value='' placeholder='Margin' class='form-control smarg onlynumdec m-b-0 float-left w-70' /><input type='text' id='EnquiriesModelList_QuoteDiscount_" + inc + "' name='EnquiriesModelList_QuoteDiscount_" + inc + "' value='' placeholder='Discount' class='form-control sqtdsc onlynumdec m-b-0 float-left w-30' /></td > " +
+                "<td class='w-6'><input type='text' id='EnquiriesModelList_GST_" + inc + "' name='EnquiriesModelList_GST_" + inc + "' value='" + tmpquoted.GST + "' disabled class='form-control sgst m-b-0 bg-gray'  type='text' /></td>" +
+                "</tr>");
+        }
+        else {
+            $('#tblquote').find('tbody').append(
+                "<tr>" +
+                "<td class='w-10'><input type='text' id='EnquiriesModelList_CustomerName_" + inc + "' name='EnquiriesModelList_CustomerName_" + inc + "' data-toggle='tooltip' title='" + tmpquoted.CustomerName + "' value='" + tmpquoted.CustomerName + "' disabled required='True' class='form-control scstname m-b-0 bg-gray' type='text'></td>" +
+                "<td class='w-10'><input type='text' id='EnquiriesModelList_EnqPId_" + inc + "' name='EnquiriesModelList_EnqPId_" + inc + "' data-toggle='tooltip' title='" + tmpquoted.EnqPId + "' value='" + tmpquoted.EnqPId + "' disabled class='form-control spid m-b-0 bg-gray'  type='text' /></td>" +
+                "<td class='w-15'><input type='text' id='EnquiriesModelList_Product_" + inc + "' name='EnquiriesModelList_Product_" + inc + "' data-toggle='tooltip' title='" + tmpquoted.Product + "' disabled value='" + tmpquoted.Product + "' class='form-control sprdid m-b-0 bg-gray'  type='text' /></td>" +
+                "<td class='w-6'><input type='text' id='EnquiriesModelList_Price_" + inc + "' name='EnquiriesModelList_Price_" + inc + "' value='" + tmpquoted.Price + "' disabled class='form-control svenprc m-b-0 bg-gray'  type='text' /></td>" +
+                "<td class='w-6'><input type='text' id='EnquiriesModelList_Quantity_" + inc + "' name='EnquiriesModelList_Quantity_" + inc + "' value='" + tmpquoted.Quantity + "' disabled class='form-control sqty m-b-0 bg-gray'  type='text' /></td>" +
+                "<td class='w-6'><input type='text' id='EnquiriesModelList_ListPrice_" + inc + "' name='EnquiriesModelList_ListPrice_" + inc + "' value='" + tmpquoted.ListPrice + "' disabled class='form-control lsprc m-b-0 bg-gray' disabled type='text' /></td>" +
+                "<td class='w-10'>" + rt + "</br > " +
+                "<input type='text' id='EnquiriesModelList_Vendor1Price_" + inc + "' name='EnquiriesModelList_Vendor1Price_" + inc + "' value='" + tmpquoted.Vendor1Price + "' placeholder='Vendor1 Price' class='form-control sven1prc onlynumdec m-b-0 float-left w-70' disabled/><input type='text' id='EnquiriesModelList_Vendor1Discount_" + inc + "' name='EnquiriesModelList_Vendor1Discount_" + inc + "' value='" + tmpquoted.Vendor1Discount + "' placeholder='Discount' class='form-control sven1dsc onlynumdec m-b-0 float-left w-30' disabled/></td > " +
+                "<td class='w-10'><input type='text' id='EnquiriesModelList_QuotePrice_" + inc + "' name='EnquiriesModelList_QuotePrice_" + inc + "' placeholder='Quote Price' value='' class='form-control squotprc m-b-0'  type='text' /></br><input type='text' id='EnquiriesModelList_Margin_" + inc + "' name='EnquiriesModelList_Margin_" + inc + "' value='' placeholder='Margin' class='form-control smarg onlynumdec m-b-0 float-left w-70' /><input type='text' id='EnquiriesModelList_QuoteDiscount_" + inc + "' name='EnquiriesModelList_QuoteDiscount_" + inc + "' value='' placeholder='Discount' class='form-control sqtdsc onlynumdec m-b-0 float-left w-30' disabled /></td > " +
+                "<td class='w-6'><input type='text' id='EnquiriesModelList_GST_" + inc + "' name='EnquiriesModelList_GST_" + inc + "' value='" + tmpquoted.GST + "' disabled class='form-control sgst m-b-0 bg-gray'  type='text' /></td>" +
+                "</tr>");
+        }
+        
         inc++;
     });
 
@@ -5091,8 +5224,8 @@ $(document).on('blur', '.squotprc', function () {
     //e.preventDefault();
     if (squotprc !== "" && squotprc !== "0" && smarg === "") {
         var mrg = (parseFloat(squotprc) - parseFloat(sven1prc)) * 100 / parseFloat(squotprc);
-        curRow.find("td:eq(6)").find(".smarg").val(mrg.toFixed(2) + "%");
-        curRow.find("td:eq(7)").find(".sgst").focus();
+        curRow.find("td:eq(7)").find(".smarg").val(mrg.toFixed(2) + "%");
+        curRow.find("td:eq(8)").find(".sgst").focus();
     }
 });
 //Get Margin
@@ -5106,8 +5239,8 @@ $(document).on('blur', '.smarg', function () {
     //e.preventDefault();
     if (smrg !== "" && smrg !== "0" && squotprc === "") {
         var mrg = (parseFloat(sven1prc) / (100 - parseFloat(smrg))) * 100;
-        curRow.find("td:eq(6)").find(".squotprc").val(mrg.toFixed(2));
-        curRow.find("td:eq(7)").find(".sgst").focus();
+        curRow.find("td:eq(7)").find(".squotprc").val(mrg.toFixed(2));
+        curRow.find("td:eq(8)").find(".sgst").focus();
     }
 });
 //Get Quoted Price
@@ -5117,9 +5250,39 @@ $(document).on('change', '.selven', function () {
     var curRow = $(this).closest("tr");
     var sven = curRow.find(".selven").val();
     var sprc = sven.split(' - ')[1];
-    curRow.find("td:eq(5)").find(".sven1prc").val(sprc);
+    var sdsc = sven.split(' - ')[2];
+    curRow.find("td:eq(6)").find(".sven1prc").val(sprc);
+    curRow.find("td:eq(6)").find(".sven1dsc").val(sdsc + " %");
 });
 //Get Vendor Price
+
+//Get Quote Price
+$(document).on('blur', '.sqtdsc', function () {
+    var curRow = $(this).closest("tr");
+    var lsprc = curRow.find(".lsprc").val();
+    var sqtdsc = curRow.find(".sqtdsc").val();
+    var sven1prc = curRow.find(".sven1prc").val();
+    var smarg = curRow.find(".smarg").val();
+
+    if (lsprc !== "" && lsprc !== "0" && sqtdsc !== "" && sqtdsc !== "0") {
+        var prc = (parseFloat(lsprc) * parseFloat(sqtdsc)) / 100;
+        var qtprc = lsprc - prc;
+        curRow.find(".squotprc").val(qtprc.toFixed(2));
+
+        var mrg = (parseFloat(qtprc) - parseFloat(sven1prc)) * 100 / parseFloat(qtprc);
+        curRow.find(".smarg").val(mrg.toFixed(2) + "%");
+        curRow.find(".sgst").focus();
+
+    }
+    else {
+        curRow.find(".squotprc").val("");
+        curRow.find(".smarg").val("");
+    }
+
+    //e.preventDefault();
+
+});
+//Get Quote Price
 
 $('.quotedsubmit').on('click', function (e) {
     $(this).find(':submit').attr('disabled', 'disabled');
@@ -5131,11 +5294,34 @@ $('.quotedsubmit').on('click', function (e) {
         var tds = $(this).find("td");
         //you could use the Find method to find the texbox or the dropdownlist and get the value.
         var spid = $(tds[1]).find('.spid').val();
-        var sven = $(tds[5]).find('.selven').val();
-        var sven1prc = $(tds[5]).find('.sven1prc').val();
-        var squotprc = $(tds[6]).find('.squotprc').val();
-        var smarg = $(tds[6]).find('.smarg').val();
-        var sgst = $(tds[7]).find('.sgst').val();
+        var sven = $(tds[6]).find('.selven').val();
+        var sven1prc = $(tds[6]).find('.sven1prc').val();
+        var sven1dsc = $(tds[6]).find('.sven1dsc').val();
+        var squotprc = $(tds[7]).find('.squotprc').val();
+        var sqtdsc = $(tds[7]).find('.sqtdsc').val();
+        var smarg = $(tds[7]).find('.smarg').val();
+        var sgst = $(tds[8]).find('.sgst').val();
+
+        if (sven1dsc !== "" && sven1dsc !== "0") {
+            sven1dsc = sven1dsc.split('%')[0];
+        }
+        else {
+            sven1dsc = 0;
+        }
+
+        if (sqtdsc !== "" && sqtdsc !== "0") {
+            sqtdsc = sqtdsc.split('%')[0];
+        }
+        else {
+            sqtdsc = 0;
+        }
+
+        if (smarg !== "" && smarg !== "0") {
+            smarg = smarg.split('%')[0];
+        }
+        else {
+            smarg = 0;
+        }
 
         if (spid !== "" && sven !== "" && sven1prc !== "" && sven1prc !== "0" &&
             squotprc !== "" && squotprc !== "0" && sgst !== "") {
@@ -5143,7 +5329,9 @@ $('.quotedsubmit').on('click', function (e) {
                 EnqPId: spid,
                 VendorId: sven,
                 VendorPrice: parseFloat(sven1prc),
+                VendorDiscount: parseFloat(sven1dsc),
                 QuotePrice: parseFloat(squotprc),
+                QuoteDiscount: parseFloat(sqtdsc),
                 Margin: parseFloat(smarg),
                 GST: sgst
                 //LastVendorId: slvenid,
