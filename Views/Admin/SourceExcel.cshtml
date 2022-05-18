@@ -1,0 +1,144 @@
+﻿@using Vendor_Indusuno.Extensions
+@model Vendor_Indusuno.ViewModels.ImportSourceViewModel
+@{
+    ViewBag.Title = "Sourced";
+    TempData["Enquiry"] = "active";
+    TempData["Sourced"] = "active";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    @{
+        string pageTitle = Html.Raw(Html.PageGTitle()) + "";
+    }
+    <h1>
+        @pageTitle
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index")"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        @Html.Raw(Html.BuildBreadcrumbNavigation())
+        @*<li class="active">Dashboard</li>*@
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    @using (Html.BeginForm("SourceExcel", "Admin", FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <!-- Main row -->
+        <div class="row">
+            <!-- /.box -->
+            <div class="col-lg-12">
+                @Html.Hidden("RedirectTo", Url.Action("Sourced", "Admin"));
+                <!-- Default box -->
+                <div class="box">
+                    <table id="tblsource" class="tbl table table-bordered display">
+                        <thead>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.ImportSourceModelList.FirstOrDefault().Customer)</th>
+                                <th>@Html.DisplayNameFor(model => model.ImportSourceModelList.FirstOrDefault().EnqPId)</th>
+                                <th>@Html.DisplayNameFor(model => model.ImportSourceModelList.FirstOrDefault().Product)</th>
+                                <th>@Html.DisplayNameFor(model => model.ImportSourceModelList.FirstOrDefault().TargetPrice)</th>
+                                <th>@Html.DisplayNameFor(model => model.ImportSourceModelList.FirstOrDefault().Quantity)</th>
+                                <th>@Html.DisplayNameFor(model => model.ImportSourceModelList.FirstOrDefault().ListPrice)</th>
+                                <th>@Html.DisplayNameFor(model => model.ImportSourceModelList.FirstOrDefault().Vendor1)</th>
+                                <th>@Html.DisplayNameFor(model => model.ImportSourceModelList.FirstOrDefault().Vendor2)</th>
+                                <th>@Html.DisplayNameFor(model => model.ImportSourceModelList.FirstOrDefault().Vendor3)</th>
+                                <th>@Html.DisplayNameFor(model => model.ImportSourceModelList.FirstOrDefault().GST)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int inc = 1;
+                            }
+                            @foreach (var item in Model.ImportSourceModelList)
+                            {
+                                <tr>
+                                    <td class='w-10'>@Html.DisplayFor(modelItem => item.Customer)</td>
+                                    <td class='w-10'><input type='text' id='EnquiriesModelList_EnqPId_@inc' name='EnquiriesModelList_EnqPId_@inc' data-toggle='tooltip' title='@item.EnqPId' value='@item.EnqPId' disabled class='form-control spid m-b-0' /></td>
+                                    <td class='w-15 tdsprdid'>
+                                        @Html.DisplayFor(modelItem => item.Product)
+                                        Brand : @item.Brand
+                                        Model : @item.ModelNo
+                                    </td>
+                                    <td class='w-6'><input type='text' id='EnquiriesModelList_TargetPrice_@inc' name='EnquiriesModelList_TargetPrice_@inc' value='@item.TargetPrice' disabled class='form-control svenprc m-b-0 bg-gray' /></td>
+                                    <td class='w-6'><input type='text' id='EnquiriesModelList_Quantity_@inc' name='EnquiriesModelList_Quantity_@inc' value='@item.Quantity' disabled class='form-control sqty m-b-0' /></td>
+                                    <td class='w-6'><input type='text' id='EnquiriesModelList_ListPrice_@inc' name='EnquiriesModelList_ListPrice_@inc' placeholder='ListPrice' disabled value='@item.ListPrice' class='form-control slprc m-b-0' /><br></td>
+                                    <td class='w-10'>
+                                        <input type='text' id='EnquiriesModelList_Vendor1Id_@inc' name='EnquiriesModelList_Vendor1Id_@inc' placeholder='Vendor1 Name' value='@item.Vendor1' class='form-control sven1id sven m-b-0' /><br>
+                                        @if (item.ListPrice == 0)
+                                        {
+                                            <input type='text' id='EnquiriesModelList_Vendor1Price_@inc' name='EnquiriesModelList_Vendor1Price_@inc' value='@item.Vendor1Price' placeholder='Price' class='form-control sven1prc onlynumdec m-b-0 float-left w-60' />
+                                            <input type='text' id='EnquiriesModelList_Vendor1Discount_@inc' name='EnquiriesModelList_Vendor1Discount_@inc' value='@item.Vendor1Discount' disabled placeholder='Discount' class='form-control onlynumdec v1dsc m-b-0 w-30' />
+                                        }
+                                        else
+                                        {
+                                            <input type='text' id='EnquiriesModelList_Vendor1Price_@inc' name='EnquiriesModelList_Vendor1Price_@inc' value='@item.Vendor1Price' placeholder='Price' disabled class='form-control sven1prc onlynumdec m-b-0 float-left w-60' />
+                                            <input type='text' id='EnquiriesModelList_Vendor1Discount_@inc' name='EnquiriesModelList_Vendor1Discount_@inc' value='@item.Vendor1Discount' placeholder='Discount' class='form-control onlynumdec v1dsc m-b-0 w-30' />
+                                        }
+                                    </td>
+                                    <td class='w-10'>
+                                        <input type='text' id='EnquiriesModelList_Vendor2Id_@inc' name='EnquiriesModelList_Vendor2Id_@inc' placeholder='Vendor2 Name' value='@item.Vendor2' class='form-control sven2id sven m-b-0' /><br>
+                                        @if (item.ListPrice == 0)
+                                        {
+                                            <input type='text' id='EnquiriesModelList_Vendor2Price_@inc' name='EnquiriesModelList_Vendor2Price_@inc' value='@item.Vendor2Price' placeholder='Price' class='form-control sven2prc onlynumdec m-b-0 float-left w-60' />
+                                            <input type='text' id='EnquiriesModelList_Vendor2Discount_@inc' name='EnquiriesModelList_Vendor2Discount_@inc' value='@item.Vendor2Discount' disabled placeholder='Discount' class='form-control onlynumdec v2dsc m-b-0 w-30' />
+                                        }
+                                        else
+                                        {
+                                            <input type='text' id='EnquiriesModelList_Vendor2Price_@inc' name='EnquiriesModelList_Vendor2Price_@inc' value='@item.Vendor2Price' placeholder='Price' disabled class='form-control sven2prc onlynumdec m-b-0 float-left w-60' />
+                                            <input type='text' id='EnquiriesModelList_Vendor2Discount_@inc' name='EnquiriesModelList_Vendor2Discount_@inc' value='@item.Vendor2Discount' placeholder='Discount' class='form-control onlynumdec v2dsc m-b-0 w-30' />
+                                        }
+                                    </td>
+                                    <td class='w-10'>
+                                        <input type='text' id='EnquiriesModelList_Vendor3Id_@inc' name='EnquiriesModelList_Vendor3Id_@inc' placeholder='Vendor3 Name' value='@item.Vendor3' class='form-control sven3id sven m-b-0' /><br>
+                                        @if (item.ListPrice == 0)
+                                        {
+                                            <input type='text' id='EnquiriesModelList_Vendor3Price_@inc' name='EnquiriesModelList_Vendor3Price_@inc' value='@item.Vendor3Price' placeholder='Price' class='form-control sven3prc onlynumdec m-b-0 float-left w-60' />
+                                            <input type='text' id='EnquiriesModelList_Vendor3Discount_@inc' name='EnquiriesModelList_Vendor3Discount_@inc' value='@item.Vendor3Discount' disabled placeholder='Discount' class='form-control onlynumdec v3dsc m-b-0 w-30' />
+                                        }
+                                        else
+                                        {
+                                            <input type='text' id='EnquiriesModelList_Vendor3Price_@inc' name='EnquiriesModelList_Vendor3Price_@inc' value='@item.Vendor3Price' placeholder='Price' disabled class='form-control sven3prc onlynumdec m-b-0 float-left w-60' />
+                                            <input type='text' id='EnquiriesModelList_Vendor3Discount_@inc' name='EnquiriesModelList_Vendor3Discount_@inc' value='@item.Vendor3Discount' placeholder='Discount' class='form-control onlynumdec v3dsc m-b-0 w-30' />
+                                        }
+                                    </td>
+                                    <td class='w-6'>
+                                        <input type='text' id='EnquiriesModelList_GST_@inc' name='EnquiriesModelList_GST_@inc' placeholder='GST' value='@item.GST' class='form-control sgst' />
+                                    </td>
+                                </tr>
+                                inc++;
+                            }
+                        </tbody>
+                    </table>
+                    <a href="javascript:void(0)" class="btn bg-aqua m-l-10 sosubmit">Submit</a>
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+        <!-- danger with sound -->
+        <div class="message-box animated fadeIn" data-sound="alert" id="mb-sub-confirm">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-warning"></span> Confirm <strong>Box</strong> ?</div>
+                    <div class="mb-content">
+                        <p>Are you sure you want to submit?</p>
+                        <p>Press No if you want to Cancel. Press Yes to Submit the record.</p>
+                    </div>
+                    <div class="mb-footer">
+                        <div class="pull-right">
+                            <button name="posubmit" class="btn btn-confirm-yes btn-lg" title="Yes">
+                                Yes
+                            </button>
+                            <button class="btn btn-confirm-no btn-lg mb-control-close">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end danger with sound -->
+    }
+</section>
+<!-- /.content -->

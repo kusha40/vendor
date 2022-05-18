@@ -2467,12 +2467,14 @@ $(document).ready(function () {
                 extend: 'excel',
                 text: '<i class="far fa-file-excel"></i> Excel',
                 exportOptions: {
-                    columns: ':visible'
+                    //columns: ':visible',
+                    rows: { selected: true }
                 },
                 footer: true
             },
             'colvis'
-        ]
+        ],
+        select: true
     });
     tblsourced.on('order.dt search.dt', function () {
         tblsourced.column(1, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
@@ -4800,9 +4802,9 @@ function AddTempSourced() {
             "<td class='w-6'>  <input type='text' id='EnquiriesModelList_Price_" + inc + "' name='EnquiriesModelList_Price_" + inc + "' value='" + tmpsrc.Price + "' disabled class='form-control svenprc m-b-0 bg-gray'  type='text' /></td>" +
             "<td class='w-6'>  <input type='text' id='EnquiriesModelList_Quantity_" + inc + "' name='EnquiriesModelList_Quantity_" + inc + "' value='" + tmpsrc.Quantity + "' class='form-control sqty m-b-0'  type='text' /></td>" +
             "<td class='w-6'>  <input type='text' id='EnquiriesModelList_ListPrice_" + inc + "' name='EnquiriesModelList_ListPrice_" + inc + "' value='' class='form-control slprc m-b-0'  type='text' /></td>" +
-            "<td class='w-10'> <input type='text' id='EnquiriesModelList_Vendor1Id_" + inc + "' name='EnquiriesModelList_Vendor1Id_" + inc + "' placeholder='Vendor1 Name' value='' class='form-control sven1id sven m-b-0'  type='text' /></br><input type='text' id='EnquiriesModelList_Vendor1Price_" + inc + "' name='EnquiriesModelList_Vendor1Price_" + inc + "' value='' placeholder='Price' class='form-control sven1prc onlynumdec m-b-0 float-left w-70' /><input type='text' id='EnquiriesModelList_Vendor1Discount_" + inc + "' name='EnquiriesModelList_Vendor1Discount_" + inc + "' value='' disabled placeholder='Discount' class='form-control onlynumdec v1dsc m-b-0 w-30' /></td>" +
-            "<td class='w-10'> <input type='text' id='EnquiriesModelList_Vendor2Id_" + inc + "' name='EnquiriesModelList_Vendor2Id_" + inc + "' placeholder='Vendor2 Name' value='' class='form-control sven2id sven m-b-0'  type='text' /></br><input type='text' id='EnquiriesModelList_Vendor2Price_" + inc + "' name='EnquiriesModelList_Vendor2Price_" + inc + "' value='' placeholder='Price' class='form-control sven2prc onlynumdec m-b-0 float-left w-70' /><input type='text' id='EnquiriesModelList_Vendor2Discount_" + inc + "' name='EnquiriesModelList_Vendor2Discount_" + inc + "' value='' disabled placeholder='Discount' class='form-control onlynumdec v2dsc m-b-0 w-30' /></td>" +
-            "<td class='w-10'> <input type='text' id='EnquiriesModelList_Vendor3Id_" + inc + "' name='EnquiriesModelList_Vendor3Id_" + inc + "' placeholder='Vendor3 Name' value='' class='form-control sven3id sven m-b-0'  type='text' /></br><input type='text' id='EnquiriesModelList_Vendor3Price_" + inc + "' name='EnquiriesModelList_Vendor3Price_" + inc + "' value='' placeholder='Price' class='form-control sven3prc onlynumdec m-b-0 float-left w-70' /><input type='text' id='EnquiriesModelList_Vendor3Discount_" + inc + "' name='EnquiriesModelList_Vendor3Discount_" + inc + "' value='' disabled placeholder='Discount' class='form-control onlynumdec v3dsc m-b-0 w-30' /></td>" +
+            "<td class='w-10'> <input type='text' id='EnquiriesModelList_Vendor1Id_" + inc + "' name='EnquiriesModelList_Vendor1Id_" + inc + "' placeholder='Vendor1 Name' value='' class='form-control sven1id sven m-b-0' /></br><input type='text' id='EnquiriesModelList_Vendor1Price_" + inc + "' name='EnquiriesModelList_Vendor1Price_" + inc + "' value='' placeholder='Price' class='form-control sven1prc onlynumdec m-b-0 float-left w-70' /><input type='text' id='EnquiriesModelList_Vendor1Discount_" + inc + "' name='EnquiriesModelList_Vendor1Discount_" + inc + "' value='' disabled placeholder='Discount' class='form-control onlynumdec v1dsc m-b-0 w-30' /></td>" +
+            "<td class='w-10'> <input type='text' id='EnquiriesModelList_Vendor2Id_" + inc + "' name='EnquiriesModelList_Vendor2Id_" + inc + "' placeholder='Vendor2 Name' value='' class='form-control sven2id sven m-b-0' /></br><input type='text' id='EnquiriesModelList_Vendor2Price_" + inc + "' name='EnquiriesModelList_Vendor2Price_" + inc + "' value='' placeholder='Price' class='form-control sven2prc onlynumdec m-b-0 float-left w-70' /><input type='text' id='EnquiriesModelList_Vendor2Discount_" + inc + "' name='EnquiriesModelList_Vendor2Discount_" + inc + "' value='' disabled placeholder='Discount' class='form-control onlynumdec v2dsc m-b-0 w-30' /></td>" +
+            "<td class='w-10'> <input type='text' id='EnquiriesModelList_Vendor3Id_" + inc + "' name='EnquiriesModelList_Vendor3Id_" + inc + "' placeholder='Vendor3 Name' value='' class='form-control sven3id sven m-b-0' /></br><input type='text' id='EnquiriesModelList_Vendor3Price_" + inc + "' name='EnquiriesModelList_Vendor3Price_" + inc + "' value='' placeholder='Price' class='form-control sven3prc onlynumdec m-b-0 float-left w-70' /><input type='text' id='EnquiriesModelList_Vendor3Discount_" + inc + "' name='EnquiriesModelList_Vendor3Discount_" + inc + "' value='' disabled placeholder='Discount' class='form-control onlynumdec v3dsc m-b-0 w-30' /></td>" +
             "<td class='w-6'> <select name='gst' class='form-control select2 sgst' id='gst'><option value = '0'> 0 %</option><option value='5'>5 %</option><option value='12'>12 %</option><option value='18' selected>18 %</option><option value='28'>28 %</option></select ></td>" +
             "</tr>");
         inc++;
@@ -5068,7 +5070,9 @@ $('.sosubmit').on('click', function (e) {
             contentType: "application/json; charset=utf-8",
             success: function (result) {
                 if (result.error === "") {
-                    location.reload();
+                    //location.reload();
+                    var url = $("#RedirectTo").val();
+                    location.href = url;
                 }
                 else {
                     alert(result.error);
@@ -5082,8 +5086,11 @@ $('.sosubmit').on('click', function (e) {
     }
     else {
         alert("Please add atleast 1 line item.");
+        $(".sosubmit").attr("disabled", false);
+        $(".sosubmit").show();
     }
     $(".sosubmit").attr("disabled", false);
+    $(".sosubmit").show();
 });
 
 function AddTempQuoted() {
@@ -5188,7 +5195,7 @@ function AddTempQuoted() {
                 "<td class='w-6'><input type='text' id='EnquiriesModelList_ListPrice_" + inc + "' name='EnquiriesModelList_ListPrice_" + inc + "' value='" + tmpquoted.ListPrice + "' disabled class='form-control lsprc m-b-0 bg-gray' disabled type='text' /></td>" +
                 "<td class='w-10'>" + rt + "</br > " +
                 "<input type='text' id='EnquiriesModelList_Vendor1Price_" + inc + "' name='EnquiriesModelList_Vendor1Price_" + inc + "' value='" + tmpquoted.Vendor1Price + "' placeholder='Vendor1 Price' class='form-control sven1prc onlynumdec m-b-0 float-left w-70' disabled/><input type='text' id='EnquiriesModelList_Vendor1Discount_" + inc + "' name='EnquiriesModelList_Vendor1Discount_" + inc + "' value='" + tmpquoted.Vendor1Discount + "' placeholder='Discount' class='form-control sven1dsc onlynumdec m-b-0 float-left w-30' disabled/></td > " +
-                "<td class='w-10'><input type='text' id='EnquiriesModelList_QuotePrice_" + inc + "' name='EnquiriesModelList_QuotePrice_" + inc + "' placeholder='Quote Price' value='' class='form-control squotprc m-b-0'  type='text' /></br><input type='text' id='EnquiriesModelList_Margin_" + inc + "' name='EnquiriesModelList_Margin_" + inc + "' value='' placeholder='Margin' class='form-control smarg onlynumdec m-b-0 float-left w-70' /><input type='text' id='EnquiriesModelList_QuoteDiscount_" + inc + "' name='EnquiriesModelList_QuoteDiscount_" + inc + "' value='' placeholder='Discount' class='form-control sqtdsc onlynumdec m-b-0 float-left w-30' /></td > " +
+                "<td class='w-10'><input type='text' id='EnquiriesModelList_QuotePrice_" + inc + "' name='EnquiriesModelList_QuotePrice_" + inc + "' placeholder='Quote Price' value='' class='form-control squotprc m-b-0'  type='text' disabled/></br><input type='text' id='EnquiriesModelList_Margin_" + inc + "' name='EnquiriesModelList_Margin_" + inc + "' value='' placeholder='Margin' class='form-control smarg onlynumdec m-b-0 float-left w-70' disabled/><input type='text' id='EnquiriesModelList_QuoteDiscount_" + inc + "' name='EnquiriesModelList_QuoteDiscount_" + inc + "' value='' placeholder='Discount' class='form-control sqtdsc onlynumdec m-b-0 float-left w-30' /></td > " +
                 "<td class='w-6'><input type='text' id='EnquiriesModelList_GST_" + inc + "' name='EnquiriesModelList_GST_" + inc + "' value='" + tmpquoted.GST + "' disabled class='form-control sgst m-b-0 bg-gray'  type='text' /></td>" +
                 "</tr>");
         }
@@ -5203,11 +5210,10 @@ function AddTempQuoted() {
                 "<td class='w-6'><input type='text' id='EnquiriesModelList_ListPrice_" + inc + "' name='EnquiriesModelList_ListPrice_" + inc + "' value='" + tmpquoted.ListPrice + "' disabled class='form-control lsprc m-b-0 bg-gray' disabled type='text' /></td>" +
                 "<td class='w-10'>" + rt + "</br > " +
                 "<input type='text' id='EnquiriesModelList_Vendor1Price_" + inc + "' name='EnquiriesModelList_Vendor1Price_" + inc + "' value='" + tmpquoted.Vendor1Price + "' placeholder='Vendor1 Price' class='form-control sven1prc onlynumdec m-b-0 float-left w-70' disabled/><input type='text' id='EnquiriesModelList_Vendor1Discount_" + inc + "' name='EnquiriesModelList_Vendor1Discount_" + inc + "' value='" + tmpquoted.Vendor1Discount + "' placeholder='Discount' class='form-control sven1dsc onlynumdec m-b-0 float-left w-30' disabled/></td > " +
-                "<td class='w-10'><input type='text' id='EnquiriesModelList_QuotePrice_" + inc + "' name='EnquiriesModelList_QuotePrice_" + inc + "' placeholder='Quote Price' value='' class='form-control squotprc m-b-0'  type='text' /></br><input type='text' id='EnquiriesModelList_Margin_" + inc + "' name='EnquiriesModelList_Margin_" + inc + "' value='' placeholder='Margin' class='form-control smarg onlynumdec m-b-0 float-left w-70' /><input type='text' id='EnquiriesModelList_QuoteDiscount_" + inc + "' name='EnquiriesModelList_QuoteDiscount_" + inc + "' value='' placeholder='Discount' class='form-control sqtdsc onlynumdec m-b-0 float-left w-30' disabled /></td > " +
+                "<td class='w-10'><input type='text' id='EnquiriesModelList_QuotePrice_" + inc + "' name='EnquiriesModelList_QuotePrice_" + inc + "' placeholder='Quote Price' value='' class='form-control squotprc m-b-0'  type='text'  /></br><input type='text' id='EnquiriesModelList_Margin_" + inc + "' name='EnquiriesModelList_Margin_" + inc + "' value='' placeholder='Margin' class='form-control smarg onlynumdec m-b-0 float-left w-70' /><input type='text' id='EnquiriesModelList_QuoteDiscount_" + inc + "' name='EnquiriesModelList_QuoteDiscount_" + inc + "' value='' placeholder='Discount' class='form-control sqtdsc onlynumdec m-b-0 float-left w-30' disabled /></td > " +
                 "<td class='w-6'><input type='text' id='EnquiriesModelList_GST_" + inc + "' name='EnquiriesModelList_GST_" + inc + "' value='" + tmpquoted.GST + "' disabled class='form-control sgst m-b-0 bg-gray'  type='text' /></td>" +
                 "</tr>");
         }
-        
         inc++;
     });
 

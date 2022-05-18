@@ -28,158 +28,160 @@
     {
         @Html.AntiForgeryToken()
         <!-- Main row -->
-        <div class="row">
-            <div class="col-lg-12 divsource">
-                <!-- Default box -->
-                <div class="box">
-                    <!-- /.box-body -->
-                    <div class="box-body">
-                        <table id="tblsource" class="tbl table table-bordered display">
-                            <thead>
-                                <tr>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().CustomerName)</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqPId)</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Product)</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Price)</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Quantity)</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().ListPrice)</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Vendor1Id)</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Vendor2Id)</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Vendor3Id)</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().GST)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                        <a href="javascript:void(0)" class="btn bg-aqua sosubmit">Submit</a>
-                    </div>
-                </div>
-            </div>
-            <!-- /.box -->
-            <div class="col-lg-12 divsourced">
-                <!-- Default box -->
-                <div class="box">
-                    <div class="box-header with-border">
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                            <a href="javascript:void(0)" class="btn bg-aqua sourced">SOURCED</a>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="col-md-8">
-                                <textarea class="float-right form-control regrmk" placeholder="Enter Regret Remarks"></textarea>
-                            </div>
-                            <div class="col-md-4 float-right">
-                                <a href="javascript:void(0)" class="btn bg-red btn-edt float-right enqregret" id="enqregret">Regret</a>
-                            </div>
-                            <div class="col-md-4 float-right">
-                                <a href="javascript:void(0)" class="btn bg-red btn-edt float-right enqhold" id="enqhold">Hold</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.box-body -->
-                    <div class="box-body">
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.Search, new { @class = "form-control-label" }) <sup>*</sup>
-                                @Html.TextBoxFor(m => m.Search,
-             new
-             {
-                 @class = "form-control text-capitalize",
-                 placeholder = @Html.DisplayNameFor(m => m.Search)
-             })
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.StartDate, new { @class = "form-control-label" }) <sup>*</sup>
-                                @Html.TextBoxFor(m => m.StartDate,
-             new
-             {
-                 @class = "form-control datepicker",
-                 placeholder = @Html.DisplayNameFor(m => m.StartDate)
-             })
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.EndDate, new { @class = "form-control-label" }) <sup>*</sup>
-                                @Html.TextBoxFor(m => m.EndDate,
-             new
-             {
-                 @class = "form-control datepicker",
-                 placeholder = @Html.DisplayNameFor(m => m.EndDate)
-             })
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="box-tools pull-left">
-                                <button type="submit" name="search" class="btn bg-aqua" title="SEARCH"
-                                        value="search">
-                                    SEARCH
-                                </button>
-                            </div>
-                        </div>
-                        <table id="tblsourced" class="table table-bordered display">
-                            <thead>
-                                <tr>
-                                    <th><input type="checkbox" id="seallasnpo" /></th>
-                                    <th>SNo</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnquiryDate)</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().CustomerName)</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqId)</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqPId)</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Product)</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Quantity)</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Unit)</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Price)</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().TotalPrice)</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Status)</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqCreatedBy)</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqAssignTo)</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqAssignBy)</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Notes)</th>
-                                    <th>Edit</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.EnquiriesModelList)
-                                {
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td>@Html.DisplayFor(modelItem => item.EnquiryDate)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.EnqId)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.EnqPId)</td>
-                                        <td title="@item.SpcRemark">
-                                            @Html.DisplayFor(modelItem => item.Product)<br>
-                                            Brand : @item.Brand<br>
-                                            Model : @item.ModelNo
-                                        </td>
-                                        <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Unit)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Price)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Status)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.EnqCreatedBy)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.EnqAssignTo)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.EnqAssignBy)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Notes)</td>
-                                        <td>
-                                            @*@if (item.Status != "G" && item.Status != "AP")
-                                                {
-                                                    @Html.EncodedActionLink("Edit", "EditEnquiry", "Admin", new { id = item.Id }, new { @class = "", title = "Edit", @target = "_blank" })
-                                                }*@
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.box -->
+    <div class="row">
+        @Html.Hidden("RedirectTo", Url.Action("Sourced", "Admin"));
+        <div class="col-lg-12 divsource">
+            <!-- Default box -->
+            <div class="box">
+                <!-- /.box-body -->
+                <div class="box-body">
+                    <table id="tblsource" class="tbl table table-bordered display">
+                        <thead>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().CustomerName)</th>
+                                <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqPId)</th>
+                                <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Product)</th>
+                                <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Price)</th>
+                                <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Quantity)</th>
+                                <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().ListPrice)</th>
+                                <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Vendor1Id)</th>
+                                <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Vendor2Id)</th>
+                                <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Vendor3Id)</th>
+                                <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().GST)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <a href="javascript:void(0)" class="btn bg-aqua sosubmit">Submit</a>
                 </div>
             </div>
         </div>
+        <!-- /.box -->
+        <div class="col-lg-12 divsourced">
+            <!-- Default box -->
+            <div class="box">
+                <div class="box-header with-border">
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        <a href="javascript:void(0)" class="btn bg-aqua sourced">SOURCED</a>
+                        @*@Html.EncodedActionLink("EXCEL SOURCED", "ImportSource", "Admin", new { }, new { @class = "btn bg-aqua m-l-20", title = "Upload Sourced Excel", @target = "_blank" })*@
+                    </div>
+                    <div class="col-md-8">
+                        <div class="col-md-8">
+                            <textarea class="float-right form-control regrmk" placeholder="Enter Regret Remarks"></textarea>
+                        </div>
+                        <div class="col-md-4 float-right">
+                            <a href="javascript:void(0)" class="btn bg-red btn-edt float-right enqregret" id="enqregret">Regret</a>
+                        </div>
+                        <div class="col-md-4 float-right">
+                            <a href="javascript:void(0)" class="btn bg-red btn-edt float-right enqhold" id="enqhold">Hold</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+                <div class="box-body">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Search, new { @class = "form-control-label" }) <sup>*</sup>
+                            @Html.TextBoxFor(m => m.Search,
+         new
+         {
+             @class = "form-control text-capitalize",
+             placeholder = @Html.DisplayNameFor(m => m.Search)
+         })
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.StartDate, new { @class = "form-control-label" }) <sup>*</sup>
+                            @Html.TextBoxFor(m => m.StartDate,
+         new
+         {
+             @class = "form-control datepicker",
+             placeholder = @Html.DisplayNameFor(m => m.StartDate)
+         })
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.EndDate, new { @class = "form-control-label" }) <sup>*</sup>
+                            @Html.TextBoxFor(m => m.EndDate,
+         new
+         {
+             @class = "form-control datepicker",
+             placeholder = @Html.DisplayNameFor(m => m.EndDate)
+         })
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="box-tools pull-left">
+                            <button type="submit" name="search" class="btn bg-aqua" title="SEARCH"
+                                    value="search">
+                                SEARCH
+                            </button>
+                        </div>
+                    </div>
+                    <table id="tblsourced" class="table table-bordered display">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" id="seallasnpo" /></th>
+                                <th>SNo</th>
+                                <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnquiryDate)</th>
+                                <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().CustomerName)</th>
+                                <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqId)</th>
+                                <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqPId)</th>
+                                <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Product)</th>
+                                <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Quantity)</th>
+                                <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Unit)</th>
+                                <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Price)</th>
+                                <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().TotalPrice)</th>
+                                <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Status)</th>
+                                <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqCreatedBy)</th>
+                                <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqAssignTo)</th>
+                                <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqAssignBy)</th>
+                                <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Notes)</th>
+                                <th>Edit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.EnquiriesModelList)
+                            {
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>@Html.DisplayFor(modelItem => item.EnquiryDate)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EnqId)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EnqPId)</td>
+                                    <td title="@item.SpcRemark">
+                                        @Html.DisplayFor(modelItem => item.Product)<br>
+                                        Brand : @item.Brand<br>
+                                        Model : @item.ModelNo
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Unit)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EnqCreatedBy)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EnqAssignTo)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EnqAssignBy)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Notes)</td>
+                                    <td>
+                                        @*@if (item.Status != "G" && item.Status != "AP")
+                                        {
+                                            @Html.EncodedActionLink("Edit", "EditEnquiry", "Admin", new { id = item.Id }, new { @class = "", title = "Edit", @target = "_blank" })
+                                        }*@
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+    </div>
         <!-- danger with sound -->
         <div class="message-box animated fadeIn" data-sound="alert" id="mb-sub-confirm">
             <div class="mb-container">

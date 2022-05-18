@@ -61,12 +61,13 @@
                             </div>
                             <div class="box-footer no-padding">
                                 <ul class="nav nav-stacked">
-                                    <li><a href="#">Last Year <span class="pull-right badge bg-blue">@Model.EnqCountModels.PLastYear</span></a></li>
+                                    @*<li><a href="#">Last Year <span class="pull-right badge bg-blue">@Model.EnqCountModels.PLastYear</span></a></li>*@
                                     <li><a href="#">Last Month <span class="pull-right badge bg-blue">@Model.EnqCountModels.PLastMonth</span></a></li>
                                     @*<li><a href="#">Last 7 Days <span class="pull-right badge bg-aqua">@Model.EnqCountModels.PLast7Days</span></a></li>*@
                                     <li><a href="#">With in 48 Hours <span class="badge bg-blue">@Model.EnqCountModels.PYesterdayS</span><span class="pull-right badge bg-blue">@Model.EnqCountModels.PYesterdayN</span></a></li>
                                     <li><a href="#">With in 24 Hours <span class="badge bg-blue">@Model.EnqCountModels.PTodayS</span><span class="pull-right badge bg-green">@Model.EnqCountModels.PTodayN</span></a></li>
                                     <li><a href="#">Current Month <span class="badge bg-blue">@Model.EnqCountModels.PCMonthS</span><span class="pull-right badge bg-red">@Model.EnqCountModels.PCMonthN</span></a></li>
+                                    <li><a href="#">CM Regret <span class="badge bg-blue m-r-60">@Model.EnqCountModels.CMRegret</span>CM Hold<span class="pull-right badge bg-red"> @Model.EnqCountModels.CMHold</span></a></li>
                                     <li><a href="#">Current Month Total <span class="pull-right badge bg-red">@Model.EnqCountModels.PCMonth</span></a></li>
                                     @*<li><a href="#">Total <span class="pull-right badge bg-red">@Model.EnqCountModels.PTotal</span></a></li>*@
                                 </ul>

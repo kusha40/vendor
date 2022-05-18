@@ -90,6 +90,10 @@
     margin-right: 10px;
 }
 
+.m-r-60 {
+    margin-right: 60px !important;
+}
+
 /* Common CSS */
 /* General CSS */
 .fixed .content-header {
