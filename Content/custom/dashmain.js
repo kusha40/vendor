@@ -2467,14 +2467,12 @@ $(document).ready(function () {
                 extend: 'excel',
                 text: '<i class="far fa-file-excel"></i> Excel',
                 exportOptions: {
-                    //columns: ':visible',
-                    rows: { selected: true }
+                    columns: ':visible'
                 },
                 footer: true
             },
             'colvis'
         ],
-        select: true
     });
     tblsourced.on('order.dt search.dt', function () {
         tblsourced.column(1, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
