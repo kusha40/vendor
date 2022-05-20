@@ -2848,15 +2848,17 @@ function AddTempPOSourced() {
 
         $('#tblposource').find('tbody').append(
             "<tr>" +
-            "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_CustomerName_" + inc + "' name='PurchaseOrdersModelList_CustomerName_" + inc + "' data-toggle='tooltip' title='" + tmpposrc.CustomerName + "' value='" + tmpposrc.CustomerName + "' disabled required='True' class='form-control scstname m-b-0 bg-gray' type='text'></td>" +
+            "<td class='w-10'> <span class='scstname'>" + tmpposrc.CustomerName + "</span></td>" +
             "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_PONumber_" + inc + "' name='PurchaseOrdersModelList_PONumber_" + inc + "' data-toggle='tooltip' title='" + tmpposrc.PONumber + "' value='" + tmpposrc.PONumber + "' class='form-control spono m-b-0 bg-gray' disabled  type='text' /></td> " +
-            "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_POPId_" + inc + "' name='PurchaseOrdersModelList_POPId_" + inc + "' data-toggle='tooltip' title='" + tmpposrc.POPId + "' value='" + tmpposrc.POPId + "' disabled class='form-control spopid m-b-0 bg-gray'  type='text' /></td>" +
-            "<td class='w-15'><input type='text' id='PurchaseOrdersModelList_Product_" + inc + "' name='PurchaseOrdersModelList_Product_" + inc + "' data-toggle='tooltip' title='" + tmpposrc.Product + "' disabled value='" + tmpposrc.Product + "' class='form-control spopid m-b-0 bg-gray'  type='text' /></td>" +
-            "<td class='w-8'> <input type='text' id='PurchaseOrdersModelList_Price_" + inc + "' name='PurchaseOrdersModelList_Price_" + inc + "' value='" + tmpposrc.Price + "' disabled class='form-control spoprice m-b-0 bg-gray'  type='text' /></td>" +
+            "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_POPId_" + inc + "' name='PurchaseOrdersModelList_POPId_" + inc + "' data-toggle='tooltip' title='" + tmpposrc.POPId + "' value='" + tmpposrc.POPId + "' disabled class='form-control spopid m-b-0'  type='text' /></td>" +
+            "<td class='w-15 tdsprdid'>" + tmpposrc.Product + "</td>" +
+            /*"<td class='w-15'><input type='text' id='PurchaseOrdersModelList_Product_" + inc + "' name='PurchaseOrdersModelList_Product_" + inc + "' data-toggle='tooltip' title='" + tmpposrc.Product + "' disabled value='" + tmpposrc.Product + "' class='form-control spopid m-b-0 bg-gray'  type='text' /></td>" +*/
+            "<td class='w-6'> <input type='text' id='PurchaseOrdersModelList_Price_" + inc + "' name='PurchaseOrdersModelList_Price_" + inc + "' value='" + tmpposrc.Price + "' disabled class='form-control spoprice m-b-0 bg-gray'  type='text' /></td>" +
             "<td class='w-6'> <input type='text' id='PurchaseOrdersModelList_Quantity_" + inc + "' name='PurchaseOrdersModelList_Quantity_" + inc + "' value='" + tmpposrc.Quantity + "' disabled class='form-control spoqty m-b-0 bg-gray'  type='text' /></br><input type='text' id='PurchaseOrdersModelList_OrderedQuantity_" + inc + "' name='PurchaseOrdersModelList_OrderedQuantity_" + inc + "' value='" + tmpposrc.Quantity + "' placeholder='Ord Qty' class='form-control sordqty onlynumdec m-b-0 float-left' /></td>" +
             "<td class='w-4'> <input type='text' id='PurchaseOrdersModelList_GST_" + inc + "' name='PurchaseOrdersModelList_GST_" + inc + "' value='" + tmpposrc.GST + "' class='form-control spogst onlynumdec m-b-0'  type='text' /></td>" +
+            "<td class='w-6'>  <input type='text' id='EnquiriesModelList_ListPrice_" + inc + "' name='EnquiriesModelList_ListPrice_" + inc + "' value='' class='form-control lstprc m-b-0'  type='text' /></td>" +
             "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_EnqId_" + inc + "' name='PurchaseOrdersModelList_EnqId_" + inc + "' value='' disabled class='form-control senqid m-b-0 bg-gray'  type='text' /></td>" +
-            "<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_VendorId_" + inc + "' name='PurchaseOrdersModelList_VendorId_" + inc + "' placeholder='Vendor Name' value='' class='form-control svenid m-b-0'  type='text' /></br><input type='text' id='PurchaseOrdersModelList_VendorPrice_" + inc + "' name='PurchaseOrdersModelList_VendorPrice_" + inc + "' value='' placeholder='Vendor Price' class='form-control svenprc svenprcmrg onlynumdec m-b-0 w-70 float-left' /><input type='text' id='PurchaseOrdersModelList_Margin_" + inc + "' name='PurchaseOrdersModelList_Margin_" + inc + "' value='' disabled placeholder='Margin' class='form-control onlynumdec posmarg m-b-0 w-30' /></td>" +
+            "<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_VendorId_" + inc + "' name='PurchaseOrdersModelList_VendorId_" + inc + "' placeholder='Vendor Name' value='' class='form-control svenid m-b-0'  type='text' /></br><input type='text' id='PurchaseOrdersModelList_VendorPrice_" + inc + "' name='PurchaseOrdersModelList_VendorPrice_" + inc + "' value='' placeholder='Vendor Price' class='form-control svenprc svenprcmrg onlynumdec m-b-0 w-70 float-left' /><input type='text' id='PurchaseOrdersModelList_Margin_" + inc + "' name='PurchaseOrdersModelList_Margin_" + inc + "' value='' disabled placeholder='Margin' class='form-control onlynumdec posmarg m-b-0 w-30' /><input type='text' id='PurchaseOrdersModelList_VendorDiscount_" + inc + "' name='PurchaseOrdersModelList_VendorDiscount_" + inc + "' value='' disabled placeholder='Discount' class='form-control onlynumdec vdsc m-b-0' /></td>" +
             "<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_LastVendorId_" + inc + "' name='PurchaseOrdersModelList_LastVendorId_" + inc + "' disabled placeholder='Last Vendor Name' value='' class='form-control slvenid m-b-0 bg-gray' /></br><input type='text' id='PurchaseOrdersModelList_LastVendorPrice_" + inc + "' disabled name='PurchaseOrdersModelList_LastVendorPrice_" + inc + "' value='' placeholder='Last Vendor Price' class='form-control slvenprc m-b-0 bg-gray' /></td>" +
             "</tr>");
         inc++;
@@ -2885,6 +2887,69 @@ $(document).on('focus', '.svenid', function () {
         },
     });
 });
+
+$(document).on('blur', '.lstprc', function () {
+    var curRow = $(this).closest("tr");
+    var lstprc = curRow.find(".lstprc").val();
+    if (lstprc !== "" && lstprc !== "0") {
+        curRow.find(".vdsc").attr("disabled", false);
+        curRow.find(".vdsc").val("");
+        curRow.find(".svenprc").attr("disabled", true);
+        curRow.find(".svenprc").val("");
+        curRow.find(".posmarg").attr("disabled", true);
+        curRow.find(".posmarg").val("");
+    }
+    else {
+        curRow.find(".vdsc").attr("disabled", true);
+        curRow.find(".vdsc").val("");
+        curRow.find(".svenprc").attr("disabled", false);
+        curRow.find(".svenprc").val("");
+        curRow.find(".posmarg").attr("disabled", false);
+        curRow.find(".posmarg").val("");
+    }
+});
+//Enable Discount
+
+//Get Vendor Price and Margin
+$(document).on('blur', '.vdsc', function () {
+    var curRow = $(this).closest("tr");
+    var lstprc = curRow.find(".lstprc").val();
+    var vdsc = curRow.find(".vdsc").val();
+    var svenprc = curRow.find(".svenprc").val();
+    var slprc = curRow.find(".spoprice").val();
+
+    if (lstprc !== "" && lstprc !== "0" && vdsc !== "" && vdsc !== "0") {
+        var prc = (parseFloat(lstprc) * parseFloat(vdsc)) / 100;
+        var venprc = lstprc - prc;
+        curRow.find(".svenprc").val(venprc.toFixed(2));
+
+        var mrg = (parseFloat(slprc) - parseFloat(venprc)) * 100 / parseFloat(slprc);
+        curRow.find(".posmarg").val(mrg.toFixed(2) + "%");
+        curRow.find(".slvenid").focus();
+    }
+    else {
+        curRow.find(".squotprc").val("");
+        curRow.find(".posmarg").val("");
+    }
+});
+//Get Vendor Price and Margin
+
+//Get Margin
+$(document).on('blur', '.svenprcmrg', function () {
+    var curRow = $(this).closest("tr");
+    var venprc = curRow.find(".svenprcmrg").val();
+    var slprc = curRow.find(".spoprice").val();
+    //e.preventDefault();
+    if (venprc !== "" && venprc !== "0") {
+        var mrg = (parseFloat(slprc) - parseFloat(venprc)) * 100 / parseFloat(slprc);
+        curRow.find(".posmarg").val(mrg.toFixed(2) + "%");
+    }
+    else {
+        curRow.find(".posmarg").val("");
+    }
+});
+//Get Margin
+
 
 //$(document).on('blur', '.senqid', function () {
 //    var curRow = $(this).closest("tr");
@@ -2940,22 +3005,6 @@ $(document).on('focus', '.svenid', function () {
 //        curRow.find("td:eq(8)").find(".slvenprc").val("");
 //    }
 //});
-
-//Get Margin
-$(document).on('blur', '.svenprcmrg', function () {
-    var curRow = $(this).closest("tr");
-    var venprc = curRow.find(".svenprcmrg").val();
-    var slprc = curRow.find(".spoprice").val();
-    //e.preventDefault();
-    if (venprc !== "" && venprc !== "0") {
-        var mrg = (parseFloat(slprc) - parseFloat(venprc)) * 100 / parseFloat(slprc);
-        curRow.find("td:eq(8)").find(".posmarg").val(mrg.toFixed(2) + "%");
-    }
-    else {
-        curRow.find("td:eq(8)").find(".posmarg").val("");
-    }
-});
-//Get Margin
 
 $(document).on('blur', '.svenprc', function () {
     var curRow = $(this).closest("tr");
@@ -3039,16 +3088,16 @@ function AddTempPOGenerate() {
         if (index == 0) {
             ccstId = row.cells[3].innerText;
             pIdNo = row.cells[4].innerText;
-            cvenid = row.cells[12].innerText;
+            cvenid = row.cells[13].innerText;
         }
         var cstId = row.cells[3].innerText;
         var peid = row.cells[4].innerText;
-        var veneid = row.cells[12].innerText;
+        var veneid = row.cells[13].innerText;
 
         if (ccstId !== "" && cvenid != "" && pIdNo != "") {
             if (ccstId == cstId && cvenid == veneid) {
                 list.push(row.cells[6].innerText);
-                venid = row.cells[12].innerText;
+                venid = row.cells[13].innerText;
                 var tmpposrc = {};
                 tmpposrc.CustomerName = row.cells[3].innerText;
                 tmpposrc.PONumber = row.cells[5].innerText;
@@ -3056,23 +3105,24 @@ function AddTempPOGenerate() {
                 tmpposrc.Product = row.cells[7].innerText;
                 tmpposrc.Quantity = row.cells[8].innerText;
                 tmpposrc.Unit = row.cells[9].innerText;
-                tmpposrc.EnqId = row.cells[11].innerText;
-                tmpposrc.VendorId = row.cells[12].innerText;
-                tmpposrc.VendorPrice = row.cells[13].innerText;
-                tmpposrc.VendorGST = row.cells[14].innerText;
+                tmpposrc.EnqId = row.cells[12].innerText;
+                tmpposrc.VendorId = row.cells[13].innerText;
+                tmpposrc.VendorPrice = row.cells[14].innerText;
+                tmpposrc.VendorGST = row.cells[16].innerText;
                 var amnt = parseFloat(tmpposrc.Quantity) * parseFloat(tmpposrc.VendorPrice);
                 $('#tblpogen').find('tbody').append(
                     "<tr class='selected'>" +
-                    "<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_CustomerName_" + inc + "' name='PurchaseOrdersModelList_CustomerName_" + inc + "' data-toggle='tooltip' title='" + tmpposrc.CustomerName + "' value='" + tmpposrc.CustomerName + "' disabled required='True' class='form-control scstname m-b-0' type='text'></td>" +
-                    "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_PONumber_" + inc + "' name='PurchaseOrdersModelList_PONumber_" + inc + "' data-toggle='tooltip' title='" + tmpposrc.PONumber + "' value='" + tmpposrc.PONumber + "' class='form-control spono m-b-0' disabled  type='text' /></td> " +
-                    "<td class='w-12'> <input type='text' id='PurchaseOrdersModelList_POPId_" + inc + "' name='PurchaseOrdersModelList_POPId_" + inc + "' data-toggle='tooltip' title='" + tmpposrc.POPId + "' value='" + tmpposrc.POPId + "' disabled class='form-control spopid m-b-0'  type='text' /></td>" +
-                    "<td class='w-20'> <input type='text' id='PurchaseOrdersModelList_Product_" + inc + "' name='PurchaseOrdersModelList_Product_" + inc + "' data-toggle='tooltip' title='" + tmpposrc.Product + "' value='" + tmpposrc.Product + "' disabled class='form-control spopid m-b-0'  type='text' /></td>" +
-                    "<td class='w-8'>  <input type='text' id='PurchaseOrdersModelList_Quantity_" + inc + "' name='PurchaseOrdersModelList_Quantity_" + inc + "' value='" + tmpposrc.Quantity + "' disabled class='form-control sqty m-b-0'  type='text' /></td>" +
-                    "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_Unit_" + inc + "' name='PurchaseOrdersModelList_Unit_" + inc + "' value='" + tmpposrc.Unit + "' disabled class='form-control sunit m-b-0'  type='text' /></td>" +
-                    "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_EnqId_" + inc + "' name='PurchaseOrdersModelList_EnqId_" + inc + "' value='" + tmpposrc.EnqId + "' disabled class='form-control senqid m-b-0'  type='text' /></td>" +
+                    "<td class='w-10'> <span class='scstname'>" + tmpposrc.CustomerName + "</span></td>" +
+                    "<td class='w-8'> <input type='text' id='PurchaseOrdersModelList_PONumber_" + inc + "' name='PurchaseOrdersModelList_PONumber_" + inc + "' data-toggle='tooltip' title='" + tmpposrc.PONumber + "' value='" + tmpposrc.PONumber + "' class='form-control spono m-b-0' disabled  type='text' /></td> " +
+                    "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_POPId_" + inc + "' name='PurchaseOrdersModelList_POPId_" + inc + "' data-toggle='tooltip' title='" + tmpposrc.POPId + "' value='" + tmpposrc.POPId + "' disabled class='form-control spopid m-b-0'  type='text' /></td>" +
+                    "<td class='w-15 tdsprdid'>" + tmpposrc.Product + "</td>" +
+                    "<td class='w-6'> <input type='text' id='PurchaseOrdersModelList_Quantity_" + inc + "' name='PurchaseOrdersModelList_Quantity_" + inc + "' value='" + tmpposrc.Quantity + "' disabled class='form-control sqty m-b-0'  type='text' /></td>" +
+                    "<td class='w-8'> <input type='text' id='PurchaseOrdersModelList_Unit_" + inc + "' name='PurchaseOrdersModelList_Unit_" + inc + "' value='" + tmpposrc.Unit + "' disabled class='form-control sunit m-b-0'  type='text' /></td>" +
+                    //"<td class='w-6'> <input type='text' id='PurchaseOrdersModelList_EnqId_" + inc + "' name='PurchaseOrdersModelList_EnqId_" + inc + "' value='" + tmpposrc.EnqId + "' disabled class='form-control senqid m-b-0'  type='text' /></td>" +
                     "<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_VendorId_" + inc + "' name='PurchaseOrdersModelList_VendorId_" + inc + "' data-toggle='tooltip' title='" + tmpposrc.VendorId + "' placeholder='Vendor Name' value='" + tmpposrc.VendorId + "' disabled class='form-control svenid m-b-0'  type='text' />" +
-                    "<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_VendorPrice_" + inc + "' name='PurchaseOrdersModelList_VendorPrice_" + inc + "' value='" + amnt + "' placeholder='Vendor Price' class='form-control svenprc m-b-0' /></br><input type='text' id='PurchaseOrdersModelList_UnitPrice_" + inc + "' name='PurchaseOrdersModelList_UnitPrice_" + inc + "' value='" + tmpposrc.VendorPrice + "' placeholder='Vendor Price' disabled class='form-control svunitprc m-b-0' /></td>" +
-                    "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_GST_" + inc + "' name='PurchaseOrdersModelList_GST_" + inc + "' value='" + tmpposrc.VendorGST + "' placeholder='GST' disabled class='form-control svengst m-b-0' /></td > " +
+                    "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_VendorPrice_" + inc + "' name='PurchaseOrdersModelList_VendorPrice_" + inc + "' value='" + amnt + "' placeholder='Vendor Price' class='form-control svenprc m-b-0' /></br><input type='text' id='PurchaseOrdersModelList_UnitPrice_" + inc + "' name='PurchaseOrdersModelList_UnitPrice_" + inc + "' value='" + tmpposrc.VendorPrice + "' placeholder='Vendor Price' disabled class='form-control svunitprc m-b-0' /></td>" +
+                    "<td class='w-6'> <input type='text' id='PurchaseOrdersModelList_GST_" + inc + "' name='PurchaseOrdersModelList_GST_" + inc + "' value='" + tmpposrc.VendorGST + "' placeholder='GST' disabled class='form-control svengst m-b-0' /></td > " +
+                    "<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_LeadTime_" + inc + "' name='PurchaseOrdersModelList_LeadTime_" + inc + "' value='' placeholder='Lead' class='form-control indleadtime m-b-0' /></td > " +
                     "</tr>");
                 inc++;
                 //});
@@ -3320,9 +3370,9 @@ $('#pocalculate').on('click', function (e) {
                 pnfamnt = 0;
                 frghtamnt = 0;
             }
-            var amountBeforeTax = parseFloat($(tds[8]).find('.svenprc').val());
+            var amountBeforeTax = parseFloat($(tds[7]).find('.svenprc').val());
             tamountbeforetax += parseFloat(amountBeforeTax);
-            var gstPercentage = parseFloat($(tds[9]).find('.svengst').val());
+            var gstPercentage = parseFloat($(tds[8]).find('.svengst').val());
             if (vsts.toLowerCase() == bsts.toLowerCase()) {
                 cgstPercentage = gstPercentage / 2;
                 sgstPercentage = gstPercentage / 2;
@@ -3580,17 +3630,41 @@ $('.posousubmit').on('click', function (e) {
     $(".posousubmit").hide();
     e.preventDefault();
     var lnArr = new Array();
+    var err = "";
     $(".tbl tbody tr").each(function () {
         var tds = $(this).find("td");
         //you could use the Find method to find the texbox or the dropdownlist and get the value.
         var spopid = $(tds[2]).find('.spopid').val();
         var sordqty = $(tds[5]).find('.sordqty').val();
         var spogst = $(tds[6]).find('.spogst').val();
-        var senqid = $(tds[7]).find('.senqid').val();
-        var svenid = $(tds[8]).find('.svenid').val();
-        var svenprc = $(tds[8]).find('.svenprc').val();
-        var slvenid = $(tds[9]).find('.slvenid').val();
-        var slvenprc = $(tds[9]).find('.slvenprc').val();
+        var lstprc = $(tds[7]).find('.lstprc').val();
+        var senqid = $(tds[8]).find('.senqid').val();
+        var svenid = $(tds[9]).find('.svenid').val();
+        var svenprc = $(tds[9]).find('.svenprc').val();
+        var vdsc = $(tds[9]).find('.vdsc').val();
+        var slvenid = $(tds[10]).find('.slvenid').val();
+        var slvenprc = $(tds[10]).find('.slvenprc').val();
+
+        if (svenid == "") {
+            err = "error";
+        }
+
+        if (svenprc == "") {
+            svenprc = 0;
+            err = "error";
+        }
+
+        if (sordqty == "" || sordqty == "0") {
+            err = "error";
+        }
+
+        if (lstprc === "") {
+            lstprc = 0;
+        }
+
+        if (vdsc === "") {
+            vdsc = 0;
+        }
 
         if (spopid !== "" /*&& senqid !== ""*/ && spogst != "" && svenid !== "" && svenprc !== "" && svenprc !== "0" &&
             sordqty !== "" && sordqty !== "0"
@@ -3599,6 +3673,8 @@ $('.posousubmit').on('click', function (e) {
                 POPId: spopid,
                 EnqId: senqid,
                 OrderedQuantity: parseFloat(sordqty),
+                ListPrice: parseFloat(lstprc),
+                VendorDiscount: parseFloat(vdsc),
                 VendorId: svenid,
                 VendorPrice: parseFloat(svenprc),
                 //LastVendorId: slvenid,
@@ -3609,7 +3685,7 @@ $('.posousubmit').on('click', function (e) {
         }
     });
 
-    if (lnArr.length > 0) {
+    if (lnArr.length > 0 && err == "") {
         var pos = JSON.stringify(lnArr);
 
         $.ajax({
@@ -3633,9 +3709,12 @@ $('.posousubmit').on('click', function (e) {
         });
     }
     else {
-        alert("Please add atleast 1 line item.");
+        alert("Please fill all mandatory field.");
+        $(".posousubmit").attr("disabled", false);
+        $(".posousubmit").show();
     }
     $(".posousubmit").attr("disabled", false);
+    $(".posousubmit").show();
 });
 
 $('#chksameadd').change(function () {
@@ -3726,13 +3805,15 @@ $('.pogen').on('click', function (e) {
             var tds = $(this).find("td");
             //you could use the Find method to find the texbox or the dropdownlist and get the value.
             var spopid = $(tds[2]).find('.spopid').val();
-            var svenprc = $(tds[8]).find('.svenprc').val();
+            var svenprc = $(tds[7]).find('.svenprc').val();
+            var indleadtime = $(tds[9]).find('.indleadtime').val();
 
             if (spopid !== "" && svenprc !== "" && svenprc !== "0") {
                 var lin = {
                     POPId: spopid,
                     VendorPrice: svenprc,
                     POType: ptype,
+                    IndLeadTime: indleadtime,
                     VendorBillingAddress: vbid,
                     BuyerBillingAddress: bbid,
                     IsShippingAddressSame: issame,
@@ -3794,12 +3875,17 @@ $('.pogen').on('click', function (e) {
         }
         else {
             alert("Please add atleast 1 line item.");
+            $(".pogen").attr("disabled", false);
+            $(".pogen").show();
         }
     }
     else {
         alert("Please fill the required fields.");
+        $(".pogen").attr("disabled", false);
+        $(".pogen").show();
     }
     $(".pogen").attr("disabled", false);
+    $(".pogen").show();
 });
 
 $('.poapprove').on('click', function (e) {
@@ -4800,7 +4886,7 @@ function AddTempSourced() {
             "<td class='w-6'>  <input type='text' id='EnquiriesModelList_Price_" + inc + "' name='EnquiriesModelList_Price_" + inc + "' value='" + tmpsrc.Price + "' disabled class='form-control svenprc m-b-0 bg-gray'  type='text' /></td>" +
             "<td class='w-6'>  <input type='text' id='EnquiriesModelList_Quantity_" + inc + "' name='EnquiriesModelList_Quantity_" + inc + "' value='" + tmpsrc.Quantity + "' class='form-control sqty m-b-0'  type='text' /></td>" +
             "<td class='w-6'>  <input type='text' id='EnquiriesModelList_ListPrice_" + inc + "' name='EnquiriesModelList_ListPrice_" + inc + "' value='' class='form-control slprc m-b-0'  type='text' /></td>" +
-            "<td class='w-10'> <input type='text' id='EnquiriesModelList_Vendor1Id_" + inc + "' name='EnquiriesModelList_Vendor1Id_" + inc + "' placeholder='Vendor1 Name' value='' class='form-control sven1id sven m-b-0' /></br><input type='text' id='EnquiriesModelList_Vendor1Price_" + inc + "' name='EnquiriesModelList_Vendor1Price_" + inc + "' value='' placeholder='Price' class='form-control sven1prc onlynumdec m-b-0 float-left w-70' /><input type='text' id='EnquiriesModelList_Vendor1Discount_" + inc + "' name='EnquiriesModelList_Vendor1Discount_" + inc + "' value='' disabled placeholder='Discount' class='form-control onlynumdec v1dsc m-b-0 w-30' /></td>" +
+            "<td class='w-10'> <input type='text' id='EnquiriesModelList_Vendor1Id_" + inc + "' name='EnquiriesModelList_Vendor1Id_" + inc + "' placeholder='Vendor1 Name' value='' class='form-control sven1id sven m-b-0'  data-val='true' data-val-required='Required' /></br><input type='text' id='EnquiriesModelList_Vendor1Price_" + inc + "' name='EnquiriesModelList_Vendor1Price_" + inc + "' value='' placeholder='Price' class='form-control sven1prc onlynumdec m-b-0 float-left w-70'  data-val='true' data-val-required='Required' /><input type='text' id='EnquiriesModelList_Vendor1Discount_" + inc + "' name='EnquiriesModelList_Vendor1Discount_" + inc + "' value='' disabled placeholder='Discount' class='form-control onlynumdec v1dsc m-b-0 w-30' /></td>" +
             "<td class='w-10'> <input type='text' id='EnquiriesModelList_Vendor2Id_" + inc + "' name='EnquiriesModelList_Vendor2Id_" + inc + "' placeholder='Vendor2 Name' value='' class='form-control sven2id sven m-b-0' /></br><input type='text' id='EnquiriesModelList_Vendor2Price_" + inc + "' name='EnquiriesModelList_Vendor2Price_" + inc + "' value='' placeholder='Price' class='form-control sven2prc onlynumdec m-b-0 float-left w-70' /><input type='text' id='EnquiriesModelList_Vendor2Discount_" + inc + "' name='EnquiriesModelList_Vendor2Discount_" + inc + "' value='' disabled placeholder='Discount' class='form-control onlynumdec v2dsc m-b-0 w-30' /></td>" +
             "<td class='w-10'> <input type='text' id='EnquiriesModelList_Vendor3Id_" + inc + "' name='EnquiriesModelList_Vendor3Id_" + inc + "' placeholder='Vendor3 Name' value='' class='form-control sven3id sven m-b-0' /></br><input type='text' id='EnquiriesModelList_Vendor3Price_" + inc + "' name='EnquiriesModelList_Vendor3Price_" + inc + "' value='' placeholder='Price' class='form-control sven3prc onlynumdec m-b-0 float-left w-70' /><input type='text' id='EnquiriesModelList_Vendor3Discount_" + inc + "' name='EnquiriesModelList_Vendor3Discount_" + inc + "' value='' disabled placeholder='Discount' class='form-control onlynumdec v3dsc m-b-0 w-30' /></td>" +
             "<td class='w-6'> <select name='gst' class='form-control select2 sgst' id='gst'><option value = '0'> 0 %</option><option value='5'>5 %</option><option value='12'>12 %</option><option value='18' selected>18 %</option><option value='28'>28 %</option></select ></td>" +
@@ -4997,6 +5083,7 @@ $('.sosubmit').on('click', function (e) {
     $(".sosubmit").hide();
     e.preventDefault();
     var lnArr = new Array();
+    var err = "";
     $(".tbl tbody tr").each(function () {
         var tds = $(this).find("td");
         //you could use the Find method to find the texbox or the dropdownlist and get the value.
@@ -5013,6 +5100,18 @@ $('.sosubmit').on('click', function (e) {
         var sven3prc = $(tds[8]).find('.sven3prc').val();
         var v3dsc = $(tds[8]).find('.v3dsc').val();
         var sgst = $(tds[9]).find('.sgst').val();
+
+        if (sven1id == "") {
+            err = "error";
+        }
+
+        if (sven1prc == "") {
+            err = "error";
+        }
+
+        if (sqty == "" || sqty == "0") {
+            err = "error";
+        }
 
         if (slprc === "") {
             slprc = 0;
@@ -5057,7 +5156,7 @@ $('.sosubmit').on('click', function (e) {
         }
     });
 
-    if (lnArr.length > 0) {
+    if (lnArr.length > 0 && err == "") {
         var enqs = JSON.stringify(lnArr);
 
         $.ajax({
@@ -5083,7 +5182,7 @@ $('.sosubmit').on('click', function (e) {
         });
     }
     else {
-        alert("Please add atleast 1 line item.");
+        alert("Please fill all mandatory field.");
         $(".sosubmit").attr("disabled", false);
         $(".sosubmit").show();
     }

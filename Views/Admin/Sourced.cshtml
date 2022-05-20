@@ -44,7 +44,7 @@
                                 <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Price)</th>
                                 <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Quantity)</th>
                                 <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().ListPrice)</th>
-                                <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Vendor1Id)</th>
+                                <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Vendor1Id) *</th>
                                 <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Vendor2Id)</th>
                                 <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Vendor3Id)</th>
                                 <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().GST)</th>
@@ -64,7 +64,7 @@
                 <div class="box-header with-border">
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                         <a href="javascript:void(0)" class="btn bg-aqua sourced">SOURCED</a>
-                        @*@Html.EncodedActionLink("EXCEL SOURCED", "ImportSource", "Admin", new { }, new { @class = "btn bg-aqua m-l-20", title = "Upload Sourced Excel", @target = "_blank" })*@
+                        @Html.EncodedActionLink("EXCEL SOURCED", "ImportSource", "Admin", new { }, new { @class = "btn bg-aqua m-l-20", title = "Upload Sourced Excel", @target = "_blank" })
                     </div>
                     <div class="col-md-8">
                         <div class="col-md-8">

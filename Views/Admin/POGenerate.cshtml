@@ -43,10 +43,11 @@
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Product)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Quantity)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Unit)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().EnqId)</th>
+                                    @*<th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().EnqId)</th>*@
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().VendorId)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().VendorPrice)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().GST)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().IndLeadTime)</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -567,9 +568,11 @@
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Quantity)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Unit)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Price)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().ListPrice)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().EnqId)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().VendorId)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().VendorPrice)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().VendorDiscount)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().GST)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Status)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().NotAppRemark)</th>
@@ -598,9 +601,11 @@
                                     <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Unit)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.ListPrice)</td>
                                     <td>@Html.DisplayFor(modelItem => item.EnqId)</td>
                                     <td>@Html.DisplayFor(modelItem => item.VendorId)</td>
                                     <td>@Html.DisplayFor(modelItem => item.VendorPrice)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.VendorDiscount)</td>
                                     <td>@Html.DisplayFor(modelItem => item.GST)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Status)</td>
                                     <td>@Html.DisplayFor(modelItem => item.NotAppRemark)</td>
