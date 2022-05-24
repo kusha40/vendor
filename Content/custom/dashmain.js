@@ -5513,14 +5513,15 @@ function AddTempQuotation() {
                 $('#tblquot').find('tbody').append(
                     "<tr class='selected'>" +
                     "<td class='w-15'> <input type='text' id='EnquiriesModelList_CustomerName_" + inc + "' name='EnquiriesModelList_CustomerName_" + inc + "' data-toggle='tooltip' title='" + tmpquotsrc.CustomerName + "' value='" + tmpquotsrc.CustomerName + "' disabled required='True' class='form-control scstname m-b-0' type='text'></td>" +
-                    "<td class='w-12'> <input type='text' id='EnquiriesModelList_EnqPId_" + inc + "' name='EnquiriesModelList_EnqPId_" + inc + "' data-toggle='tooltip' title='" + tmpquotsrc.EnqPId + "' value='" + tmpquotsrc.EnqPId + "' disabled class='form-control senqpid m-b-0'  type='text' /></td>" +
+                    "<td class='w-10'> <input type='text' id='EnquiriesModelList_EnqPId_" + inc + "' name='EnquiriesModelList_EnqPId_" + inc + "' data-toggle='tooltip' title='" + tmpquotsrc.EnqPId + "' value='" + tmpquotsrc.EnqPId + "' disabled class='form-control senqpid m-b-0'  type='text' /></td>" +
                     "<td class='w-20'> <input type='text' id='EnquiriesModelList_Product_" + inc + "' name='EnquiriesModelList_Product_" + inc + "' data-toggle='tooltip' title='" + tmpquotsrc.Product + "' value='" + tmpquotsrc.Product + "' disabled class='form-control sprdid m-b-0'  type='text' /></td>" +
                     "<td class='w-8'>  <input type='text' id='EnquiriesModelList_Quantity_" + inc + "' name='EnquiriesModelList_Quantity_" + inc + "' value='" + tmpquotsrc.Quantity + "' disabled class='form-control sqty m-b-0'  type='text' /></td>" +
                     "<td class='w-10'> <input type='text' id='EnquiriesModelList_Unit_" + inc + "' name='EnquiriesModelList_Unit_" + inc + "' value='" + tmpquotsrc.Unit + "' disabled class='form-control sunit m-b-0'  type='text' /></td>" +
-                    "<td class='w-8'>  <input type='text' id='EnquiriesModelList_UnitPrice_" + inc + "' name='EnquiriesModelList_UnitPrice_" + inc + "' value='" + tmpquotsrc.QuotePrice + "' placeholder='Unit Price' disabled class='form-control svunitprc m-b-0' /></td>" +
-                    "<td class='w-8'> <input type='text' id='EnquiriesModelList_Discount_" + inc + "' name='EnquiriesModelList_Discount_" + inc + "' value='' placeholder='Discount' class='form-control sdisc m-b-0' /></br><input type='text' id='EnquiriesModelList_Value_" + inc + "' name='EnquiriesModelList_Value_" + inc + "' value='' placeholder='Value' class='form-control svalue m-b-0' /></td>" +
-                    "<td class='w-8'> <input type='text' id='EnquiriesModelList_TotalPrice_" + inc + "' name='EnquiriesModelList_TotalPrice_" + inc + "' value='" + amnt + "' placeholder='TotalPrice' disabled class='form-control stotprc m-b-0' />" +
-                    "<td class='w-10'> <input type='text' id='EnquiriesModelList_GST_" + inc + "' name='EnquiriesModelList_GST_" + inc + "' value='" + tmpquotsrc.GST + "' placeholder='GST' disabled class='form-control svengst m-b-0' /></td > " +
+                    "<td class='w-6'>  <input type='text' id='EnquiriesModelList_UnitPrice_" + inc + "' name='EnquiriesModelList_UnitPrice_" + inc + "' value='" + tmpquotsrc.QuotePrice + "' placeholder='Unit Price' disabled class='form-control svunitprc m-b-0' /></td>" +
+                    "<td class='w-6'> <input type='text' id='EnquiriesModelList_Discount_" + inc + "' name='EnquiriesModelList_Discount_" + inc + "' value='' placeholder='Discount' class='form-control sdisc m-b-0' /></br><input type='text' id='EnquiriesModelList_Value_" + inc + "' name='EnquiriesModelList_Value_" + inc + "' value='' placeholder='Value' class='form-control svalue m-b-0' /></td>" +
+                    "<td class='w-6'> <input type='text' id='EnquiriesModelList_TotalPrice_" + inc + "' name='EnquiriesModelList_TotalPrice_" + inc + "' value='" + amnt + "' placeholder='TotalPrice' disabled class='form-control stotprc m-b-0' />" +
+                    "<td class='w-6'> <input type='text' id='EnquiriesModelList_GST_" + inc + "' name='EnquiriesModelList_GST_" + inc + "' value='" + tmpquotsrc.GST + "' placeholder='GST' disabled class='form-control svengst m-b-0' /></td > " +
+                    "<td class='w-10'> <input type='text' id='EnquiriesModelList_IndLeadTime_" + inc + "' name='EnquiriesModelList_IndLeadTime_" + inc + "' value='' placeholder='Lead Time' class='form-control indleadtime m-b-0' /></td > " +
                     "</tr>");
                 inc++;
                 //});
@@ -5879,6 +5880,7 @@ $('.quot').on('click', function (e) {
             var senqpid = $(tds[1]).find('.senqpid').val();
             var svunitprc = $(tds[5]).find('.svunitprc').val();
             var sdisc = $(tds[6]).find('.sdisc').val();
+            var indleadtime = $(tds[9]).find('.indleadtime').val();
             if (sdisc === "") {
                 sdisc = 0;
             }
@@ -5887,6 +5889,7 @@ $('.quot').on('click', function (e) {
                 var lin = {
                     EnqPId: senqpid,
                     QuotePrice: svunitprc,
+                    IndLeadTime: indleadtime,
                     Discount: sdisc,
                     EnqType: enqtype,
                     CustomerBillingAddress: vbid,
