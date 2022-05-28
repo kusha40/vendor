@@ -129,20 +129,7 @@
                                 new { @class = "text-danger errenqtype" })
                                     </div>
                                 </div>
-                                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
-                                    <div class="form-group">
-                                        @Html.LabelFor(m => m.EnquiryModels.Type, new { @class = "form-control-label" })
-                                        @Html.DropDownListFor(m => m.EnquiryModels.Type,
-                                       new List<SelectListItem>
-                                          {
-                                            new SelectListItem{ Text="STANDARD", Value = "STANDARD", Selected = true  },
-                                                new SelectListItem{ Text="NON STANDARD", Value = "NON STANDARD" },
-                                          },
-                                        "--Select Enq Type--", new { @class = "form-control select2 type" })
-                                        @Html.ValidationMessageFor(m => m.EnquiryModels.Type, "",
-                                new { @class = "text-danger errtype" })
-                                    </div>
-                                </div>
+                                
                                 <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
                                     <div class="form-group">
                                         @Html.LabelFor(m => m.EnquiryModels.EnqId, new { @class = "form-control-label" }) <sup>*</sup>
@@ -289,7 +276,7 @@
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     @Html.LabelFor(m => m.EnquiryModels.SpcRemark, new { @class = "form-control-label" })
                                     @Html.TextBoxFor(m => m.EnquiryModels.SpcRemark,
@@ -327,6 +314,20 @@
                             })
                                     @Html.ValidationMessageFor(m => m.EnquiryModels.Price, "",
                             new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.EnquiryModels.Type, new { @class = "form-control-label" })
+                                    @Html.DropDownListFor(m => m.EnquiryModels.Type,
+                                   new List<SelectListItem>
+                                      {
+                                        new SelectListItem{ Text="STANDARD", Value = "STANDARD", Selected = true  },
+                                            new SelectListItem{ Text="NON STANDARD", Value = "NON STANDARD" },
+                                      },
+                                    "--Select Enq Type--", new { @class = "form-control select2 type" })
+                                    @Html.ValidationMessageFor(m => m.EnquiryModels.Type, "",
+                            new { @class = "text-danger errtype" })
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">

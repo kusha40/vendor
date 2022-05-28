@@ -4392,6 +4392,7 @@ function AddTempEnqLine() {
     tmpenqline.Quantity = $('.qty').val();
     tmpenqline.UnitId = $('.untid option:selected').text();
     tmpenqline.Price = $('.price').val();
+    tmpenqline.Type = $('.type').val();
 
     if (tmpenqline.SKUNo === "--Select SKU No--") {
         tmpenqline.SKUNo = "";
@@ -4404,6 +4405,9 @@ function AddTempEnqLine() {
     }
     if (tmpenqline.UnitId === "--Select Unit--") {
         tmpenqline.UnitId = "";
+    }
+    if (tmpenqline.Type === "--Select Enq Type--") {
+        tmpenqline.Type = "";
     }
 
     var Errors = "";
@@ -4439,6 +4443,13 @@ function AddTempEnqLine() {
         $('.errqty').text("");
     }
 
+    if (tmpenqline.Type === "") {
+        $('.errtype').text("Enquiry Type required");
+        Errors = "Enquiry Type required";
+    } else {
+        $('.errtype').text("");
+    }
+
     if (Errors.length === 0) {
         var row = parseInt($('#tblTempEnqLine tbody tr').length);
         if (row < lnitm) {
@@ -4469,6 +4480,7 @@ function AddTempEnqLine() {
                 $('<td>').html(tmpenqline.SpcRemark).addClass("pspcrmk").appendTo(Row);
                 $('<td>').html(tmpenqline.Quantity).addClass("pqty").appendTo(Row);
                 $('<td>').html(tmpenqline.Price).addClass("pprice").appendTo(Row);
+                $('<td>').html(tmpenqline.Type).addClass("ptype").appendTo(Row);
                 $('<td>').html("<div class='text-center'><button class='btn btn-danger btn-sm' onclick='Delete($(this))'>Remove</button></div>").appendTo(Row);
 
                 //Append row to table's body  
@@ -4499,7 +4511,6 @@ $('.enqsubmit').on('click', function (e) {
         var cstbadd = $('.cstbadd').val();
         var cstsadd = $('.cstsadd').val();
         var enqtype = $('.enqtype').val();
-        var type = $('.type').val();
         var enqid = $('.enqid').val();
         var enqdate = $('.enqdate').val();
         var enddate = $('.enddate').val();
@@ -4522,10 +4533,11 @@ $('.enqsubmit').on('click', function (e) {
                 var pspcrmk = $(tds[8]).text();
                 var pqty = $(tds[9]).text();
                 var pprice = $(tds[10]).text();
+                var ptype = $(tds[11]).text();
                 if (pprice == "") {
                     pprice = 0;
                 }
-                if (pprdid !== "" && ppctrid !== "" && pbrndid !== "" && punitid !== "" && pqty !== "0" && pqty !== "") {
+                if (pprdid !== "" && ppctrid !== "" && pbrndid !== "" && punitid !== "" && pqty !== "0" && pqty !== "" && ptype !== "") {
                     var lin = {
                         CustomerId: cstId,
                         CustomerBillAdd: cstbadd,
