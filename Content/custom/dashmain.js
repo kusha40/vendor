@@ -4518,7 +4518,7 @@ $('.enqsubmit').on('click', function (e) {
         var enqlneitm = $('.enqlneitm').val();
         var enqsentby = $('.enqsentby').val();
 
-        if (cstId !== "" && cstbadd !== "" && cstsadd !== "" && enqid !== "" && enqtype !== "" && type !== "" && enqlneitm !== "0" && enqlneitm !== "" && enqsentby !== "") {
+        if (cstId !== "" && cstbadd !== "" && cstsadd !== "" && enqid !== "" && enqtype !== "" && enqlneitm !== "0" && enqlneitm !== "" && enqsentby !== "") {
 
             $(".tbl tbody tr").each(function () {
                 var tds = $(this).find("td");
@@ -4544,7 +4544,7 @@ $('.enqsubmit').on('click', function (e) {
                         CustomerBillAdd: cstbadd,
                         CustomerShipAdd: cstsadd,
                         EnqType: enqtype,
-                        Type: type,
+                        Type: ptype,
                         EnqId: enqid,
                         EnquiryDate: enqdate,
                         EndDate: enddate,
@@ -4591,16 +4591,24 @@ $('.enqsubmit').on('click', function (e) {
             }
             else {
                 alert("Please add atleast 1 line item.");
+                $(".enqsubmit").attr("disabled", false);
+                $(".enqsubmit").show();
             }
         }
         else {
             alert("Please fill the required fields.");
+            $(".enqsubmit").attr("disabled", false);
+            $(".enqsubmit").show();
         }
     }
     else {
         alert("Line item not matched.");
+        $(".enqsubmit").attr("disabled", false);
+        $(".enqsubmit").show();
     }
     $(".enqsubmit").attr("disabled", false);
+    $(".enqsubmit").attr("disabled", false);
+    $(".enqsubmit").show();
 });
 
 $('.enqassign').on('click', function (e) {
