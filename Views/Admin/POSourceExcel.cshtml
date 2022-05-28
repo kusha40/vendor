@@ -42,7 +42,7 @@
                                 <th>@Html.DisplayNameFor(model => model.ImportPOSourceModelList.FirstOrDefault().POPId)</th>
                                 <th>@Html.DisplayNameFor(model => model.ImportPOSourceModelList.FirstOrDefault().Product)</th>
                                 <th>@Html.DisplayNameFor(model => model.ImportPOSourceModelList.FirstOrDefault().SalePrice)</th>
-                                <th>@Html.DisplayNameFor(model => model.ImportPOSourceModelList.FirstOrDefault().Quantity)</th>
+                                <th>Qty</th>
                                 <th>@Html.DisplayNameFor(model => model.ImportPOSourceModelList.FirstOrDefault().GST)</th>
                                 <th>@Html.DisplayNameFor(model => model.ImportPOSourceModelList.FirstOrDefault().ListPrice)</th>
                                 <th>@Html.DisplayNameFor(model => model.ImportPOSourceModelList.FirstOrDefault().EnqPId)</th>
@@ -59,35 +59,37 @@
                                 <tr>
                                     <td class='w-10'>@Html.DisplayFor(modelItem => item.Customer)</td>
                                     <td class='w-10'>@Html.DisplayFor(modelItem => item.CustomerPONo)</td>
-                                    <td class='w-10'><input type='text' id='ImportPOSourceModelList_POPId_@inc' name='ImportPOSourceModelList_POPId_@inc' data-toggle='tooltip' title='@item.POPId' value='@item.POPId' disabled class='form-control spid m-b-0' /></td>
+                                    <td class='w-10'><input type='text' id='ImportPOSourceModelList_POPId_@inc' name='ImportPOSourceModelList_POPId_@inc' data-toggle='tooltip' title='@item.POPId' value='@item.POPId' disabled class='form-control spopid m-b-0' /></td>
                                     <td class='w-15 tdsprdid'>
                                         @Html.DisplayFor(modelItem => item.Product)
                                         Brand : @item.Brand
                                         Model : @item.ModelNo
                                     </td>
-                                    <td class='w-6'><input type='text' id='ImportPOSourceModelList_SalePrice_@inc' name='ImportPOSourceModelList_SalePrice_@inc' value='@item.SalePrice' disabled class='form-control svenprc m-b-0 bg-gray' /></td>
+                                    <td class='w-6'><input type='text' id='ImportPOSourceModelList_SalePrice_@inc' name='ImportPOSourceModelList_SalePrice_@inc' value='@item.SalePrice' disabled class='form-control spoprice m-b-0 bg-gray' /></td>
                                     <td class='w-6'><input type='text' id='ImportPOSourceModelList_Quantity_@inc' name='ImportPOSourceModelList_Quantity_@inc' value='@item.Quantity' disabled class='form-control spoqty m-b-0' />
-                                                    <input type='text' id='ImportPOSourceModelList_Quantity_@inc' name='ImportPOSourceModelList_Quantity_@inc' value='@item.Quantity' disabled class='form-control sordqty m-b-0' /></td>
-                                    <td class='w-6'>
+                                                    <input type='text' id='ImportPOSourceModelList_Quantity_@inc' name='ImportPOSourceModelList_Quantity_@inc' value='@item.Quantity' class='form-control sordqty m-b-0' /></td>
+                                    <td class='w-4'>
                                         <input type='text' id='ImportPOSourceModelList_GST_@inc' name='ImportPOSourceModelList_GST_@inc' placeholder='GST' value='@item.GST' class='form-control sgst' />
                                     </td>
-                                    <td class='w-6'><input type='text' id='ImportPOSourceModelList_ListPrice_@inc' name='ImportPOSourceModelList_ListPrice_@inc' placeholder='ListPrice' disabled value='@item.ListPrice' class='form-control slprc m-b-0' /></td>
-                                    <td class='w-6'><input type='text' id='ImportPOSourceModelList_EnqPId_@inc' name='ImportPOSourceModelList_EnqPId_@inc' placeholder='EnqPId' disabled value='@item.EnqPId' class='form-control slprc m-b-0' /></td>
-                                    <td class='w-10'>
-                                        <input type='text' id='ImportPOSourceModelList_VendorId_@inc' name='ImportPOSourceModelList_VendorId_@inc' placeholder='Vendor Name' value='@item.Vendor' class='form-control svenid sven m-b-0' /><br>
+                                    <td class='w-6'><input type='text' id='ImportPOSourceModelList_ListPrice_@inc' name='ImportPOSourceModelList_ListPrice_@inc' placeholder='ListPrice' value='@item.ListPrice' class='form-control lstprc m-b-0' /></td>
+                                    <td class='w-6'><input type='text' id='ImportPOSourceModelList_EnqPId_@inc' name='ImportPOSourceModelList_EnqPId_@inc' placeholder='EnqPId' disabled value='@item.EnqPId' class='form-control senqid m-b-0' /></td>
+                                    <td class='w-15'>
+                                        <input type='text' id='ImportPOSourceModelList_VendorId_@inc' name='ImportPOSourceModelList_VendorId_@inc' placeholder='Vendor Name' value='@item.Vendor' class='form-control svenid svenid m-b-0' /><br>
                                         @if (item.ListPrice == 0)
                                         {
-                                            <input type='text' id='ImportPOSourceModelList_VendorPrice_@inc' name='ImportPOSourceModelList_VendorPrice_@inc' value='@item.VendorPrice' placeholder='Price' class='form-control svenprc onlynumdec m-b-0 float-left w-60' />
-                                            <input type='text' id='ImportPOSourceModelList_VendorDiscount_@inc' name='ImportPOSourceModelList_VendorDiscount_@inc' value='@item.VendorDiscount' disabled placeholder='Discount' class='form-control onlynumdec vdsc m-b-0 w-30' />
+                                            <input type='text' id='ImportPOSourceModelList_VendorPrice_@inc' name='ImportPOSourceModelList_VendorPrice_@inc' value='@item.VendorPrice' placeholder='Price' class='form-control svenprc onlynumdec m-b-0 float-left' />
+                                            <input type='text' id='ImportPOSourceModelList_Margin_@inc' name='ImportPOSourceModelList_Margin_@inc' value='@item.Margin' placeholder='Margin' class='form-control posmarg onlynumdec m-b-0 float-left' /><br />
+                                            <input type='text' id='ImportPOSourceModelList_VendorDiscount_@inc' name='ImportPOSourceModelList_VendorDiscount_@inc' value='@item.VendorDiscount' disabled placeholder='Discount' class='form-control onlynumdec vdsc m-b-0' />
                                         }
                                         else
                                         {
-                                            <input type='text' id='ImportPOSourceModelList_VendorPrice_@inc' name='ImportPOSourceModelList_VendorPrice_@inc' value='@item.VendorPrice' placeholder='Price' disabled class='form-control svenprc onlynumdec m-b-0 float-left w-60' />
-                                            <input type='text' id='ImportPOSourceModelList_VendorDiscount_@inc' name='ImportPOSourceModelList_VendorDiscount_@inc' value='@item.VendorDiscount' placeholder='Discount' class='form-control onlynumdec vdsc m-b-0 w-30' />
+                                            <input type='text' id='ImportPOSourceModelList_VendorPrice_@inc' name='ImportPOSourceModelList_VendorPrice_@inc' value='@item.VendorPrice' placeholder='Price' disabled class='form-control svenprc onlynumdec m-b-0 float-left' />
+                                            <input type='text' id='ImportPOSourceModelList_Margin_@inc' name='ImportPOSourceModelList_Margin_@inc' value='@item.Margin' placeholder='Margin' disabled class='form-control posmarg onlynumdec m-b-0 float-left' /><br />
+                                            <input type='text' id='ImportPOSourceModelList_VendorDiscount_@inc' name='ImportPOSourceModelList_VendorDiscount_@inc' value='@item.VendorDiscount' placeholder='Discount' class='form-control onlynumdec vdsc m-b-0' />
                                         }
                                     </td>
                                     <td class='w-10'>
-                                        <input type='text' id='ImportPOSourceModelList_VendorId_@inc' name='ImportPOSourceModelList_VendorId_@inc' placeholder='Vendor Name' value='@item.LastVendor' disabled class='form-control sven2id slven m-b-0' /><br>
+                                        <input type='text' id='ImportPOSourceModelList_VendorId_@inc' name='ImportPOSourceModelList_VendorId_@inc' placeholder='Vendor Name' value='@item.LastVendor' disabled class='form-control svenid slvenid m-b-0' /><br>
                                         <input type='text' id='ImportPOSourceModelList_VendorPrice_@inc' name='ImportPOSourceModelList_VendorPrice_@inc' value='@item.LastVendorPrice' placeholder='Price' disabled class='form-control slvenprc onlynumdec m-b-0 float-left' />
                                     </td>
                                 </tr>

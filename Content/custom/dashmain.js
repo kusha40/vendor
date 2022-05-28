@@ -3696,7 +3696,8 @@ $('.posousubmit').on('click', function (e) {
             contentType: "application/json; charset=utf-8",
             success: function (result) {
                 if (result.error === "") {
-                    location.reload();
+                    var url = $("#RedirectTo").val();
+                    location.href = url;
                 }
                 else {
                     alert(result.error);

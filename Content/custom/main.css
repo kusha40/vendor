@@ -497,6 +497,11 @@ td .form-group {
     width: 40% !important;
 }
 
+.w-4 {
+    width: 4% !important;
+}
+
+
 .w-50 {
     width: 50%;
 }
@@ -882,4 +887,22 @@ td.isrcbtn button {
 
 .navbar .dropdown-menu li > a {
     font-size: 12px !important;
+}
+
+.form-control1 {
+    font-size: 12px !important;
+    background-image: linear-gradient(#2196f3, #2196f3),linear-gradient(#D2D2D2, #D2D2D2);
+    border: 0;
+    background-size: 0 2px,100% 1px;
+    background-repeat: no-repeat;
+    background-position: center bottom,center calc(100% - 1px);
+    background-color: rgba(0,0,0,0);
+    transition: background 0s ease-out;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 7px 0;
+    line-height: 1.42857143;
+    display: block;
+    height: 34px;
+    color: #555;
 }
