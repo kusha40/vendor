@@ -31,7 +31,7 @@
         <div class="row">
             <!-- /.box -->
             <div class="col-lg-12">
-                @Html.Hidden("RedirectTo", Url.Action("Sourced", "Admin"));
+                @Html.Hidden("RedirectTo", Url.Action("POSourced", "Admin"));
                 <!-- Default box -->
                 <div class="box">
                     <table id="tblposource" class="tbl table table-bordered display">
@@ -39,7 +39,7 @@
                             <tr>
                                 <th>@Html.DisplayNameFor(model => model.ImportPOSourceModelList.FirstOrDefault().Customer)</th>
                                 <th>@Html.DisplayNameFor(model => model.ImportPOSourceModelList.FirstOrDefault().CustomerPONo)</th>
-                                <th>@Html.DisplayNameFor(model => model.ImportPOSourceModelList.FirstOrDefault().POPPId)</th>
+                                <th>@Html.DisplayNameFor(model => model.ImportPOSourceModelList.FirstOrDefault().POPId)</th>
                                 <th>@Html.DisplayNameFor(model => model.ImportPOSourceModelList.FirstOrDefault().Product)</th>
                                 <th>@Html.DisplayNameFor(model => model.ImportPOSourceModelList.FirstOrDefault().SalePrice)</th>
                                 <th>@Html.DisplayNameFor(model => model.ImportPOSourceModelList.FirstOrDefault().Quantity)</th>
@@ -66,7 +66,8 @@
                                         Model : @item.ModelNo
                                     </td>
                                     <td class='w-6'><input type='text' id='ImportPOSourceModelList_SalePrice_@inc' name='ImportPOSourceModelList_SalePrice_@inc' value='@item.SalePrice' disabled class='form-control svenprc m-b-0 bg-gray' /></td>
-                                    <td class='w-6'><input type='text' id='ImportPOSourceModelList_Quantity_@inc' name='ImportPOSourceModelList_Quantity_@inc' value='@item.Quantity' disabled class='form-control sqty m-b-0' /></td>
+                                    <td class='w-6'><input type='text' id='ImportPOSourceModelList_Quantity_@inc' name='ImportPOSourceModelList_Quantity_@inc' value='@item.Quantity' disabled class='form-control spoqty m-b-0' />
+                                                    <input type='text' id='ImportPOSourceModelList_Quantity_@inc' name='ImportPOSourceModelList_Quantity_@inc' value='@item.Quantity' disabled class='form-control sordqty m-b-0' /></td>
                                     <td class='w-6'>
                                         <input type='text' id='ImportPOSourceModelList_GST_@inc' name='ImportPOSourceModelList_GST_@inc' placeholder='GST' value='@item.GST' class='form-control sgst' />
                                     </td>
@@ -94,7 +95,7 @@
                             }
                         </tbody>
                     </table>
-                    <a href="javascript:void(0)" class="btn bg-aqua m-l-10 sosubmit">Submit</a>
+                    <a href="javascript:void(0)" class="btn bg-aqua m-l-10 posousubmit">Submit</a>
                 </div>
                 <!-- /.box -->
             </div>
