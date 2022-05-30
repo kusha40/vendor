@@ -28,116 +28,117 @@
     {
         @Html.AntiForgeryToken()
         <!-- Main row -->
-        <div class="row">
-            <div class="col-lg-12 divsource">
-                <!-- Default box -->
-                <div class="box">
-                    <!-- /.box-body -->
-                    <div class="box-body">
-                        <table id="tblposource" class="tbl table table-bordered display">
-                            <thead>
-                                <tr>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().CustomerName)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().PONumber)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POPId)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Product)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Price)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Quantity)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().GST)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().ListPrice)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().EnqId)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().VendorId)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().LastVendorId)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                        <a href="javascript:void(0)" class="btn bg-aqua posousubmit">Submit</a>
-                    </div>
+    <div class="row">
+        @Html.Hidden("RedirectTo", Url.Action("POSourced", "Admin"));
+        <div class="col-lg-12 divsource">
+            <!-- Default box -->
+            <div class="box">
+                <!-- /.box-body -->
+                <div class="box-body">
+                    <table id="tblposource" class="tbl table table-bordered display">
+                        <thead>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().CustomerName)</th>
+                                <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().PONumber)</th>
+                                <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POPId)</th>
+                                <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Product)</th>
+                                <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Price)</th>
+                                <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Quantity)</th>
+                                <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().GST)</th>
+                                <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().ListPrice)</th>
+                                <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().EnqId)</th>
+                                <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().VendorId)</th>
+                                <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().LastVendorId)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <a href="javascript:void(0)" class="btn bg-aqua posousubmit">Submit</a>
                 </div>
             </div>
-            <!-- /.box -->
-            <div class="col-lg-12 divsourced">
-                <!-- Default box -->
-                <div class="box">
-                    <div class="box-header with-border">
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <a href="javascript:void(0)" class="btn bg-aqua posourced">SOURCED</a>
-                            @Html.EncodedActionLink("EXCEL SOURCED", "ImportPOSource", "Admin", new { }, new { @class = "btn bg-aqua m-l-20", title = "Upload PO Sourced Excel", @target = "_blank" })
+        </div>
+        <!-- /.box -->
+        <div class="col-lg-12 divsourced">
+            <!-- Default box -->
+            <div class="box">
+                <div class="box-header with-border">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <a href="javascript:void(0)" class="btn bg-aqua posourced">SOURCED</a>
+                        @Html.EncodedActionLink("EXCEL SOURCED", "ImportPOSource", "Admin", new { }, new { @class = "btn bg-aqua m-l-20", title = "Upload PO Sourced Excel", @target = "_blank" })
+                    </div>
+                </div>
+                <!-- /.box-body -->
+                <div class="box-body">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Search, new { @class = "form-control-label" }) <sup>*</sup>
+                            @Html.TextBoxFor(m => m.Search,
+                            new
+                            {
+                                @class = "form-control text-capitalize",
+                                placeholder = @Html.DisplayNameFor(m => m.Search)
+                            })
                         </div>
                     </div>
-                    <!-- /.box-body -->
-                    <div class="box-body">
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.Search, new { @class = "form-control-label" }) <sup>*</sup>
-                                @Html.TextBoxFor(m => m.Search,
-                                new
-                                {
-                                    @class = "form-control text-capitalize",
-                                    placeholder = @Html.DisplayNameFor(m => m.Search)
-                                })
-                            </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.StartDate, new { @class = "form-control-label" }) <sup>*</sup>
+                            @Html.TextBoxFor(m => m.StartDate,
+                            new
+                            {
+                                @class = "form-control datepicker",
+                                placeholder = @Html.DisplayNameFor(m => m.StartDate)
+                            })
                         </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.StartDate, new { @class = "form-control-label" }) <sup>*</sup>
-                                @Html.TextBoxFor(m => m.StartDate,
-                                new
-                                {
-                                    @class = "form-control datepicker",
-                                    placeholder = @Html.DisplayNameFor(m => m.StartDate)
-                                })
-                            </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.EndDate, new { @class = "form-control-label" }) <sup>*</sup>
+                            @Html.TextBoxFor(m => m.EndDate,
+                            new
+                            {
+                                @class = "form-control datepicker",
+                                placeholder = @Html.DisplayNameFor(m => m.EndDate)
+                            })
                         </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.EndDate, new { @class = "form-control-label" }) <sup>*</sup>
-                                @Html.TextBoxFor(m => m.EndDate,
-                                new
-                                {
-                                    @class = "form-control datepicker",
-                                    placeholder = @Html.DisplayNameFor(m => m.EndDate)
-                                })
-                            </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="box-tools pull-left">
+                            <button type="submit" name="search" class="btn bg-aqua" title="SEARCH"
+                                    value="search">
+                                SEARCH
+                            </button>
                         </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="box-tools pull-left">
-                                <button type="submit" name="search" class="btn bg-aqua" title="SEARCH"
-                                        value="search">
-                                    SEARCH
-                                </button>
-                            </div>
-                        </div>
-                        <table id="tblposourced" class="table table-bordered display">
-                            <thead>
-                                <tr>
-                                    <th><input type="checkbox" id="seallasnpo" /></th>
-                                    <th>SNo</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().OrderDate)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().CustomerName)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POId)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().PONumber)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POPId)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Product)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Quantity)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Unit)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Price)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Discount)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().TotalPrice)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().GST)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Status)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POCreatedBy)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POAssignTo)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POAssignBy)</th>
-                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Notes)</th>
-                                    <th>Edit</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.PurchaseOrdersModelList)
-                                {
+                    </div>
+                    <table id="tblposourced" class="table table-bordered display">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" id="seallasnpo" /></th>
+                                <th>SNo</th>
+                                <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().OrderDate)</th>
+                                <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().CustomerName)</th>
+                                <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POId)</th>
+                                <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().PONumber)</th>
+                                <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POPId)</th>
+                                <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Product)</th>
+                                <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Quantity)</th>
+                                <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Unit)</th>
+                                <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Price)</th>
+                                <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Discount)</th>
+                                <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().TotalPrice)</th>
+                                <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().GST)</th>
+                                <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Status)</th>
+                                <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POCreatedBy)</th>
+                                <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POAssignTo)</th>
+                                <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POAssignBy)</th>
+                                <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Notes)</th>
+                                <th>Edit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.PurchaseOrdersModelList)
+                            {
                                 <tr>
                                     <td></td>
                                     <td></td>
@@ -174,14 +175,14 @@
                                         }
                                     </td>
                                 </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.box -->
+                            }
+                        </tbody>
+                    </table>
                 </div>
+                <!-- /.box -->
             </div>
         </div>
+    </div>
         <!-- danger with sound -->
         <div class="message-box animated fadeIn" data-sound="alert" id="mb-sub-confirm">
             <div class="mb-container">
