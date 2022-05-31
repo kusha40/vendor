@@ -37,7 +37,7 @@
                         <div class="box box-widget widget-user-2">
                             <div class="widget-user-header bg-yellow p-10">
                                 <h3 class="widget-user-username m-l-0">Enquiry</h3>
-                                <h5 class="widget-user-desc m-l-0">Total</h5>
+                                <h5 class="widget-user-desc m-l-0">Total (Standard, Non-Standard)</h5>
                             </div>
                             <div class="box-footer no-padding">
                                 <ul class="nav nav-stacked">
@@ -46,7 +46,8 @@
                                     @* <li><a href="#">Last 7 Days <span class="pull-right badge bg-aqua">@Model.EnqCountModels.OLast7Days</span></a></li>*@
                                     <li><a href="#">Yesterday <span class="pull-right badge bg-blue">@Model.EnqCountModels.OYesterday</span></a></li>
                                     <li><a href="#">Today <span class="pull-right badge bg-green">@Model.EnqCountModels.OToday</span></a></li>
-                                    <li><a href="#">Current Month <span class="pull-right badge bg-red">@Model.EnqCountModels.OCMonth</span></a></li>
+                                    @*<li><a href="#">Current Month <span class="pull-right badge bg-red">@Model.EnqCountModels.OCMonth</span></a></li>*@
+                                    <li><a href="#">Current Month <span class="badge bg-blue">@Model.EnqCountModels.OCMonthS</span><span class="pull-right badge bg-red">@Model.EnqCountModels.OCMonthN</span></a></li>
                                     <li><a href="#">Current Year <span class="pull-right badge bg-red">@Model.EnqCountModels.OCYear</span></a></li>
                                     @*<li><a href="#">Total <span class="pull-right badge bg-red">@Model.EnqCountModels.OTotal</span></a></li>*@
                                 </ul>
