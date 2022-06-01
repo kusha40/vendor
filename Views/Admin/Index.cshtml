@@ -41,11 +41,15 @@
                             </div>
                             <div class="box-footer no-padding">
                                 <ul class="nav nav-stacked">
-                                    <li><a href="#">Last Year <span class="pull-right badge bg-blue">@Model.EnqCountModels.OLastYear</span></a></li>
-                                    <li><a href="#">Last Month <span class="pull-right badge bg-blue">@Model.EnqCountModels.OLastMonth</span></a></li>
+                                    @*<li><a href="#">Last Year <span class="pull-right badge bg-blue">@Model.EnqCountModels.OLastYear</span></a></li>*@
+                                    <li><a href="#">Last Year <span class="badge bg-blue">@Model.EnqCountModels.OLastYearS</span><span class="pull-right badge bg-red">@Model.EnqCountModels.OLastYearN</span></a></li>
+                                    @*<li><a href="#">Last Month <span class="pull-right badge bg-blue">@Model.EnqCountModels.OLastMonth</span></a></li>*@
+                                    <li><a href="#">Last Month <span class="badge bg-blue">@Model.EnqCountModels.OLastMonthS</span><span class="pull-right badge bg-red">@Model.EnqCountModels.OLastMonthN</span></a></li>
                                     @* <li><a href="#">Last 7 Days <span class="pull-right badge bg-aqua">@Model.EnqCountModels.OLast7Days</span></a></li>*@
-                                    <li><a href="#">Yesterday <span class="pull-right badge bg-blue">@Model.EnqCountModels.OYesterday</span></a></li>
-                                    <li><a href="#">Today <span class="pull-right badge bg-green">@Model.EnqCountModels.OToday</span></a></li>
+                                    @*<li><a href="#">Yesterday <span class="pull-right badge bg-blue">@Model.EnqCountModels.OYesterday</span></a></li>*@
+                                    <li><a href="#">Yesterday <span class="badge bg-blue">@Model.EnqCountModels.OYesterdayS</span><span class="pull-right badge bg-red">@Model.EnqCountModels.OYesterdayN</span></a></li>
+                                    @*<li><a href="#">Today <span class="pull-right badge bg-green">@Model.EnqCountModels.OToday</span></a></li>*@
+                                    <li><a href="#">Today <span class="badge bg-green">@Model.EnqCountModels.OTodayS</span><span class="pull-right badge bg-green">@Model.EnqCountModels.OTodayN</span></a></li>
                                     @*<li><a href="#">Current Month <span class="pull-right badge bg-red">@Model.EnqCountModels.OCMonth</span></a></li>*@
                                     <li><a href="#">Current Month <span class="badge bg-blue">@Model.EnqCountModels.OCMonthS</span><span class="pull-right badge bg-red">@Model.EnqCountModels.OCMonthN</span></a></li>
                                     <li><a href="#">Current Year <span class="pull-right badge bg-red">@Model.EnqCountModels.OCYear</span></a></li>
@@ -123,10 +127,11 @@
                             </div>
                             <div class="box-footer no-padding">
                                 <ul class="nav nav-stacked">
-                                    <li><a href="#">Last Year <span class="badge bg-blue">@Model.POPendingCountModels.OLastYear</span><span class="pull-right badge bg-blue">@Model.POPendingCountModels.OLastYearValue</span></a></li>
+                                    <li><a href="#">C Year Opening <span class="badge bg-blue">@Model.POPendingCountModels.OLastYear</span><span class="pull-right badge bg-blue">@Model.POPendingCountModels.OLastYearValue</span></a></li>
                                     <li><a href="#">Last Month <span class="badge bg-blue">@Model.POPendingCountModels.OLastMonth</span><span class="pull-right badge bg-blue">@Model.POPendingCountModels.OLastMonthValue</span></a></li>
                                     @*<li><a href="#">Last 7 Days <span class="pull-right badge bg-aqua">@Model.POPendingCountModels.OLast7Days</span></a></li>*@
-                                    <li><a href="#">Yesterday <span class="badge bg-blue">@Model.POPendingCountModels.OYesterday</span><span class="pull-right badge bg-blue">@Model.POPendingCountModels.OYesterdayValue</span></a></li>
+                                    @*<li><a href="#">Yesterday <span class="badge bg-blue">@Model.POPendingCountModels.OYesterday</span><span class="pull-right badge bg-blue">@Model.POPendingCountModels.OYesterdayValue</span></a></li>*@
+                                    <li><a href="#">Total <span class="badge bg-blue">@Model.POPendingCountModels.OTotal</span><span class="pull-right badge bg-blue">@Model.POPendingCountModels.OTotalValue</span></a></li>
                                     <li><a href="#">Today <span class="badge bg-green">@Model.POPendingCountModels.OToday</span><span class="pull-right badge bg-green">@Model.POPendingCountModels.OTodayValue</span></a></li>
                                     <li><a href="#">Current Month <span class="badge bg-red">@Model.POPendingCountModels.OCMonth</span><span class="pull-right badge bg-red">@Model.POPendingCountModels.OCMonthValue</span></a></li>
                                     <li><a href="#">Current Year <span class="badge bg-red">@Model.POPendingCountModels.OCYear</span><span class="pull-right badge bg-red">@Model.POPendingCountModels.OCYearValue</span></a></li>
@@ -138,7 +143,7 @@
                     <div class="col-md-3 col-sm-6 col-xs-12">
                         <div class="box box-widget widget-user-2">
                             <div class="widget-user-header bg-aqua-active p-10">
-                                <h3 class="widget-user-username m-l-0">Purchase Order</h3>
+                                <h3 class="widget-user-username m-l-0">Sales</h3>
                                 <h5 class="widget-user-desc m-l-0">Complete</h5>
                             </div>
                             <div class="box-footer no-padding">
@@ -158,8 +163,8 @@
                     <div class="col-md-3 col-sm-6 col-xs-12">
                         <div class="box box-widget widget-user-2">
                             <div class="widget-user-header bg-aqua-active p-10">
-                                <h3 class="widget-user-username m-l-0">Purchase Order</h3>
-                                <h5 class="widget-user-desc m-l-0">Margin</h5>
+                                <h3 class="widget-user-username m-l-0">Margin</h3>
+                                <h5 class="widget-user-desc m-l-0">%</h5>
                             </div>
                             <div class="box-footer no-padding">
                                 <ul class="nav nav-stacked">
