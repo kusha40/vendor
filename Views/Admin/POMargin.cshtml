@@ -1,0 +1,155 @@
+﻿@using Vendor_Indusuno.Extensions
+@model Vendor_Indusuno.ViewModels.POMarginViewModel
+@{
+    ViewBag.Title = "PO Margin";
+    TempData["Index"] = "active";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    @{
+        string pageTitle = Html.Raw(Html.PageGTitle()) + "";
+    }
+    <h1>
+        @*@pageTitle*@
+        Approved PO
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index")"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        @Html.Raw(Html.BuildBreadcrumbNavigation())
+        @*<li class="active">Dashboard</li>*@
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    @using (Html.BeginForm("POMargin", "Admin", FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <!-- Main row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Default box -->
+                <div class="box">
+                    <!-- /.box-body -->
+                    <div class="box-body">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Search, new { @class = "form-control-label" }) <sup>*</sup>
+                                @Html.TextBoxFor(m => m.Search,
+                                new
+                                {
+                                    @class = "form-control text-capitalize",
+                                    placeholder = @Html.DisplayNameFor(m => m.Search)
+                                })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.StartDate, new { @class = "form-control-label" }) <sup>*</sup>
+                                @Html.TextBoxFor(m => m.StartDate,
+                                new
+                                {
+                                    @class = "form-control datepicker",
+                                    placeholder = @Html.DisplayNameFor(m => m.StartDate)
+                                })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.EndDate, new { @class = "form-control-label" }) <sup>*</sup>
+                                @Html.TextBoxFor(m => m.EndDate,
+                                new
+                                {
+                                    @class = "form-control datepicker",
+                                    placeholder = @Html.DisplayNameFor(m => m.EndDate)
+                                })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="box-tools pull-left">
+                                <button type="submit" name="search" class="btn bg-aqua" title="SEARCH"
+                                        value="search">
+                                    SEARCH
+                                </button>
+                            </div>
+                        </div>
+                        <table id="tblPOApproved" class="table table-bordered display">
+                            <thead>
+                                <tr>
+                                    <th>SNo</th>
+                                    <th>@Html.DisplayNameFor(model => model.POMarginModelList.FirstOrDefault().CustomerName)</th>
+                                    <th>@Html.DisplayNameFor(model => model.POMarginModelList.FirstOrDefault().PONumber)</th>
+                                    <th>@Html.DisplayNameFor(model => model.POMarginModelList.FirstOrDefault().POId)</th>
+                                    <th>@Html.DisplayNameFor(model => model.POMarginModelList.FirstOrDefault().POPId)</th>
+                                    <th>@Html.DisplayNameFor(model => model.POMarginModelList.FirstOrDefault().POQuantity)</th>
+                                    <th>@Html.DisplayNameFor(model => model.POMarginModelList.FirstOrDefault().BillQuantity)</th>
+                                    <th>@Html.DisplayNameFor(model => model.POMarginModelList.FirstOrDefault().RemainingQuantity)</th>
+                                    <th>@Html.DisplayNameFor(model => model.POMarginModelList.FirstOrDefault().SalePrice)</th>
+                                    <th>@Html.DisplayNameFor(model => model.POMarginModelList.FirstOrDefault().Vendor)</th>
+                                    <th>@Html.DisplayNameFor(model => model.POMarginModelList.FirstOrDefault().VPONumber)</th>
+                                    <th>@Html.DisplayNameFor(model => model.POMarginModelList.FirstOrDefault().BuyingQuantity)</th>
+                                    <th>@Html.DisplayNameFor(model => model.POMarginModelList.FirstOrDefault().BuyingUnitPrice)</th>
+                                    <th>@Html.DisplayNameFor(model => model.POMarginModelList.FirstOrDefault().BuyingTotalPrice)</th>
+                                    <th>@Html.DisplayNameFor(model => model.POMarginModelList.FirstOrDefault().SellingQuantity)</th>
+                                    <th>@Html.DisplayNameFor(model => model.POMarginModelList.FirstOrDefault().SellingTotalPrice)</th>
+                                    <th>@Html.DisplayNameFor(model => model.POMarginModelList.FirstOrDefault().Margin)</th>
+                                    <th>@Html.DisplayNameFor(model => model.POMarginModelList.FirstOrDefault().POAssignTo)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.POMarginModelList)
+                                {
+                                    <tr>
+                                        <td></td>
+                                        <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.PONumber)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.POId)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.POPId)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.POQuantity)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.BillQuantity)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.RemainingQuantity)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.SalePrice)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Vendor)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.VPONumber)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.BuyingQuantity)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.BuyingUnitPrice)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.BuyingTotalPrice)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.SellingQuantity)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.SellingTotalPrice)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Margin)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.POAssignTo)</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box -->
+                </div>
+            </div>
+        </div>
+        <!-- danger with sound -->
+        <div class="message-box animated fadeIn" data-sound="alert" id="mb-sub-confirm">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-warning"></span> Confirm <strong>Box</strong> ?</div>
+                    <div class="mb-content">
+                        <p>Are you sure you want to submit?</p>
+                        <p>Press No if you want to Cancel. Press Yes to Submit the record.</p>
+                    </div>
+                    <div class="mb-footer">
+                        <div class="pull-right">
+                            <button name="posubmit" class="btn btn-confirm-yes btn-lg" title="Yes">
+                                Yes
+                            </button>
+                            <button class="btn btn-confirm-no btn-lg mb-control-close">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end danger with sound -->
+    }
+</section>
+<!-- /.content -->
