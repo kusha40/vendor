@@ -199,6 +199,20 @@ $(document).ready(function () {
         AddNewRow(this, "item-data", tblId);
     });
 
+    $(".ienq").hover(
+        function () {
+            var stn = $(this).find(".stn").text();
+            var nstn = $(this).find(".nstn").text();
+            var tot = parseFloat(stn) + parseFloat(nstn);
+            $(".tot").text(tot);
+        }, function () {
+            var stn = $(".cstn").text();
+            var nstn = $(".cnstn").text();
+            var tot = parseFloat(stn) + parseFloat(nstn);
+            $(".tot").text(tot);
+        }
+    );
+
     //Registered Vendor Index Info Table
     var tblIndexRegVen = $('#tblIndexRegVen').DataTable({
         "columnDefs": [
