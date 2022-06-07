@@ -34,7 +34,7 @@
                 <div class="box">
                     <!-- /.box-body -->
                     <div class="box-body">
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
                             <div class="form-group">
                                 @Html.LabelFor(m => m.Search, new { @class = "form-control-label" }) <sup>*</sup>
                                 @Html.TextBoxFor(m => m.Search,
@@ -45,7 +45,7 @@
                                 })
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
                             <div class="form-group">
                                 @Html.LabelFor(m => m.StartDate, new { @class = "form-control-label" }) <sup>*</sup>
                                 @Html.TextBoxFor(m => m.StartDate,
@@ -56,7 +56,7 @@
                                 })
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
                             <div class="form-group">
                                 @Html.LabelFor(m => m.EndDate, new { @class = "form-control-label" }) <sup>*</sup>
                                 @Html.TextBoxFor(m => m.EndDate,
@@ -65,6 +65,24 @@
                                     @class = "form-control datepicker",
                                     placeholder = @Html.DisplayNameFor(m => m.EndDate)
                                 })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Customer, new { @class = "form-control-label" }) <sup>*</sup>
+                                @Html.DropDownListFor(m => m.Customer, new SelectList(Model.CustomerModelList, "Key", "Value"),
+                                "--Select Customer--", new { @class = "form-control select2 cstid" })
+                                @Html.ValidationMessageFor(m => m.Customer, "",
+                        new { @class = "text-danger errcstid" })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.User, new { @class = "form-control-label" }) <sup>*</sup>
+                                @Html.DropDownListFor(m => m.User, new SelectList(Model.UserModelList, "Key", "Value"),
+                                "--Select User--", new { @class = "form-control select2 posentby" })
+                                @Html.ValidationMessageFor(m => m.User, "",
+                        new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -102,27 +120,27 @@
                             <tbody>
                                 @foreach (var item in Model.POMarginModelList)
                                 {
-                                <tr>
-                                    <td></td>
-                                    <td>@Html.DisplayFor(modelItem => item.BillDate)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.PONumber)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.POId)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.POPId)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.POQuantity)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.BillQuantity)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.RemainingQuantity)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.SalePrice)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Vendor)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.VPONumber)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.BuyingQuantity)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.BuyingUnitPrice)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.BuyingTotalPrice)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.SellingQuantity)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.SellingTotalPrice)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Margin)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.POAssignTo)</td>
-                                </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>@Html.DisplayFor(modelItem => item.BillDate)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.PONumber)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.POId)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.POPId)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.POQuantity)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.BillQuantity)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.RemainingQuantity)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.SalePrice)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Vendor)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.VPONumber)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.BuyingQuantity)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.BuyingUnitPrice)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.BuyingTotalPrice)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.SellingQuantity)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.SellingTotalPrice)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Margin)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.POAssignTo)</td>
+                                    </tr>
                                 }
                             </tbody>
                         </table>
