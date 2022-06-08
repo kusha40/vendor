@@ -1047,6 +1047,31 @@ $(document).ready(function () {
     }).draw();
     //Admin Product Table
 
+    var tblPOMargin = $('#tblPOMargin').DataTable({
+        "scrollX": true,
+        "paging": false,
+        "info": false,
+        "dom": 'Bfrtip',
+        "buttons": [
+            'pageLength',
+            {
+                extend: 'excel',
+                text: '<i class="far fa-file-excel"></i> Excel',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                footer: true
+            },
+            'colvis'
+        ]
+    });
+    tblPOMargin.on('order.dt search.dt', function () {
+        tblPOMargin.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblPOMargin.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
     //Registered Vendor Index Info Table
     var tblpurchaseorder = $('#tblpurchaseorder').DataTable({
         "columnDefs": [

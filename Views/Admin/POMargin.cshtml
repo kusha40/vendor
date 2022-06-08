@@ -12,8 +12,7 @@
         string pageTitle = Html.Raw(Html.PageGTitle()) + "";
     }
     <h1>
-        @*@pageTitle*@
-        Approved PO
+        @pageTitle
         <small></small>
     </h1>
     <ol class="breadcrumb">
@@ -93,7 +92,7 @@
                                 </button>
                             </div>
                         </div>
-                        <table id="tblPOApproved" class="table table-bordered display">
+                        <table id="tblPOMargin" class="table table-bordered display">
                             <thead>
                                 <tr>
                                     <th>SNo</th>
@@ -102,6 +101,9 @@
                                     <th>@Html.DisplayNameFor(model => model.POMarginModelList.FirstOrDefault().PONumber)</th>
                                     <th>@Html.DisplayNameFor(model => model.POMarginModelList.FirstOrDefault().POId)</th>
                                     <th>@Html.DisplayNameFor(model => model.POMarginModelList.FirstOrDefault().POPId)</th>
+                                    <th>@Html.DisplayNameFor(model => model.POMarginModelList.FirstOrDefault().Product)</th>
+                                    <th>@Html.DisplayNameFor(model => model.POMarginModelList.FirstOrDefault().Brand)</th>
+                                    <th>@Html.DisplayNameFor(model => model.POMarginModelList.FirstOrDefault().ModelNo)</th>
                                     <th>@Html.DisplayNameFor(model => model.POMarginModelList.FirstOrDefault().POQuantity)</th>
                                     <th>@Html.DisplayNameFor(model => model.POMarginModelList.FirstOrDefault().BillQuantity)</th>
                                     <th>@Html.DisplayNameFor(model => model.POMarginModelList.FirstOrDefault().RemainingQuantity)</th>
@@ -120,27 +122,30 @@
                             <tbody>
                                 @foreach (var item in Model.POMarginModelList)
                                 {
-                                    <tr>
-                                        <td></td>
-                                        <td>@Html.DisplayFor(modelItem => item.BillDate)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.PONumber)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.POId)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.POPId)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.POQuantity)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.BillQuantity)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.RemainingQuantity)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.SalePrice)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Vendor)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.VPONumber)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.BuyingQuantity)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.BuyingUnitPrice)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.BuyingTotalPrice)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.SellingQuantity)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.SellingTotalPrice)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Margin)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.POAssignTo)</td>
-                                    </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>@Html.DisplayFor(modelItem => item.BillDate)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.PONumber)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.POId)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.POPId)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Product)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Brand)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.ModelNo)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.POQuantity)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.BillQuantity)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.RemainingQuantity)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.SalePrice)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Vendor)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.VPONumber)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.BuyingQuantity)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.BuyingUnitPrice)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.BuyingTotalPrice)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.SellingQuantity)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.SellingTotalPrice)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Margin)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.POAssignTo)</td>
+                                </tr>
                                 }
                             </tbody>
                         </table>
