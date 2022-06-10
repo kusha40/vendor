@@ -532,7 +532,8 @@
                                 <tr>
                                     <th><input type="checkbox" id="seallsrspo" /></th>
                                     <th>SNo</th>
-                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnquiryDate)</th>
+                                    @*<th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnquiryDate)</th>*@
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().QuotedDate)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().CustomerName)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqId)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqPId)</th>
@@ -555,32 +556,33 @@
                             <tbody>
                                 @foreach (var item in Model.EnquiriesModelList)
                                 {
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td>@Html.DisplayFor(modelItem => item.EnquiryDate)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.EnqId)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.EnqPId)</td>
-                                    <td title="@item.SpcRemark">
-                                        @Html.DisplayFor(modelItem => item.Product)<br>
-                                        Brand : @item.Brand<br>
-                                        Model : @item.ModelNo
-                                    </td>
-                                    <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Unit)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Price)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.VendorId)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.VendorPrice)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.QuotePrice)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.GST)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Status)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.NotAppRemark)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.EnqCreatedBy)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.EnqAssignTo)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.EnqAssignBy)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.EnqSourcedBy)</td>
-                                </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        @*<td>@Html.DisplayFor(modelItem => item.EnquiryDate)</td>*@
+                                        <td>@Html.DisplayFor(modelItem => item.QuotedDate)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.EnqId)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.EnqPId)</td>
+                                        <td title="@item.SpcRemark">
+                                            @Html.DisplayFor(modelItem => item.Product)<br>
+                                            Brand : @item.Brand<br>
+                                            Model : @item.ModelNo
+                                        </td>
+                                        <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Unit)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.VendorId)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.VendorPrice)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.QuotePrice)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.GST)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.NotAppRemark)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.EnqCreatedBy)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.EnqAssignTo)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.EnqAssignBy)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.EnqSourcedBy)</td>
+                                    </tr>
                                 }
                             </tbody>
                         </table>
