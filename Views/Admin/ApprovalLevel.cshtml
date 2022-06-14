@@ -95,33 +95,31 @@
                                 <div class="col-md-12">
                                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                         <div class="form-group">
-                                            @Html.LabelFor(m => m.ApprovalLevelModels.Level1, new { @class = "form-control-label" }) <sup>*</sup>
-                                            @Html.DropDownListFor(m => m.ApprovalLevelModels.Level1, new SelectList(Model.Level1UserModelList, "Key", "Value"),
-                     "--Select Level 1 User--", new { @class = "form-control select2" })
-                                            @Html.ValidationMessageFor(m => m.ApprovalLevelModels.Level1, "",
-             new { @class = "text-danger" })
+                                            @Html.LabelFor(m => m.ApprovalLevelModels.Level1arr, new { @class = "form-control-label" }) <sup>*</sup>
+                                            @Html.DropDownListFor(m => m.ApprovalLevelModels.Level1arr, new SelectList(Model.Level1UserModelList, "Key", "Value"),
+                                            new { @class = "form-control select2", @multiple = "multiple", @data_placeholder = "--Select Level 1 User--" })
+                                            @Html.ValidationMessageFor(m => m.ApprovalLevelModels.Level1arr, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                         <div class="form-group">
                                             @Html.LabelFor(m => m.ApprovalLevelModels.LevelValue, new { @class = "form-control-label" }) <sup>*</sup>
                                             @Html.TextBoxFor(m => m.ApprovalLevelModels.LevelValue,
-             new
-             {
-                 @class = "form-control text-uppercase",
-                 placeholder = "Enter " + @Html.DisplayNameFor(m => m.ApprovalLevelModels.LevelValue)
-             })
-                                            @Html.ValidationMessageFor(m => m.ApprovalLevelModels.LevelValue, "",
-             new { @class = "text-danger" })
+                                             new
+                                             {
+                                                 @class = "form-control text-uppercase",
+                                                 placeholder = "Enter " + @Html.DisplayNameFor(m => m.ApprovalLevelModels.LevelValue)
+                                             })
+                                                                            @Html.ValidationMessageFor(m => m.ApprovalLevelModels.LevelValue, "",
+                                             new { @class = "text-danger" })
                                         </div>
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                         <div class="form-group">
-                                            @Html.LabelFor(m => m.ApprovalLevelModels.Level2, new { @class = "form-control-label" }) <sup>*</sup>
-                                            @Html.DropDownListFor(m => m.ApprovalLevelModels.Level2, new SelectList(Model.Level2UserModelList, "Key", "Value"),
-                     "--Select Level 2 User--", new { @class = "form-control select2" })
-                                            @Html.ValidationMessageFor(m => m.ApprovalLevelModels.Level2, "",
-             new { @class = "text-danger" })
+                                            @Html.LabelFor(m => m.ApprovalLevelModels.Level2arr, new { @class = "form-control-label" }) <sup>*</sup>
+                                            @Html.DropDownListFor(m => m.ApprovalLevelModels.Level2arr, new SelectList(Model.Level2UserModelList, "Key", "Value"),
+                                            new { @class = "form-control select2", @multiple = "multiple", @data_placeholder = "--Select Level 2 User--" })
+                                            @Html.ValidationMessageFor(m => m.ApprovalLevelModels.Level2arr, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
                                 </div>
