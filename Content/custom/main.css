@@ -613,6 +613,10 @@ td.isrcbtn button {
     margin-left: 10px !important;
 }
 
+.m-l-14 {
+    margin-left: 14px !important;
+}
+
 .m-t-60 {
     margin-top: 60px !important;
 }
@@ -748,6 +752,10 @@ td.isrcbtn button {
 
 .font-size-85 {
     font-size: 85px !important;
+}
+
+.font-size-16 {
+    font-size: 16px !important;
 }
 
 .no-record {

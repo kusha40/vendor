@@ -3958,7 +3958,12 @@ $('.poapprove').on('click', function (e) {
     // Iterate over all selected checkboxes
     $.each(rows_selected, function (index, row) {
         // Create a hidden element
-        list.push(row.cells[6].innerText);
+        var lin = {
+            POId: row.cells[6].innerText,
+            VendorPrice: row.cells[9].innerText,
+            Margin: row.cells[11].innerText
+        };
+        list.push(lin);
     });
 
     if (list.length > 0) {
@@ -4297,6 +4302,56 @@ $("#upsubmit").on("click", function (e) {
     }
     else {
         alert("Please Select 1 Page");
+    }
+});
+
+$("#iteamsubmit").on("click", function (e) {
+    e.preventDefault();
+    $("#iteamsubmit").attr("disabled", true);
+
+    var hdArr = new Array();
+    var uTeam = $('#IndusTeamModels_TeamName').val();
+    var userName = $('#AddUserModels_UserName').val();
+    $("input:checkbox[class=chk]").each(function () {
+        var chek = $(this).is(":checked");
+        if (chek == true) {
+            var allchk = {
+                TeamUsers: $(this).attr("name"),
+                Value: $(this).val(),
+                Checked: $(this).is(":checked"),
+                TeamName: uTeam,
+                TeamHead: userName
+            };
+            hdArr.push(allchk);
+        }
+    });
+    if (hdArr.length > 0) {
+        var frmact = "";
+        var iteam = JSON.stringify(hdArr);
+        $.ajax({
+            url: "/Admin/UpsertIndusTeam",
+            dataType: "json",
+            data: "{'iteam': '" + iteam + "', 'act': '" + frmact + "' }",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                if (result.error === "") {
+                    window.location.href = window.location.href;
+                }
+                else {
+                    alert(result.error);
+                }
+                //location.reload();
+            },
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                alert(err.Message);
+            }
+        });
+    }
+    else {
+        alert("Please Select User");
+        $("#iteamsubmit").attr("disabled", false);
     }
 });
 

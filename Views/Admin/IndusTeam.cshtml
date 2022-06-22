@@ -1,0 +1,191 @@
+﻿@using Vendor_Indusuno.Extensions
+@model Vendor_Indusuno.ViewModels.IndusTeamViewModel
+@{
+    ViewBag.Title = "User Permission";
+    TempData["HRM"] = "active";
+    TempData["IndusTeam"] = "active";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        @Html.Raw(Html.PageGTitle())
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index")"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        @Html.Raw(Html.BuildBreadcrumbNavigation())
+        @*<li class="active">Dashboard</li>*@
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    @using (Html.BeginForm("IndusTeam", "Admin", FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off" }))
+    {
+        @Html.AntiForgeryToken()
+        <!-- Main row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Default box -->
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Add / Edit Team</h3>
+                        <div class="box-tools pull-right">
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="col-md-12">
+                            <div class="msgs">
+                                @if (ViewData?.ModelState[""]?.Errors?.Any() == true)
+                                {
+                                    <div class="alert alert-danger alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                                        @Html.ValidationSummary(true, "", new { @class = "float-left" })
+                                    </div>
+                                }
+                                @if (!String.IsNullOrEmpty(ViewBag.SucMsg))
+                                {
+                                    <div class="alert alert-success alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-check"></i> Success!</h4>
+                                        <strong>Well done!</strong> @ViewBag.SucMsg
+                                    </div>
+                                }
+                                @if (!String.IsNullOrEmpty(TempData["ErrMsg"] + ""))
+                                {
+                                    <div class="alert alert-danger alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                                        <strong>Oh snap!</strong> @TempData["ErrMsg"]
+                                    </div>
+                                }
+                                @if (!String.IsNullOrEmpty(TempData["SucMsg"] + ""))
+                                {
+                                    <div class="alert alert-success alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        <h4><i class="icon fa fa-check"></i> Success!</h4>
+                                        <strong>Well done!</strong> @TempData["SucMsg"]
+                                    </div>
+                                }
+                            </div>
+                            @Html.HiddenFor(model => model.AddUserModels.Id)
+                        </div>
+                        <div class="row">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group m-b-0">
+                                        @Html.LabelFor(m => m.AddUserModels.UserName, new { @class = "form-control-label" })
+                                        @Html.DropDownListFor(model => model.AddUserModels.UserName, new SelectList(Model.UsersModelList, "Key", "Value"),
+                                        "-- Select User --", new { @class = "form-control select2" })
+                                        @Html.ValidationMessageFor(m => m.AddUserModels.UserName, "",
+                                        new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 m-t-10">
+                                    <button type="submit" name="search" formnovalidate class="btn bg-aqua" title="Search"
+                                            value="Search">
+                                        SEARCH
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.IndusTeamModels.TeamName, new { @class = "form-control-label" }) <sup>*</sup>
+                                        @Html.TextBoxFor(m => m.IndusTeamModels.TeamName,
+                                new
+                                {
+                                    @class = "form-control text-uppercase",
+                                    placeholder = "Enter " + @Html.DisplayNameFor(m => m.IndusTeamModels.TeamName)
+                                })
+                                        @Html.ValidationMessageFor(m => m.IndusTeamModels.TeamName, "",
+                                new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 m-t-10">
+                                    <button type="submit" id="iteamsubmit" name="submit" class="btn bg-aqua" title="Submit"
+                                            value="Submit">
+                                        SUBMIT
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        @foreach (var item in Model.IndusTeamModelList)
+                        {
+                            string[] name = item.TeamUsers.Split(',');
+                            string[] ids = item.TeamUserIds.Split(',');
+                            int row = 0;
+
+                            foreach (string unm in name)
+                            {
+                                string[] nArr = unm.Split('#');
+                                string uName = (nArr[0] + "").Trim();
+                                string uId = (nArr[1] + "").Trim();
+                                <div class="col-md-3 m-t-20">
+                                    <div class="box box-success m-b-10">
+                                        <div class="box-header with-border">
+                                            <h5 class="box-title font-size-16">@uName</h5>
+                                            <div class="box-tools pull-right">
+                                                <div class="checkbox chk float-right m-t-0 m-b-0">
+                                                    <label>
+                                                        @Html.CheckBox(uId, (ids[row].Trim() == "1" ? true : false), new { @class = "chk" })
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                row++;
+                            }
+                        }
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+        <!-- danger with sound -->
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Default box -->
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Teams</h3>
+                        <div class="box-tools pull-right">
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <table id="tblEnquiryReport" class="table table-bordered display">
+                            <thead>
+                                <tr>
+                                    <th>SNo</th>
+                                    <th>@Html.DisplayNameFor(model => model.IndusTeamModelList.FirstOrDefault().TeamName)</th>
+                                    <th>@Html.DisplayNameFor(model => model.IndusTeamModelList.FirstOrDefault().TeamHead)</th>
+                                    <th>@Html.DisplayNameFor(model => model.IndusTeamModelList.FirstOrDefault().TeamUsers)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.IndusTeamModelList)
+                                {
+                                    <tr>
+                                        <td></td>
+                                        <td>@Html.DisplayFor(modelItem => item.TeamName)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.TeamHead)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.TeamUsers)</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+    }
+</section>
+<!-- /.content -->
