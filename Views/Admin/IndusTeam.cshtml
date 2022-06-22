@@ -1,7 +1,7 @@
 ﻿@using Vendor_Indusuno.Extensions
 @model Vendor_Indusuno.ViewModels.IndusTeamViewModel
 @{
-    ViewBag.Title = "User Permission";
+    ViewBag.Title = "Indus Team";
     TempData["HRM"] = "active";
     TempData["IndusTeam"] = "active";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -86,7 +86,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 m-t-10">
-                                    <button type="submit" name="search" formnovalidate class="btn bg-aqua" title="Search"
+                                    <button type="submit" name="search" formnovalidate="formnovalidate"  class="btn bg-aqua" title="Search"
                                             value="Search">
                                         SEARCH
                                     </button>
@@ -159,23 +159,25 @@
                         </div>
                     </div>
                     <div class="box-body">
-                        <table id="tblEnquiryReport" class="table table-bordered display">
+                        <table id="tblIndusTeam" class="table table-bordered display">
                             <thead>
                                 <tr>
                                     <th>SNo</th>
                                     <th>@Html.DisplayNameFor(model => model.IndusTeamModelList.FirstOrDefault().TeamName)</th>
                                     <th>@Html.DisplayNameFor(model => model.IndusTeamModelList.FirstOrDefault().TeamHead)</th>
                                     <th>@Html.DisplayNameFor(model => model.IndusTeamModelList.FirstOrDefault().TeamUsers)</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var item in Model.IndusTeamModelList)
+                                @foreach (var item in Model.IndusTeamList)
                                 {
                                     <tr>
                                         <td></td>
                                         <td>@Html.DisplayFor(modelItem => item.TeamName)</td>
                                         <td>@Html.DisplayFor(modelItem => item.TeamHead)</td>
                                         <td>@Html.DisplayFor(modelItem => item.TeamUsers)</td>
+                                        <td>@Html.EncodedActionLink("<i class='fa fa-times'></i>", "DeleteIndusTeam", "Admin", new { id = item.Id }, new { @class = "btn btn-del m-l-5 bg-m-red btn-sm", title = "Delete" })</td>
                                     </tr>
                                 }
                             </tbody>

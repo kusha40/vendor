@@ -2236,6 +2236,16 @@ $(document).ready(function () {
     $(".divgen").hide();
     $('#POGenerate').click(function () { AddTempPOGenerate(); });
 
+    var tblIndusTeam = $('#tblIndusTeam').DataTable({
+    });
+
+    tblIndusTeam.on('order.dt search.dt', function () {
+        tblIndusTeam.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblIndusTeam.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
     var tblEnquiryReport = $('#tblEnquiryReport').DataTable({
         "columnDefs": [
         ],
@@ -4312,45 +4322,51 @@ $("#iteamsubmit").on("click", function (e) {
     var hdArr = new Array();
     var uTeam = $('#IndusTeamModels_TeamName').val();
     var userName = $('#AddUserModels_UserName').val();
-    $("input:checkbox[class=chk]").each(function () {
-        var chek = $(this).is(":checked");
-        if (chek == true) {
-            var allchk = {
-                TeamUsers: $(this).attr("name"),
-                Value: $(this).val(),
-                Checked: $(this).is(":checked"),
-                TeamName: uTeam,
-                TeamHead: userName
-            };
-            hdArr.push(allchk);
-        }
-    });
-    if (hdArr.length > 0) {
-        var frmact = "";
-        var iteam = JSON.stringify(hdArr);
-        $.ajax({
-            url: "/Admin/UpsertIndusTeam",
-            dataType: "json",
-            data: "{'iteam': '" + iteam + "', 'act': '" + frmact + "' }",
-            type: "POST",
-            contentType: "application/json; charset=utf-8",
-            success: function (result) {
-                if (result.error === "") {
-                    window.location.href = window.location.href;
-                }
-                else {
-                    alert(result.error);
-                }
-                //location.reload();
-            },
-            error: function (xhr, status, error) {
-                var err = eval("(" + xhr.responseText + ")");
-                alert(err.Message);
+    if (uTeam != "") {
+        $("input:checkbox[class=chk]").each(function () {
+            var chek = $(this).is(":checked");
+            if (chek == true) {
+                var allchk = {
+                    TeamUsers: $(this).attr("name"),
+                    Value: $(this).val(),
+                    Checked: $(this).is(":checked"),
+                    TeamName: uTeam,
+                    TeamHead: userName
+                };
+                hdArr.push(allchk);
             }
         });
+        if (hdArr.length > 0) {
+            var frmact = "";
+            var iteam = JSON.stringify(hdArr);
+            $.ajax({
+                url: "/Admin/UpsertIndusTeam",
+                dataType: "json",
+                data: "{'iteam': '" + iteam + "', 'act': '" + frmact + "' }",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (result) {
+                    if (result.error === "") {
+                        window.location.href = window.location.href;
+                    }
+                    else {
+                        alert(result.error);
+                    }
+                    //location.reload();
+                },
+                error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert(err.Message);
+                }
+            });
+        }
+        else {
+            alert("Please Select User");
+            $("#iteamsubmit").attr("disabled", false);
+        }
     }
     else {
-        alert("Please Select User");
+        alert("Please enter team name.");
         $("#iteamsubmit").attr("disabled", false);
     }
 });
