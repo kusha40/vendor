@@ -35,10 +35,10 @@
                     <!-- /.box-body -->
                     <div class="box-body">
                         <div class="col-md-12">
-                            @if (Model.UserProfileModels.EmpType != "User")
+                            @if (Model.UserProfileModels.EmpType == "Administrator" || Model.UserProfileModels.EmpType == "SupAdmin" || Model.UserProfileModels.IsAdminRight == true)
                             {
                                 @*<a href="javascript:void(0)" class="btn bg-aqua poapprove" id="poapprove">Approve</a>
-                                    <a href="javascript:void(0)" class="btn bg-red float-right ponotapprove" id="ponotapprove">Not Approve</a>*@
+            <a href="javascript:void(0)" class="btn bg-red float-right ponotapprove" id="ponotapprove">Not Approve</a>*@
                                 <div class="col-md-4">
                                     <a href="javascript:void(0)" class="btn bg-aqua poapprove" id="poapprove">Approve</a>
                                 </div>

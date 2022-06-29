@@ -185,12 +185,12 @@
                                     <div class="form-group">
                                         @Html.LabelFor(m => m.UserProfileModels.ProfileImage, new { @class = "form-control-label" })
                                         @Html.TextBoxFor(m => m.UserProfileModels.ProfileImage,
-                 new
-                 {
-                     @class = "form-control-file",
-                     @type = "file",
-                     @onchange = "ShowImagePreview(this);"
-                 })
+                                         new
+                                         {
+                                             @class = "form-control-file",
+                                             @type = "file",
+                                             @onchange = "ShowImagePreview(this);"
+                                         })
                                         @Html.ValidationMessageFor(m => m.UserProfileModels.ProfileImage, "",
                  new { @class = "text-danger" })
                                     </div>
@@ -205,6 +205,12 @@
 
                                     <canvas id="canvas" height="2" width="2" style="display: none"></canvas>
                                     <input type="hidden" name="imgCropped" id="imgCropped" />
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.UserProfileModels.IsAdminRight, new { @class = "form-control-label" }) 
+                                        @Html.CheckBoxFor(m => m.UserProfileModels.IsAdminRight)
+                                    </div>
                                 </div>
                             </div>
                         </div>

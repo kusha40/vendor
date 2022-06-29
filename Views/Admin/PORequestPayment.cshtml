@@ -444,7 +444,7 @@
                                 <thead>
                                     <tr>
                                         <th>SNo.</th>
-                                        @if (Model.UserProfileModels.EmpType != "User")
+                                        @if (Model.UserProfileModels.EmpType == "Administrator" || Model.UserProfileModels.EmpType == "SupAdmin" || Model.UserProfileModels.IsAdminRight == true)
                                         {
                                             <th>Action</th>
                                         }
@@ -466,7 +466,7 @@
                                     {
                                         <tr>
                                             <td></td>
-                                            @if (Model.UserProfileModels.EmpType != "User")
+                                            @if (Model.UserProfileModels.EmpType == "Administrator" || Model.UserProfileModels.EmpType == "SupAdmin" || Model.UserProfileModels.IsAdminRight == true)
                                             {
                                                 <td>
                                                     @if (u.Status != "RPC")
