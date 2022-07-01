@@ -387,6 +387,24 @@ $(document).ready(function () {
     }).draw();
     //CompanyGroup table
 
+    //CustomerReport table
+    var tblCustomerReport = $('#tblCustomerReport').DataTable({
+        "columnDefs": [
+            { 'targets': 0, 'width': '50', 'searchable': false, 'orderable': false },   //SNo.
+        ],
+        //"scrollX": true,
+        "order": [1, 'asc'],
+        "paging": false
+    });
+
+    tblCustomerReport.on('order.dt search.dt', function () {
+        tblCustomerReport.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblCustomerReport.cell(cell).invalidate('dom');
+        });
+    }).draw();
+    //CustomerReport table
+
     //ApprovalLevel table
     var tblApprovalLevel = $('#tblApprovalLevel').DataTable({
         "columnDefs": [
