@@ -91,9 +91,9 @@
                                             <td>@Html.DisplayFor(model => u.AssignUser)</td>
                                             <td>@Html.DisplayFor(model => u.CreatedOn)</td>
                                             <td>
-                                                @Html.EncodedActionLink("Billing", "BillingAddress", "Admin", new { id = u.CustomerId }, new { @target = "_blank", @class = "btn btn-sm m-l-5 bg-aqua", title = "Add Address" })
-                                                @Html.EncodedActionLink("Shipping", "ShippingAddress", "Admin", new { id = u.CustomerId }, new { @target = "_blank", @class = "btn btn-sm m-l-5 bg-aqua", title = "Add Address" })
-                                                @Html.EncodedActionLink("Contact", "CustomerContactDetail", "Admin", new { id = u.CustomerId }, new { @target = "_blank", @class = "btn btn-sm m-l-5 bg-aqua", title = "Add Address" })
+                                                @Html.EncodedActionLink("Billing", "BillingAddress", "Admin", new { id = u.CustomerId }, new { @target = "_blank", @class = "btn btn-sm m-l-5 bg-aqua", title = "Billing Address" })
+                                                @Html.EncodedActionLink("Shipping", "ShippingAddress", "Admin", new { id = u.CustomerId }, new { @target = "_blank", @class = "btn btn-sm m-l-5 bg-aqua", title = "Shipping Address" })
+                                                @Html.EncodedActionLink("Contact", "CustomerContactDetail", "Admin", new { id = u.CustomerId }, new { @target = "_blank", @class = "btn btn-sm m-l-5 bg-aqua", title = "Customer Contact Detail" })
                                             </td>
                                         </tr>
                                     }

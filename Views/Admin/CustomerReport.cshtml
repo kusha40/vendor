@@ -93,6 +93,7 @@
                                     <th>@Html.DisplayNameFor(model => model.CustomerReportModelList.FirstOrDefault().NoOfLneItm)</th>
                                     <th>@Html.DisplayNameFor(model => model.CustomerReportModelList.FirstOrDefault().QuotedEnq)</th>
                                     <th>@Html.DisplayNameFor(model => model.CustomerReportModelList.FirstOrDefault().QuotedLneItm)</th>
+                                    <th>@Html.DisplayNameFor(model => model.CustomerReportModelList.FirstOrDefault().QuotedValue)</th>
                                     <th>@Html.DisplayNameFor(model => model.CustomerReportModelList.FirstOrDefault().TAT)</th>
                                     <th>@Html.DisplayNameFor(model => model.CustomerReportModelList.FirstOrDefault().POReceived)</th>
                                     <th>@Html.DisplayNameFor(model => model.CustomerReportModelList.FirstOrDefault().POValue)</th>
@@ -101,17 +102,18 @@
                             <tbody>
                                 @foreach (var item in Model.CustomerReportModelList)
                                 {
-                                    <tr>
-                                        <td></td>
-                                        <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.NoOfEnqRcv)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.NoOfLneItm)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.QuotedEnq)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.QuotedLneItm)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.TAT)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.POReceived)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.POValue)</td>
-                                    </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.NoOfEnqRcv)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.NoOfLneItm)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.QuotedEnq)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.QuotedLneItm)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.QuotedValue)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.TAT)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.POReceived)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.POValue)</td>
+                                </tr>
                                 }
                             </tbody>
                         </table>
