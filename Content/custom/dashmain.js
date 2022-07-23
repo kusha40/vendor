@@ -6400,9 +6400,9 @@ $('.enqhold').on('click', function (e) {
     }
 });
 
-$('#wcrapprove').on('click', function (e) {
+$('.wcrapprove').on('click', function (e) {
     $(this).find(':submit').attr('disabled', 'disabled');
-    $("#wcrapprove").attr("disabled", true);
+    $(".wcrapprove").attr("disabled", true);
     e.preventDefault();
     var rows_selected = $("#tblWeeklyCustomerReport tbody tr.selected");
     var list = new Array();
@@ -6450,6 +6450,6 @@ $('#wcrapprove').on('click', function (e) {
     else {
         alert("Please select atleast one customer.");
         $(this).find(':submit').attr('disabled', false);
-        $("#wcrapprove").attr("disabled", false);
+        $(".wcrapprove").attr("disabled", false);
     }
 });
