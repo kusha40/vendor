@@ -405,6 +405,64 @@ $(document).ready(function () {
     }).draw();
     //CustomerReport table
 
+    //CustomerReport table
+    var tblweeklycustomer = $('#tblweeklycustomer').DataTable({
+        "columnDefs": [
+            { 'targets': 0, 'width': '50', 'searchable': false, 'orderable': false },   //SNo.
+        ],
+        //"scrollX": true,
+        "order": [1, 'asc'],
+        "paging": false
+    });
+
+    tblweeklycustomer.on('order.dt search.dt', function () {
+        tblweeklycustomer.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblweeklycustomer.cell(cell).invalidate('dom');
+        });
+    }).draw();
+    //CustomerReport table
+
+    var tblWeeklyCustomerReport = $('#tblWeeklyCustomerReport').DataTable({
+        "columnDefs": [
+            {
+                'targets': 0, 'checkboxes':
+                {
+                    'selectRow': true
+                },
+                'searchable': false,
+                'orderable': false
+            },                      //Select
+        ],
+        select: {
+            style: 'multi',
+        },
+       /* "scrollX": true,*/
+        "paging": false,
+        //"searching": false,
+        "info": false,
+        "dom": 'Bfrtip',
+        "buttons": [
+            'pageLength',
+            {
+                extend: 'excel',
+                text: '<i class="far fa-file-excel"></i> Excel',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                footer: true
+            },
+            'colvis'
+        ]
+    });
+    tblWeeklyCustomerReport.on('order.dt search.dt', function () {
+        tblWeeklyCustomerReport.column(1, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblWeeklyCustomerReport.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
+
     //ApprovalLevel table
     var tblApprovalLevel = $('#tblApprovalLevel').DataTable({
         "columnDefs": [
@@ -6339,5 +6397,59 @@ $('.enqhold').on('click', function (e) {
         alert("Please select atleast one enq.");
         $(".enqhold").attr("disabled", false);
         $(".enqhold").show();
+    }
+});
+
+$('#wcrapprove').on('click', function (e) {
+    $(this).find(':submit').attr('disabled', 'disabled');
+    $("#wcrapprove").attr("disabled", true);
+    e.preventDefault();
+    var rows_selected = $("#tblWeeklyCustomerReport tbody tr.selected");
+    var list = new Array();
+    // Iterate over all selected checkboxes
+
+    $.each(rows_selected, function (index, row) {
+        // Create a hidden element
+        var lin = {
+            CustomerId: row.cells[2].innerText,
+            EnquiryReceived: row.cells[4].innerText,
+            EnquiryLineItems: row.cells[5].innerText,
+            QuotedEnquiry: row.cells[6].innerText,
+            QuotedLineItems: row.cells[7].innerText,
+            QuotedValue: row.cells[8].innerText,
+            TAT: row.cells[9].innerText,
+            POReceived: row.cells[10].innerText,
+            POValue: row.cells[11].innerText,
+            Delivery: row.cells[12].innerText
+        };
+        list.push(lin);
+    });
+
+    if (list.length > 0) {
+        var cstIds = JSON.stringify(list);
+        $.ajax({
+            url: "/Admin/ApproveWeeklyCustomerReport",
+            dataType: "json",
+            data: "{'cstIds': '" + cstIds + "'}",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                if (result.error === "") {
+                    location.reload();
+                }
+                else {
+                    alert(result.error);
+                }
+            },
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                alert(err.Message);
+            }
+        });
+    }
+    else {
+        alert("Please select atleast one customer.");
+        $(this).find(':submit').attr('disabled', false);
+        $("#wcrapprove").attr("disabled", false);
     }
 });
