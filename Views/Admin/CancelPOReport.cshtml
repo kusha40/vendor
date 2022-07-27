@@ -1,0 +1,194 @@
+﻿@using Vendor_Indusuno.Extensions
+@model Vendor_Indusuno.ViewModels.POReportViewModel
+@{
+    ViewBag.Title = "Cancel PO Report";
+    TempData["Reports"] = "active";
+    TempData["CancelPOReport"] = "active";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    @{
+        string pageTitle = Html.Raw(Html.PageGTitle()) + "";
+    }
+    <h1>
+        @pageTitle
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index")"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        @Html.Raw(Html.BuildBreadcrumbNavigation())
+        @*<li class="active">Dashboard</li>*@
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    @using (Html.BeginForm("CancelPOReport", "Admin", FormMethod.Post, new { id = "form_advanced_validation", autocomplete = "off", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <!-- Main row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Default box -->
+                <div class="box">
+                    <div class="box-header with-border">
+                        <div class="col-md-12">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Search, new { @class = "form-control-label" }) <sup>*</sup>
+                                    @Html.TextBoxFor(m => m.Search,
+                                    new
+                                    {
+                                        @class = "form-control text-capitalize",
+                                        placeholder = @Html.DisplayNameFor(m => m.Search)
+                                    })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.StartDate, new { @class = "form-control-label" }) <sup>*</sup>
+                                    @Html.TextBoxFor(m => m.StartDate,
+                                    new
+                                    {
+                                        @class = "form-control datepicker",
+                                        placeholder = @Html.DisplayNameFor(m => m.StartDate)
+                                    })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.EndDate, new { @class = "form-control-label" }) <sup>*</sup>
+                                    @Html.TextBoxFor(m => m.EndDate,
+                                    new
+                                    {
+                                        @class = "form-control datepicker",
+                                        placeholder = @Html.DisplayNameFor(m => m.EndDate)
+                                    })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="box box-widget widget-user-2">
+                                    <div class="box-footer no-padding">
+                                        <ul class="nav nav-stacked">
+                                            <li><a href="#">Total Price <span class="pull-right badge bg-blue">@Model.PurchaseOrdersModels.TotalPrice</span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Customer, new { @class = "form-control-label" }) <sup>*</sup>
+                                    @Html.DropDownListFor(m => m.Customer, new SelectList(Model.CustomerModelList, "Key", "Value"),
+                                    "--Select Customer--", new { @class = "form-control select2 cstid" })
+                                    @Html.ValidationMessageFor(m => m.Customer, "",
+                            new { @class = "text-danger errcstid" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.User, new { @class = "form-control-label" }) <sup>*</sup>
+                                    @Html.DropDownListFor(m => m.User, new SelectList(Model.UserModelList, "Key", "Value"),
+                                    "--Select User--", new { @class = "form-control select2 posentby" })
+                                    @Html.ValidationMessageFor(m => m.User, "",
+                            new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="box-tools pull-left">
+                                        <button type="submit" name="search" class="btn bg-aqua" title="SEARCH"
+                                                value="search">
+                                            SEARCH
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-body">
+                        <table id="tblporeport" class="table table-bordered display">
+                            <thead>
+                                <tr>
+                                    <th>SNo</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().CustomerName)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().PONumber)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POId)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POPId)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Product)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Brand)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().ModelNo)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POType)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Quantity)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Price)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Discount)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().TotalPrice)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().GST)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().OrderDate)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().ExpDlvDate)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().POAssignTo)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.PurchaseOrdersModelList)
+                                {
+                                    <tr>
+                                        <td></td>
+                                        <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
+                                        <td>
+                                            <a href='~/Content/upload/poupload/@item.POFile' target="_blank">@item.PONumber</a>
+                                        </td>
+                                        <td>
+                                            <a href='~/Content/upload/poupload/@item.POFile' target="_blank">@item.POId</a>
+                                        </td>
+                                        <td>@Html.DisplayFor(modelItem => item.POPId)</td>
+                                        <td title="@item.SpcRemark">
+                                            @Html.DisplayFor(modelItem => item.Product)<br>
+                                        </td>
+                                        <td>@Html.DisplayFor(modelItem => item.Brand)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.ModelNo)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.POType)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Discount)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.GST)%</td>
+                                        <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.ExpDlvDate)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.POAssignTo)</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box -->
+                </div>
+            </div>
+        </div>
+        <!-- danger with sound -->
+        <div class="message-box animated fadeIn" data-sound="alert" id="mb-sub-confirm">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-warning"></span> Confirm <strong>Box</strong> ?</div>
+                    <div class="mb-content">
+                        <p>Are you sure you want to submit?</p>
+                        <p>Press No if you want to Cancel. Press Yes to Submit the record.</p>
+                    </div>
+                    <div class="mb-footer">
+                        <div class="pull-right">
+                            <button name="posubmit" class="btn btn-confirm-yes btn-lg" title="Yes">
+                                Yes
+                            </button>
+                            <button class="btn btn-confirm-no btn-lg mb-control-close">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end danger with sound -->
+    }
+</section>
+<!-- /.content -->

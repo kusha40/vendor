@@ -114,15 +114,18 @@
                                         <td>
                                             @if (item.Status != "CAN")
                                             {
-                                            @Html.EncodedActionLink("<i class='fa fa-pencil-square-o'></i>", "EditPurchaseOrder", "Admin", new { id = item.Id }, new { @class = "btn btn-edt bg-aqua btn-sm", title = "Edit", @target = "_blank" })
+                                                @Html.EncodedActionLink("<i class='fa fa-pencil-square-o'></i>", "EditPurchaseOrder", "Admin", new { id = item.Id }, new { @class = "btn btn-edt bg-aqua btn-sm", title = "Edit", @target = "_blank" })
                                             }
                                             @if (item.Status == "I" || item.Status == "A")
                                             {
                                                 @Html.EncodedActionLink("<i class='fa fa-times'></i>", "DeletePurchaseOrder", "Admin", new { id = item.Id }, new { @class = "btn btn-del m-l-5 bg-m-red btn-sm", title = "Delete" })
                                             }
-                                            @if (item.Status == "I" || item.Status == "A" || item.Status == "S" || item.Status == "G" || item.Status == "AP" || item.Status == "RP" || item.Status == "RPA")
+                                            @if (Model.UserProfileModels.EmpType == "Administrator" || Model.UserProfileModels.EmpType == "SupAdmin")
                                             {
-                                                @Html.EncodedActionLink("Cancel", "CancelPurchaseOrder", "Admin", new { id = item.Id }, new { @class = "btn btn-del m-l-5 bg-m-red btn-sm", title = "Cancel" })
+                                                if (item.Status == "I" || item.Status == "A" || item.Status == "S" || item.Status == "G" || item.Status == "AP" || item.Status == "RP" || item.Status == "RPA")
+                                                {
+                                                    @Html.EncodedActionLink("Cancel", "CancelPurchaseOrder", "Admin", new { id = item.Id }, new { @class = "btn btn-del m-l-5 bg-m-red btn-sm", title = "Cancel" })
+                                                }
                                             }
                                         </td>
                                         <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
