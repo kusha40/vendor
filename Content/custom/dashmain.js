@@ -3931,9 +3931,9 @@ $('#chksameadd').change(function () {
 });
 
 $('.pogen').on('click', function (e) {
+    $(".pogen").hide();
     $(this).find(':submit').attr('disabled', 'disabled');
     $(".pogen").attr("disabled", true);
-    $(".pogen").hide();
     e.preventDefault();
     var linkObj = $(this);
     var hdArr = new Array();
