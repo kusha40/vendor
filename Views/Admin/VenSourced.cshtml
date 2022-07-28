@@ -102,23 +102,23 @@
                                         <td>@Html.DisplayFor(modelItem => item.Vendor)</td>
                                         <td>@Html.DisplayFor(modelItem => item.EnqAssignTo)</td>
                                         <td>
-                                            @Html.EncodedActionLink("Approve", "ApproveVendorEnquiryEmail", "Admin", new { id = item.VSNo }, new { @class = "", title = "Approve", @target = "_blank" })
+                                            @Html.EncodedActionLink("Send", "SendVendorEnquiryEmail", "Admin", new { id = item.VSNo }, new { @class = "", title = "Send", @target = "_blank" })
                                             @*@if (item.IsApproved == "A" && Model.IsLevelUser == "Y")
-                                            {
-                                                @lvlApp
-                                            }
-                                            else if (item.IsApproved == "NA" && Model.IsLevelUser == "Y")
-                                            {
-                                                @Html.EncodedActionLink("Approve", "ApproveVendorEnquiryEmail", "Admin", new { id = item.VSNo }, new { @class = "", title = "Approve", @target = "_blank" })
-                                            }
-                                            else if (item.IsApproved == "A" && Model.IsLevelUser != "Y")
-                                            {
-                                                @Html.EncodedActionLink("Send", "SendVendorEnquiryEmail", "Admin", new { id = item.VSNo }, new { @class = "", title = "Edit", @target = "_blank" })
-                                            }
-                                            else
-                                            {
-                                                @aText
-                                            }*@
+                                                {
+                                                    @lvlApp
+                                                }
+                                                else if (item.IsApproved == "NA" && Model.IsLevelUser == "Y")
+                                                {
+                                                    @Html.EncodedActionLink("Approve", "ApproveVendorEnquiryEmail", "Admin", new { id = item.VSNo }, new { @class = "", title = "Approve", @target = "_blank" })
+                                                }
+                                                else if (item.IsApproved == "A" && Model.IsLevelUser != "Y")
+                                                {
+                                                    @Html.EncodedActionLink("Send", "SendVendorEnquiryEmail", "Admin", new { id = item.VSNo }, new { @class = "", title = "Edit", @target = "_blank" })
+                                                }
+                                                else
+                                                {
+                                                    @aText
+                                                }*@
                                         </td>
                                         <td>@Html.DisplayFor(modelItem => item.EmailSend)</td>
                                     </tr>
