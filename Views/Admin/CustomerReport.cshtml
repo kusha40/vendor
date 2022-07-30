@@ -116,7 +116,7 @@
                                     <td>@Html.DisplayFor(modelItem => item.POReceived)</td>
                                     <td>@Html.DisplayFor(modelItem => item.POValue)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Delivery)</td>
-                                    <td>@Html.EncodedActionLink("Send", "SendCustomerWeeklyReport", "Admin", new { id = item.Id }, new { @class = "", title = "Send", @target = "_blank" })</td>
+                                    <td>@Html.EncodedActionLink("Send", "WeeklyCustomerReportSend", "Admin", new { id = item.Id }, new { @class = "", title = "Send", @target = "_blank" })</td>
                                 </tr>
                                 }
                             </tbody>

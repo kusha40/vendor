@@ -6420,7 +6420,7 @@ $('.wcrapprove').on('click', function (e) {
             TAT: row.cells[9].innerText,
             POReceived: row.cells[10].innerText,
             POValue: row.cells[11].innerText,
-            Delivery: row.cells[12].innerText
+            Delivery: row.cells[12].innerText.split('%')[0]+""
         };
         list.push(lin);
     });
