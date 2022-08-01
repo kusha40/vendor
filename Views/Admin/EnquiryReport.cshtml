@@ -98,8 +98,8 @@
                             new { @class = "text-danger errcstid" })
                                 </div>
                             </div>
-                            @if(Model.UserProfileModels.EmpType != "User")
-                            { 
+                            @if (Model.UserProfileModels.EmpType != "User")
+                            {
                                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                     <div class="form-group">
                                         @Html.LabelFor(m => m.User, new { @class = "form-control-label" })
@@ -151,6 +151,15 @@
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Product)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Brand)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().ModelNo)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Vendor1Id)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Vendor1Price)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Vendor1Discount)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Vendor2Id)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Vendor2Price)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Vendor2Discount)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Vendor3Id)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Vendor3Price)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Vendor3Discount)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Type)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqType)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().Quantity)</th>
@@ -178,6 +187,15 @@
                                         </td>
                                         <td>@Html.DisplayFor(modelItem => item.Brand)</td>
                                         <td>@Html.DisplayFor(modelItem => item.ModelNo)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Vendor1Id)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Vendor1Price)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Vendor1Discount) %</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Vendor2Id)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Vendor2Price)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Vendor2Discount) %</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Vendor3Id)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Vendor3Price)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Vendor3Discount) %</td>
                                         <td>@Html.DisplayFor(modelItem => item.Type)</td>
                                         <td>@Html.DisplayFor(modelItem => item.EnqType)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
