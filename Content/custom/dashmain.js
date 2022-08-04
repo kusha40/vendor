@@ -3021,15 +3021,19 @@ function AddTempPOSourced() {
         $('#tblposource').find('tbody').append(
             "<tr>" +
             "<td class='w-10'> <span class='scstname'>" + tmpposrc.CustomerName + "</span></td>" +
-            "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_PONumber_" + inc + "' name='PurchaseOrdersModelList_PONumber_" + inc + "' data-toggle='tooltip' title='" + tmpposrc.PONumber + "' value='" + tmpposrc.PONumber + "' class='form-control spono m-b-0 bg-gray' disabled  type='text' /></td> " +
-            "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_POPId_" + inc + "' name='PurchaseOrdersModelList_POPId_" + inc + "' data-toggle='tooltip' title='" + tmpposrc.POPId + "' value='" + tmpposrc.POPId + "' disabled class='form-control spopid m-b-0'  type='text' /></td>" +
-            "<td class='w-15 tdsprdid'>" + tmpposrc.Product + "</td>" +
+            /*"<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_PONumber_" + inc + "' name='PurchaseOrdersModelList_PONumber_" + inc + "' data-toggle='tooltip' title='" + tmpposrc.PONumber + "' value='" + tmpposrc.PONumber + "' class='form-control spono m-b-0 bg-gray' disabled  type='text' /></td> " +*/
+            "<td class='w-6'><span class='spono'>" + tmpposrc.PONumber + "</span></td> " +
+            "<td class='w-8'> <input type='text' id='PurchaseOrdersModelList_POPId_" + inc + "' name='PurchaseOrdersModelList_POPId_" + inc + "' data-toggle='tooltip' title='" + tmpposrc.POPId + "' value='" + tmpposrc.POPId + "' disabled class='form-control spopid m-b-0'  type='text' /></td>" +
+            "<td class='w-10 tdsprdid'>" + tmpposrc.Product + "</td>" +
             /*"<td class='w-15'><input type='text' id='PurchaseOrdersModelList_Product_" + inc + "' name='PurchaseOrdersModelList_Product_" + inc + "' data-toggle='tooltip' title='" + tmpposrc.Product + "' disabled value='" + tmpposrc.Product + "' class='form-control spopid m-b-0 bg-gray'  type='text' /></td>" +*/
             "<td class='w-6'> <input type='text' id='PurchaseOrdersModelList_Price_" + inc + "' name='PurchaseOrdersModelList_Price_" + inc + "' value='" + tmpposrc.Price + "' disabled class='form-control spoprice m-b-0 bg-gray'  type='text' /></td>" +
             "<td class='w-6'> <input type='text' id='PurchaseOrdersModelList_Quantity_" + inc + "' name='PurchaseOrdersModelList_Quantity_" + inc + "' value='" + tmpposrc.Quantity + "' disabled class='form-control spoqty m-b-0 bg-gray'  type='text' /></br><input type='text' id='PurchaseOrdersModelList_OrderedQuantity_" + inc + "' name='PurchaseOrdersModelList_OrderedQuantity_" + inc + "' value='" + tmpposrc.Quantity + "' placeholder='Ord Qty' class='form-control sordqty onlynumdec m-b-0 float-left' /></td>" +
             "<td class='w-4'> <input type='text' id='PurchaseOrdersModelList_GST_" + inc + "' name='PurchaseOrdersModelList_GST_" + inc + "' value='" + tmpposrc.GST + "' class='form-control spogst onlynumdec m-b-0'  type='text' /></td>" +
             "<td class='w-6'>  <input type='text' id='EnquiriesModelList_ListPrice_" + inc + "' name='EnquiriesModelList_ListPrice_" + inc + "' value='' class='form-control lstprc m-b-0'  type='text' /></td>" +
-            "<td class='w-10'> <input type='text' id='PurchaseOrdersModelList_EnqId_" + inc + "' name='PurchaseOrdersModelList_EnqId_" + inc + "' value='' disabled class='form-control senqid m-b-0 bg-gray'  type='text' /></td>" +
+            "<td class='w-8'> <input type='text' id='PurchaseOrdersModelList_EnqId_" + inc + "' name='PurchaseOrdersModelList_EnqId_" + inc + "' value='' class='form-control senqid m-b-0 bg-gray' disabled  type='text' /></td>" +
+            //"<td class='w-12'> <input type='text' id='PurchaseOrdersModelList_VendorId1_" + inc + "' name='PurchaseOrdersModelList_VendorId1_" + inc + "' placeholder='Vendor 1' value='' class='form-control svenid1 m-b-0' /></br><input type='text' id='PurchaseOrdersModelList_VendorPrice1_" + inc + "' name='PurchaseOrdersModelList_VendorPrice1_" + inc + "' value='' placeholder='V. Price 1' class='form-control svenprc1 svenprcmrg1 onlynumdec m-b-0 w-70 float-left' /><input type='text' id='PurchaseOrdersModelList_Margin1_" + inc + "' name='PurchaseOrdersModelList_Margin1_" + inc + "' value='' disabled placeholder='Margin' class='form-control onlynumdec posmarg1 m-b-0 w-30' /><input type='text' id='PurchaseOrdersModelList_VendorDiscount1_" + inc + "' name='PurchaseOrdersModelList_VendorDiscount1_" + inc + "' value='' disabled placeholder='Discount' class='form-control onlynumdec vdsc1 m-b-0' /></td>" +
+            //"<td class='w-12'> <input type='text' id='PurchaseOrdersModelList_VendorId2_" + inc + "' name='PurchaseOrdersModelList_VendorId2_" + inc + "' placeholder='Vendor 2' value='' class='form-control svenid2 m-b-0' /></br><input type='text' id='PurchaseOrdersModelList_VendorPrice2_" + inc + "' name='PurchaseOrdersModelList_VendorPrice2_" + inc + "' value='' placeholder='V. Price 2' class='form-control svenprc2 svenprcmrg2 onlynumdec m-b-0 w-70 float-left' /><input type='text' id='PurchaseOrdersModelList_Margin2_" + inc + "' name='PurchaseOrdersModelList_Margin2_" + inc + "' value='' disabled placeholder='Margin' class='form-control onlynumdec posmarg2 m-b-0 w-30' /><input type='text' id='PurchaseOrdersModelList_VendorDiscount2_" + inc + "' name='PurchaseOrdersModelList_VendorDiscount2_" + inc + "' value='' disabled placeholder='Discount' class='form-control onlynumdec vdsc2 m-b-0' /></td>" +
+            //"<td class='w-12'> <input type='text' id='PurchaseOrdersModelList_VendorId3_" + inc + "' name='PurchaseOrdersModelList_VendorId3_" + inc + "' placeholder='Vendor 3' value='' class='form-control svenid3 m-b-0' /></br><input type='text' id='PurchaseOrdersModelList_VendorPrice3_" + inc + "' name='PurchaseOrdersModelList_VendorPrice3_" + inc + "' value='' placeholder='V. Price 3' class='form-control svenprc3 svenprcmrg3 onlynumdec m-b-0 w-70 float-left' /><input type='text' id='PurchaseOrdersModelList_Margin3_" + inc + "' name='PurchaseOrdersModelList_Margin3_" + inc + "' value='' disabled placeholder='Margin' class='form-control onlynumdec posmarg3 m-b-0 w-30' /><input type='text' id='PurchaseOrdersModelList_VendorDiscount3_" + inc + "' name='PurchaseOrdersModelList_VendorDiscount3_" + inc + "' value='' disabled placeholder='Discount' class='form-control onlynumdec vdsc3 m-b-0' /></td>" +
             "<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_VendorId_" + inc + "' name='PurchaseOrdersModelList_VendorId_" + inc + "' placeholder='Vendor Name' value='' class='form-control svenid m-b-0'  type='text' /></br><input type='text' id='PurchaseOrdersModelList_VendorPrice_" + inc + "' name='PurchaseOrdersModelList_VendorPrice_" + inc + "' value='' placeholder='Vendor Price' class='form-control svenprc svenprcmrg onlynumdec m-b-0 w-70 float-left' /><input type='text' id='PurchaseOrdersModelList_Margin_" + inc + "' name='PurchaseOrdersModelList_Margin_" + inc + "' value='' disabled placeholder='Margin' class='form-control onlynumdec posmarg m-b-0 w-30' /><input type='text' id='PurchaseOrdersModelList_VendorDiscount_" + inc + "' name='PurchaseOrdersModelList_VendorDiscount_" + inc + "' value='' disabled placeholder='Discount' class='form-control onlynumdec vdsc m-b-0' /></td>" +
             "<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_LastVendorId_" + inc + "' name='PurchaseOrdersModelList_LastVendorId_" + inc + "' disabled placeholder='Last Vendor Name' value='' class='form-control slvenid m-b-0 bg-gray' /></br><input type='text' id='PurchaseOrdersModelList_LastVendorPrice_" + inc + "' disabled name='PurchaseOrdersModelList_LastVendorPrice_" + inc + "' value='' placeholder='Last Vendor Price' class='form-control slvenprc m-b-0 bg-gray' /></td>" +
             "</tr>");
@@ -3123,60 +3127,75 @@ $(document).on('blur', '.svenprcmrg', function () {
 //Get Margin
 
 
-//$(document).on('blur', '.senqid', function () {
-//    var curRow = $(this).closest("tr");
-//    var enqid = curRow.find(".senqid").val();
-//    var cstName = curRow.find(".scstname").val();
-//    //e.preventDefault();
-//    if (enqid !== "") {
-//        $.ajax({
-//            url: '/Admin/GetVendorPrice',
-//            data: "{'enqid':'" + enqid + "'}",
-//            type: "POST",
-//            dataType: "JSON",
-//            contentType: "application/json; charset=utf-8",
-//            success: function (res) {
-//                if (res[0] === undefined || res[0] === "") {
-//                    curRow.find("td:eq(8)").find(".svenid").val("");
-//                    curRow.find("td:eq(8)").find(".svenprc").val("");
-//                    curRow.find("td:eq(9)").find(".slvenid").val("");
-//                    curRow.find("td:eq(9)").find(".slvenprc").val("");
-//                    alert("Vendor is not registered with us Please register and then enter enquiry Id.");
-//                }
-//                else {
-//                    if (res[0].CustomerName === cstName) {
-//                        if (res[0].Status == "1") {
-//                            curRow.find("td:eq(8)").find(".svenid").val(res[0].VendorName);
-//                            curRow.find("td:eq(8)").find(".svenprc").val(res[0].VendorPrice);
-//                            curRow.find("td:eq(9)").find(".slvenid").val(res[0].VendorName);
-//                            curRow.find("td:eq(9)").find(".slvenprc").val(res[0].VendorPrice);
-//                        }
-//                        else {
-//                            curRow.find("td:eq(8)").find(".svenid").val("");
-//                            curRow.find("td:eq(8)").find(".svenprc").val("");
-//                            curRow.find("td:eq(9)").find(".slvenid").val(res[0].VendorName);
-//                            curRow.find("td:eq(9)").find(".slvenprc").val(res[0].VendorPrice);
-//                        }
-//                    }
-//                    else {
-//                        alert("This enquiry id is not quoted with this customer");
-//                        curRow.find("td:eq(7)").find(".senqid").val("");
-//                        curRow.find("td:eq(7)").find(".senqid").focus();
-//                    }
-//                }
-//            },
-//            error: function (e) {
-//                alert("Failed! Please try again. ");
-//            }
-//        });
-//    }
-//    else {
-//        curRow.find("td:eq(8)").find(".svenid").val("");
-//        curRow.find("td:eq(8)").find(".svenprc").val("");
-//        curRow.find("td:eq(9)").find(".slvenid").val("");
-//        curRow.find("td:eq(8)").find(".slvenprc").val("");
-//    }
-//});
+$(document).on('blur', '.senqid', function () {
+    var curRow = $(this).closest("tr");
+    var enqid = curRow.find(".senqid").val();
+    var cstName = curRow.find(".scstname").html();
+    //e.preventDefault();
+    if (enqid !== "") {
+        $.ajax({
+            url: '/Admin/GetVendorPrice',
+            data: "{'enqid':'" + enqid + "'}",
+            type: "POST",
+            dataType: "JSON",
+            contentType: "application/json; charset=utf-8",
+            success: function (res) {
+                if (res[0] === undefined || res[0] === "") {
+                    curRow.find("td:eq(9)").find(".svenid1").val("");
+                    curRow.find("td:eq(9)").find(".svenprc1").val("");
+                    curRow.find("td:eq(9)").find(".vdsc1").val("");
+                    curRow.find("td:eq(10)").find(".svenid2").val("");
+                    curRow.find("td:eq(10)").find(".svenprc2").val("");
+                    curRow.find("td:eq(10)").find(".vdsc2").val("");
+                    curRow.find("td:eq(11)").find(".svenid3").val("");
+                    curRow.find("td:eq(11)").find(".svenprc3").val("");
+                    curRow.find("td:eq(11)").find(".vdsc3").val("");
+                    alert("Vendor is not registered with us Please register and then enter enquiry Id.");
+                }
+                else {
+                    if (res[0].CustomerName === cstName) {
+                        //if (res[0].Status == "1") {
+                            curRow.find("td:eq(9)").find(".svenid1").val(res[0].Vendor1Name);
+                            curRow.find("td:eq(9)").find(".svenprc1").val(res[0].Vendor1Price);
+                            curRow.find("td:eq(9)").find(".vdsc1").val(res[0].Vendor1Discount);
+                            curRow.find("td:eq(10)").find(".svenid2").val(res[0].Vendor2Name);
+                            curRow.find("td:eq(10)").find(".svenprc2").val(res[0].Vendor2Price);
+                            curRow.find("td:eq(10)").find(".vdsc2").val(res[0].Vendor2Discount);
+                            curRow.find("td:eq(11)").find(".svenid3").val(res[0].Vendor3Name);
+                            curRow.find("td:eq(11)").find(".svenprc3").val(res[0].Vendor3Price);
+                            curRow.find("td:eq(11)").find(".vdsc3").val(res[0].Vendor3Discount);
+                        //}
+                        //else {
+                        //    curRow.find("td:eq(9)").find(".svenid1").val("");
+                        //    curRow.find("td:eq(9)").find(".svenprc1").val("");
+                        //    curRow.find("td:eq(9)").find(".vdsc1").val("");
+                        //    curRow.find("td:eq(10)").find(".svenid2").val("");
+                        //    curRow.find("td:eq(10)").find(".svenprc2").val("");
+                        //    curRow.find("td:eq(10)").find(".vdsc2").val("");
+                        //    curRow.find("td:eq(11)").find(".svenid3").val("");
+                        //    curRow.find("td:eq(11)").find(".svenprc3").val("");
+                        //    curRow.find("td:eq(11)").find(".vdsc3").val("");
+                        //}
+                    }
+                    else {
+                        alert("This enquiry id is not quoted with this customer");
+                        curRow.find("td:eq(8)").find(".senqid").val("");
+                        curRow.find("td:eq(8)").find(".senqid").focus();
+                    }
+                }
+            },
+            error: function (e) {
+                alert("Failed! Please try again. ");
+            }
+        });
+    }
+    else {
+        curRow.find("td:eq(8)").find(".svenid").val("");
+        curRow.find("td:eq(8)").find(".svenprc").val("");
+        curRow.find("td:eq(9)").find(".slvenid").val("");
+        curRow.find("td:eq(8)").find(".slvenprc").val("");
+    }
+});
 
 $(document).on('blur', '.svenprc', function () {
     var curRow = $(this).closest("tr");
@@ -4988,7 +5007,8 @@ function AddTempVenSourced() {
         $('#tblvensource').find('tbody').append(
             "<tr>" +
             "<td class='w-10'> <span class='scstname'>" + tmpvensrc.CustomerName + "</span></td>" +
-            "<td class='w-10'> <input type='text' id='EnquiriesModelList_EnqPId_" + inc + "' name='EnquiriesModelList_EnqPId_" + inc + "' data-toggle='tooltip' title='" + tmpvensrc.EnqPId + "' value='" + tmpvensrc.EnqPId + "' disabled class='form-control spid m-b-0'  type='text' /><a class='btn btn-sm bg-aqua pedtbtn'>Edit Product</a></td>" +
+            /*"<td class='w-10'> <input type='text' id='EnquiriesModelList_EnqPId_" + inc + "' name='EnquiriesModelList_EnqPId_" + inc + "' data-toggle='tooltip' title='" + tmpvensrc.EnqPId + "' value='" + tmpvensrc.EnqPId + "' disabled class='form-control spid m-b-0'  type='text' /><a class='btn btn-sm bg-aqua pedtbtn'>Edit Product</a></td>" +*/
+            "<td class='w-10'> <input type='text' id='EnquiriesModelList_EnqPId_" + inc + "' name='EnquiriesModelList_EnqPId_" + inc + "' data-toggle='tooltip' title='" + tmpvensrc.EnqPId + "' value='" + tmpvensrc.EnqPId + "' disabled class='form-control spid m-b-0'  type='text' /></td>" +
 
             "<td class='w-15 tdsprdid'>" + tmpvensrc.Product + "</td>" +
 
