@@ -437,7 +437,7 @@ $(document).ready(function () {
         select: {
             style: 'multi',
         },
-       /* "scrollX": true,*/
+        /* "scrollX": true,*/
         "paging": false,
         //"searching": false,
         "info": false,
@@ -3029,13 +3029,13 @@ function AddTempPOSourced() {
             "<td class='w-6'> <input type='text' id='PurchaseOrdersModelList_Price_" + inc + "' name='PurchaseOrdersModelList_Price_" + inc + "' value='" + tmpposrc.Price + "' disabled class='form-control spoprice m-b-0 bg-gray'  type='text' /></td>" +
             "<td class='w-6'> <input type='text' id='PurchaseOrdersModelList_Quantity_" + inc + "' name='PurchaseOrdersModelList_Quantity_" + inc + "' value='" + tmpposrc.Quantity + "' disabled class='form-control spoqty m-b-0 bg-gray'  type='text' /></br><input type='text' id='PurchaseOrdersModelList_OrderedQuantity_" + inc + "' name='PurchaseOrdersModelList_OrderedQuantity_" + inc + "' value='" + tmpposrc.Quantity + "' placeholder='Ord Qty' class='form-control sordqty onlynumdec m-b-0 float-left' /></td>" +
             "<td class='w-4'> <input type='text' id='PurchaseOrdersModelList_GST_" + inc + "' name='PurchaseOrdersModelList_GST_" + inc + "' value='" + tmpposrc.GST + "' class='form-control spogst onlynumdec m-b-0'  type='text' /></td>" +
-            "<td class='w-6'>  <input type='text' id='EnquiriesModelList_ListPrice_" + inc + "' name='EnquiriesModelList_ListPrice_" + inc + "' value='' class='form-control lstprc m-b-0'  type='text' /></td>" +
-            "<td class='w-8'> <input type='text' id='PurchaseOrdersModelList_EnqId_" + inc + "' name='PurchaseOrdersModelList_EnqId_" + inc + "' value='' class='form-control senqid m-b-0 bg-gray' disabled  type='text' /></td>" +
-            //"<td class='w-12'> <input type='text' id='PurchaseOrdersModelList_VendorId1_" + inc + "' name='PurchaseOrdersModelList_VendorId1_" + inc + "' placeholder='Vendor 1' value='' class='form-control svenid1 m-b-0' /></br><input type='text' id='PurchaseOrdersModelList_VendorPrice1_" + inc + "' name='PurchaseOrdersModelList_VendorPrice1_" + inc + "' value='' placeholder='V. Price 1' class='form-control svenprc1 svenprcmrg1 onlynumdec m-b-0 w-70 float-left' /><input type='text' id='PurchaseOrdersModelList_Margin1_" + inc + "' name='PurchaseOrdersModelList_Margin1_" + inc + "' value='' disabled placeholder='Margin' class='form-control onlynumdec posmarg1 m-b-0 w-30' /><input type='text' id='PurchaseOrdersModelList_VendorDiscount1_" + inc + "' name='PurchaseOrdersModelList_VendorDiscount1_" + inc + "' value='' disabled placeholder='Discount' class='form-control onlynumdec vdsc1 m-b-0' /></td>" +
-            //"<td class='w-12'> <input type='text' id='PurchaseOrdersModelList_VendorId2_" + inc + "' name='PurchaseOrdersModelList_VendorId2_" + inc + "' placeholder='Vendor 2' value='' class='form-control svenid2 m-b-0' /></br><input type='text' id='PurchaseOrdersModelList_VendorPrice2_" + inc + "' name='PurchaseOrdersModelList_VendorPrice2_" + inc + "' value='' placeholder='V. Price 2' class='form-control svenprc2 svenprcmrg2 onlynumdec m-b-0 w-70 float-left' /><input type='text' id='PurchaseOrdersModelList_Margin2_" + inc + "' name='PurchaseOrdersModelList_Margin2_" + inc + "' value='' disabled placeholder='Margin' class='form-control onlynumdec posmarg2 m-b-0 w-30' /><input type='text' id='PurchaseOrdersModelList_VendorDiscount2_" + inc + "' name='PurchaseOrdersModelList_VendorDiscount2_" + inc + "' value='' disabled placeholder='Discount' class='form-control onlynumdec vdsc2 m-b-0' /></td>" +
-            //"<td class='w-12'> <input type='text' id='PurchaseOrdersModelList_VendorId3_" + inc + "' name='PurchaseOrdersModelList_VendorId3_" + inc + "' placeholder='Vendor 3' value='' class='form-control svenid3 m-b-0' /></br><input type='text' id='PurchaseOrdersModelList_VendorPrice3_" + inc + "' name='PurchaseOrdersModelList_VendorPrice3_" + inc + "' value='' placeholder='V. Price 3' class='form-control svenprc3 svenprcmrg3 onlynumdec m-b-0 w-70 float-left' /><input type='text' id='PurchaseOrdersModelList_Margin3_" + inc + "' name='PurchaseOrdersModelList_Margin3_" + inc + "' value='' disabled placeholder='Margin' class='form-control onlynumdec posmarg3 m-b-0 w-30' /><input type='text' id='PurchaseOrdersModelList_VendorDiscount3_" + inc + "' name='PurchaseOrdersModelList_VendorDiscount3_" + inc + "' value='' disabled placeholder='Discount' class='form-control onlynumdec vdsc3 m-b-0' /></td>" +
-            "<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_VendorId_" + inc + "' name='PurchaseOrdersModelList_VendorId_" + inc + "' placeholder='Vendor Name' value='' class='form-control svenid m-b-0'  type='text' /></br><input type='text' id='PurchaseOrdersModelList_VendorPrice_" + inc + "' name='PurchaseOrdersModelList_VendorPrice_" + inc + "' value='' placeholder='Vendor Price' class='form-control svenprc svenprcmrg onlynumdec m-b-0 w-70 float-left' /><input type='text' id='PurchaseOrdersModelList_Margin_" + inc + "' name='PurchaseOrdersModelList_Margin_" + inc + "' value='' disabled placeholder='Margin' class='form-control onlynumdec posmarg m-b-0 w-30' /><input type='text' id='PurchaseOrdersModelList_VendorDiscount_" + inc + "' name='PurchaseOrdersModelList_VendorDiscount_" + inc + "' value='' disabled placeholder='Discount' class='form-control onlynumdec vdsc m-b-0' /></td>" +
-            "<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_LastVendorId_" + inc + "' name='PurchaseOrdersModelList_LastVendorId_" + inc + "' disabled placeholder='Last Vendor Name' value='' class='form-control slvenid m-b-0 bg-gray' /></br><input type='text' id='PurchaseOrdersModelList_LastVendorPrice_" + inc + "' disabled name='PurchaseOrdersModelList_LastVendorPrice_" + inc + "' value='' placeholder='Last Vendor Price' class='form-control slvenprc m-b-0 bg-gray' /></td>" +
+            "<td class='w-6'> <input type='text' id='EnquiriesModelList_ListPrice_" + inc + "' name='EnquiriesModelList_ListPrice_" + inc + "' value='' class='form-control lstprc m-b-0 onlynumdec bg-m-whitesmoke'  type='text' /></td>" +
+            "<td class='w-8'> <input type='text' id='PurchaseOrdersModelList_EnqId_" + inc + "' name='PurchaseOrdersModelList_EnqId_" + inc + "' value='' class='form-control senqid m-b-0 bg-m-whitesmoke'  type='text' /></td>" +
+            "<td class='w-12'> <input type='text' id='PurchaseOrdersModelList_VendorId1_" + inc + "' name='PurchaseOrdersModelList_VendorId1_" + inc + "' placeholder='Vendor 1' value='' class='form-control svenid1 svenid m-b-0' /></br><input type='text' id='PurchaseOrdersModelList_VendorPrice1_" + inc + "' name='PurchaseOrdersModelList_VendorPrice1_" + inc + "' value='' placeholder='V. Price 1' class='form-control svenprc1 svenprcmrg1 onlynumdec m-b-0 w-70 float-left'/><input type='text' id='PurchaseOrdersModelList_Margin1_" + inc + "' name='PurchaseOrdersModelList_Margin1_" + inc + "' value='' disabled placeholder='Margin' class='form-control onlynumdec posmarg1 m-b-0 w-30'/><input type='text' id='PurchaseOrdersModelList_VendorDiscount1_" + inc + "' name='PurchaseOrdersModelList_VendorDiscount1_" + inc + "' value='' disabled placeholder='Discount' class='form-control onlynumdec vdsc1 m-b-0' /><input type='checkbox' id='PurchaseOrdersModelList_VendorL1_" + inc + "' name='PurchaseOrdersModelList_VendorL1_" + inc + "' checked class='vl1 m-b-0 chk' value=''/></td>" +
+            "<td class='w-12'> <input type='text' id='PurchaseOrdersModelList_VendorId2_" + inc + "' name='PurchaseOrdersModelList_VendorId2_" + inc + "' placeholder='Vendor 2' value='' class='form-control svenid2 svenid m-b-0' /></br><input type='text' id='PurchaseOrdersModelList_VendorPrice2_" + inc + "' name='PurchaseOrdersModelList_VendorPrice2_" + inc + "' value='' placeholder='V. Price 2' class='form-control svenprc2 svenprcmrg2 onlynumdec m-b-0 w-70 float-left' /><input type='text' id='PurchaseOrdersModelList_Margin2_" + inc + "' name='PurchaseOrdersModelList_Margin2_" + inc + "' value='' disabled placeholder='Margin' class='form-control onlynumdec posmarg2 m-b-0 w-30' /><input type='text' id='PurchaseOrdersModelList_VendorDiscount2_" + inc + "' name='PurchaseOrdersModelList_VendorDiscount2_" + inc + "' value='' disabled placeholder='Discount' class='form-control onlynumdec vdsc2 m-b-0' /><input type='checkbox' id='PurchaseOrdersModelList_VendorL2_" + inc + "' name='PurchaseOrdersModelList_VendorL2_" + inc + "' class='vl2 m-b-0 chk' value=''/></td>" +
+            "<td class='w-12'> <input type='text' id='PurchaseOrdersModelList_VendorId3_" + inc + "' name='PurchaseOrdersModelList_VendorId3_" + inc + "' placeholder='Vendor 3' value='' class='form-control svenid3 svenid m-b-0' /></br><input type='text' id='PurchaseOrdersModelList_VendorPrice3_" + inc + "' name='PurchaseOrdersModelList_VendorPrice3_" + inc + "' value='' placeholder='V. Price 3' class='form-control svenprc3 svenprcmrg3 onlynumdec m-b-0 w-70 float-left' /><input type='text' id='PurchaseOrdersModelList_Margin3_" + inc + "' name='PurchaseOrdersModelList_Margin3_" + inc + "' value='' disabled placeholder='Margin' class='form-control onlynumdec posmarg3 m-b-0 w-30' /><input type='text' id='PurchaseOrdersModelList_VendorDiscount3_" + inc + "' name='PurchaseOrdersModelList_VendorDiscount3_" + inc + "' value='' disabled placeholder='Discount' class='form-control onlynumdec vdsc3 m-b-0' /><input type='checkbox' id='PurchaseOrdersModelList_VendorL3_" + inc + "' name='PurchaseOrdersModelList_VendorL3_" + inc + "' class='vl3 m-b-0 chk' value=''/></td>" +
+            //"<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_VendorId_" + inc + "' name='PurchaseOrdersModelList_VendorId_" + inc + "' placeholder='Vendor Name' value='' class='form-control svenid m-b-0'  type='text' /></br><input type='text' id='PurchaseOrdersModelList_VendorPrice_" + inc + "' name='PurchaseOrdersModelList_VendorPrice_" + inc + "' value='' placeholder='Vendor Price' class='form-control svenprc svenprcmrg onlynumdec m-b-0 w-70 float-left' /><input type='text' id='PurchaseOrdersModelList_Margin_" + inc + "' name='PurchaseOrdersModelList_Margin_" + inc + "' value='' disabled placeholder='Margin' class='form-control onlynumdec posmarg m-b-0 w-30' /><input type='text' id='PurchaseOrdersModelList_VendorDiscount_" + inc + "' name='PurchaseOrdersModelList_VendorDiscount_" + inc + "' value='' disabled placeholder='Discount' class='form-control onlynumdec vdsc m-b-0' /></td>" +
+            //"<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_LastVendorId_" + inc + "' name='PurchaseOrdersModelList_LastVendorId_" + inc + "' disabled placeholder='Last Vendor Name' value='' class='form-control slvenid m-b-0 bg-gray' /></br><input type='text' id='PurchaseOrdersModelList_LastVendorPrice_" + inc + "' disabled name='PurchaseOrdersModelList_LastVendorPrice_" + inc + "' value='' placeholder='Last Vendor Price' class='form-control slvenprc m-b-0 bg-gray' /></td>" +
             "</tr>");
         inc++;
     });
@@ -3064,64 +3064,202 @@ $(document).on('focus', '.svenid', function () {
     });
 });
 
+$('body').on('click', '.chk', function () {
+    var curRow = $(this).closest("tr");
+    var curCol = $(this).closest("td");
+    var venid = curCol.find(".svenid").val();
+    if (venid !== "") {
+        $.ajax({
+            url: '/Admin/IsVendorExist',
+            data: { venid: venid },
+            type: "GET",
+            dataType: "JSON",
+            success: function (res) {
+                var relsn = res;
+                if (relsn.length !== 0) {
+                    curRow.find(".chk").prop("checked", false);
+                    curCol.find(".chk").prop("checked", true);
+                }
+                else {
+                    alert("Vendor does not exist.");
+                    $(this).prop("checked", false);
+                }
+            },
+            error: function () {
+                alert("Failed! Please try again.");
+            }
+        });
+    }
+    else {
+        alert("Please enter vendor name.");
+        $(this).prop("checked", false);
+    }
+});
+
 $(document).on('blur', '.lstprc', function () {
     var curRow = $(this).closest("tr");
     var lstprc = curRow.find(".lstprc").val();
     if (lstprc !== "" && lstprc !== "0") {
-        curRow.find(".vdsc").attr("disabled", false);
-        curRow.find(".vdsc").val("");
-        curRow.find(".svenprc").attr("disabled", true);
-        curRow.find(".svenprc").val("");
-        curRow.find(".posmarg").attr("disabled", true);
-        curRow.find(".posmarg").val("");
+        curRow.find(".vdsc1").attr("disabled", false);
+        curRow.find(".vdsc1").val("");
+        curRow.find(".svenprc1").attr("disabled", true);
+        curRow.find(".svenprc1").val("");
+        curRow.find(".posmarg1").attr("disabled", true);
+        curRow.find(".posmarg1").val("");
+        curRow.find(".vdsc2").attr("disabled", false);
+        curRow.find(".vdsc2").val("");
+        curRow.find(".svenprc2").attr("disabled", true);
+        curRow.find(".svenprc2").val("");
+        curRow.find(".posmarg2").attr("disabled", true);
+        curRow.find(".posmarg2").val("");
+        curRow.find(".vdsc3").attr("disabled", false);
+        curRow.find(".vdsc3").val("");
+        curRow.find(".svenprc3").attr("disabled", true);
+        curRow.find(".svenprc3").val("");
+        curRow.find(".posmarg3").attr("disabled", true);
+        curRow.find(".posmarg3").val("");
     }
     else {
-        curRow.find(".vdsc").attr("disabled", true);
-        curRow.find(".vdsc").val("");
-        curRow.find(".svenprc").attr("disabled", false);
-        curRow.find(".svenprc").val("");
-        curRow.find(".posmarg").attr("disabled", false);
-        curRow.find(".posmarg").val("");
+        curRow.find(".vdsc1").attr("disabled", true);
+        curRow.find(".vdsc1").val("");
+        curRow.find(".svenprc1").attr("disabled", false);
+        curRow.find(".svenprc1").val("");
+        curRow.find(".posmarg1").attr("disabled", false);
+        curRow.find(".posmarg1").val("");
+
+        curRow.find(".vdsc2").attr("disabled", true);
+        curRow.find(".vdsc2").val("");
+        curRow.find(".svenprc2").attr("disabled", false);
+        curRow.find(".svenprc2").val("");
+        curRow.find(".posmarg2").attr("disabled", false);
+        curRow.find(".posmarg2").val("");
+
+        curRow.find(".vdsc3").attr("disabled", true);
+        curRow.find(".vdsc3").val("");
+        curRow.find(".svenprc3").attr("disabled", false);
+        curRow.find(".svenprc3").val("");
+        curRow.find(".posmarg3").attr("disabled", false);
+        curRow.find(".posmarg3").val("");
     }
 });
 //Enable Discount
 
 //Get Vendor Price and Margin
-$(document).on('blur', '.vdsc', function () {
+$(document).on('blur', '.vdsc1', function () {
     var curRow = $(this).closest("tr");
     var lstprc = curRow.find(".lstprc").val();
-    var vdsc = curRow.find(".vdsc").val();
-    var svenprc = curRow.find(".svenprc").val();
+    var vdsc = curRow.find(".vdsc1").val();
+    var svenprc = curRow.find(".svenprc1").val();
     var slprc = curRow.find(".spoprice").val();
 
     if (lstprc !== "" && lstprc !== "0" && vdsc !== "" && vdsc !== "0") {
         var prc = (parseFloat(lstprc) * parseFloat(vdsc)) / 100;
         var venprc = lstprc - prc;
-        curRow.find(".svenprc").val(venprc.toFixed(2));
+        curRow.find(".svenprc1").val(venprc.toFixed(2));
 
         var mrg = (parseFloat(slprc) - parseFloat(venprc)) * 100 / parseFloat(slprc);
-        curRow.find(".posmarg").val(mrg.toFixed(2) + "%");
-        curRow.find(".slvenid").focus();
+        curRow.find(".posmarg1").val(mrg.toFixed(2) + "%");
+        curRow.find(".svenid2").focus();
     }
     else {
-        curRow.find(".squotprc").val("");
-        curRow.find(".posmarg").val("");
+        curRow.find(".squotprc1").val("");
+        curRow.find(".posmarg1").val("");
+    }
+});
+//Get Vendor Price and Margin
+
+//Get Vendor Price and Margin
+$(document).on('blur', '.vdsc2', function () {
+    var curRow = $(this).closest("tr");
+    var lstprc = curRow.find(".lstprc").val();
+    var vdsc = curRow.find(".vdsc2").val();
+    var svenprc = curRow.find(".svenprc2").val();
+    var slprc = curRow.find(".spoprice").val();
+
+    if (lstprc !== "" && lstprc !== "0" && vdsc !== "" && vdsc !== "0") {
+        var prc = (parseFloat(lstprc) * parseFloat(vdsc)) / 100;
+        var venprc = lstprc - prc;
+        curRow.find(".svenprc2").val(venprc.toFixed(2));
+
+        var mrg = (parseFloat(slprc) - parseFloat(venprc)) * 100 / parseFloat(slprc);
+        curRow.find(".posmarg2").val(mrg.toFixed(2) + "%");
+        curRow.find(".svenid3").focus();
+    }
+    else {
+        curRow.find(".squotprc2").val("");
+        curRow.find(".posmarg2").val("");
+    }
+});
+//Get Vendor Price and Margin
+
+//Get Vendor Price and Margin
+$(document).on('blur', '.vdsc3', function () {
+    var curRow = $(this).closest("tr");
+    var lstprc = curRow.find(".lstprc").val();
+    var vdsc = curRow.find(".vdsc3").val();
+    var svenprc = curRow.find(".svenprc3").val();
+    var slprc = curRow.find(".spoprice").val();
+
+    if (lstprc !== "" && lstprc !== "0" && vdsc !== "" && vdsc !== "0") {
+        var prc = (parseFloat(lstprc) * parseFloat(vdsc)) / 100;
+        var venprc = lstprc - prc;
+        curRow.find(".svenprc3").val(venprc.toFixed(2));
+
+        var mrg = (parseFloat(slprc) - parseFloat(venprc)) * 100 / parseFloat(slprc);
+        curRow.find(".posmarg3").val(mrg.toFixed(2) + "%");
+        curRow.find(".spopid").focus();
+    }
+    else {
+        curRow.find(".squotprc3").val("");
+        curRow.find(".posmarg3").val("");
     }
 });
 //Get Vendor Price and Margin
 
 //Get Margin
-$(document).on('blur', '.svenprcmrg', function () {
+$(document).on('blur', '.svenprcmrg1', function () {
     var curRow = $(this).closest("tr");
-    var venprc = curRow.find(".svenprcmrg").val();
+    var venprc = curRow.find(".svenprcmrg1").val();
     var slprc = curRow.find(".spoprice").val();
     //e.preventDefault();
     if (venprc !== "" && venprc !== "0") {
         var mrg = (parseFloat(slprc) - parseFloat(venprc)) * 100 / parseFloat(slprc);
-        curRow.find(".posmarg").val(mrg.toFixed(2) + "%");
+        curRow.find(".posmarg1").val(mrg.toFixed(2) + "%");
     }
     else {
-        curRow.find(".posmarg").val("");
+        curRow.find(".posmarg1").val("");
+    }
+});
+//Get Margin
+
+//Get Margin
+$(document).on('blur', '.svenprcmrg2', function () {
+    var curRow = $(this).closest("tr");
+    var venprc = curRow.find(".svenprcmrg2").val();
+    var slprc = curRow.find(".spoprice").val();
+    //e.preventDefault();
+    if (venprc !== "" && venprc !== "0") {
+        var mrg = (parseFloat(slprc) - parseFloat(venprc)) * 100 / parseFloat(slprc);
+        curRow.find(".posmarg2").val(mrg.toFixed(2) + "%");
+    }
+    else {
+        curRow.find(".posmarg2").val("");
+    }
+});
+//Get Margin
+
+//Get Margin
+$(document).on('blur', '.svenprcmrg3', function () {
+    var curRow = $(this).closest("tr");
+    var venprc = curRow.find(".svenprcmrg3").val();
+    var slprc = curRow.find(".spoprice").val();
+    //e.preventDefault();
+    if (venprc !== "" && venprc !== "0") {
+        var mrg = (parseFloat(slprc) - parseFloat(venprc)) * 100 / parseFloat(slprc);
+        curRow.find(".posmarg3").val(mrg.toFixed(2) + "%");
+    }
+    else {
+        curRow.find(".posmarg3").val("");
     }
 });
 //Get Margin
@@ -3131,6 +3269,9 @@ $(document).on('blur', '.senqid', function () {
     var curRow = $(this).closest("tr");
     var enqid = curRow.find(".senqid").val();
     var cstName = curRow.find(".scstname").html();
+    cstName = cstName.replaceAll("amp;", "");
+    var lstprc = curRow.find(".lstprc").val();
+    var slprc = curRow.find(".spoprice").val();
     //e.preventDefault();
     if (enqid !== "") {
         $.ajax({
@@ -3142,8 +3283,13 @@ $(document).on('blur', '.senqid', function () {
             success: function (res) {
                 if (res[0] === undefined || res[0] === "") {
                     curRow.find("td:eq(9)").find(".svenid1").val("");
+                    curRow.find("td:eq(9)").find(".svenid1").prop("disabled", false);
                     curRow.find("td:eq(9)").find(".svenprc1").val("");
+                    curRow.find("td:eq(9)").find(".svenprc1").prop("disabled", false);
                     curRow.find("td:eq(9)").find(".vdsc1").val("");
+                    if (lstprc != "" && lstprc !== "0") {
+                        curRow.find("td:eq(9)").find(".vdsc1").prop("disabled", false);
+                    }
                     curRow.find("td:eq(10)").find(".svenid2").val("");
                     curRow.find("td:eq(10)").find(".svenprc2").val("");
                     curRow.find("td:eq(10)").find(".vdsc2").val("");
@@ -3154,33 +3300,87 @@ $(document).on('blur', '.senqid', function () {
                 }
                 else {
                     if (res[0].CustomerName === cstName) {
-                        //if (res[0].Status == "1") {
+                        if (res[0].Vendor1Status == "1") {
+                            curRow.find("td:eq(9)").find(".svenid1").css('background-color', '#ffffff');
                             curRow.find("td:eq(9)").find(".svenid1").val(res[0].Vendor1Name);
+                            curRow.find("td:eq(9)").find(".svenid1").prop("disabled", true);
                             curRow.find("td:eq(9)").find(".svenprc1").val(res[0].Vendor1Price);
+                            curRow.find("td:eq(9)").find(".svenprc1").prop("disabled", true);
                             curRow.find("td:eq(9)").find(".vdsc1").val(res[0].Vendor1Discount);
+                            curRow.find("td:eq(9)").find(".vdsc1").prop("disabled", true);
+                            var venprc1 = res[0].Vendor1Price;
+                            if (venprc1 !== "" && venprc1 !== "0") {
+                                var mrg1 = (parseFloat(slprc) - parseFloat(venprc1)) * 100 / parseFloat(slprc);
+                                curRow.find(".posmarg1").val(mrg1.toFixed(2) + "%");
+                            }
+                        }
+                        else {
+                            curRow.find("td:eq(9)").find(".svenid1").css('background-color', '#ffa8a8;');
+                            curRow.find("td:eq(9)").find(".svenid1").val(res[0].Vendor1Name);
+                            curRow.find("td:eq(9)").find(".svenid1").prop("disabled", false);
+                            curRow.find("td:eq(9)").find(".svenprc1").val(res[0].Vendor1Price);
+                            curRow.find("td:eq(9)").find(".svenprc1").prop("disabled", false);
+                            curRow.find("td:eq(9)").find(".vdsc1").val(res[0].Vendor1Discount);
+                            curRow.find("td:eq(9)").find(".vdsc1").prop("disabled", false);
+                            var venprc1 = res[0].Vendor1Price;
+                            if (venprc1 !== "" && venprc1 !== "0") {
+                                var mrg1 = (parseFloat(slprc) - parseFloat(venprc1)) * 100 / parseFloat(slprc);
+                                curRow.find(".posmarg1").val(mrg1.toFixed(2) + "%");
+                            }
+                        }
+                        if (res[0].Vendor2Status == "1") {
+                            curRow.find("td:eq(10)").find(".svenid2").css('background-color', '#ffffff');
                             curRow.find("td:eq(10)").find(".svenid2").val(res[0].Vendor2Name);
                             curRow.find("td:eq(10)").find(".svenprc2").val(res[0].Vendor2Price);
                             curRow.find("td:eq(10)").find(".vdsc2").val(res[0].Vendor2Discount);
+                            var venprc2 = res[0].Vendor2Price;
+                            if (venprc2 !== "" && venprc2 !== "0") {
+                                var mrg2 = (parseFloat(slprc) - parseFloat(venprc2)) * 100 / parseFloat(slprc);
+                                curRow.find(".posmarg2").val(mrg2.toFixed(2) + "%");
+                            }
+                        }
+                        else {
+                            curRow.find("td:eq(10)").find(".svenid2").css('background-color', '#ffa8a8;');
+                            curRow.find("td:eq(10)").find(".svenid2").val(res[0].Vendor2Name);
+                            curRow.find("td:eq(10)").find(".svenprc2").val(res[0].Vendor2Price);
+                            curRow.find("td:eq(10)").find(".vdsc2").val(res[0].Vendor2Discount);
+                            var venprc2 = res[0].Vendor2Price;
+                            if (venprc2 !== "" && venprc2 !== "0") {
+                                var mrg2 = (parseFloat(slprc) - parseFloat(venprc2)) * 100 / parseFloat(slprc);
+                                curRow.find(".posmarg2").val(mrg2.toFixed(2) + "%");
+                            }
+                        }
+                        if (res[0].Vendor3Status == "1") {
+                            curRow.find("td:eq(11)").find(".svenid3").css('background-color', '#ffffff');
                             curRow.find("td:eq(11)").find(".svenid3").val(res[0].Vendor3Name);
                             curRow.find("td:eq(11)").find(".svenprc3").val(res[0].Vendor3Price);
                             curRow.find("td:eq(11)").find(".vdsc3").val(res[0].Vendor3Discount);
-                        //}
-                        //else {
-                        //    curRow.find("td:eq(9)").find(".svenid1").val("");
-                        //    curRow.find("td:eq(9)").find(".svenprc1").val("");
-                        //    curRow.find("td:eq(9)").find(".vdsc1").val("");
-                        //    curRow.find("td:eq(10)").find(".svenid2").val("");
-                        //    curRow.find("td:eq(10)").find(".svenprc2").val("");
-                        //    curRow.find("td:eq(10)").find(".vdsc2").val("");
-                        //    curRow.find("td:eq(11)").find(".svenid3").val("");
-                        //    curRow.find("td:eq(11)").find(".svenprc3").val("");
-                        //    curRow.find("td:eq(11)").find(".vdsc3").val("");
-                        //}
+                            var venprc3 = res[0].Vendor3Price;
+                            if (venprc3 !== "" && venprc3 !== "0") {
+                                var mrg3 = (parseFloat(slprc) - parseFloat(venprc3)) * 100 / parseFloat(slprc);
+                                curRow.find(".posmarg3").val(mrg3.toFixed(2) + "%");
+                            }
+                        }
+                        else {
+                            curRow.find("td:eq(11)").find(".svenid3").css('background-color', '#ffa8a8;');
+                            curRow.find("td:eq(11)").find(".svenid3").val(res[0].Vendor3Name);
+                            curRow.find("td:eq(11)").find(".svenprc3").val(res[0].Vendor3Price);
+                            curRow.find("td:eq(11)").find(".vdsc3").val(res[0].Vendor3Discount);
+                            var venprc3 = res[0].Vendor3Price;
+                            if (venprc3 !== "" && venprc3 !== "0") {
+                                var mrg3 = (parseFloat(slprc) - parseFloat(venprc3)) * 100 / parseFloat(slprc);
+                                curRow.find(".posmarg3").val(mrg3.toFixed(2) + "%");
+                            }
+                        }
                     }
                     else {
                         alert("This enquiry id is not quoted with this customer");
                         curRow.find("td:eq(8)").find(".senqid").val("");
                         curRow.find("td:eq(8)").find(".senqid").focus();
+
+                        curRow.find("td:eq(9)").find(".svenid1").prop("disabled", false);
+                        curRow.find("td:eq(9)").find(".svenprc1").prop("disabled", false);
+                        curRow.find("td:eq(9)").find(".vdsc1").prop("disabled", false);
                     }
                 }
             },
@@ -3190,10 +3390,23 @@ $(document).on('blur', '.senqid', function () {
         });
     }
     else {
-        curRow.find("td:eq(8)").find(".svenid").val("");
-        curRow.find("td:eq(8)").find(".svenprc").val("");
-        curRow.find("td:eq(9)").find(".slvenid").val("");
-        curRow.find("td:eq(8)").find(".slvenprc").val("");
+        curRow.find("td:eq(9)").find(".svenid1").val("");
+        curRow.find("td:eq(9)").find(".svenid1").prop("disabled", false);
+        curRow.find("td:eq(9)").find(".svenprc1").val("");
+        curRow.find("td:eq(9)").find(".svenprc1").prop("disabled", false);
+        curRow.find("td:eq(9)").find(".vdsc1").val("");
+        if (lstprc != "" && lstprc !== "0") {
+            curRow.find("td:eq(9)").find(".vdsc1").prop("disabled", false);
+        }
+        else {
+            curRow.find("td:eq(9)").find(".vdsc1").prop("disabled", true);
+        }
+        curRow.find("td:eq(10)").find(".svenid2").val("");
+        curRow.find("td:eq(10)").find(".svenprc2").val("");
+        curRow.find("td:eq(10)").find(".vdsc2").val("");
+        curRow.find("td:eq(11)").find(".svenid3").val("");
+        curRow.find("td:eq(11)").find(".svenprc3").val("");
+        curRow.find("td:eq(11)").find(".vdsc3").val("");
     }
 });
 
@@ -3822,6 +4035,19 @@ $('.posousubmit').on('click', function (e) {
     e.preventDefault();
     var lnArr = new Array();
     var err = "";
+    //$("input:checkbox[class=chk]").each(function () {
+    //    var chek = $(this).is(":checked");
+    //    if (chek == true) {
+    //        var allchk = {
+    //            TeamUsers: $(this).attr("name"),
+    //            Value: $(this).val(),
+    //            Checked: $(this).is(":checked"),
+    //            TeamName: uTeam,
+    //            TeamHead: userName
+    //        };
+    //        hdArr.push(allchk);
+    //    }
+    //});
     $(".tbl tbody tr").each(function () {
         var tds = $(this).find("td");
         //you could use the Find method to find the texbox or the dropdownlist and get the value.
@@ -3830,19 +4056,35 @@ $('.posousubmit').on('click', function (e) {
         var spogst = $(tds[6]).find('.spogst').val();
         var lstprc = $(tds[7]).find('.lstprc').val();
         var senqid = $(tds[8]).find('.senqid').val();
-        var svenid = $(tds[9]).find('.svenid').val();
-        var svenprc = $(tds[9]).find('.svenprc').val();
-        var vdsc = $(tds[9]).find('.vdsc').val();
-        var slvenid = $(tds[10]).find('.slvenid').val();
-        var slvenprc = $(tds[10]).find('.slvenprc').val();
+        var svenid1 = $(tds[9]).find('.svenid1').val();
+        var svenprc1 = $(tds[9]).find('.svenprc1').val();
+        var vdsc1 = $(tds[9]).find('.vdsc1').val();
+        var svenid2 = $(tds[10]).find('.svenid2').val();
+        var svenprc2 = $(tds[10]).find('.svenprc2').val();
+        var vdsc2 = $(tds[10]).find('.vdsc2').val();
+        var svenid3 = $(tds[11]).find('.svenid3').val();
+        var svenprc3 = $(tds[11]).find('.svenprc3').val();
+        var vdsc3 = $(tds[11]).find('.vdsc3').val();
 
-        if (svenid == "") {
+
+        var chek1 = $(tds[9]).find(".chk").is(":checked");
+        var chek2 = $(tds[10]).find(".chk").is(":checked");
+        var chek3 = $(tds[11]).find(".chk").is(":checked");
+
+
+        if (svenid1 == "") {
             err = "error";
         }
 
-        if (svenprc == "") {
-            svenprc = 0;
+        if (svenprc1 == "") {
+            svenprc1 = 0;
             err = "error";
+        }
+        if (svenprc2 == "") {
+            svenprc2 = 0;
+        }
+        if (svenprc3 == "") {
+            svenprc3 = 0;
         }
 
         if (sordqty == "" || sordqty == "0") {
@@ -3853,24 +4095,53 @@ $('.posousubmit').on('click', function (e) {
             lstprc = 0;
         }
 
-        if (vdsc === "") {
-            vdsc = 0;
+        if (vdsc1 === "") {
+            vdsc1 = 0;
+        }
+        if (vdsc2 === "") {
+            vdsc2 = 0;
+        }
+        if (vdsc3 === "") {
+            vdsc3 = 0;
+        }
+        var ven = "";
+        var vprc = "";
+        var vdsc = "";
+        if (chek3 == true) {
+            ven = svenid3;
+            vprc = svenprc3;
+            vdsc = vdsc3;
+        } else if (chek2 == true) {
+            ven = svenid2;
+            vprc = svenprc2;
+            vdsc = vdsc2;
+        }
+        else {
+            ven = svenid1;
+            vprc = svenprc1;
+            vdsc = vdsc1;
         }
 
-        if (spopid !== "" /*&& senqid !== ""*/ && spogst != "" && svenid !== "" && svenprc !== "" && svenprc !== "0" &&
-            sordqty !== "" && sordqty !== "0"
-            /*&& slvenid !== "" && slvenprc !== "0" && slvenprc !== ""*/) {
+        if (spopid !== "" /*&& senqid !== ""*/ && spogst != "" && svenid1 !== "" && svenprc1 !== "" && svenprc1 !== "0" &&
+            sordqty !== "" && sordqty !== "0" && ven !== "" && vprc !== "0") {
             var lin = {
                 POPId: spopid,
                 EnqId: senqid,
                 OrderedQuantity: parseFloat(sordqty),
                 ListPrice: parseFloat(lstprc),
+                GST: parseFloat(spogst),
+                VendorId: ven,
+                VendorPrice: parseFloat(vprc),
                 VendorDiscount: parseFloat(vdsc),
-                VendorId: svenid,
-                VendorPrice: parseFloat(svenprc),
-                //LastVendorId: slvenid,
-                //LastVendorPrice: parseFloat(slvenprc),
-                GST: parseFloat(spogst)
+                VendorId1: svenid1,
+                VendorPrice1: parseFloat(svenprc1),
+                VendorDiscount1: parseFloat(vdsc1),
+                VendorId2: svenid2,
+                VendorPrice2: parseFloat(svenprc2),
+                VendorDiscount2: parseFloat(vdsc2),
+                VendorId3: svenid3,
+                VendorPrice3: parseFloat(svenprc3),
+                VendorDiscount3: parseFloat(vdsc3)
             };
             lnArr.push(lin);
         }
@@ -6440,7 +6711,7 @@ $('.wcrapprove').on('click', function (e) {
             TAT: row.cells[9].innerText,
             POReceived: row.cells[10].innerText,
             POValue: row.cells[11].innerText,
-            Delivery: row.cells[12].innerText.split('%')[0]+""
+            Delivery: row.cells[12].innerText.split('%')[0] + ""
         };
         list.push(lin);
     });
