@@ -171,43 +171,47 @@
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().TAT)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqAssignTo)</th>
                                     <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().CurrentStage)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqOCStatus)</th>
+                                    <th>@Html.DisplayNameFor(model => model.EnquiriesModelList.FirstOrDefault().EnqOCStatusRemark)</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var item in Model.EnquiriesModelList)
                                 {
-                                    <tr>
-                                        <td></td>
-                                        <td hidden></td>
-                                        <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.EnqId)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.EnqPId)</td>
-                                        <td title="@item.SpcRemark">
-                                            @Html.DisplayFor(modelItem => item.Product)<br>
-                                        </td>
-                                        <td>@Html.DisplayFor(modelItem => item.Brand)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.ModelNo)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Vendor1Id)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Vendor1Price)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Vendor1Discount) %</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Vendor2Id)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Vendor2Price)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Vendor2Discount) %</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Vendor3Id)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Vendor3Price)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Vendor3Discount) %</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Type)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.EnqType)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Price)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.EnquiryDate)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.EnqADate)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.TAT)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.EnqAssignTo)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.CurrentStage)</td>
-                                    </tr>
+                                <tr>
+                                    <td></td>
+                                    <td hidden></td>
+                                    <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EnqId)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EnqPId)</td>
+                                    <td title="@item.SpcRemark">
+                                        @Html.DisplayFor(modelItem => item.Product)<br>
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.Brand)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.ModelNo)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Vendor1Id)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Vendor1Price)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Vendor1Discount) %</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Vendor2Id)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Vendor2Price)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Vendor2Discount) %</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Vendor3Id)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Vendor3Price)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Vendor3Discount) %</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Type)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EnqType)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EnquiryDate)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EnqADate)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.TAT)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EnqAssignTo)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.CurrentStage)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EnqOCStatus)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EnqOCStatusRemark)</td>
+                                </tr>
                                 }
                             </tbody>
                         </table>

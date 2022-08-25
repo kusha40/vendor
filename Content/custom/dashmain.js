@@ -2349,6 +2349,30 @@ $(document).ready(function () {
         });
     }).draw();
 
+    var tblEnquiryStatus = $('#tblEnquiryStatus').DataTable({
+        "columnDefs": [
+            {
+                'targets': 0, 'checkboxes':
+                {
+                    'selectRow': true
+                }
+            },                      //Select
+        ],
+        select: {
+            style: 'multi',
+        },
+        "scrollX": true,
+        "paging": false,
+        //"searching": false,
+        "info": false,
+    });
+    tblEnquiryStatus.on('order.dt search.dt', function () {
+        tblEnquiryStatus.column(1, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+            tblEnquiryStatus.cell(cell).invalidate('dom');
+        });
+    }).draw();
+
     var tblEnquiryReport = $('#tblEnquiryReport').DataTable({
         "columnDefs": [
         ],
@@ -6742,5 +6766,53 @@ $('.wcrapprove').on('click', function (e) {
         alert("Please select atleast one customer.");
         $(this).find(':submit').attr('disabled', false);
         $(".wcrapprove").attr("disabled", false);
+    }
+});
+
+$('.enqstssubmit').on('click', function (e) {
+    $(this).find(':submit').attr('disabled', 'disabled');
+    $(".enqstssubmit").attr("disabled", true);
+    $(".enqstssubmit").hide();
+    e.preventDefault();
+    var rows_selected = $("#tblEnquiryStatus tbody tr.selected");
+    var list = new Array();
+    // Iterate over all selected checkboxes
+    $.each(rows_selected, function (index, row) {
+        // Create a hidden element
+        list.push(row.cells[4].innerText);
+    });
+    var stsrmk = $(".stsrmk").val();
+    var enqsts = $(".enqsts").val();
+    if (list.length > 0) {
+        if (stsrmk != "" && enqsts != "--Select Status--") {
+            var quotNos = JSON.stringify(list);
+            $.ajax({
+                url: "/Admin/UpdateEnquiryStatusList",
+                dataType: "json",
+                data: "{'quotNos': '" + quotNos + "','stsrmk': '" + stsrmk + "','enqsts': '" + enqsts + "'}",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (result) {
+                    if (result.error === "") {
+                        location.reload();
+                    }
+                    else {
+                        alert(result.error);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert(err.Message);
+                }
+            });
+        } else {
+            alert("Please enter remarks");
+            $(this).find(':submit').attr('disabled', 'disabled');
+            $(".enqstssubmit").attr("disabled", true);
+            $(".enqstssubmit").show();
+        }
+    }
+    else {
+        alert("Please select atleast one po.");
     }
 });

@@ -236,32 +236,46 @@
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Price)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Discount)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().TotalPrice)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().VendorId)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().VendorPrice)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().Margin)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().VendorId1)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().VendorPrice1)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().VendorId2)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().VendorPrice2)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().VendorId3)</th>
+                                    <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().VendorPrice3)</th>
                                     <th>@Html.DisplayNameFor(model => model.PurchaseOrdersModelList.FirstOrDefault().GST)</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var item in Model.PurchaseOrdersModelList)
                                 {
-                                    <tr>
-                                        <td></td>
-                                        <td><a href='~/Content/upload/poupload/@item.POFile' target="_blank">@item.PONumber</a></td>
-                                        <td>@Html.DisplayFor(modelItem => item.POId)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.POPId)</td>
-                                        <td title="@item.SpcRemark">
-                                            @Html.DisplayFor(modelItem => item.Product)<br>
-                                            Brand : @item.Brand<br>
-                                            Model : @item.ModelNo
-                                        </td>
-                                        <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Price)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Discount)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.VendorPrice)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Margin)%</td>
-                                        <td>@Html.DisplayFor(modelItem => item.GST)%</td>
-                                    </tr>
+                                <tr>
+                                    <td></td>
+                                    <td><a href='~/Content/upload/poupload/@item.POFile' target="_blank">@item.PONumber</a></td>
+                                    <td>@Html.DisplayFor(modelItem => item.POId)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.POPId)</td>
+                                    <td title="@item.SpcRemark">
+                                        @Html.DisplayFor(modelItem => item.Product)<br>
+                                        Brand : @item.Brand<br>
+                                        Model : @item.ModelNo
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Discount)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.VendorId)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.VendorPrice)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Margin)%</td>
+                                    <td>@Html.DisplayFor(modelItem => item.VendorId1)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.VendorPrice1)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.VendorId2)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.VendorPrice2)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.VendorId3)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.VendorPrice3)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.GST)%</td>
+                                </tr>
                                 }
                             </tbody>
                         </table>
