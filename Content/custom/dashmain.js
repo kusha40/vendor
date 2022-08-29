@@ -3055,9 +3055,9 @@ function AddTempPOSourced() {
             "<td class='w-4'> <input type='text' id='PurchaseOrdersModelList_GST_" + inc + "' name='PurchaseOrdersModelList_GST_" + inc + "' value='" + tmpposrc.GST + "' class='form-control spogst onlynumdec m-b-0'  type='text' /></td>" +
             "<td class='w-6'> <input type='text' id='EnquiriesModelList_ListPrice_" + inc + "' name='EnquiriesModelList_ListPrice_" + inc + "' value='' class='form-control lstprc m-b-0 onlynumdec bg-m-whitesmoke'  type='text' /></td>" +
             "<td class='w-8'> <input type='text' id='PurchaseOrdersModelList_EnqId_" + inc + "' name='PurchaseOrdersModelList_EnqId_" + inc + "' value='' class='form-control senqid m-b-0 bg-m-whitesmoke'  type='text' /></td>" +
-            "<td class='w-12'> <input type='text' id='PurchaseOrdersModelList_VendorId1_" + inc + "' name='PurchaseOrdersModelList_VendorId1_" + inc + "' placeholder='Vendor 1' value='' class='form-control svenid1 svenid m-b-0' /></br><input type='text' id='PurchaseOrdersModelList_VendorPrice1_" + inc + "' name='PurchaseOrdersModelList_VendorPrice1_" + inc + "' value='' placeholder='V. Price 1' class='form-control svenprc1 svenprcmrg1 onlynumdec m-b-0 w-70 float-left'/><input type='text' id='PurchaseOrdersModelList_Margin1_" + inc + "' name='PurchaseOrdersModelList_Margin1_" + inc + "' value='' disabled placeholder='Margin' class='form-control onlynumdec posmarg1 m-b-0 w-30'/><input type='text' id='PurchaseOrdersModelList_VendorDiscount1_" + inc + "' name='PurchaseOrdersModelList_VendorDiscount1_" + inc + "' value='' disabled placeholder='Discount' class='form-control onlynumdec vdsc1 m-b-0' /><input type='checkbox' id='PurchaseOrdersModelList_VendorL1_" + inc + "' name='PurchaseOrdersModelList_VendorL1_" + inc + "' checked class='vl1 m-b-0 chk' value=''/></td>" +
-            "<td class='w-12'> <input type='text' id='PurchaseOrdersModelList_VendorId2_" + inc + "' name='PurchaseOrdersModelList_VendorId2_" + inc + "' placeholder='Vendor 2' value='' class='form-control svenid2 svenid m-b-0' /></br><input type='text' id='PurchaseOrdersModelList_VendorPrice2_" + inc + "' name='PurchaseOrdersModelList_VendorPrice2_" + inc + "' value='' placeholder='V. Price 2' class='form-control svenprc2 svenprcmrg2 onlynumdec m-b-0 w-70 float-left' /><input type='text' id='PurchaseOrdersModelList_Margin2_" + inc + "' name='PurchaseOrdersModelList_Margin2_" + inc + "' value='' disabled placeholder='Margin' class='form-control onlynumdec posmarg2 m-b-0 w-30' /><input type='text' id='PurchaseOrdersModelList_VendorDiscount2_" + inc + "' name='PurchaseOrdersModelList_VendorDiscount2_" + inc + "' value='' disabled placeholder='Discount' class='form-control onlynumdec vdsc2 m-b-0' /><input type='checkbox' id='PurchaseOrdersModelList_VendorL2_" + inc + "' name='PurchaseOrdersModelList_VendorL2_" + inc + "' class='vl2 m-b-0 chk' value=''/></td>" +
-            "<td class='w-12'> <input type='text' id='PurchaseOrdersModelList_VendorId3_" + inc + "' name='PurchaseOrdersModelList_VendorId3_" + inc + "' placeholder='Vendor 3' value='' class='form-control svenid3 svenid m-b-0' /></br><input type='text' id='PurchaseOrdersModelList_VendorPrice3_" + inc + "' name='PurchaseOrdersModelList_VendorPrice3_" + inc + "' value='' placeholder='V. Price 3' class='form-control svenprc3 svenprcmrg3 onlynumdec m-b-0 w-70 float-left' /><input type='text' id='PurchaseOrdersModelList_Margin3_" + inc + "' name='PurchaseOrdersModelList_Margin3_" + inc + "' value='' disabled placeholder='Margin' class='form-control onlynumdec posmarg3 m-b-0 w-30' /><input type='text' id='PurchaseOrdersModelList_VendorDiscount3_" + inc + "' name='PurchaseOrdersModelList_VendorDiscount3_" + inc + "' value='' disabled placeholder='Discount' class='form-control onlynumdec vdsc3 m-b-0' /><input type='checkbox' id='PurchaseOrdersModelList_VendorL3_" + inc + "' name='PurchaseOrdersModelList_VendorL3_" + inc + "' class='vl3 m-b-0 chk' value=''/></td>" +
+            "<td class='w-12'> <input type='text' id='PurchaseOrdersModelList_VendorId1_" + inc + "' name='PurchaseOrdersModelList_VendorId1_" + inc + "' placeholder='Vendor 1' value='' class='form-control svenid1 svenid m-b-0' /></br><input type='text' id='PurchaseOrdersModelList_VendorPrice1_" + inc + "' name='PurchaseOrdersModelList_VendorPrice1_" + inc + "' value='' placeholder='V. Price 1' class='form-control svenprc1 svenprcmrg1 onlynumdec m-b-0 w-70 float-left'/><input type='text' id='PurchaseOrdersModelList_Margin1_" + inc + "' name='PurchaseOrdersModelList_Margin1_" + inc + "' value='' disabled placeholder='Margin' class='form-control onlynumdec posmarg1 m-b-0 w-30'/><input type='text' id='PurchaseOrdersModelList_VendorDiscount1_" + inc + "' name='PurchaseOrdersModelList_VendorDiscount1_" + inc + "' value='' disabled placeholder='Discount' class='form-control onlynumdec vdsc1 m-b-0' /><input type='checkbox' id='PurchaseOrdersModelList_VendorL1_" + inc + "' name='PurchaseOrdersModelList_VendorL1_" + inc + "' checked class='vl1 m-b-0 poschk' value=''/></td>" +
+            "<td class='w-12'> <input type='text' id='PurchaseOrdersModelList_VendorId2_" + inc + "' name='PurchaseOrdersModelList_VendorId2_" + inc + "' placeholder='Vendor 2' value='' class='form-control svenid2 svenid m-b-0' /></br><input type='text' id='PurchaseOrdersModelList_VendorPrice2_" + inc + "' name='PurchaseOrdersModelList_VendorPrice2_" + inc + "' value='' placeholder='V. Price 2' class='form-control svenprc2 svenprcmrg2 onlynumdec m-b-0 w-70 float-left' /><input type='text' id='PurchaseOrdersModelList_Margin2_" + inc + "' name='PurchaseOrdersModelList_Margin2_" + inc + "' value='' disabled placeholder='Margin' class='form-control onlynumdec posmarg2 m-b-0 w-30' /><input type='text' id='PurchaseOrdersModelList_VendorDiscount2_" + inc + "' name='PurchaseOrdersModelList_VendorDiscount2_" + inc + "' value='' disabled placeholder='Discount' class='form-control onlynumdec vdsc2 m-b-0' /><input type='checkbox' id='PurchaseOrdersModelList_VendorL2_" + inc + "' name='PurchaseOrdersModelList_VendorL2_" + inc + "' class='vl2 m-b-0 poschk' value=''/></td>" +
+            "<td class='w-12'> <input type='text' id='PurchaseOrdersModelList_VendorId3_" + inc + "' name='PurchaseOrdersModelList_VendorId3_" + inc + "' placeholder='Vendor 3' value='' class='form-control svenid3 svenid m-b-0' /></br><input type='text' id='PurchaseOrdersModelList_VendorPrice3_" + inc + "' name='PurchaseOrdersModelList_VendorPrice3_" + inc + "' value='' placeholder='V. Price 3' class='form-control svenprc3 svenprcmrg3 onlynumdec m-b-0 w-70 float-left' /><input type='text' id='PurchaseOrdersModelList_Margin3_" + inc + "' name='PurchaseOrdersModelList_Margin3_" + inc + "' value='' disabled placeholder='Margin' class='form-control onlynumdec posmarg3 m-b-0 w-30' /><input type='text' id='PurchaseOrdersModelList_VendorDiscount3_" + inc + "' name='PurchaseOrdersModelList_VendorDiscount3_" + inc + "' value='' disabled placeholder='Discount' class='form-control onlynumdec vdsc3 m-b-0' /><input type='checkbox' id='PurchaseOrdersModelList_VendorL3_" + inc + "' name='PurchaseOrdersModelList_VendorL3_" + inc + "' class='vl3 m-b-0 poschk' value=''/></td>" +
             //"<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_VendorId_" + inc + "' name='PurchaseOrdersModelList_VendorId_" + inc + "' placeholder='Vendor Name' value='' class='form-control svenid m-b-0'  type='text' /></br><input type='text' id='PurchaseOrdersModelList_VendorPrice_" + inc + "' name='PurchaseOrdersModelList_VendorPrice_" + inc + "' value='' placeholder='Vendor Price' class='form-control svenprc svenprcmrg onlynumdec m-b-0 w-70 float-left' /><input type='text' id='PurchaseOrdersModelList_Margin_" + inc + "' name='PurchaseOrdersModelList_Margin_" + inc + "' value='' disabled placeholder='Margin' class='form-control onlynumdec posmarg m-b-0 w-30' /><input type='text' id='PurchaseOrdersModelList_VendorDiscount_" + inc + "' name='PurchaseOrdersModelList_VendorDiscount_" + inc + "' value='' disabled placeholder='Discount' class='form-control onlynumdec vdsc m-b-0' /></td>" +
             //"<td class='w-15'> <input type='text' id='PurchaseOrdersModelList_LastVendorId_" + inc + "' name='PurchaseOrdersModelList_LastVendorId_" + inc + "' disabled placeholder='Last Vendor Name' value='' class='form-control slvenid m-b-0 bg-gray' /></br><input type='text' id='PurchaseOrdersModelList_LastVendorPrice_" + inc + "' disabled name='PurchaseOrdersModelList_LastVendorPrice_" + inc + "' value='' placeholder='Last Vendor Price' class='form-control slvenprc m-b-0 bg-gray' /></td>" +
             "</tr>");
@@ -3088,7 +3088,7 @@ $(document).on('focus', '.svenid', function () {
     });
 });
 
-$('body').on('click', '.chk', function () {
+$('body').on('click', '.poschk', function () {
     var curRow = $(this).closest("tr");
     var curCol = $(this).closest("td");
     var venid = curCol.find(".svenid").val();
@@ -3101,8 +3101,8 @@ $('body').on('click', '.chk', function () {
             success: function (res) {
                 var relsn = res;
                 if (relsn.length !== 0) {
-                    curRow.find(".chk").prop("checked", false);
-                    curCol.find(".chk").prop("checked", true);
+                    curRow.find(".poschk").prop("checked", false);
+                    curCol.find(".poschk").prop("checked", true);
                 }
                 else {
                     alert("Vendor does not exist.");
@@ -4059,19 +4059,6 @@ $('.posousubmit').on('click', function (e) {
     e.preventDefault();
     var lnArr = new Array();
     var err = "";
-    //$("input:checkbox[class=chk]").each(function () {
-    //    var chek = $(this).is(":checked");
-    //    if (chek == true) {
-    //        var allchk = {
-    //            TeamUsers: $(this).attr("name"),
-    //            Value: $(this).val(),
-    //            Checked: $(this).is(":checked"),
-    //            TeamName: uTeam,
-    //            TeamHead: userName
-    //        };
-    //        hdArr.push(allchk);
-    //    }
-    //});
     $(".tbl tbody tr").each(function () {
         var tds = $(this).find("td");
         //you could use the Find method to find the texbox or the dropdownlist and get the value.
