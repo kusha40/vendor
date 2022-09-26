@@ -14,7 +14,7 @@
     }
     <h1>
         @*@pageTitle*@
-        Approved PO
+        Approved Quotation
         <small></small>
     </h1>
     <ol class="breadcrumb">
@@ -65,6 +65,17 @@
                                 {
                                     @class = "form-control datepicker",
                                     placeholder = @Html.DisplayNameFor(m => m.EndDate)
+                                })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.QuotationNo, new { @class = "form-control-label" }) <sup>*</sup>
+                                @Html.TextBoxFor(m => m.QuotationNo,
+                                new
+                                {
+                                    @class = "form-control",
+                                    placeholder = @Html.DisplayNameFor(m => m.QuotationNo)
                                 })
                             </div>
                         </div>

@@ -69,6 +69,17 @@
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.VPONumber, new { @class = "form-control-label" }) <sup>*</sup>
+                                @Html.TextBoxFor(m => m.VPONumber,
+                                new
+                                {
+                                    @class = "form-control",
+                                    placeholder = @Html.DisplayNameFor(m => m.VPONumber)
+                                })
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <div class="box-tools pull-left">
                                 <button type="submit" name="search" class="btn bg-aqua" title="SEARCH"
                                         value="search">

@@ -4232,7 +4232,7 @@ $('#chksameadd').change(function () {
 });
 
 $('.pogen').on('click', function (e) {
-    $(".pogen").hide();
+    $('.pogen').hide();
     $(this).find(':submit').attr('disabled', 'disabled');
     $(".pogen").attr("disabled", true);
     e.preventDefault();
